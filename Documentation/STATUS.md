@@ -24,3 +24,4 @@ UmbrellaOS core cards list: see Documentation/DOCS_INDEX.md.
 
 ## 07_master_merge_poster_vnext (status record)
 - This file is the canonical status record for private/public + branch state.
+- 🕐 PST 2026-01-27 — Sync tagged for SymbolOS_Dev_Private; docs aligned (internal + external guidance mirrored).
