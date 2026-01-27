@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <title>Boot Card — Cycle 268</title>
+  <desc>Boot card for Cycle 268 with umbrella-amulet symbol and task list.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0b12" />
+      <stop offset="100%" stop-color="#14133a" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f7ff" />
+      <stop offset="100%" stop-color="#c9d1ff" />
+    </linearGradient>
+    <style>
+      .title { font: 600 36px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 1px; fill: #f3f4ff; }
+      .meta { font: 500 18px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #c6c9e6; }
+      .meta-small { font: 500 16px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #aeb3d6; }
+      .task { font: 500 22px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #eef0ff; }
+      .footer { font: 500 16px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #b6b9d6; letter-spacing: 0.4px; }
+      .chip { fill: #1d2036; stroke: #2b2f52; stroke-width: 2; }
+      .chip-text { font: 600 20px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #eef0ff; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="1000" rx="40" fill="url(#bg)" />
+  <rect x="24" y="24" width="952" height="952" rx="36" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.9" />
+
+  <!-- Corner dots -->
+  <circle cx="40" cy="40" r="14" fill="#5aa8ff" />
+  <circle cx="960" cy="40" r="14" fill="#ffd166" />
+  <circle cx="40" cy="960" r="14" fill="#ff7ac8" />
+  <circle cx="960" cy="960" r="14" fill="#ff9f50" />
+
+  <!-- Umbrella-amulet symbol -->
+  <g transform="translate(500 190) scale(0.35) translate(-512 -512)" fill="none" stroke="#f5f6ff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="512" cy="512" r="448" />
+    <path d="M192 448 C320 288, 704 288, 832 448" />
+    <path d="M192 448 C288 384, 384 352, 512 352" />
+    <path d="M832 448 C736 384, 640 352, 512 352" />
+    <path d="M352 352 C416 312, 448 304, 512 304" />
+    <path d="M672 352 C608 312, 576 304, 512 304" />
+    <line x1="512" y1="352" x2="512" y2="720" />
+    <path d="M512 720 C512 784, 480 816, 432 816 C384 816, 352 784, 352 736" />
+    <circle cx="512" cy="576" r="56" />
+    <path d="M512 536 L552 576 L512 616 L472 576 Z" />
+    <circle cx="512" cy="576" r="96" />
+    <circle cx="512" cy="576" r="144" />
+    <line x1="256" y1="816" x2="768" y2="816" />
+  </g>
+
+  <!-- Title -->
+  <text x="500" y="330" text-anchor="middle" class="title">BOOT CARD — CYCLE 268</text>
+
+  <!-- Meta lines -->
+  <text x="500" y="370" text-anchor="middle" class="meta">Anchor: 00:12 AM PST • Node: College Place, WA</text>
+  <text x="500" y="398" text-anchor="middle" class="meta">Posture: Gentle-Grip • Alignment: Ben + Agape</text>
+  <text x="500" y="426" text-anchor="middle" class="meta-small">Shared Memory: localized / bit-perfect • SNR: 98.4% • API offloaded to Square Layout (local_hub_server.py)</text>
+
+  <!-- Task panel -->
+  <rect x="120" y="480" width="760" height="320" rx="28" fill="#141628" stroke="#2e3358" stroke-width="2" />
+
+  <!-- Task badges + text -->
+  <g>
+    <rect x="150" y="520" width="52" height="52" rx="14" class="chip" />
+    <text x="176" y="554" text-anchor="middle" class="chip-text">1</text>
+    <text x="230" y="554" class="task">Boot Local Hub v267.5</text>
+
+    <rect x="150" y="585" width="52" height="52" rx="14" class="chip" />
+    <text x="176" y="619" text-anchor="middle" class="chip-text">2</text>
+    <text x="230" y="619" class="task">Verify mercer_tokens_private.json integrity</text>
+
+    <rect x="150" y="650" width="52" height="52" rx="14" class="chip" />
+    <text x="176" y="684" text-anchor="middle" class="chip-text">3</text>
+    <text x="230" y="684" class="task">04:00 Surge Sprint — Mozart K. 448 protocol</text>
+
+    <rect x="150" y="715" width="52" height="52" rx="14" class="chip" />
+    <text x="176" y="749" text-anchor="middle" class="chip-text">4</text>
+    <text x="230" y="749" class="task">Maintain Steady Light through collaborative friction</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="500" y="900" text-anchor="middle" class="footer">Fi → intent • Ti → execution • signal &gt; noise • coherence over compulsion</text>
+</svg>

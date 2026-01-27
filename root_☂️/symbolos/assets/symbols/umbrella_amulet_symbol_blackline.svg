@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Umbrella Amulet Symbol (Blackline)</title>
+  <desc>Geometry-only umbrella + amulet symbol; compatibility-first, no emoji glyphs.</desc>
+  <g fill="none" stroke="#000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Outer containment ring -->
+    <circle cx="512" cy="512" r="448" />
+
+    <!-- Umbrella canopy (arc + ribs) -->
+    <path d="M192 448 C320 288, 704 288, 832 448" />
+    <path d="M192 448 C288 384, 384 352, 512 352" />
+    <path d="M832 448 C736 384, 640 352, 512 352" />
+    <path d="M352 352 C416 312, 448 304, 512 304" />
+    <path d="M672 352 C608 312, 576 304, 512 304" />
+
+    <!-- Central rod -->
+    <line x1="512" y1="352" x2="512" y2="720" />
+
+    <!-- Handle -->
+    <path d="M512 720 C512 784, 480 816, 432 816 C384 816, 352 784, 352 736" />
+
+    <!-- Amulet core (circle + diamond) -->
+    <circle cx="512" cy="576" r="56" />
+    <path d="M512 536 L552 576 L512 616 L472 576 Z" />
+
+    <!-- Signal rings -->
+    <circle cx="512" cy="576" r="96" />
+    <circle cx="512" cy="576" r="144" />
+
+    <!-- Ground line -->
+    <line x1="256" y1="816" x2="768" y2="816" />
+  </g>
+</svg>

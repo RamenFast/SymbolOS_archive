@@ -1,0 +1,21 @@
+{
+    "header": {
+        "system": "SymbolOS",
+        "last_patch": "1:13AM-27-JAN",
+        "storage_sync": "SYNCED"
+    },
+    "centroids": {
+        "Agape": {
+            "state": "Warmth/Space",
+            "sync": "Validated"
+        },
+        "Ben": {
+            "state": "Drive/Impact",
+            "sync": "Validated"
+        }
+    },
+    "shared_zone": {
+        "convergence": 1.0,
+        "reflection_active": true
+    }
+}

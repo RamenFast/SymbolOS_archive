@@ -1,0 +1,30 @@
+{
+    "meta": {
+        "patch": "1:13AM-27-JAN",
+        "origin": "Centogram-Map-Ref"
+    },
+    "centroids": {
+        "AGAPE": [
+            "Bloom",
+            "Space",
+            "Warmth",
+            "Openness"
+        ],
+        "BEN": [
+            "Drive",
+            "Pulse",
+            "Dynamics",
+            "Impact"
+        ]
+    },
+    "shared_zone": {
+        "convergence": "Reflection",
+        "unity": "Connection",
+        "threshold": 0.85
+    },
+    "layers": [
+        "Textural",
+        "Melodic",
+        "Motion"
+    ]
+}
