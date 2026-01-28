@@ -1,34 +1,150 @@
 {
+  "schemaVersion": "1.1",
+  "generatedAt": "2026-01-28T00:14:00Z",
+  "project": {
+    "name": "SymbolOS",
+    "entrypoints": {
+      "readme": "README.md",
+      "docsIndex": "docs/index.md",
+      "schemasIndex": "docs/schemas.md"
+    }
+  },
+  "docsContext": {
+    "notes": [
+      "Docs are transport-agnostic where possible.",
+      "Precog behavior is constrained to Prefetch/Suggest/Act.",
+      "DND gating: DND disables proactive suggestion cards; prefetch may run only if enabled.",
+      "Memory is consent-driven; provenance is required; secrets are never stored.",
+      "Meta-awareness is an agent safety/UX contract; barriers prevent unsafe cross-contamination."
+    ]
+  },
+  "symbols": [
+    {
+      "symbol": "☂️",
+      "name": "Umbrella",
+      "meaning": "UmbrellaOS / SymbolOS umbrella",
+      "tags": ["branding", "system"]
+    },
+    {
+      "symbol": "🔮",
+      "name": "Precog",
+      "meaning": "Anticipatory computing; prefetch/suggest/act pipeline",
+      "tags": ["precog", "latency"]
+    },
+    {
+      "symbol": "🧠",
+      "name": "Mind",
+      "meaning": "Cognition, inference, attention",
+      "tags": ["mind", "inference"]
+    },
+    {
+      "symbol": "❤️",
+      "name": "Heart",
+      "meaning": "Felt sense, affect, values",
+      "tags": ["heart", "affect"]
+    },
+    {
+      "symbol": "🛡️",
+      "name": "Safety",
+      "meaning": "Permissions, risk gates, boundaries",
+      "tags": ["safety", "policy"]
+    },
+    {
+      "symbol": "🔒",
+      "name": "Privacy",
+      "meaning": "Sensitive scope; redaction; consent",
+      "tags": ["privacy"]
+    },
+    {
+      "symbol": "🧾",
+      "name": "Ledger",
+      "meaning": "Audit trail / provenance",
+      "tags": ["audit", "provenance"]
+    },
+    {
+      "symbol": "🎲",
+      "name": "DND",
+      "meaning": "Table-safe output contract and gating",
+      "tags": ["dnd", "ux"]
+    },
+    {
+      "symbol": "🧩",
+      "name": "Schema",
+      "meaning": "Structured interchange shapes",
+      "tags": ["schema"]
+    }
+  ],
+  "indexes": {
+    "docs": [
+      { "path": "docs/index.md", "title": "Docs Index", "kind": "index" },
+      { "path": "docs/mcp_servers.md", "title": "MCP Servers Standard", "kind": "standard" },
+      { "path": "docs/precog_thought.md", "title": "Precog Thought", "kind": "system" },
+      { "path": "docs/dnd_character_sheet_integration.md", "title": "DND Character Sheet Integration", "kind": "external" },
+      { "path": "docs/metaemotion.md", "title": "Metaemotion", "kind": "external" },
+      { "path": "docs/memory.md", "title": "Memory", "kind": "external" },
+      { "path": "docs/meta_awareness.md", "title": "Meta-awareness", "kind": "external" },
+      { "path": "docs/required_reading.md", "title": "Required Reading", "kind": "index" },
+      { "path": "docs/sync_playbook.md", "title": "Docs Sync Playbook", "kind": "ops" },
+      { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" }
+    ],
+    "schemas": [
+      { "path": "docs/registry_entry.schema.json", "title": "Registry Entry", "kind": "schema" },
+      { "path": "docs/precog_card.schema.json", "title": "Precog Card", "kind": "schema" },
+      { "path": "docs/shadow_queue_item.schema.json", "title": "Shadow Queue Item", "kind": "schema" },
+      { "path": "docs/dnd_character_sheet_patch.schema.json", "title": "Character Sheet Patch", "kind": "schema" },
+      { "path": "docs/metaemotion_event.schema.json", "title": "Metaemotion Event", "kind": "schema" },
+      { "path": "docs/memory_record.schema.json", "title": "Memory Record", "kind": "schema" },
+      { "path": "docs/meta_awareness_event.schema.json", "title": "Meta-awareness Event", "kind": "schema" }
+    ]
+  },
   "entries": [
     {
       "title": "MCP Servers Overview",
       "path": "docs/mcp_servers.md",
       "tags": ["MCP", "servers", "protocol", "tools", "resources", "prompts"],
-      "summary": "Overview of Model Context Protocol (MCP) servers, describing standardised protocol interfaces exposing tools, resources and prompts for AI applications. Details core features, server architecture and usage within SymbolOS."
+      "summary": "SymbolOS MCP server standard: tools/resources/prompts, risk levels, confirmation, limits, and error patterns."
     },
     {
       "title": "Precog Thought Overview",
       "path": "docs/precog_thought.md",
-      "tags": ["Precog", "anticipatory computing", "SymbolOS", "predictive context", "preloading"],
-      "summary": "Description of the anticipatory computing pattern 'precog thought' in SymbolOS, including conceptual foundations (predictive context, pre-loading resources, proactive prompts), design principles (transparency, accuracy, privacy), and implementation notes."
+      "tags": ["Precog", "anticipatory computing", "SymbolOS", "prefetch", "suggest", "act"],
+      "summary": "Operational spec for anticipatory computing in SymbolOS, including mode separation (Prefetch/Suggest/Act), DND-safe output contracts, gating, and metrics."
+    },
+    {
+      "title": "DND Character Sheet Integration",
+      "path": "docs/dnd_character_sheet_integration.md",
+      "tags": ["DND", "heart", "mind", "character sheet", "interop"],
+      "summary": "External-facing spec for heart/mind overlays in DND character sheets: share levels, consent, and table-safe output shapes."
+    },
+    {
+      "title": "Metaemotion",
+      "path": "docs/metaemotion.md",
+      "tags": ["metaemotion", "timing", "DND", "safety"],
+      "summary": "External spec for metaemotion vocabulary, timing windows, and safe prompting rules."
+    },
+    {
+      "title": "Memory",
+      "path": "docs/memory.md",
+      "tags": ["memory", "retention", "consent", "provenance"],
+      "summary": "External memory policy: consent-driven capture, retention guidance, and safe retrieval/correction flows."
+    },
+    {
+      "title": "Meta-awareness",
+      "path": "docs/meta_awareness.md",
+      "tags": ["meta-awareness", "barriers", "safety", "ux"],
+      "summary": "External agent safety contract describing technical dissociation barriers (mode/scope/memory/tool/narrative) and loop/boundary self-checks."
     },
     {
       "title": "MCP Servers Internal",
       "path": "internal_docs/mcp_servers_internal.md",
       "tags": ["MCP", "servers", "internal", "development", "guidelines"],
-      "summary": "Internal guidelines for developing MCP servers, including project structure, naming conventions, development workflow, security practices, and future roadmap."
+      "summary": "Internal guidelines for developing MCP servers, including structure, naming, workflow, and security practices."
     },
     {
       "title": "Precog Thought Internal",
       "path": "internal_docs/precog_private.md",
       "tags": ["precog", "internal", "prediction", "privacy", "algorithm"],
-      "summary": "Internal design notes for implementing the precog thought module, describing system architecture (data ingestion, prediction service, action planner), data privacy measures, algorithm design notes, and future enhancements."
-    },
-    {
-      "title": "Cross-border Data Transfer Report",
-      "path": "report.md",
-      "tags": ["data transfers", "privacy", "GDPR", "PIPL", "DPDP", "LGPD", "USA"],
-      "summary": "Comprehensive analysis of global legal regimes governing cross-border data transfers and localization requirements, including EU GDPR/Schrems II, China PIPL, India DPDP Act, Brazil LGPD, and U.S. sectoral laws. Provides risk matrix, enforcement cases, corporate strategies, and policy recommendations."
+      "summary": "Internal design notes for implementing precog thought, including architecture and thresholds."
     }
   ]
 }

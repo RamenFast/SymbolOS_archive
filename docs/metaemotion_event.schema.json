@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symbolos.local/schemas/metaemotion_event.schema.json",
+  "title": "MetaemotionEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "timestamp", "primaryEmotion", "confidence"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "primaryEmotion": { "type": "string", "minLength": 1, "maxLength": 30 },
+    "metaemotion": { "type": ["string", "null"], "maxLength": 60 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "surfaceMode": { "type": "string", "enum": ["silent", "suggest", "ask_clarifying"], "default": "suggest" },
+    "dnd": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope": { "type": "string", "enum": ["private", "party", "dm", "public"], "default": "private" },
+        "redaction": { "type": "string", "enum": ["none", "coarse", "strict"], "default": "coarse" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Redacted features/signals and short reason strings."
+    }
+  }
+}

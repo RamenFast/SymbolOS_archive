@@ -25,8 +25,15 @@ When importing notes from Drive into this repo:
 
 ## SymbolOS docs (this repo)
 
+- Docs index (start here): [index.md](index.md)
 - MCP servers standard: [mcp_servers.md](mcp_servers.md)
 - Precog thought spec: [precog_thought.md](precog_thought.md)
+- Heart + mind (DND sheet integration): [dnd_character_sheet_integration.md](dnd_character_sheet_integration.md)
+- Metaemotion (timing + table-safe prompts): [metaemotion.md](metaemotion.md)
+- Memory (consent + retention): [memory.md](memory.md)
+- Meta-awareness (barriers): [meta_awareness.md](meta_awareness.md)
+- Schemas index: [schemas.md](schemas.md)
+- Symbol map (shared JSON): [../symbol_map.shared.json](../symbol_map.shared.json)
 - External overview: [symbolOS_external_documentation.md](../symbolOS_external_documentation.md)
 
 ---

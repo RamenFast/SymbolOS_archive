@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symbolos.local/schemas/dnd_character_sheet_patch.schema.json",
+  "title": "DndCharacterSheetPatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["characterId", "patch", "createdAt"],
+  "properties": {
+    "characterId": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "patch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["heartMind"],
+      "properties": {
+        "heartMind": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["heartLabel", "mindLabel", "shareLevel"],
+          "properties": {
+            "heartLabel": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "heartIntensity": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "mindLabel": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "mindClarity": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "metaemotionLabel": { "type": ["string", "null"], "maxLength": 60 },
+            "needs": {
+              "type": "array",
+              "maxItems": 2,
+              "items": {
+                "type": "string",
+                "enum": ["rest", "reassurance", "control", "novelty", "safety", "connection", "meaning"]
+              }
+            },
+            "shareLevel": { "type": "string", "enum": ["private", "party", "dm", "public"] },
+            "dnd": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "enabled": { "type": "boolean" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": { "type": "string", "enum": ["user_manual", "rule_engine", "model_inference"] },
+        "reason": { "type": "string", "maxLength": 200 }
+      }
+    }
+  }
+}

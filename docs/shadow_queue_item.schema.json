@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symbolos.local/schemas/shadow_queue_item.schema.json",
+  "title": "ShadowQueueItem",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "kind", "payload", "createdAt"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "kind": { "type": "string", "enum": ["precog_suggestion", "memory_candidate", "metaemotion_candidate"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "reasonSuppressed": { "type": "string", "maxLength": 200 },
+    "suppressedBy": { "type": "string", "enum": ["dnd", "cooldown", "policy", "rate_limit", "unknown"], "default": "unknown" },
+    "payload": {
+      "type": "object",
+      "description": "Suppressed item payload; typically a PrecogCard or a candidate memory/metaemotion event.",
+      "additionalProperties": true
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope": { "type": "string", "enum": ["private", "party", "dm", "public"], "default": "private" },
+        "redaction": { "type": "string", "enum": ["none", "coarse", "strict"], "default": "coarse" }
+      }
+    }
+  }
+}

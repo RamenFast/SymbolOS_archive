@@ -6,6 +6,17 @@ This repository is a private development space for **SymbolOS**, a symbolic oper
 
 This repository includes a growing set of developer-facing documentation under `docs/`. This document serves as an introduction for external audiences and provides high‑level guidelines.
 
+## Documentation index
+
+Start here:
+
+- Docs index: [docs/index.md](docs/index.md)
+- Schemas index: [docs/schemas.md](docs/schemas.md)
+
+If you are integrating tooling (e.g., a VS Code assistant/extension), the canonical shared symbol+docs map is:
+
+- [symbol_map.shared.json](symbol_map.shared.json)
+
 ## Getting Started
 
 1. **Project goals.**  The goal of SymbolOS is to create a symbolic interface layer that encodes system status and interactions using intuitive symbols and colour codes.  All future code and documentation should adhere to these principles.
@@ -50,10 +61,10 @@ When raising an issue, provide sufficient context, steps to reproduce (if applic
 
 To continue development:
 
-1. Define the **SymbolOS specification**: document the symbolic language, icons, and communication patterns.  This could live in `docs/specification.md`.
-2. Draft a **style guide**: describe how to use symbols, colours and typography in communication.  Place this under `docs/style_guide.md`.
-3. Set up a development environment and create a simple prototype implementing part of the specification.
-4. Expand the README to include installation instructions, usage examples and contribution guidelines.
+1. Define the **SymbolOS specification**: document the symbolic language, icons, and communication patterns.
+2. Draft a **style guide**: describe how to use symbols and typography in communication.
+3. Add initial runtime code (when ready) and link it from [docs/index.md](docs/index.md).
+4. Keep schemas authoritative and keep [docs/schemas.md](docs/schemas.md) updated.
 
 ## Disclaimer
 
