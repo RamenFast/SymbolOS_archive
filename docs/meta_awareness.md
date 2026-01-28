@@ -1,5 +1,12 @@
 # Meta-Awareness (External)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🛡️  META-AWARENESS — BARRIERS & SELF-CHECKS             ║
+║  Quest: explain intent • detect drift • respect boundaries   ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 This document defines a *technical* meaning of “meta-awareness” for SymbolOS agents:
 
 Meta-awareness is the agent’s ability to:

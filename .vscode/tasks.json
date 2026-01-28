@@ -30,6 +30,23 @@
       "group": "build"
     },
     {
+      "label": "Mercer: doc alignment runner (retry x3, 20m)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\mercer_doc_alignment_runner.ps1",
+        "-RetryCount",
+        "3",
+        "-RetryDelayMinutes",
+        "20"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "Mercer: install 5h doc alignment scheduled task (read-only)",
       "type": "shell",
       "command": "powershell",

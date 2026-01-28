@@ -41,7 +41,8 @@ $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument ("-NoProfi
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(2) -RepetitionInterval (New-TimeSpan -Hours $Hours) -RepetitionDuration ([TimeSpan]::MaxValue)
 
 # Run only when user is logged on (safest default; no elevated secrets).
-$principal = New-ScheduledTaskPrincipal -UserId $env:UserName -LogonType Interactive -RunLevel Limited
+$userId = if ($env:USERDOMAIN) { "{0}\\{1}" -f $env:USERDOMAIN, $env:USERNAME } else { $env:USERNAME }
+$principal = New-ScheduledTaskPrincipal -UserId $userId -LogonType Interactive -RunLevel Limited
 
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -MultipleInstances IgnoreNew -StartWhenAvailable
 

@@ -65,18 +65,31 @@ MercerID: MRC-20260128-0249-18
 Read-only scan script:
 - `scripts/mercer_doc_alignment_scan.ps1`
 
+Retrying runner wrapper (recommended for scheduled tasks):
+- `scripts/mercer_doc_alignment_runner.ps1`
+
 Optional Windows Scheduled Task installer (runs scan every 5 hours by default):
 - `scripts/install_mercer_doc_alignment_task.ps1`
 
 VS Code tasks:
 - `Mercer: doc alignment scan (read-only)`
+- `Mercer: doc alignment runner (retry x3, 20m)`
 - `Mercer: install 5h doc alignment scheduled task (read-only)`
 - `Mercer: uninstall 5h doc alignment scheduled task`
+
+Crash handling policy (scheduled task):
+- On crash/error (⛔), retry up to 3 times
+- Wait 20 minutes between retries
+- If still failing, stop and defer until the next 5-hour scheduled run
 
 Status behavior:
 - ✅ exit code `0`: no drift
 - ⚠️ exit code `2`: drift detected (suggestion only)
 - ⛔ nonzero other: error
+
+Drift semantics (symbols):
+- The scan validates the shared map against `docs/symbol_map.md` **## Core symbols** only.
+- **Extended (doc-only)** symbols are allowed to evolve and do not trigger drift.
 
 MercerID: MRC-20260128-0249-26
 

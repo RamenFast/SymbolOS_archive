@@ -1,5 +1,11 @@
 # Session Log — 2026-01-28 (Private)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧾  SESSION LOG (PRIVATE) — DM’S JOURNAL                ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 ## Context
 - Goal: Make VS Code the home base with an explicit, file-backed memory system.
 - Rule: No reliance on chat history or model memory.

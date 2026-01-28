@@ -1,5 +1,12 @@
 # Symbol Map (Human)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🗺️  SYMBOL MAP — SHARED GLYPHS                          ║
+║  Quest: consistency over novelty                             ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 A small, shared legend for symbols used across SymbolOS documentation.
 
 This is *not* a UI spec; it’s a meaning map so docs, tools, and agents stay consistent.

@@ -5,11 +5,14 @@ This document defines a DND-compatible way to represent “heart + mind” state
 This is an interface spec: it describes *what* can be represented and *how it should behave in play*, not proprietary model details.
 
 ## Design goals
-- Player-first: never override choices; always offer options.
-- Table-safe: works as an overlay to any DND sheet.
-- Minimal intrusion: compact, skimmable, optional.
-- Consent-driven: the player controls what is tracked and shared.
 
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🎲🧬☂️❤️🧠  CHARACTER SHEET — HEART + MIND OVERLAY           ║
+║  Quest: table-safe clarity • consent-first                   ║
+╚══════════════════════════════════════════════════════════════╝
+```
 ## Core concepts
 
 ### 1) Heart state (felt sense)

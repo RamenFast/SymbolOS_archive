@@ -1,5 +1,12 @@
 # SymbolOS Schemas Index
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧩  SCHEMAS — STRUCTURED SHAPES                          ║
+║  Quest: validate interfaces • keep docs machine-friendly     ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 These JSON Schemas define the shared interchange shapes used across SymbolOS docs.
 
 ## Registry

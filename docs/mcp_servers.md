@@ -1,5 +1,12 @@
 # MCP Servers in SymbolOS
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🛠️🛡️  MCP SERVERS — CAPABILITY BOUNDARIES               ║
+║  Quest: tools with gates • resources with limits             ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 This document defines how Model Context Protocol (MCP) servers are designed, operated, and integrated inside SymbolOS.
 
 MCP servers expose capabilities to AI clients via three building blocks:

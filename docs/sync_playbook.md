@@ -1,5 +1,12 @@
 # Docs Sync Playbook (SymbolOS/UmbrellaOS)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧾  SYNC PLAYBOOK — KEEP THE LORE CONSISTENT            ║
+║  Quest: small diffs • stable meanings • verifiable changes   ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 This playbook is the shortest safe path to keep docs synced and coherent.
 
 Scope: `docs/` and Markdown files (`*.md`) in the repo root.

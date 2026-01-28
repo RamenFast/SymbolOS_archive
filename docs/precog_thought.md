@@ -1,5 +1,12 @@
 # Precog Thought: Anticipatory Computing in SymbolOS
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🔮🧠  PRECOG THOUGHT — PREFETCH / SUGGEST / ACT          ║
+║  Quest: reduce latency • preserve trust                      ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 Precog thought in SymbolOS is a practical pattern: use context to prepare helpful information or drafts before the user explicitly asks.
 It is not paranormal. “Precog” is a metaphor for probabilistic inference, workflow heuristics, and smart precomputation.
 

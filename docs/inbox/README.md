@@ -1,5 +1,12 @@
 # Docs Inbox
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️📥  INBOX — INTAKE RITUAL                               ║
+║  Quest: capture cleanly • route safely                       ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 Drop incoming notes here before curating them into the main docs.
 
 Conventions:

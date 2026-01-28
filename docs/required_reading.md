@@ -1,5 +1,12 @@
 # Required Reading
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️📚  REQUIRED READING — THE PARTY BRIEF                  ║
+║  Quest: learn the rules • keep the system safe               ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 This page is the canonical list of “what to read” for SymbolOS/UmbrellaOS work.
 
 It is intentionally skimmable and DND-friendly: short sections, clear links, and minimal fluff.

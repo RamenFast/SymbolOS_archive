@@ -1,5 +1,13 @@
 # Open Loops (Private)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧾  OPEN LOOPS (PRIVATE) — QUEST LOG                    ║
+║  Rule: promises/tasks that must not be dropped              ║
+╚══════════════════════════════════════════════════════════════╝
+Glyph tags: 🧬☂️🧾🛡️✅⚠️⛔
+```
+
 Track tasks/questions/promises that must not be dropped.
 
 Template:
@@ -18,12 +26,14 @@ Template:
   - Next action: Register memory system in `symbol_map.shared.json` and link from docs index.
   - Due/Review: Next session start
   - Links: `memory/README.md`
+  - MercerID: MRC-20260128-0249-33
 
 - [ ] ID: 20260128-002
   - Loop: Add a JSON Schema for `symbol_map.shared.json` for validation and extension tooling.
   - Owner: Mercer
   - Next action: Create `docs/symbol_map.shared.schema.json` and add it to schema indexes.
   - Due/Review: Next session start
+  - MercerID: MRC-20260128-0249-34
 
 - [ ] ID: 20260128-003
   - Loop: Define the exact safety condition for Precog “proactively act” (placeholder: virus-scanning logic).

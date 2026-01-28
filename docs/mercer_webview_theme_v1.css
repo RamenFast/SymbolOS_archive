@@ -332,6 +332,15 @@
   --mercer-radius-md: 10px;
   --mercer-radius-lg: 14px;
 
+  /* ========= Optional private backdrops =========
+     Intended for local/internal use.
+     - Place the image at: docs/assets/lily_background.private.png (gitignored)
+     - Webviews can opt-in by adding the `mercer-lily-backdrop` class.
+  */
+  --mercer-lily-bg-url: url("./assets/lily_background.private.png");
+  --mercer-backdrop-image: var(--mercer-lily-bg-url);
+  --mercer-backdrop-tint: color-mix(in srgb, var(--mercer-bg) 92%, transparent 8%);
+
   --mercer-shadow-sm: 0 1px 2px rgba(0,0,0,0.18);
   --mercer-shadow-md: 0 6px 18px rgba(0,0,0,0.25);
   --mercer-shadow-lg: 0 14px 34px rgba(0,0,0,0.35);
@@ -391,6 +400,17 @@
 
 .mercer-banner .title {
   font-weight: 700;
+}
+
+/* Optional lily field backdrop (opt-in) */
+.mercer-lily-backdrop {
+  background-color: var(--mercer-bg);
+  background-image:
+    linear-gradient(180deg, var(--mercer-backdrop-tint), var(--mercer-backdrop-tint)),
+    var(--mercer-backdrop-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* End of theme map */

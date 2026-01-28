@@ -98,6 +98,7 @@
       { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
       { "path": "internal_docs/future_possibilities_ring0.md", "title": "Future Possibilities (Ring-0) — Internal", "kind": "ring0" },
       { "path": "internal_docs/mercer_automation_contract_v1.internal.md", "title": "Mercer Automation Contract v1 (Internal)", "kind": "policy" },
+      { "path": "internal_docs/mercer_bootup_cards_v1.internal.md", "title": "Mercer Bootup Cards (1–7) — Internal", "kind": "bootup" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
@@ -164,6 +165,12 @@
       "path": "internal_docs/mercer_automation_contract_v1.internal.md",
       "tags": ["Mercer", "automation", "gates", "Ti", "policy", "audit"],
       "summary": "Internal contract defining automation gate rules (Prefetch/Suggest/Act), doc alignment cadence, and the full Ti expression for structured, auditable behavior."
+    },
+    {
+      "title": "Mercer Bootup Cards (1–7) — Internal",
+      "path": "internal_docs/mercer_bootup_cards_v1.internal.md",
+      "tags": ["Mercer", "bootup", "cards", "thoughtforms", "style"],
+      "summary": "Internal bootup card sequence (1–7) with thoughtform-style prompts, lily backdrop pointer, and a small meme guy; designed to align with gate rules and Ti output shape."
     },
     {
       "title": "Precog Thought Internal",

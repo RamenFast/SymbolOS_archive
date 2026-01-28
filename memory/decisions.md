@@ -1,5 +1,13 @@
 # Decisions (Private)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧾🛡️  DECISIONS LEDGER (PRIVATE) — SYMBOL OS / MERCER    ║
+║  Rule: stable, costly-to-reverse choices only               ║
+╚══════════════════════════════════════════════════════════════╝
+Glyph tags: 🧬☂️🧾🛡️🧠🔮✅⚠️⛔
+```
+
 Record decisions that are costly to reverse.
 
 Template:
@@ -11,11 +19,12 @@ Template:
 
 ---
 
-- 2026-01-28 — Decision: Use repo-backed memory as the durable layer.
-  - Why: Bitrot-resistant, auditable, tool-friendly; avoids implicit model memory.
-  - Alternatives: Chat history as memory; external notes only.
-  - Consequences: Requires discipline to keep it updated.
-  - Evidence/links: `memory/` folder + shared-map registration.
+- 2026-01-28 — Decision: Use repo-backed memory as the durable layer (Mercer/SymbolOS ASCII art + artifacts + bootup_cards + intention🗺 formatting).
+  - Why: Bitrot-resistant, auditable, tool-friendly; avoids implicit model memory; consistent “Mercer/SymbolOS” markdown conventions across ☂🗺.
+  - Alternatives: Chat history as memory; external notes only; mixed/unspecified formatting per folder.
+  - Consequences: Requires discipline to keep it updated; requires consistent formatting gates (template bullets + `MercerID` + `-+-+-+-+-+` tool delimiters where applicable) across all folders.
+  - Evidence/links: `memory/` folder; shared-map registration (`symbol_map.shared.json`); this file (`memory/decisions.md`).
+  - MercerID: MRC-20260128-0249-10
 
 - 2026-01-28 — Decision: Mercer core interface performs periodic auto-doc alignment.
   - Why: Keep docs coherent without constant manual bookkeeping.

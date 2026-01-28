@@ -1,5 +1,12 @@
 # Metaemotion (External)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️❤️🧠  METAEMOTION — TIMING + TABLE-SAFE SIGNALS          ║
+║  Quest: feel clearly • act safely                            ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 Metaemotion is “emotion about emotion” — how someone feels about what they’re feeling.
 
 This spec defines shared vocabulary, timing, and safe inference/display rules for SymbolOS.

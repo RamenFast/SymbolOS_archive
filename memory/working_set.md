@@ -1,5 +1,13 @@
 # Working Set (Private)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧠  WORKING SET (PRIVATE) — ACTIVE QUEST HUD            ║
+║  Rule: keep it current; smallest next safe step             ║
+╚══════════════════════════════════════════════════════════════╝
+Glyph tags: 🧬☂️🧠🧾🛡️✅⚠️⛔
+```
+
 ## Purpose we’re increasing
 - Establish a stable SymbolOS home base with a file-backed memory system and explicit return-loop workflows.
 

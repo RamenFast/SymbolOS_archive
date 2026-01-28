@@ -1,5 +1,12 @@
 # SymbolOS Docs Index
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️📚  DOCS INDEX — MEETING PLACE TRAILHEAD                ║
+║  Quest: find truth fast • keep humans first                  ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 This is the canonical entry point for SymbolOS documentation in this repo.
 
 ## Protocols & standards

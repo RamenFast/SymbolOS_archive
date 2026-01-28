@@ -8,3 +8,8 @@
 *.tmp
 .DS_Store
 Thumbs.db
+
+# Private doc assets (kept local, not committed)
+/docs/assets/**/*.private.*
+/docs/assets/lily_background.*
+/docs/assets/photos_import_private/

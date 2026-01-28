@@ -1,5 +1,12 @@
 # SymbolOS Memory (External)
 
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬☂️🧾  MEMORY — CONSENT + PROVENANCE                        ║
+║  Quest: remember well • never store secrets                  ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
 This document defines a safe, consent-driven approach to “memory” in SymbolOS.
 
 Memory here means: durable, retrievable notes and preferences that help future interactions.
