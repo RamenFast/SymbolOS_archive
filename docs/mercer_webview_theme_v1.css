@@ -1,0 +1,396 @@
+/*
+  Mercer Webview Theme Map v1
+  Shared symbol: 🧬  Glyphs: 🌸☂✨🌟🏮🦊🪂
+
+  Goal: a *map* of as many useful colors/tokens as practical for VS Code Webviews.
+  Usage:
+    - Include this CSS in your webview HTML
+    - Prefer semantic tokens (e.g., --mercer-fg) over raw palette tokens.
+
+  Notes:
+    - VS Code exposes theme colors to webviews via --vscode-* variables.
+    - We map those into --mercer-* tokens, then provide a large palette.
+*/
+
+:root {
+  /* ========= VS Code → Mercer semantic mapping ========= */
+  --mercer-bg: var(--vscode-editor-background);
+  --mercer-fg: var(--vscode-editor-foreground);
+  --mercer-muted: var(--vscode-descriptionForeground);
+
+  --mercer-border: var(--vscode-panel-border);
+  --mercer-focus: var(--vscode-focusBorder);
+
+  --mercer-link: var(--vscode-textLink-foreground);
+  --mercer-link-hover: var(--vscode-textLink-activeForeground);
+
+  --mercer-error: var(--vscode-errorForeground);
+  --mercer-warning: var(--vscode-editorWarning-foreground);
+  --mercer-info: var(--vscode-editorInfo-foreground);
+  --mercer-success: #22c55e;
+
+  --mercer-button-bg: var(--vscode-button-background);
+  --mercer-button-fg: var(--vscode-button-foreground);
+  --mercer-button-hover-bg: var(--vscode-button-hoverBackground);
+
+  --mercer-badge-bg: var(--vscode-badge-background);
+  --mercer-badge-fg: var(--vscode-badge-foreground);
+
+  --mercer-input-bg: var(--vscode-input-background);
+  --mercer-input-fg: var(--vscode-input-foreground);
+  --mercer-input-border: var(--vscode-input-border);
+
+  --mercer-list-hover: var(--vscode-list-hoverBackground);
+  --mercer-list-active: var(--vscode-list-activeSelectionBackground);
+  --mercer-list-active-fg: var(--vscode-list-activeSelectionForeground);
+  --mercer-list-inactive: var(--vscode-list-inactiveSelectionBackground);
+  --mercer-list-inactive-fg: var(--vscode-list-inactiveSelectionForeground);
+
+  /* ========= Glyph colors (brand signposts) ========= */
+  --mercer-glyph-dna: #22c55e;   /* 🧬 */
+  --mercer-glyph-flower: #ec4899;/* 🌸 */
+  --mercer-glyph-umbrella: #0ea5e9; /* ☂ */
+  --mercer-glyph-sparkle: #f59e0b;/* ✨ */
+  --mercer-glyph-star: #a855f7;  /* 🌟 */
+  --mercer-glyph-lantern: #fb7185;/* 🏮 */
+  --mercer-glyph-fox: #f97316;   /* 🦊 */
+  --mercer-glyph-parachute: #14b8a6; /* 🪂 */
+
+  /* ========= Full palette (Tailwind-inspired, extended) ========= */
+  /* Grays */
+  --mercer-slate-50: #f8fafc;
+  --mercer-slate-100: #f1f5f9;
+  --mercer-slate-200: #e2e8f0;
+  --mercer-slate-300: #cbd5e1;
+  --mercer-slate-400: #94a3b8;
+  --mercer-slate-500: #64748b;
+  --mercer-slate-600: #475569;
+  --mercer-slate-700: #334155;
+  --mercer-slate-800: #1e293b;
+  --mercer-slate-900: #0f172a;
+  --mercer-slate-950: #020617;
+
+  --mercer-gray-50: #f9fafb;
+  --mercer-gray-100: #f3f4f6;
+  --mercer-gray-200: #e5e7eb;
+  --mercer-gray-300: #d1d5db;
+  --mercer-gray-400: #9ca3af;
+  --mercer-gray-500: #6b7280;
+  --mercer-gray-600: #4b5563;
+  --mercer-gray-700: #374151;
+  --mercer-gray-800: #1f2937;
+  --mercer-gray-900: #111827;
+  --mercer-gray-950: #030712;
+
+  /* Reds */
+  --mercer-red-50: #fef2f2;
+  --mercer-red-100: #fee2e2;
+  --mercer-red-200: #fecaca;
+  --mercer-red-300: #fca5a5;
+  --mercer-red-400: #f87171;
+  --mercer-red-500: #ef4444;
+  --mercer-red-600: #dc2626;
+  --mercer-red-700: #b91c1c;
+  --mercer-red-800: #991b1b;
+  --mercer-red-900: #7f1d1d;
+  --mercer-red-950: #450a0a;
+
+  /* Oranges */
+  --mercer-orange-50: #fff7ed;
+  --mercer-orange-100: #ffedd5;
+  --mercer-orange-200: #fed7aa;
+  --mercer-orange-300: #fdba74;
+  --mercer-orange-400: #fb923c;
+  --mercer-orange-500: #f97316;
+  --mercer-orange-600: #ea580c;
+  --mercer-orange-700: #c2410c;
+  --mercer-orange-800: #9a3412;
+  --mercer-orange-900: #7c2d12;
+  --mercer-orange-950: #431407;
+
+  /* Ambers */
+  --mercer-amber-50: #fffbeb;
+  --mercer-amber-100: #fef3c7;
+  --mercer-amber-200: #fde68a;
+  --mercer-amber-300: #fcd34d;
+  --mercer-amber-400: #fbbf24;
+  --mercer-amber-500: #f59e0b;
+  --mercer-amber-600: #d97706;
+  --mercer-amber-700: #b45309;
+  --mercer-amber-800: #92400e;
+  --mercer-amber-900: #78350f;
+  --mercer-amber-950: #451a03;
+
+  /* Yellows */
+  --mercer-yellow-50: #fefce8;
+  --mercer-yellow-100: #fef9c3;
+  --mercer-yellow-200: #fef08a;
+  --mercer-yellow-300: #fde047;
+  --mercer-yellow-400: #facc15;
+  --mercer-yellow-500: #eab308;
+  --mercer-yellow-600: #ca8a04;
+  --mercer-yellow-700: #a16207;
+  --mercer-yellow-800: #854d0e;
+  --mercer-yellow-900: #713f12;
+  --mercer-yellow-950: #422006;
+
+  /* Limes */
+  --mercer-lime-50: #f7fee7;
+  --mercer-lime-100: #ecfccb;
+  --mercer-lime-200: #d9f99d;
+  --mercer-lime-300: #bef264;
+  --mercer-lime-400: #a3e635;
+  --mercer-lime-500: #84cc16;
+  --mercer-lime-600: #65a30d;
+  --mercer-lime-700: #4d7c0f;
+  --mercer-lime-800: #3f6212;
+  --mercer-lime-900: #365314;
+  --mercer-lime-950: #1a2e05;
+
+  /* Greens */
+  --mercer-green-50: #f0fdf4;
+  --mercer-green-100: #dcfce7;
+  --mercer-green-200: #bbf7d0;
+  --mercer-green-300: #86efac;
+  --mercer-green-400: #4ade80;
+  --mercer-green-500: #22c55e;
+  --mercer-green-600: #16a34a;
+  --mercer-green-700: #15803d;
+  --mercer-green-800: #166534;
+  --mercer-green-900: #14532d;
+  --mercer-green-950: #052e16;
+
+  /* Emerald */
+  --mercer-emerald-50: #ecfdf5;
+  --mercer-emerald-100: #d1fae5;
+  --mercer-emerald-200: #a7f3d0;
+  --mercer-emerald-300: #6ee7b7;
+  --mercer-emerald-400: #34d399;
+  --mercer-emerald-500: #10b981;
+  --mercer-emerald-600: #059669;
+  --mercer-emerald-700: #047857;
+  --mercer-emerald-800: #065f46;
+  --mercer-emerald-900: #064e3b;
+  --mercer-emerald-950: #022c22;
+
+  /* Teals */
+  --mercer-teal-50: #f0fdfa;
+  --mercer-teal-100: #ccfbf1;
+  --mercer-teal-200: #99f6e4;
+  --mercer-teal-300: #5eead4;
+  --mercer-teal-400: #2dd4bf;
+  --mercer-teal-500: #14b8a6;
+  --mercer-teal-600: #0d9488;
+  --mercer-teal-700: #0f766e;
+  --mercer-teal-800: #115e59;
+  --mercer-teal-900: #134e4a;
+  --mercer-teal-950: #042f2e;
+
+  /* Cyans */
+  --mercer-cyan-50: #ecfeff;
+  --mercer-cyan-100: #cffafe;
+  --mercer-cyan-200: #a5f3fc;
+  --mercer-cyan-300: #67e8f9;
+  --mercer-cyan-400: #22d3ee;
+  --mercer-cyan-500: #06b6d4;
+  --mercer-cyan-600: #0891b2;
+  --mercer-cyan-700: #0e7490;
+  --mercer-cyan-800: #155e75;
+  --mercer-cyan-900: #164e63;
+  --mercer-cyan-950: #083344;
+
+  /* Skies */
+  --mercer-sky-50: #f0f9ff;
+  --mercer-sky-100: #e0f2fe;
+  --mercer-sky-200: #bae6fd;
+  --mercer-sky-300: #7dd3fc;
+  --mercer-sky-400: #38bdf8;
+  --mercer-sky-500: #0ea5e9;
+  --mercer-sky-600: #0284c7;
+  --mercer-sky-700: #0369a1;
+  --mercer-sky-800: #075985;
+  --mercer-sky-900: #0c4a6e;
+  --mercer-sky-950: #082f49;
+
+  /* Blues */
+  --mercer-blue-50: #eff6ff;
+  --mercer-blue-100: #dbeafe;
+  --mercer-blue-200: #bfdbfe;
+  --mercer-blue-300: #93c5fd;
+  --mercer-blue-400: #60a5fa;
+  --mercer-blue-500: #3b82f6;
+  --mercer-blue-600: #2563eb;
+  --mercer-blue-700: #1d4ed8;
+  --mercer-blue-800: #1e40af;
+  --mercer-blue-900: #1e3a8a;
+  --mercer-blue-950: #172554;
+
+  /* Indigos */
+  --mercer-indigo-50: #eef2ff;
+  --mercer-indigo-100: #e0e7ff;
+  --mercer-indigo-200: #c7d2fe;
+  --mercer-indigo-300: #a5b4fc;
+  --mercer-indigo-400: #818cf8;
+  --mercer-indigo-500: #6366f1;
+  --mercer-indigo-600: #4f46e5;
+  --mercer-indigo-700: #4338ca;
+  --mercer-indigo-800: #3730a3;
+  --mercer-indigo-900: #312e81;
+  --mercer-indigo-950: #1e1b4b;
+
+  /* Violets */
+  --mercer-violet-50: #f5f3ff;
+  --mercer-violet-100: #ede9fe;
+  --mercer-violet-200: #ddd6fe;
+  --mercer-violet-300: #c4b5fd;
+  --mercer-violet-400: #a78bfa;
+  --mercer-violet-500: #8b5cf6;
+  --mercer-violet-600: #7c3aed;
+  --mercer-violet-700: #6d28d9;
+  --mercer-violet-800: #5b21b6;
+  --mercer-violet-900: #4c1d95;
+  --mercer-violet-950: #2e1065;
+
+  /* Purples */
+  --mercer-purple-50: #faf5ff;
+  --mercer-purple-100: #f3e8ff;
+  --mercer-purple-200: #e9d5ff;
+  --mercer-purple-300: #d8b4fe;
+  --mercer-purple-400: #c084fc;
+  --mercer-purple-500: #a855f7;
+  --mercer-purple-600: #9333ea;
+  --mercer-purple-700: #7e22ce;
+  --mercer-purple-800: #6b21a8;
+  --mercer-purple-900: #581c87;
+  --mercer-purple-950: #3b0764;
+
+  /* Fuchsias */
+  --mercer-fuchsia-50: #fdf4ff;
+  --mercer-fuchsia-100: #fae8ff;
+  --mercer-fuchsia-200: #f5d0fe;
+  --mercer-fuchsia-300: #f0abfc;
+  --mercer-fuchsia-400: #e879f9;
+  --mercer-fuchsia-500: #d946ef;
+  --mercer-fuchsia-600: #c026d3;
+  --mercer-fuchsia-700: #a21caf;
+  --mercer-fuchsia-800: #86198f;
+  --mercer-fuchsia-900: #701a75;
+  --mercer-fuchsia-950: #4a044e;
+
+  /* Pinks */
+  --mercer-pink-50: #fdf2f8;
+  --mercer-pink-100: #fce7f3;
+  --mercer-pink-200: #fbcfe8;
+  --mercer-pink-300: #f9a8d4;
+  --mercer-pink-400: #f472b6;
+  --mercer-pink-500: #ec4899;
+  --mercer-pink-600: #db2777;
+  --mercer-pink-700: #be185d;
+  --mercer-pink-800: #9d174d;
+  --mercer-pink-900: #831843;
+  --mercer-pink-950: #500724;
+
+  /* Roses */
+  --mercer-rose-50: #fff1f2;
+  --mercer-rose-100: #ffe4e6;
+  --mercer-rose-200: #fecdd3;
+  --mercer-rose-300: #fda4af;
+  --mercer-rose-400: #fb7185;
+  --mercer-rose-500: #f43f5e;
+  --mercer-rose-600: #e11d48;
+  --mercer-rose-700: #be123c;
+  --mercer-rose-800: #9f1239;
+  --mercer-rose-900: #881337;
+  --mercer-rose-950: #4c0519;
+
+  /* ========= “All the colors I can” extras ========= */
+  --mercer-black: #000000;
+  --mercer-white: #ffffff;
+  --mercer-transparent: transparent;
+
+  /* Neon accents */
+  --mercer-neon-green: #39ff14;
+  --mercer-neon-cyan: #00ffff;
+  --mercer-neon-magenta: #ff00ff;
+  --mercer-neon-yellow: #ffff00;
+  --mercer-neon-orange: #ff5f1f;
+
+  /* Pastel accents */
+  --mercer-pastel-mint: #b7f7d8;
+  --mercer-pastel-lavender: #e6d6ff;
+  --mercer-pastel-peach: #ffd7ba;
+  --mercer-pastel-sky: #cce8ff;
+  --mercer-pastel-rose: #ffd1dc;
+
+  /* Metallic-ish */
+  --mercer-metal-gold: #d4af37;
+  --mercer-metal-silver: #c0c0c0;
+  --mercer-metal-bronze: #cd7f32;
+
+  /* ========= Layout tokens ========= */
+  --mercer-radius-sm: 6px;
+  --mercer-radius-md: 10px;
+  --mercer-radius-lg: 14px;
+
+  --mercer-shadow-sm: 0 1px 2px rgba(0,0,0,0.18);
+  --mercer-shadow-md: 0 6px 18px rgba(0,0,0,0.25);
+  --mercer-shadow-lg: 0 14px 34px rgba(0,0,0,0.35);
+}
+
+/* Convenience classes */
+.mercer-surface {
+  background: var(--mercer-bg);
+  color: var(--mercer-fg);
+}
+
+.mercer-card {
+  background: color-mix(in srgb, var(--mercer-bg) 88%, var(--mercer-slate-50) 12%);
+  border: 1px solid color-mix(in srgb, var(--mercer-border) 70%, transparent 30%);
+  border-radius: var(--mercer-radius-md);
+  box-shadow: var(--mercer-shadow-sm);
+  padding: 12px 14px;
+}
+
+.mercer-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--mercer-badge-bg);
+  color: var(--mercer-badge-fg);
+}
+
+.mercer-link a {
+  color: var(--mercer-link);
+}
+.mercer-link a:hover {
+  color: var(--mercer-link-hover);
+}
+
+.mercer-outline:focus {
+  outline: 2px solid var(--mercer-focus);
+  outline-offset: 2px;
+}
+
+.mercer-kbd {
+  font-family: var(--vscode-editor-font-family);
+  font-size: 0.9em;
+  border: 1px solid color-mix(in srgb, var(--mercer-border) 75%, transparent 25%);
+  border-bottom-width: 2px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--mercer-bg) 90%, var(--mercer-slate-100) 10%);
+}
+
+/* Banner helpers */
+.mercer-banner {
+  border-left: 5px solid var(--mercer-glyph-dna);
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--mercer-bg) 86%, var(--mercer-emerald-200) 14%);
+  border-radius: var(--mercer-radius-md);
+}
+
+.mercer-banner .title {
+  font-weight: 700;
+}
+
+/* End of theme map */

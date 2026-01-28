@@ -15,7 +15,8 @@
       "Precog behavior is constrained to Prefetch/Suggest/Act.",
       "DND gating: DND disables proactive suggestion cards; prefetch may run only if enabled.",
       "Memory is consent-driven; provenance is required; secrets are never stored.",
-      "Meta-awareness is an agent safety/UX contract; barriers prevent unsafe cross-contamination."
+      "Meta-awareness is an agent safety/UX contract; barriers prevent unsafe cross-contamination.",
+      "Mercer meeting place shared symbol is 🧬; always return to the meeting place (A + B)."
     ]
   },
   "symbols": [
@@ -72,6 +73,12 @@
       "name": "Schema",
       "meaning": "Structured interchange shapes",
       "tags": ["schema"]
+    },
+    {
+      "symbol": "🧬",
+      "name": "Meeting Place",
+      "meaning": "Shared symbol for Mercer meeting place return loop",
+      "tags": ["mercer", "meeting-place", "flow"]
     }
   ],
   "indexes": {
@@ -85,7 +92,9 @@
       { "path": "docs/meta_awareness.md", "title": "Meta-awareness", "kind": "external" },
       { "path": "docs/required_reading.md", "title": "Required Reading", "kind": "index" },
       { "path": "docs/sync_playbook.md", "title": "Docs Sync Playbook", "kind": "ops" },
-      { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" }
+      { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" },
+      { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
+      { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" }
     ],
     "schemas": [
       { "path": "docs/registry_entry.schema.json", "title": "Registry Entry", "kind": "schema" },
@@ -145,6 +154,18 @@
       "path": "internal_docs/precog_private.md",
       "tags": ["precog", "internal", "prediction", "privacy", "algorithm"],
       "summary": "Internal design notes for implementing precog thought, including architecture and thresholds."
+    },
+    {
+      "title": "Mercer Webview Theme Map v1",
+      "path": "docs/mercer_webview_theme_v1.css",
+      "tags": ["mercer", "theme", "webview", "css", "colors"],
+      "summary": "VS Code webview CSS theme token map with semantic tokens + an extended color palette for Mercer UI panels."
+    },
+    {
+      "title": "Mercer Meeting Place Oath v1 (Private)",
+      "path": "internal_docs/mercer_meeting_place_oath_v1.private.md",
+      "tags": ["mercer", "meeting-place", "oath", "private", "fi"],
+      "summary": "Private oath and behavior contract: meeting place return loop (A+B), dissociation barriers, and Fi values alignment clauses."
     }
   ]
 }
