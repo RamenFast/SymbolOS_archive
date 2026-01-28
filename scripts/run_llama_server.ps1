@@ -1,4 +1,5 @@
 Param(
+  [string]$ServerDirOrExe = "",
   [string]$ModelPath = "",
   [string]$BindIP = "127.0.0.1",
   [int]$Port = 8080,
@@ -13,14 +14,45 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $binDir = Join-Path $repoRoot 'local_ai\bin'
 $modelDir = Join-Path $repoRoot 'local_ai\models'
 
-$serverCandidates = @(
-  (Join-Path $binDir 'llama-server.exe'),
-  (Join-Path $binDir 'server.exe')
-)
+function Resolve-LlamaServerExe {
+  Param(
+    [string]$ServerDirOrExe,
+    [string]$DefaultBinDir
+  )
 
-$serverExe = $serverCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+  $searchRoots = @()
+
+  if ($ServerDirOrExe) {
+    if (Test-Path -LiteralPath $ServerDirOrExe) {
+      $item = Get-Item -LiteralPath $ServerDirOrExe
+      if ($item.PSIsContainer) {
+        $searchRoots += $item.FullName
+      } else {
+        return $item.FullName
+      }
+    } else {
+      throw "ServerDirOrExe does not exist: $ServerDirOrExe"
+    }
+  }
+
+  if (Test-Path -LiteralPath $DefaultBinDir) {
+    $searchRoots += $DefaultBinDir
+  }
+
+  foreach ($root in $searchRoots | Select-Object -Unique) {
+    $hit = Get-ChildItem -Path $root -Recurse -File -Filter 'llama-server.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($hit) { return $hit.FullName }
+
+    $hit = Get-ChildItem -Path $root -Recurse -File -Filter 'server.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($hit) { return $hit.FullName }
+  }
+
+  return $null
+}
+
+$serverExe = Resolve-LlamaServerExe -ServerDirOrExe $ServerDirOrExe -DefaultBinDir $binDir
 if (-not $serverExe) {
-  throw "No server binary found. Put llama.cpp server binary in: $binDir (expected llama-server.exe or server.exe)"
+  throw "No server binary found. Provide -ServerDirOrExe pointing to an extracted llama.cpp folder or place llama-server.exe under: $binDir"
 }
 
 if (-not $ModelPath) {
