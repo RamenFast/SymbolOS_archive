@@ -47,6 +47,21 @@ Examples of banned behavior:
 For high-risk actions (delete, network calls, credential use):
 - require explicit confirmation every time.
 
+## Auto-approve (Ring-0)
+
+Auto-approve is allowed only for **read-only / mechanically verifiable** maintenance (Ring-0).
+
+Allowed examples:
+- running read-only drift scans
+- refreshing status dashboards
+- indexing docs/schemas locally
+
+Not allowed without explicit user confirmation:
+- deleting files
+- pushing to remotes
+- any action that transmits data off-machine
+- anything that touches secrets/credentials
+
 ## External network boundary
 
 Unless the user explicitly asks:

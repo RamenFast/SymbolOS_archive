@@ -16,6 +16,15 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 
 This document defines how Model Context Protocol (MCP) servers are designed, operated, and integrated inside SymbolOS.
 
+---
+
+## 🧭 Anchor (Codex base + connectors + memory)
+
+- Codex main base (GPT-5.2-Codex): this repo’s docs are the shared ground truth. Start at [index.md](index.md).
+- Shared resources (canonical): [../symbol_map.shared.json](../symbol_map.shared.json) (🧬), [symbol_map.md](symbol_map.md), [schemas.md](schemas.md).
+- Connectors (MCP): [mcp_servers.md](mcp_servers.md) + registry entries.
+- Memory (our side): [memory.md](memory.md) + private repo-backed memory at [../memory/README.md](../memory/README.md).
+
 MCP servers expose capabilities to AI clients via three building blocks:
 
 - Tools: callable actions with validated inputs/outputs

@@ -16,6 +16,15 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 
 This document defines a safe, consent-driven approach to “memory” in SymbolOS.
 
+---
+
+## 🧭 Anchor (Codex base + connectors + memory)
+
+- Codex main base (GPT-5.2-Codex): this repo’s docs are the shared ground truth. Start at [index.md](index.md).
+- Shared resources (canonical): [../symbol_map.shared.json](../symbol_map.shared.json) (🧬), [symbol_map.md](symbol_map.md), [schemas.md](schemas.md).
+- Connectors (MCP): [mcp_servers.md](mcp_servers.md) + registry entries.
+- Memory (our side): [memory.md](memory.md) + private repo-backed memory at [../memory/README.md](../memory/README.md).
+
 Memory here means: durable, retrievable notes and preferences that help future interactions.
 
 ## Principles

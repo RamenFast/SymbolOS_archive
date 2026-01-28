@@ -11,6 +11,22 @@ This is the canonical entry point for SymbolOS documentation in this repo.
 
 ---
 
+## 🧭 Anchor (Codex base + connectors + memory)
+
+- Codex main base (GPT-5.2-Codex): this repo’s docs are the shared ground truth. Start at [index.md](index.md).
+- Shared resources (canonical): [../symbol_map.shared.json](../symbol_map.shared.json) (🧬), [symbol_map.md](symbol_map.md), [schemas.md](schemas.md).
+- Connectors (MCP): [mcp_servers.md](mcp_servers.md) + registry entries.
+- Memory (our side): [memory.md](memory.md) + private repo-backed memory at [../memory/README.md](../memory/README.md).
+
+---
+
+## 🌸☂️ Naming + boundary (Ti → Fi order)
+
+- **SymbolOS (public)** — all external + light + in style 🌸☂️🗺️✋. This is the public-facing surface.
+- **UmbrellaOS (private)** — all internal + dark + fortress rules. RWX to public/external only from within; never changes unless explicitly specified by an agent inside or user inside ☂️.
+
+---
+
 ## 🎯 Quick Pitch: What is SymbolOS?
 
 **SymbolOS is a symbol-driven framework for intention mapping.**

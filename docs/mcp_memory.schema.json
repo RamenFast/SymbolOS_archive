@@ -30,6 +30,10 @@
           "inputSchema": {
             "type": "object"
           },
+          "outputSchema": {
+            "type": "object",
+            "description": "JSON Schema describing the tool result payload"
+          },
           "requiresConfirmation": {
             "type": "boolean"
           },
@@ -53,6 +57,14 @@
           "inputSchema": {
             "type": "object",
             "properties": {}
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
           }
         },
         {
@@ -78,6 +90,14 @@
                 }
               }
             }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
           }
         },
         {
@@ -93,6 +113,14 @@
                 "description": "Max decisions to return (default: 20)"
               }
             }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
           }
         },
         {
@@ -126,6 +154,14 @@
               }
             },
             "required": ["title", "rationale"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
           }
         },
         {
@@ -135,6 +171,14 @@
           "requiresConfirmation": false,
           "inputSchema": {
             "type": "object"
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
           }
         },
         {
@@ -159,6 +203,14 @@
               }
             },
             "required": ["question"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
           }
         },
         {
@@ -174,6 +226,14 @@
                 "description": "Term to look up (optional; if empty, list all)"
               }
             }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
           }
         },
         {
@@ -196,6 +256,14 @@
               }
             },
             "required": ["term", "definition"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
           }
         }
       ]

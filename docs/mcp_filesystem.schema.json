@@ -21,6 +21,10 @@
           "inputSchema": {
             "type": "object"
           },
+          "outputSchema": {
+            "type": "object",
+            "description": "JSON Schema describing the tool result payload"
+          },
           "requiresConfirmation": {
             "type": "boolean"
           },
@@ -55,6 +59,15 @@
               }
             },
             "required": ["path"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" },
+              "encoding": { "type": "string", "enum": ["utf-8", "base64"] }
+            },
+            "required": ["content", "encoding"]
           }
         },
         {
@@ -79,6 +92,15 @@
               }
             },
             "required": ["path", "content"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" },
+              "path": { "type": "string" }
+            },
+            "required": ["ok", "path"]
           }
         },
         {
@@ -95,6 +117,15 @@
               }
             },
             "required": ["path"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" },
+              "path": { "type": "string" }
+            },
+            "required": ["ok", "path"]
           }
         },
         {
@@ -114,6 +145,25 @@
                 "description": "If true, list all subdirectories (default: false)"
               }
             }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": { "type": "string" },
+                    "isDirectory": { "type": "boolean" }
+                  },
+                  "required": ["name", "isDirectory"]
+                }
+              }
+            },
+            "required": ["entries"]
           }
         },
         {
@@ -127,6 +177,16 @@
               "path": {
                 "type": "string"
               }
+            },
+            "required": ["path"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": { "type": "string" },
+              "size": { "type": "integer" },
+              "modifiedTime": { "type": "string" }
             },
             "required": ["path"]
           }

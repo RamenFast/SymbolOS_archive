@@ -35,16 +35,6 @@
           "default": false,
           "description": "When true, enables verbose logging and extra notifications to help debug drift checks and task launching."
         },
-        "mercerStatus.autoApproveOnDrift": {
-          "type": "boolean",
-          "default": false,
-          "description": "When true, automatically runs the configured task on WARN/FAIL drift without prompting (Ring-0 friendly). Use only with read-only/safe tasks."
-        },
-        "mercerStatus.promptBeforeAutoRun": {
-          "type": "boolean",
-          "default": true,
-          "description": "When true, shows a consent prompt before running any task automatically (MAC-aligned / 🌸)."
-        },
         "mercerStatus.autoLaunchOnDrift": {
           "type": "boolean",
           "default": true,

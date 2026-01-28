@@ -87,7 +87,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Mercer: status UI (auto on folder open)",
+      "label": "SymbolOS: autorun (MAC prompt)",
       "type": "shell",
       "command": "powershell",
       "args": [
@@ -95,7 +95,7 @@
         "-ExecutionPolicy",
         "Bypass",
         "-File",
-        "${workspaceFolder}\\scripts\\mercer_status.ps1"
+        "${workspaceFolder}\\scripts\\autorun_symbolos.ps1"
       ],
       "problemMatcher": [],
       "presentation": {
@@ -106,6 +106,19 @@
       "runOptions": {
         "runOn": "folderOpen"
       }
+    },
+    {
+      "label": "Mercer: status UI (auto on folder open)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\mercer_status.ps1"
+      ],
+      "problemMatcher": []
     }
   ]
 }
