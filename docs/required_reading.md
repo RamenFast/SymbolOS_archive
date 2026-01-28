@@ -34,6 +34,7 @@ When importing notes from Drive into this repo:
 - Meta-awareness (barriers): [meta_awareness.md](meta_awareness.md)
 - Schemas index: [schemas.md](schemas.md)
 - Symbol map (shared JSON): [../symbol_map.shared.json](../symbol_map.shared.json)
+- Repo-backed memory system (private): [../memory/README.md](../memory/README.md)
 - External overview: [symbolOS_external_documentation.md](../symbolOS_external_documentation.md)
 
 ---

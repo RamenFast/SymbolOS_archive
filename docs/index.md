@@ -26,6 +26,9 @@ This is the canonical entry point for SymbolOS documentation in this repo.
 ## Mercer
 - Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css)
 
+## Memory (repo-backed)
+- Private memory system (repo-backed): [../memory/README.md](../memory/README.md)
+
 ## Ops
 - Docs sync playbook: [sync_playbook.md](sync_playbook.md)
 - Required reading list: [required_reading.md](required_reading.md)

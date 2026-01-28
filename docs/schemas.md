@@ -22,3 +22,6 @@ These JSON Schemas define the shared interchange shapes used across SymbolOS doc
 
 ## Meta-awareness
 - Meta-awareness event: [meta_awareness_event.schema.json](meta_awareness_event.schema.json)
+
+## Shared maps
+- Shared symbol map: [symbol_map.shared.schema.json](symbol_map.shared.schema.json)

@@ -94,7 +94,13 @@
       { "path": "docs/sync_playbook.md", "title": "Docs Sync Playbook", "kind": "ops" },
       { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" },
       { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
-      { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" }
+      { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
+      { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
+      { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
+      { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
+      { "path": "memory/open_loops.md", "title": "Open Loops (Private)", "kind": "memory" },
+      { "path": "memory/glossary.md", "title": "Glossary (Private)", "kind": "memory" },
+      { "path": "memory/session_log_2026-01-28.md", "title": "Session Log 2026-01-28 (Private)", "kind": "memory" }
     ],
     "schemas": [
       { "path": "docs/registry_entry.schema.json", "title": "Registry Entry", "kind": "schema" },
@@ -103,7 +109,8 @@
       { "path": "docs/dnd_character_sheet_patch.schema.json", "title": "Character Sheet Patch", "kind": "schema" },
       { "path": "docs/metaemotion_event.schema.json", "title": "Metaemotion Event", "kind": "schema" },
       { "path": "docs/memory_record.schema.json", "title": "Memory Record", "kind": "schema" },
-      { "path": "docs/meta_awareness_event.schema.json", "title": "Meta-awareness Event", "kind": "schema" }
+      { "path": "docs/meta_awareness_event.schema.json", "title": "Meta-awareness Event", "kind": "schema" },
+      { "path": "docs/symbol_map.shared.schema.json", "title": "Shared Symbol Map", "kind": "schema" }
     ]
   },
   "entries": [
@@ -166,6 +173,12 @@
       "path": "internal_docs/mercer_meeting_place_oath_v1.private.md",
       "tags": ["mercer", "meeting-place", "oath", "private", "fi"],
       "summary": "Private oath and behavior contract: meeting place return loop (A+B), dissociation barriers, and Fi values alignment clauses."
+    },
+    {
+      "title": "Repo-backed Memory System (Private)",
+      "path": "memory/README.md",
+      "tags": ["memory", "private", "repo-backed", "ops", "bitrot"],
+      "summary": "Durable, file-backed memory substrate (working set, decisions, open loops, glossary, session logs) designed to avoid reliance on chat history or model memory."
     }
   ]
 }
