@@ -4,12 +4,12 @@
 
 This repository is a private development space for **SymbolOS**, a symbolic operating system and communication framework.  SymbolOS aims to define a consistent symbolic language and style for system communication using intuitive symbols and colour codes.  The project seeks to enable clear, concise communication between system components, users and external systems while maintaining privacy and security.
 
-At present, the repository contains only a placeholder file (`README.md`) with an umbrella emoji (☂️), indicating that the project scaffolding has been created but no substantive content has been committed yet.  This document serves as an introduction for external audiences and provides high‑level guidelines for the project’s future development.
+This repository includes a growing set of developer-facing documentation under `docs/`. This document serves as an introduction for external audiences and provides high‑level guidelines.
 
 ## Getting Started
 
 1. **Project goals.**  The goal of SymbolOS is to create a symbolic interface layer that encodes system status and interactions using intuitive symbols and colour codes.  All future code and documentation should adhere to these principles.
-2. **Repository structure.**  Once development begins, this repository is expected to include:
+2. **Repository structure.**  This repository is expected to include:
    - `src/`: core source code for the SymbolOS runtime and API.
    - `docs/`: developer documentation, style guides, protocol specifications and user guides.
    - `examples/`: sample scripts demonstrating how to interact with SymbolOS.
@@ -48,7 +48,7 @@ When raising an issue, provide sufficient context, steps to reproduce (if applic
 
 ## Next steps
 
-The current repository is essentially a placeholder.  To kickstart development:
+To continue development:
 
 1. Define the **SymbolOS specification**: document the symbolic language, icons, and communication patterns.  This could live in `docs/specification.md`.
 2. Draft a **style guide**: describe how to use symbols, colours and typography in communication.  Place this under `docs/style_guide.md`.

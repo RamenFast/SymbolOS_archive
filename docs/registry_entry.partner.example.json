@@ -1,0 +1,54 @@
+{
+  "id": "partner.crm",
+  "displayName": "Partner CRM",
+  "description": "External partner CRM MCP server for contact search and lead creation.",
+  "ownerTeam": "Integrations",
+  "onCall": "integrations-oncall@symbolos.local",
+  "environment": "prod",
+  "transport": {
+    "type": "https",
+    "endpoint": "https://api.partner.example/mcp",
+    "notes": "External network endpoint. Must be routed through the SymbolOS egress gateway with allowlisted DNS and TLS policy."
+  },
+  "auth": {
+    "method": "signed_token",
+    "audience": "partner-crm",
+    "scopes": [
+      "crm.contacts.read",
+      "crm.leads.write"
+    ],
+    "notes": "Short-lived signed tokens issued by SymbolOS; partner must support key rotation and auditable access."
+  },
+  "capabilities": {
+    "summary": "Search contacts (read) and create leads (write; confirmation required in clients).",
+    "tools": [
+      "crm.searchContacts",
+      "crm.createLead",
+      "crm.exportLeads"
+    ],
+    "resources": [
+      "crm://contacts?query={q}&limit={n}&cursor={cursor}",
+      "crm://lead/{leadId}"
+    ],
+    "docsUrl": "docs/mcp_servers.md"
+  },
+  "dataClassification": "restricted",
+  "rateLimits": {
+    "requestsPerMinute": 120,
+    "burst": 20,
+    "notes": "Stricter defaults for external partners; clients should back off and respect retry-after guidance."
+  },
+  "timeouts": {
+    "defaultMs": 10000,
+    "maxMs": 20000
+  },
+  "version": "1.0.0",
+  "supportedProtocolVersions": [
+    "1"
+  ],
+  "tags": [
+    "external",
+    "partner",
+    "crm"
+  ]
+}
