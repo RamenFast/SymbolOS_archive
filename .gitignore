@@ -1,0 +1,10 @@
+# Local compute artifacts (keep repo clean)
+/local_ai/bin/
+/local_ai/models/
+/local_ai/cache/
+
+# Common tooling
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

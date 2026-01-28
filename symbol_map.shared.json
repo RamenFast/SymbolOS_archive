@@ -95,6 +95,7 @@
       { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" },
       { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
       { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
+      { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
@@ -179,6 +180,12 @@
       "path": "memory/README.md",
       "tags": ["memory", "private", "repo-backed", "ops", "bitrot"],
       "summary": "Durable, file-backed memory substrate (working set, decisions, open loops, glossary, session logs) designed to avoid reliance on chat history or model memory."
+    },
+    {
+      "title": "Local LLM (Windows Vulkan) — Internal",
+      "path": "internal_docs/local_llm_windows_vulkan_internal.md",
+      "tags": ["local", "llm", "compute", "windows", "vulkan", "amd", "gpu"],
+      "summary": "Internal setup guide for running a local LLM server on Windows with AMD GPU acceleration via Vulkan (llama.cpp server)."
     }
   ]
 }
