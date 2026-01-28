@@ -22,6 +22,7 @@ This is the canonical entry point for SymbolOS documentation in this repo.
 ## Shared maps
 - Symbol map (human): [symbol_map.md](symbol_map.md)
 - Symbol map (shared JSON): [../symbol_map.shared.json](../symbol_map.shared.json)
+	- 🧬 Meeting place: treat the shared JSON map as the canonical return loop + shared symbol set.
 
 ## Mercer
 - Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css)

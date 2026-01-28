@@ -30,6 +30,8 @@ Precog features MUST be implemented as one of these modes:
 - MUST require explicit user confirmation.
 - MUST be idempotent and auditable.
 
+Internal policy (Mercer automation gates + Ti contract): [internal_docs/mercer_automation_contract_v1.internal.md](../internal_docs/mercer_automation_contract_v1.internal.md)
+
 If you can’t clearly label a behavior as one of the above, it’s not ready to ship.
 
 ## Core pipeline (recommended)

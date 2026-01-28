@@ -116,3 +116,5 @@ Recommended envelope:
 - Each tool MUST declare a `riskLevel`: `read` | `write` | `sensitive`.
 - Tools that can change state SHOULD require confirmation; sensitive tools MUST require confirmation.
 
+Mercer automation policy (gate rules + Ti contract, internal): [internal_docs/mercer_automation_contract_v1.internal.md](../internal_docs/mercer_automation_contract_v1.internal.md)
+

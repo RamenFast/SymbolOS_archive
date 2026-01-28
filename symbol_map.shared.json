@@ -96,6 +96,8 @@
       { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
       { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
       { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
+      { "path": "internal_docs/future_possibilities_ring0.md", "title": "Future Possibilities (Ring-0) — Internal", "kind": "ring0" },
+      { "path": "internal_docs/mercer_automation_contract_v1.internal.md", "title": "Mercer Automation Contract v1 (Internal)", "kind": "policy" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
@@ -156,6 +158,12 @@
       "path": "internal_docs/mcp_servers_internal.md",
       "tags": ["MCP", "servers", "internal", "development", "guidelines"],
       "summary": "Internal guidelines for developing MCP servers, including structure, naming, workflow, and security practices."
+    },
+    {
+      "title": "Mercer Automation Contract v1 (Internal)",
+      "path": "internal_docs/mercer_automation_contract_v1.internal.md",
+      "tags": ["Mercer", "automation", "gates", "Ti", "policy", "audit"],
+      "summary": "Internal contract defining automation gate rules (Prefetch/Suggest/Act), doc alignment cadence, and the full Ti expression for structured, auditable behavior."
     },
     {
       "title": "Precog Thought Internal",

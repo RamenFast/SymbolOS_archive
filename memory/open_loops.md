@@ -24,3 +24,27 @@ Template:
   - Owner: Mercer
   - Next action: Create `docs/symbol_map.shared.schema.json` and add it to schema indexes.
   - Due/Review: Next session start
+
+- [ ] ID: 20260128-003
+  - Loop: Define the exact safety condition for Precog “proactively act” (placeholder: virus-scanning logic).
+  - Owner: Mercer
+  - Next action: Write the condition + gating checklist in `docs/precog_thought.md` (or link to a security doc).
+  - Due/Review: Next session start
+  - Links: `docs/precog_thought.md`
+  - MercerID: MRC-20260128-0249-13
+
+- [ ] ID: 20260128-004
+  - Loop: Create Ring-0 workflow for speculative notes (“Future Possibilities”) and ensure core docs remain stable.
+  - Owner: Mercer
+  - Next action: Seed `internal_docs/future_possibilities_ring0.md` and link it from the meeting-place index.
+  - Due/Review: This week
+  - Links: `internal_docs/future_possibilities_ring0.md`, `docs/index.md`
+  - MercerID: MRC-20260128-0249-14
+
+- [ ] ID: 20260128-005
+  - Loop: Decide how “auto-doc alignment every 5 hours” is implemented (suggest vs auto-commit gating).
+  - Owner: Mercer
+  - Next action: Specify the gate rules and audit trail requirements (when commit is allowed).
+  - Due/Review: This week
+  - Links: `memory/decisions.md`
+  - MercerID: MRC-20260128-0249-15
