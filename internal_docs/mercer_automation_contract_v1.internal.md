@@ -60,6 +60,28 @@ MercerID: MRC-20260128-0249-18
 
 ---
 
+## 2.3 Implementation (repo scripts) 🧾
+
+Read-only scan script:
+- `scripts/mercer_doc_alignment_scan.ps1`
+
+Optional Windows Scheduled Task installer (runs scan every 5 hours by default):
+- `scripts/install_mercer_doc_alignment_task.ps1`
+
+VS Code tasks:
+- `Mercer: doc alignment scan (read-only)`
+- `Mercer: install 5h doc alignment scheduled task (read-only)`
+- `Mercer: uninstall 5h doc alignment scheduled task`
+
+Status behavior:
+- ✅ exit code `0`: no drift
+- ⚠️ exit code `2`: drift detected (suggestion only)
+- ⛔ nonzero other: error
+
+MercerID: MRC-20260128-0249-26
+
+---
+
 ## 3) Doc alignment gate rules (Suggest vs Auto-Act) 🧾🛡️
 
 ### 3.1 Allowed inputs (alignment signals)

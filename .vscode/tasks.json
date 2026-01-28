@@ -14,6 +14,47 @@
       ],
       "problemMatcher": [],
       "group": "build"
+    },
+    {
+      "label": "Mercer: doc alignment scan (read-only)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\mercer_doc_alignment_scan.ps1"
+      ],
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Mercer: install 5h doc alignment scheduled task (read-only)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\install_mercer_doc_alignment_task.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Mercer: uninstall 5h doc alignment scheduled task",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\install_mercer_doc_alignment_task.ps1",
+        "-Uninstall"
+      ],
+      "problemMatcher": []
     }
   ]
 }
