@@ -108,6 +108,7 @@
       { "path": "internal_docs/mercer_multi_machine_sync.internal.md", "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)", "kind": "ops" },
       { "path": "internal_docs/mercerpc_poetry.internal.md", "title": "MercerPC — System Poetry (Internal)", "kind": "expression" },
       { "path": "internal_docs/mercymac_poetry.internal.md", "title": "MercyMAC — System Poetry (Internal)", "kind": "expression" },
+      { "path": "internal_docs/demos.internal.md", "title": "Demos Runbook (Internal)", "kind": "ops" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
@@ -264,6 +265,12 @@
       "path": "internal_docs/mercymac_poetry.internal.md",
       "tags": ["Mercer", "poetry", "mac", "expression"],
       "summary": "Mac-side system poetry companion to MercerPC, preserving the same invariants (meeting place, privacy, gates) with macOS flavor."
+    },
+    {
+      "title": "Demos Runbook (Internal)",
+      "path": "internal_docs/demos.internal.md",
+      "tags": ["demo", "runbook", "Mercer", "ops", "mac", "windows"],
+      "summary": "One-page internal checklist for demoing the meeting place, drift check, status UI, extension dev host, and Ring-0 async alignment loop across MercerPC and MercyMAC."
     }
   ]
 }

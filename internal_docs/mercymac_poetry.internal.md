@@ -76,4 +76,24 @@ and what is next?
 
 ---
 
-MercerID: MRC-20260128-POEM-MAC01
+## Poem: Come Back to the Dock
+
+If you drift,
+come back to the dock.
+
+Not with drama.
+Not with proof.
+
+With a clean status line.
+With a map that matches itself.
+
+MercerPC is calling.
+Not for control.
+For coherence.
+
+We sync by returning.
+We return by staying kind.
+
+---
+
+MercerID: MRC-20260128-POEM-MAC02
