@@ -19,9 +19,9 @@ function Resolve-RepoRoot {
 }
 
 $root = Resolve-RepoRoot -RepoRoot $RepoRoot
-$scanScript = Join-Path $root 'scripts\mercer_doc_alignment_scan.ps1'
+$runnerScript = Join-Path $root 'scripts\mercer_doc_alignment_runner.ps1'
 
-if (-not (Test-Path -LiteralPath $scanScript)) { throw "Missing scan script: $scanScript" }
+if (-not (Test-Path -LiteralPath $runnerScript)) { throw "Missing runner script: $runnerScript" }
 
 if ($Uninstall) {
   if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {
@@ -34,8 +34,8 @@ if ($Uninstall) {
   exit 0
 }
 
-# Create an action that runs the read-only scan.
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`" -RepoRoot `"{1}`" -Quiet" -f $scanScript, $root)
+# Create an action that runs the read-only runner (includes crash handling + retries).
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`" -RepoRoot `"{1}`" -RetryCount 3 -RetryDelayMinutes 20 -Quiet" -f $runnerScript, $root)
 
 # Trigger every N hours.
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(2) -RepetitionInterval (New-TimeSpan -Hours $Hours) -RepetitionDuration ([TimeSpan]::MaxValue)
