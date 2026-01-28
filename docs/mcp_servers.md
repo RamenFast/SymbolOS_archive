@@ -1,4 +1,4 @@
-# MCP Servers: Overview and Integration
+# MCP Servers: Overview and Integration 🚀
 
 Model Context Protocol (MCP) servers expose specific capabilities to AI applications through a **standardised protocol interface**.  According to the official documentation, MCP servers are programs that provide access to external services such as file systems, databases, version‑control platforms and messaging systems【325592776098157†L77-L83】.  These servers allow large‑language‑model (LLM) agents to call functions, retrieve resources and use pre‑built prompts in a controlled way.
 
@@ -6,9 +6,9 @@ Model Context Protocol (MCP) servers expose specific capabilities to AI applicat
 
 MCP defines three building blocks that together power a server【325592776098157†L86-L91】:
 
-- **Tools** – discrete functions that an LLM can invoke to perform an action.  Each tool has an input schema and output schema, and the model calls them when the user needs to do something, such as search flights, create calendar events or send messages【325592776098157†L90-L94】.
-- **Resources** – read‑only data sources that provide context to the model.  Examples include calendar feeds, knowledge base documents or API responses.  Resources have unique URIs and may support parameterised queries for flexible retrieval【325592776098157†L195-L214】.
-- **Prompts** – instruction templates that guide the model on how to use tools and resources effectively.  Prompts can encapsulate workflows (e.g., “plan a vacation” or “summarise my meetings”) and help the agent choose the right tool for the job.
+- 🔧 **Tools** – discrete functions that an LLM can invoke to perform an action.  Each tool has an input schema and output schema, and the model calls them when the user needs to do something, such as search flights, create calendar events or send messages【325592776098157†L90-L94】.
+- 📚 **Resources** – read‑only data sources that provide context to the model.  Examples include calendar feeds, knowledge base documents or API responses.  Resources have unique URIs and may support parameterised queries for flexible retrieval【325592776098157†L195-L214】.
+- 💡 **Prompts** – instruction templates that guide the model on how to use tools and resources effectively.  Prompts can encapsulate workflows (e.g., “plan a vacation” or “summarise my meetings”) and help the agent choose the right tool for the job.
 
 ## Server architecture
 
