@@ -1,0 +1,51 @@
+{
+  "name": "mercer-status",
+  "displayName": "Mercer Status (SymbolOS)",
+  "description": "Auto-check SymbolOS drift on startup and optionally launch the Mercer status UI.",
+  "version": "0.0.1",
+  "publisher": "ramenfast",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "workspaceContains:symbol_map.shared.json",
+    "onCommand:mercerStatus.showStatus",
+    "onCommand:mercerStatus.checkDrift"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "mercerStatus.showStatus",
+        "title": "Mercer: Show Status UI"
+      },
+      {
+        "command": "mercerStatus.checkDrift",
+        "title": "Mercer: Check Drift (Core Symbols)"
+      }
+    ],
+    "configuration": {
+      "title": "Mercer Status",
+      "properties": {
+        "mercerStatus.autoLaunchOnDrift": {
+          "type": "boolean",
+          "default": true,
+          "description": "When true, the extension will launch the 'Mercer: status UI (interactive)' task on startup only if drift is WARN/FAIL."
+        },
+        "mercerStatus.notifyOnOk": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, shows a small info message even when drift is OK."
+        },
+        "mercerStatus.taskLabel": {
+          "type": "string",
+          "default": "Mercer: status UI (interactive)",
+          "description": "VS Code task label to execute when drift is WARN/FAIL."
+        }
+      }
+    }
+  }
+}

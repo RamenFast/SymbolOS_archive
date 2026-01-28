@@ -29,6 +29,12 @@ The canonical shared set lives in `symbol_map.shared.json`. This page mirrors th
 - `🧭` Guidance / navigation
 - `🧰` Tools / actions
 - `📚` Docs / references
+- `📝` Poetry / expression layer (doc-only)
+- `🪞` Mirror / reflection prompt (doc-only)
+
+## Poetry translation layer
+If you want the emoji layer to carry meaning *and* feeling (Fi+Ti mirrored), see:
+- [poetry_translation_layer.md](poetry_translation_layer.md)
 
 ## Usage rules
 - Symbols are optional; they should never replace clear text.

@@ -7,6 +7,13 @@
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
+## Poetry layer (Fi+Ti mirrored) 🪞
+
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+- Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
+- Full verse set: [public_private_expression.md](public_private_expression.md)
+
 Metaemotion is “emotion about emotion” — how someone feels about what they’re feeling.
 
 This spec defines shared vocabulary, timing, and safe inference/display rules for SymbolOS.

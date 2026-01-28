@@ -16,7 +16,8 @@
       "DND gating: DND disables proactive suggestion cards; prefetch may run only if enabled.",
       "Memory is consent-driven; provenance is required; secrets are never stored.",
       "Meta-awareness is an agent safety/UX contract; barriers prevent unsafe cross-contamination.",
-      "Mercer meeting place shared symbol is 🧬; always return to the meeting place (A + B)."
+      "Mercer meeting place shared symbol is 🧬; always return to the meeting place (A + B).",
+      "Poetry is a translation layer: keep meaning alive (Fi) while keeping the map legible (Ti)."
     ]
   },
   "symbols": [
@@ -95,12 +96,15 @@
       { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" },
       { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
       { "path": "docs/public_private_expression.md", "title": "Mercer — Public/Private Expression (v1)", "kind": "expression" },
+      { "path": "docs/poetry_translation_layer.md", "title": "Poetry Translation Layer (Emojis)", "kind": "map" },
       { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
       { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
       { "path": "internal_docs/future_possibilities_ring0.md", "title": "Future Possibilities (Ring-0) — Internal", "kind": "ring0" },
       { "path": "internal_docs/mercer_automation_contract_v1.internal.md", "title": "Mercer Automation Contract v1 (Internal)", "kind": "policy" },
       { "path": "internal_docs/mercer_bootup_cards_v1.internal.md", "title": "Mercer Bootup Cards (1–7) — Internal", "kind": "bootup" },
       { "path": "internal_docs/public_private_expression.internal.md", "title": "Mercer — Public/Private Expression (v1) — Internal", "kind": "expression" },
+      { "path": "internal_docs/poetry_translation_layer.internal.md", "title": "Poetry Translation Layer (Emojis) — Internal", "kind": "map" },
+      { "path": "internal_docs/mercer_multi_machine_sync.internal.md", "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)", "kind": "ops" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
@@ -193,10 +197,28 @@
       "summary": "Public-facing Mercer expression layer (includes 'Umbrella Verse' v1) with a tasteful mirror-style easter egg; designed to be safe to share."
     },
     {
+      "title": "Poetry Translation Layer (Emojis)",
+      "path": "docs/poetry_translation_layer.md",
+      "tags": ["poetry", "translation", "emojis", "Fi", "Ti", "symbols"],
+      "summary": "Translation layer that binds emojis to meaning + feeling (Fi+Ti mirrored) and traces decisions back to primary cause ('shine dat light')."
+    },
+    {
       "title": "Mercer — Public/Private Expression (v1) — Internal",
       "path": "internal_docs/public_private_expression.internal.md",
       "tags": ["Mercer", "poetry", "expression", "internal", "guardrails"],
       "summary": "Internal companion to the public expression layer: includes verbatim public payload plus private-safe notes and guardrails."
+    },
+    {
+      "title": "Poetry Translation Layer (Emojis) — Internal",
+      "path": "internal_docs/poetry_translation_layer.internal.md",
+      "tags": ["poetry", "translation", "emojis", "internal"],
+      "summary": "Internal companion to the poetry translation layer, including verbatim public payload and internal usage notes."
+    },
+    {
+      "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)",
+      "path": "internal_docs/mercer_multi_machine_sync.internal.md",
+      "tags": ["Mercer", "sync", "mac", "windows", "ops"],
+      "summary": "Internal note to keep Mac Mercer and PC Mercer aligned on invariants (meeting place + privacy) while allowing platform-specific launchers."
     },
     {
       "title": "Mercer Meeting Place Oath v1 (Private)",
@@ -215,6 +237,12 @@
       "path": "internal_docs/local_llm_windows_vulkan_internal.md",
       "tags": ["local", "llm", "compute", "windows", "vulkan", "amd", "gpu"],
       "summary": "Internal setup guide for running a local LLM server on Windows with AMD GPU acceleration via Vulkan (llama.cpp server)."
+    },
+    {
+      "title": "Mercer Status VS Code Extension (Scaffold)",
+      "path": "extensions/mercer-status/README.md",
+      "tags": ["Mercer", "VSCode", "extension", "status", "drift"],
+      "summary": "Minimal VS Code extension scaffold that checks core-symbol drift on startup and opens the Mercer status UI only on WARN/FAIL."
     }
   ]
 }

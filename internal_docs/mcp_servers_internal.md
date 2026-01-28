@@ -2,6 +2,13 @@
 
 This document is intended for internal contributors working on the SymbolOS implementation of **MCP servers**.  It complements the public overview by providing deeper technical notes, development standards and future plans.  **Do not share this document outside the team**.
 
+## Poetry layer (Fi+Ti mirrored) 🪞
+
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+- Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
+- Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
+
 ## Project structure
 
 Our MCP server code resides in the `services/mcp_servers` directory of the repository.  Each sub‑directory corresponds to a specific integration (e.g., `calendar_server`, `git_server`).  Shared utilities live in `services/mcp_servers/common`.

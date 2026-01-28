@@ -4,21 +4,128 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$pyScript = Join-Path $scriptDir 'mercer_status.py'
-
-$pythonCmd = Get-Command python -ErrorAction SilentlyContinue
-if (-not $pythonCmd) {
-  $pythonCmd = Get-Command python3 -ErrorAction SilentlyContinue
+function Write-Banner {
+  Write-Host '=============================================================='
+  Write-Host 'MERCER STATUS - SYMBOLOS WORKSPACE CHECK'
+  Write-Host '=============================================================='
 }
 
-if (-not $pythonCmd) {
-  Write-Host '⛔ Python not found on PATH (python/python3).' -ForegroundColor Red
-  exit 1
+function Get-RepoRoot {
+  $scriptDir = $PSScriptRoot
+  if (-not $scriptDir) {
+    $scriptDir = Split-Path -Parent $PSCommandPath
+  }
+  return (Resolve-Path (Join-Path $scriptDir '..')).Path
 }
 
-$argsList = @($pyScript)
-if ($Once) { $argsList += '--once' }
+function Test-ExistsLabel([string]$path) {
+  if (Test-Path -LiteralPath $path) { return 'YES' }
+  return 'NO'
+}
 
-& $pythonCmd.Path @argsList
-exit $LASTEXITCODE
+function Get-SharedSymbols([string]$sharedMapPath) {
+  $json = Get-Content -LiteralPath $sharedMapPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  $syms = @()
+  foreach ($s in $json.symbols) {
+    if ($null -ne $s.symbol -and ($s.symbol.ToString().Trim().Length -gt 0)) {
+      $syms += $s.symbol.ToString()
+    }
+  }
+  return $syms
+}
+
+function Get-CoreSymbolsFromHumanMap([string]$humanMapPath) {
+  $text = Get-Content -LiteralPath $humanMapPath -Raw -Encoding UTF8
+  $idx = $text.IndexOf("## Core symbols")
+  if ($idx -lt 0) { return @() }
+
+  $after = $text.Substring($idx)
+  # Find the *second* heading occurrence (the first is the Core header itself)
+  $allHeadings = [regex]::Matches($after, '(?m)^##\s+')
+  $end = $after.Length
+  if ($allHeadings.Count -ge 2) {
+    $end = $allHeadings[1].Index
+  }
+
+  $block = $after.Substring(0, $end)
+  $matches = [regex]::Matches($block, '(?m)^\s*-\s+`([^`]+)`\s+')
+  $syms = @()
+  foreach ($m in $matches) {
+    $val = $m.Groups[1].Value.Trim()
+    if ($val.Length -gt 0) { $syms += $val }
+  }
+  return $syms
+}
+
+function Get-DriftResult([string]$sharedMapPath, [string]$humanMapPath) {
+  try {
+    $shared = @(Get-SharedSymbols -sharedMapPath $sharedMapPath)
+    $core = @(Get-CoreSymbolsFromHumanMap -humanMapPath $humanMapPath)
+
+    $missing = @($shared | Where-Object { $_ -notin $core })
+    $extra = @($core | Where-Object { $_ -notin $shared })
+
+    if ($missing.Count -eq 0 -and $extra.Count -eq 0) {
+      return @{ Code = 0; Summary = 'Core symbols aligned' }
+    }
+
+    $parts = @()
+    if ($missing.Count -gt 0) { $parts += ("docs missing: " + ($missing -join ' ')) }
+    if ($extra.Count -gt 0) { $parts += ("docs extra: " + ($extra -join ' ')) }
+
+    return @{ Code = 2; Summary = ($parts -join '; ') }
+  } catch {
+    return @{ Code = 1; Summary = ("Error checking drift: " + $_.Exception.Message) }
+  }
+}
+
+function Show-Status([string]$repoRoot) {
+  $sharedMap = Join-Path $repoRoot 'symbol_map.shared.json'
+  $docsIndex = Join-Path $repoRoot 'docs\index.md'
+  $readme = Join-Path $repoRoot 'README.md'
+  $humanMap = Join-Path $repoRoot 'docs\symbol_map.md'
+  $lilyPrivate = Join-Path $repoRoot 'docs\assets\lily_background.private.png'
+  $bootupArtDir = Join-Path $repoRoot 'docs\assets\bootup_cards'
+
+  Write-Banner
+  Write-Host "Repo root: $repoRoot"
+  Write-Host ("Meeting place: symbol_map.shared.json={0} | docs/index.md={1} | README.md={2}" -f (Test-ExistsLabel $sharedMap), (Test-ExistsLabel $docsIndex), (Test-ExistsLabel $readme))
+  Write-Host ("Lily backdrop present (private): {0}" -f (Test-ExistsLabel $lilyPrivate))
+  Write-Host ("Bootup art folder present (private): {0}" -f (Test-ExistsLabel $bootupArtDir))
+
+  $drift = Get-DriftResult -sharedMapPath $sharedMap -humanMapPath $humanMap
+  $code = [int]$drift.Code
+  $status = if ($code -eq 0) { 'OK' } elseif ($code -eq 2) { 'WARN' } else { 'FAIL' }
+  $color = if ($code -eq 0) { 'Green' } elseif ($code -eq 2) { 'Yellow' } else { 'Red' }
+  Write-Host ("Doc alignment (core symbols): {0} {1}" -f $status, $drift.Summary) -ForegroundColor $color
+
+  return $code
+}
+
+$repo = Get-RepoRoot
+$code = Show-Status -repoRoot $repo
+
+if ($Once) {
+  exit $code
+}
+
+while ($true) {
+  Write-Host ""
+  Write-Host 'Actions: [R]efresh  [O]pen docs index  [M]ap (shared)  [P]oetry (public)  [Q]uit'
+  $choice = (Read-Host '>').Trim().ToLower()
+
+  if ($choice -eq 'q' -or $choice -eq 'quit' -or $choice -eq 'exit') {
+    exit $code
+  }
+
+  if ($choice -eq '' -or $choice -eq 'r') {
+    $code = Show-Status -repoRoot $repo
+    continue
+  }
+
+  if ($choice -eq 'o') { Invoke-Item (Join-Path $repo 'docs\index.md'); continue }
+  if ($choice -eq 'm') { Invoke-Item (Join-Path $repo 'symbol_map.shared.json'); continue }
+  if ($choice -eq 'p') { Invoke-Item (Join-Path $repo 'docs\public_private_expression.md'); continue }
+
+  Write-Host 'Unknown option.'
+}

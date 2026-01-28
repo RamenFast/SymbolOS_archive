@@ -9,6 +9,13 @@ Classification: internal/private
 Glyph tags: 🧬☂️🧾🛡️🧠🔮✅⚠️⛔
 ```
 
+## Poetry layer (Fi+Ti mirrored) 🪞
+
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+- Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
+- Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
+
 Purpose: define the *exact* gate rules for Mercer automation (especially doc updates) and the “full Ti expression” (structured, auditable, deterministic reasoning constraints).
 
 Meeting place resolution order (truth source):
@@ -76,6 +83,13 @@ VS Code tasks:
 - `Mercer: doc alignment runner (retry x3, 20m)`
 - `Mercer: install 5h doc alignment scheduled task (read-only)`
 - `Mercer: uninstall 5h doc alignment scheduled task`
+- `Mercer: status UI (interactive)`
+- `Mercer: status UI (auto on folder open)`
+
+Local status UI (interactive):
+- `scripts/mercer_status.ps1` (PowerShell-first; works without Python)
+- `scripts/mercer_status.py` (cross-platform; optional)
+- `scripts/mercer_status.sh` (bash/zsh launcher; requires python)
 
 Crash handling policy (scheduled task):
 - On crash/error (⛔), retry up to 3 times

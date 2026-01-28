@@ -4,6 +4,13 @@ This document describes internal expectations for predicting metaemotion and dec
 
 External-facing concept spec: [docs/metaemotion.md](../docs/metaemotion.md).
 
+## Poetry layer (Fi+Ti mirrored) 🪞
+
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+- Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
+- Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
+
 ## Problem statement
 Given observed signals and recent context, estimate:
 - primary emotion likelihood(s)

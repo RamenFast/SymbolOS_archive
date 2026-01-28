@@ -85,6 +85,27 @@
         "${workspaceFolder}\\scripts\\mercer_status.ps1"
       ],
       "problemMatcher": []
+    },
+    {
+      "label": "Mercer: status UI (auto on folder open)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\mercer_status.ps1"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     }
   ]
 }

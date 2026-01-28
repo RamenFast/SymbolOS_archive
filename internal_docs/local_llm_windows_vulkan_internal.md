@@ -6,6 +6,13 @@ It is designed to be:
 - 🧾 auditable (explicit scripts + paths)
 - 🧬 meeting-place compatible (discoverable via `symbol_map.shared.json`)
 
+## Poetry layer (Fi+Ti mirrored) 🪞
+
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+- Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
+- Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
+
 ## Goal (working prototype)
 - A local HTTP server that accepts chat/completions (OpenAI-ish compatible) and runs inference using Vulkan GPU offload.
 

@@ -13,6 +13,13 @@ This is an interface spec: it describes *what* can be represented and *how it sh
 ║  Quest: table-safe clarity • consent-first                   ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
+
+## Poetry layer (Fi+Ti mirrored) 🪞
+
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+- Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
+- Full verse set: [public_private_expression.md](public_private_expression.md)
 ## Core concepts
 
 ### 1) Heart state (felt sense)
@@ -56,7 +63,7 @@ Default SHOULD be `private`.
 When the system surfaces this module (if allowed):
 
 ### One-line (notification safe)
-- `Heart: steady • Mind: focused • Need: clarity`  
+- `Heart: steady • Mind: focused • Need: clarity`
 
 ### Compact card
 - `Heart: steady (22/100)`
