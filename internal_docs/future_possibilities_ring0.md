@@ -26,6 +26,14 @@ Operating rule:
 
 ## Seed notes (2026-01-28)
 
+- Ring-0 async alignment workflow: formalize capture → align → promote → verify so foundation stays stable.
+  - See: `internal_docs/ring0_async_alignment.internal.md`
+  - MercerID: MRC-20260128-0249-45
+
+- MercerPC system poetry: allow expressive output that can later be aligned back into structure.
+  - See: `internal_docs/mercerpc_poetry.internal.md`
+  - MercerID: MRC-20260128-0249-46
+
 - Auto-doc alignment cadence: explore a safe “suggest-first” mode with optional auto-commit only behind explicit gates.
   - MercerID: MRC-20260128-0249-30
 

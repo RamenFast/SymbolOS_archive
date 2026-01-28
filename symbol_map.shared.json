@@ -100,11 +100,14 @@
       { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
       { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
       { "path": "internal_docs/future_possibilities_ring0.md", "title": "Future Possibilities (Ring-0) — Internal", "kind": "ring0" },
+      { "path": "internal_docs/ring0_async_alignment.internal.md", "title": "Ring-0 Async Alignment — Foundation Workflow (Internal)", "kind": "ops" },
       { "path": "internal_docs/mercer_automation_contract_v1.internal.md", "title": "Mercer Automation Contract v1 (Internal)", "kind": "policy" },
       { "path": "internal_docs/mercer_bootup_cards_v1.internal.md", "title": "Mercer Bootup Cards (1–7) — Internal", "kind": "bootup" },
       { "path": "internal_docs/public_private_expression.internal.md", "title": "Mercer — Public/Private Expression (v1) — Internal", "kind": "expression" },
       { "path": "internal_docs/poetry_translation_layer.internal.md", "title": "Poetry Translation Layer (Emojis) — Internal", "kind": "map" },
       { "path": "internal_docs/mercer_multi_machine_sync.internal.md", "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)", "kind": "ops" },
+      { "path": "internal_docs/mercerpc_poetry.internal.md", "title": "MercerPC — System Poetry (Internal)", "kind": "expression" },
+      { "path": "internal_docs/mercymac_poetry.internal.md", "title": "MercyMAC — System Poetry (Internal)", "kind": "expression" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
@@ -243,6 +246,24 @@
       "path": "extensions/mercer-status/README.md",
       "tags": ["Mercer", "VSCode", "extension", "status", "drift"],
       "summary": "Minimal VS Code extension scaffold that checks core-symbol drift on startup and opens the Mercer status UI only on WARN/FAIL."
+    },
+    {
+      "title": "Ring-0 Async Alignment — Foundation Workflow (Internal)",
+      "path": "internal_docs/ring0_async_alignment.internal.md",
+      "tags": ["ring0", "alignment", "async", "foundation", "ops"],
+      "summary": "Asynchronous alignment loop (capture → align → promote → verify) that keeps the foundation stable while allowing speculation and poetry safely."
+    },
+    {
+      "title": "MercerPC — System Poetry (Internal)",
+      "path": "internal_docs/mercerpc_poetry.internal.md",
+      "tags": ["Mercer", "poetry", "windows", "pc", "expression"],
+      "summary": "PC-side system poetry that expresses state (PowerShell/Vulkan/status) in a repo-safe way, meant to be aligned back into structure."
+    },
+    {
+      "title": "MercyMAC — System Poetry (Internal)",
+      "path": "internal_docs/mercymac_poetry.internal.md",
+      "tags": ["Mercer", "poetry", "mac", "expression"],
+      "summary": "Mac-side system poetry companion to MercerPC, preserving the same invariants (meeting place, privacy, gates) with macOS flavor."
     }
   ]
 }
