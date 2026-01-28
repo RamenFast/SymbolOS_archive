@@ -6,21 +6,38 @@ Param(
 
 $ErrorActionPreference = 'Stop'
 
+function _Emoji([int]$codePoint) {
+  return [System.Char]::ConvertFromUtf32($codePoint)
+}
+
+function _WithVS16([string]$s) {
+  # Variation Selector-16 to force emoji presentation when supported.
+  return $s + [char]0xFE0F
+}
+
 function Write-Banner {
   Param([string]$Status = "OK")
 
-  $glyphs = "🧬☂️🧾🛡️🧠🔮"
+  $glyphs = (
+    (_Emoji 0x1F9EC) +
+    (_WithVS16 ([System.Char]::ConvertFromUtf32(0x2602))) +
+    (_Emoji 0x1F9FE) +
+    (_WithVS16 (_Emoji 0x1F6E1)) +
+    (_Emoji 0x1F9E0) +
+    (_Emoji 0x1F52E)
+  )
+
   $statusGlyph = switch ($Status) {
-    "OK" { "✅" }
-    "WARN" { "⚠️" }
-    "FAIL" { "⛔" }
-    default { "⚠️" }
+    "OK" { _Emoji 0x2705 }
+    "WARN" { (_WithVS16 ([System.Char]::ConvertFromUtf32(0x26A0))) }
+    "FAIL" { _Emoji 0x26D4 }
+    default { (_WithVS16 ([System.Char]::ConvertFromUtf32(0x26A0))) }
   }
 
-  Write-Host "" 
-  Write-Host "╔══════════════════════════════════════════════════════════════╗" -ForegroundColor DarkCyan
-  Write-Host "║  $glyphs  MERCER DOC ALIGNMENT SCAN (READ-ONLY)             ║" -ForegroundColor DarkCyan
-  Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor DarkCyan
+  Write-Host ""
+  Write-Host '==============================================================' -ForegroundColor DarkCyan
+  Write-Host "  $glyphs  MERCER DOC ALIGNMENT SCAN (READ-ONLY)" -ForegroundColor DarkCyan
+  Write-Host '==============================================================' -ForegroundColor DarkCyan
   Write-Host "Status: $statusGlyph $Status" -ForegroundColor Cyan
 }
 
@@ -104,23 +121,27 @@ if (-not $Quiet) { Write-Banner -Status $status }
 
 # Ti-ish structured output (read-only)
 if (-not $Quiet) {
-  Write-Host "✅ Objective: detect drift between shared symbol map and human doc" -ForegroundColor Green
-  Write-Host "🧾 Inputs: $mapPath ; $docPath" -ForegroundColor Gray
-  Write-Host "🛡️ Constraints: READ-ONLY, no writes, no commits" -ForegroundColor Gray
-  Write-Host "🔮 Decision: Prefetch-only scan (Suggest if drift found)" -ForegroundColor Gray
+  $ok = _Emoji 0x2705
+  $ledger = _Emoji 0x1F9FE
+  $shield = _WithVS16 (_Emoji 0x1F6E1)
+  $crystal = _Emoji 0x1F52E
+  Write-Host "$ok Objective: detect drift between shared symbol map and human doc" -ForegroundColor Green
+  Write-Host "$ledger Inputs: $mapPath ; $docPath" -ForegroundColor Gray
+  Write-Host "$shield Constraints: READ-ONLY, no writes, no commits" -ForegroundColor Gray
+  Write-Host "$crystal Decision: Prefetch-only scan (Suggest if drift found)" -ForegroundColor Gray
 }
 
 if ($status -eq "OK") {
   if (-not $Quiet) {
     Write-Host "" 
-    Write-Host "✅ No drift detected. Core symbols match shared map." -ForegroundColor Green
+    Write-Host "$(_Emoji 0x2705) No drift detected. Core symbols match shared map." -ForegroundColor Green
   }
   exit 0
 }
 
 # Suggestion output (still no side effects)
 Write-Host "" 
-Write-Host "⚠️ Drift detected (suggestion only — no writes performed)." -ForegroundColor Yellow
+Write-Host "$(_WithVS16 ([System.Char]::ConvertFromUtf32(0x26A0))) Drift detected (suggestion only - no writes performed)." -ForegroundColor Yellow
 
 if ($missingInCore.Count -gt 0) {
   $examples = $missingInCore | Select-Object -First $MaxExamples
@@ -139,7 +160,7 @@ if ($extraInCore.Count -gt 0) {
 }
 
 Write-Host "" 
-Write-Host "🔍 Verify: open docs/symbol_map.md and symbol_map.shared.json; reconcile core vs extended lists." -ForegroundColor Gray
+Write-Host "Verify: open docs/symbol_map.md and symbol_map.shared.json; reconcile core vs extended lists." -ForegroundColor Gray
 Write-Host "MercerID: MRC-20260128-0249-23" -ForegroundColor DarkCyan
 
 exit 2
