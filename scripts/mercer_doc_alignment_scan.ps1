@@ -81,11 +81,13 @@ function Get-DocSymbols {
   $afterHeading = $start + $heading.Length
 
   # Find next markdown H2 after the core section.
-  $nextHeading = $text.IndexOf("`r`n## ", $afterHeading, [System.StringComparison]::OrdinalIgnoreCase)
-  if ($nextHeading -lt 0) {
-    $section = $text.Substring($afterHeading)
+  # Must handle both LF and CRLF line endings.
+  $rest = $text.Substring($afterHeading)
+  $nextHeadingMatch = [regex]::Match($rest, '(?m)^\s*##\s+')
+  if (-not $nextHeadingMatch.Success) {
+    $section = $rest
   } else {
-    $section = $text.Substring($afterHeading, $nextHeading - $afterHeading)
+    $section = $rest.Substring(0, $nextHeadingMatch.Index)
   }
 
   # Parse markdown list entries like: - `🧬` Meeting place ...

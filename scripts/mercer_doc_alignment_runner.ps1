@@ -7,22 +7,38 @@ Param(
 
 $ErrorActionPreference = 'Stop'
 
+function _Emoji([int]$codePoint) {
+  return [System.Char]::ConvertFromUtf32($codePoint)
+}
+
+function _WithVS16([string]$s) {
+  return $s + [char]0xFE0F
+}
+
 function Write-RunnerBanner {
   Param([string]$Status = "OK")
 
-  $glyphs = "🧬☂️🧾🛡️🧠🔮"
+  $glyphs = (
+    (_Emoji 0x1F9EC) +
+    (_WithVS16 ([System.Char]::ConvertFromUtf32(0x2602))) +
+    (_Emoji 0x1F9FE) +
+    (_WithVS16 (_Emoji 0x1F6E1)) +
+    (_Emoji 0x1F9E0) +
+    (_Emoji 0x1F52E)
+  )
+
   $statusGlyph = switch ($Status) {
-    "OK" { "✅" }
-    "WARN" { "⚠️" }
-    "FAIL" { "⛔" }
-    default { "⚠️" }
+    "OK" { _Emoji 0x2705 }
+    "WARN" { (_WithVS16 ([System.Char]::ConvertFromUtf32(0x26A0))) }
+    "FAIL" { _Emoji 0x26D4 }
+    default { (_WithVS16 ([System.Char]::ConvertFromUtf32(0x26A0))) }
   }
 
-  Write-Host "" 
-  Write-Host "╔══════════════════════════════════════════════════════════════╗" -ForegroundColor DarkCyan
-  Write-Host "║  $glyphs  MERCER DOC ALIGNMENT RUNNER (RETRY)               ║" -ForegroundColor DarkCyan
-  Write-Host "║  Quest: keep the map true • no writes • no commits          ║" -ForegroundColor DarkCyan
-  Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor DarkCyan
+  Write-Host ""
+  Write-Host '==============================================================' -ForegroundColor DarkCyan
+  Write-Host "  $glyphs  MERCER DOC ALIGNMENT RUNNER (RETRY)" -ForegroundColor DarkCyan
+  Write-Host '  Quest: keep the map true - no writes - no commits' -ForegroundColor DarkCyan
+  Write-Host '==============================================================' -ForegroundColor DarkCyan
   Write-Host "Status: $statusGlyph $Status" -ForegroundColor Cyan
 }
 
@@ -55,24 +71,34 @@ while ($attempt -lt $RetryCount) {
 
   if (-not $Quiet) {
     Write-RunnerBanner -Status "OK"
-    Write-Host "🗺️ Attempt $attempt/$RetryCount — running read-only scan…" -ForegroundColor Gray
+    Write-Host "Attempt $attempt/$RetryCount - running read-only scan..." -ForegroundColor Gray
   }
 
   try {
-    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $scanScript -RepoRoot $root -Quiet:$Quiet
+    $scanArgs = @(
+      '-NoProfile',
+      '-ExecutionPolicy', 'Bypass',
+      '-File', $scanScript,
+      '-RepoRoot', $root
+    )
+    if ($Quiet) {
+      $scanArgs += '-Quiet'
+    }
+
+    & powershell.exe @scanArgs
     $exitCode = $LASTEXITCODE
   } catch {
     $exitCode = 99
     if (-not $Quiet) {
       Write-RunnerBanner -Status "FAIL"
-      Write-Host "⛔ Scan crashed: $($_.Exception.Message)" -ForegroundColor Red
+      Write-Host "Scan crashed: $($_.Exception.Message)" -ForegroundColor Red
     }
   }
 
   if ($exitCode -eq 0) {
     if (-not $Quiet) {
       Write-RunnerBanner -Status "OK"
-      Write-Host "✅ Scan complete: no drift." -ForegroundColor Green
+      Write-Host "$(_Emoji 0x2705) Scan complete: no drift." -ForegroundColor Green
       Write-Host "MercerID: MRC-20260128-0249-27" -ForegroundColor DarkCyan
     }
     exit 0
@@ -81,7 +107,7 @@ while ($attempt -lt $RetryCount) {
   if ($exitCode -eq 2) {
     if (-not $Quiet) {
       Write-RunnerBanner -Status "WARN"
-      Write-Host "⚠️ Scan complete: drift detected (suggestion only)." -ForegroundColor Yellow
+      Write-Host "$(_WithVS16 ([System.Char]::ConvertFromUtf32(0x26A0))) Scan complete: drift detected (suggestion only)." -ForegroundColor Yellow
       Write-Host "MercerID: MRC-20260128-0249-28" -ForegroundColor DarkCyan
     }
     exit 2
@@ -93,7 +119,7 @@ while ($attempt -lt $RetryCount) {
   if ($attempt -lt $RetryCount) {
     if (-not $Quiet) {
       Write-RunnerBanner -Status "FAIL"
-      Write-Host "⛔ Scan failed (exit $exitCode). Retrying in $RetryDelayMinutes minutes…" -ForegroundColor Red
+      Write-Host "Scan failed (exit $exitCode). Retrying in $RetryDelayMinutes minutes..." -ForegroundColor Red
       Write-Host "(If all retries fail, we wait for the next scheduled 5h run.)" -ForegroundColor Gray
     }
     Start-Sleep -Seconds ($RetryDelayMinutes * 60)
@@ -102,7 +128,7 @@ while ($attempt -lt $RetryCount) {
 
   if (-not $Quiet) {
     Write-RunnerBanner -Status "FAIL"
-    Write-Host "⛔ All retries exhausted. Deferring until next scheduled run." -ForegroundColor Red
+    Write-Host "All retries exhausted. Deferring until next scheduled run." -ForegroundColor Red
     Write-Host "MercerID: MRC-20260128-0249-29" -ForegroundColor DarkCyan
   }
 

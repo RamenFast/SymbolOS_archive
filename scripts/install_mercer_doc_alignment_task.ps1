@@ -26,10 +26,10 @@ if (-not (Test-Path -LiteralPath $runnerScript)) { throw "Missing runner script:
 if ($Uninstall) {
   if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false | Out-Null
-    Write-Host "✅ Uninstalled scheduled task: $TaskName" -ForegroundColor Green
+    Write-Host "Uninstalled scheduled task: $TaskName" -ForegroundColor Green
     Write-Host "MercerID: MRC-20260128-0249-24" -ForegroundColor DarkCyan
   } else {
-    Write-Host "⚠️ Task not found: $TaskName" -ForegroundColor Yellow
+    Write-Host "Task not found: $TaskName" -ForegroundColor Yellow
   }
   exit 0
 }
@@ -50,7 +50,7 @@ $task = New-ScheduledTask -Action $action -Trigger $trigger -Principal $principa
 
 Register-ScheduledTask -TaskName $TaskName -InputObject $task -Force | Out-Null
 
-Write-Host "✅ Installed scheduled task: $TaskName" -ForegroundColor Green
+Write-Host "Installed scheduled task: $TaskName" -ForegroundColor Green
 Write-Host "- Cadence: every $Hours hours" -ForegroundColor Gray
 Write-Host "- Mode: Prefetch-only (read-only scan; no writes)" -ForegroundColor Gray
 Write-Host "MercerID: MRC-20260128-0249-25" -ForegroundColor DarkCyan
