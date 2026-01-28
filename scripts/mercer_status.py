@@ -96,7 +96,8 @@ def _print_banner() -> None:
     print("\n".join(
         [
             "╔══════════════════════════════════════════════════════════════╗",
-            "║  🧬☂️🧾  MERCER STATUS — SYMBOLOS WORKSPACE CHECK             ║",
+            "║  🧬☂️🗺️  MERCER STATUS                                        ║",
+            "║  SymbolOS Workspace Pulse Check                             ║",
             "╚══════════════════════════════════════════════════════════════╝",
         ]
     ))
@@ -114,10 +115,11 @@ def _print_status(repo: Path) -> int:
     drift = _check_symbol_drift(shared_map_path, symbol_map_md_path)
 
     _print_banner()
-    print(f"Repo root: {repo}")
-    print(f"Meeting place: {shared_map_path.name}={_exists(shared_map_path)} | docs/index.md={_exists(docs_index_path)} | README.md={_exists(readme_path)}")
-    print(f"Lily backdrop present (private): {_exists(lily_private)}")
-    print(f"Bootup art folder present (private): {_exists(bootup_art_dir)}")
+    print(f"🗺️  Repo root: {repo}")
+    print(f"🧬 Meeting place: {shared_map_path.name}={_exists(shared_map_path)} | docs/index.md={_exists(docs_index_path)} | README.md={_exists(readme_path)}")
+    print(f"🌸 Lily backdrop (private): {_exists(lily_private)}")
+    print(f"🎨 Bootup art folder (private): {_exists(bootup_art_dir)}")
+    print()
 
     status = "✅" if drift.code == 0 else ("⚠️" if drift.code == 2 else "⛔")
     print(f"Doc alignment (core symbols): {status} {drift.summary}")
@@ -145,9 +147,12 @@ def main(argv: list[str]) -> int:
         return code
 
     while True:
-        print("")
-        print("Actions: [R]efresh  [O]pen docs index  [M]ap (shared)  [P]oetry (public)  [Q]uit")
-        choice = input("> ").strip().lower()
+        print()
+        print("┌─ 🎯 ACTIONS ─────────────────────────────────────────────────┐")
+        print("│ [R] Refresh     [O] Docs Index     [M] Map     [P] Poetry     │")
+        print("│                          [Q] Quit                            │")
+        print("└───────────────────────────────────────────────────────────────┘")
+        choice = input("→ ").strip().lower()
 
         if choice in {"q", "quit", "exit"}:
             return code
@@ -164,7 +169,7 @@ def main(argv: list[str]) -> int:
             _try_open(repo / "docs" / "public_private_expression.md")
             continue
 
-        print("Unknown option.")
+        print("❌ Unknown option.")
 
 
 if __name__ == "__main__":
