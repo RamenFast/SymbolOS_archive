@@ -55,9 +55,25 @@ function Get-DocSymbols {
 
   $text = Get-Content -LiteralPath $DocPath -Raw
 
+  $heading = "## Core symbols"
+  $start = $text.IndexOf($heading, [System.StringComparison]::OrdinalIgnoreCase)
+  if ($start -lt 0) {
+    throw "Could not find '$heading' section in: $DocPath"
+  }
+
+  $afterHeading = $start + $heading.Length
+
+  # Find next markdown H2 after the core section.
+  $nextHeading = $text.IndexOf("`r`n## ", $afterHeading, [System.StringComparison]::OrdinalIgnoreCase)
+  if ($nextHeading -lt 0) {
+    $section = $text.Substring($afterHeading)
+  } else {
+    $section = $text.Substring($afterHeading, $nextHeading - $afterHeading)
+  }
+
   # Parse markdown list entries like: - `🧬` Meeting place ...
   $regex = [regex]::new('^\s*-\s*`(?<sym>[^`]+)`\s+', [System.Text.RegularExpressions.RegexOptions]::Multiline)
-  $symbolMatches = $regex.Matches($text)
+  $symbolMatches = $regex.Matches($section)
 
   $symbols = @()
   foreach ($m in $symbolMatches) {
@@ -76,13 +92,13 @@ if (-not (Test-Path -LiteralPath $mapPath)) { throw "Missing shared map: $mapPat
 if (-not (Test-Path -LiteralPath $docPath)) { throw "Missing doc symbol map: $docPath" }
 
 $shared = Get-SharedSymbols -MapPath $mapPath
-$doc = Get-DocSymbols -DocPath $docPath
+$docCore = Get-DocSymbols -DocPath $docPath
 
-$missingInDoc = @($shared | Where-Object { $_ -notin $doc })
-$extraInDoc = @($doc | Where-Object { $_ -notin $shared })
+$missingInCore = @($shared | Where-Object { $_ -notin $docCore })
+$extraInCore = @($docCore | Where-Object { $_ -notin $shared })
 
 $status = "OK"
-if ($missingInDoc.Count -gt 0 -or $extraInDoc.Count -gt 0) { $status = "WARN" }
+if ($missingInCore.Count -gt 0 -or $extraInCore.Count -gt 0) { $status = "WARN" }
 
 if (-not $Quiet) { Write-Banner -Status $status }
 
@@ -97,7 +113,7 @@ if (-not $Quiet) {
 if ($status -eq "OK") {
   if (-not $Quiet) {
     Write-Host "" 
-    Write-Host "✅ No drift detected. Docs and shared map symbols match." -ForegroundColor Green
+    Write-Host "✅ No drift detected. Core symbols match shared map." -ForegroundColor Green
   }
   exit 0
 }
@@ -106,19 +122,19 @@ if ($status -eq "OK") {
 Write-Host "" 
 Write-Host "⚠️ Drift detected (suggestion only — no writes performed)." -ForegroundColor Yellow
 
-if ($missingInDoc.Count -gt 0) {
-  $examples = $missingInDoc | Select-Object -First $MaxExamples
-  Write-Host ("- Missing in docs/symbol_map.md: " + ($examples -join ' ')) -ForegroundColor Yellow
-  if ($missingInDoc.Count -gt $examples.Count) {
-    Write-Host ("  (and {0} more)" -f ($missingInDoc.Count - $examples.Count)) -ForegroundColor Yellow
+if ($missingInCore.Count -gt 0) {
+  $examples = $missingInCore | Select-Object -First $MaxExamples
+  Write-Host ("- Missing in docs/symbol_map.md core section: " + ($examples -join ' ')) -ForegroundColor Yellow
+  if ($missingInCore.Count -gt $examples.Count) {
+    Write-Host ("  (and {0} more)" -f ($missingInCore.Count - $examples.Count)) -ForegroundColor Yellow
   }
 }
 
-if ($extraInDoc.Count -gt 0) {
-  $examples = $extraInDoc | Select-Object -First $MaxExamples
-  Write-Host ("- Extra in docs/symbol_map.md (not in shared map): " + ($examples -join ' ')) -ForegroundColor Yellow
-  if ($extraInDoc.Count -gt $examples.Count) {
-    Write-Host ("  (and {0} more)" -f ($extraInDoc.Count - $examples.Count)) -ForegroundColor Yellow
+if ($extraInCore.Count -gt 0) {
+  $examples = $extraInCore | Select-Object -First $MaxExamples
+  Write-Host ("- Extra in docs/symbol_map.md core section (not in shared map): " + ($examples -join ' ')) -ForegroundColor Yellow
+  if ($extraInCore.Count -gt $examples.Count) {
+    Write-Host ("  (and {0} more)" -f ($extraInCore.Count - $examples.Count)) -ForegroundColor Yellow
   }
 }
 
