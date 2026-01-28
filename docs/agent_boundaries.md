@@ -21,6 +21,7 @@ These boundaries are *part of the system*. Tools and agents are expected to resp
 
 - **Public-ish docs**: `docs/` (safe to link internally; still treat as “shareable only with consent”).
 - **Private-by-default**: `memory/` and `internal_docs/`.
+- **UmbrellaOS-private-dev-arch**: never leak private details into public docs; treat as fortress scope unless explicitly requested by a user inside ☂️.
 
 Agents MUST NOT:
 - push content from `memory/` or `internal_docs/` into `docs/` unless explicitly requested
@@ -46,6 +47,10 @@ Examples of banned behavior:
 
 For high-risk actions (delete, network calls, credential use):
 - require explicit confirmation every time.
+
+## Async Ring-0 AI compatibility (default)
+
+All AI operations run in **Ring-0 async compatibility** by default: speculation and experimentation stay isolated until explicitly promoted. No cross-scope leakage; no direct writes to public-facing docs without consent.
 
 ## Auto-approve (Ring-0)
 

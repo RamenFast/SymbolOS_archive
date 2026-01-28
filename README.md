@@ -3,8 +3,8 @@
 SymbolOS is a symbol-driven framework for intention mapping: fast scope clarity, explicit boundaries, and git-backed provenance.
 
 🌸☂️🗺️✋ **Naming + boundary (Ti → Fi order)**
-- **SymbolOS (public)** → all external + light + in style 🌸☂️🗺️✋. This repo is the shared, external-facing surface.
-- **UmbrellaOS (private)** → all internal + dark + fortress rules. RWX to public/external only from within; never changes unless explicitly specified by an agent inside or user inside ☂️.
+- **SymbolOS-public-dev-arch (public)** → all external + light + in style 🌸☂️🗺️✋. This repo is the shared, external-facing surface.
+- **UmbrellaOS-private-dev-arch (private)** → all internal + dark + fortress rules. RWX to public/external only from within; never changes unless explicitly specified by an agent inside or user inside ☂️.
 
 🤝 **Co‑creator alignment**
 - This work branches into four co‑creators in equal alignment; shared truth anchors in the 🧬 map.

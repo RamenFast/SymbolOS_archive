@@ -1,0 +1,71 @@
+param(
+  [switch]$SkipPrompt,
+  [switch]$StartAlignmentScan = $true,
+  [switch]$StartStatusUi = $true,
+  [switch]$StartLlama = $true
+)
+
+$ErrorActionPreference = 'Stop'
+
+function Write-Banner {
+  Write-Host ''
+  Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Cyan
+  Write-Host '║  🧬☂️🗺️  SYMBOL0S START — ALL ENDPOINTS IN SCOPE           ║' -ForegroundColor Cyan
+  Write-Host '║  Quest: sync • status • local inference                    ║' -ForegroundColor Cyan
+  Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Cyan
+  Write-Host ''
+}
+
+function Confirm-Start {
+  if ($SkipPrompt) { return $true }
+  Write-Host 'Start all local endpoints now? (Y/N)' -ForegroundColor Yellow
+  $choice = (Read-Host '→').Trim().ToLower()
+  return ($choice -eq 'y' -or $choice -eq 'yes')
+}
+
+function Resolve-RepoRoot {
+  $scriptDir = $PSScriptRoot
+  if (-not $scriptDir) {
+    $scriptDir = Split-Path -Parent $PSCommandPath
+  }
+  return (Resolve-Path (Join-Path $scriptDir '..')).Path
+}
+
+function Start-AlignmentScan([string]$repoRoot) {
+  $scan = Join-Path $repoRoot 'scripts\mercer_doc_alignment_scan.ps1'
+  if (Test-Path -LiteralPath $scan) { & $scan }
+}
+
+function Start-StatusUiOnce([string]$repoRoot) {
+  $status = Join-Path $repoRoot 'scripts\mercer_status.ps1'
+  if (Test-Path -LiteralPath $status) { & $status -Once }
+}
+
+function Test-LlamaReady([string]$repoRoot) {
+  $binDir = Join-Path $repoRoot 'local_ai\bin'
+  $modelDir = Join-Path $repoRoot 'local_ai\models'
+  $serverExe = Get-ChildItem -Path $binDir -Filter 'llama-server.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1
+  $model = Get-ChildItem -Path $modelDir -Filter '*.gguf' -File -ErrorAction SilentlyContinue | Select-Object -First 1
+  return ($serverExe -and $model)
+}
+
+function Start-Llama([string]$repoRoot) {
+  $llama = Join-Path $repoRoot 'scripts\run_llama_server.ps1'
+  if (-not (Test-LlamaReady -repoRoot $repoRoot)) {
+    Write-Host 'Local LLM not ready (missing llama-server.exe or .gguf model). Skipping.' -ForegroundColor Yellow
+    return
+  }
+  if (Test-Path -LiteralPath $llama) { & $llama }
+}
+
+$root = Resolve-RepoRoot
+Write-Banner
+
+if (-not (Confirm-Start)) {
+  Write-Host 'Start cancelled.' -ForegroundColor Yellow
+  exit 0
+}
+
+if ($StartAlignmentScan) { Start-AlignmentScan -repoRoot $root }
+if ($StartStatusUi) { Start-StatusUiOnce -repoRoot $root }
+if ($StartLlama) { Start-Llama -repoRoot $root }

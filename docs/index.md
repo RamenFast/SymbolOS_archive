@@ -22,8 +22,8 @@ This is the canonical entry point for SymbolOS documentation in this repo.
 
 ## 🌸☂️ Naming + boundary (Ti → Fi order)
 
-- **SymbolOS (public)** — all external + light + in style 🌸☂️🗺️✋. This is the public-facing surface.
-- **UmbrellaOS (private)** — all internal + dark + fortress rules. RWX to public/external only from within; never changes unless explicitly specified by an agent inside or user inside ☂️.
+- **SymbolOS-public-dev-arch (public)** — all external + light + in style 🌸☂️🗺️✋. This is the public-facing surface.
+- **UmbrellaOS-private-dev-arch (private)** — all internal + dark + fortress rules. RWX to public/external only from within; never changes unless explicitly specified by an agent inside or user inside ☂️.
 
 ---
 

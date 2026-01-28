@@ -108,6 +108,20 @@
       }
     },
     {
+      "label": "SymbolOS: start all endpoints",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\start_symbolos.ps1"
+      ],
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
       "label": "Mercer: status UI (auto on folder open)",
       "type": "shell",
       "command": "powershell",

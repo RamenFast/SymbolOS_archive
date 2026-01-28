@@ -24,8 +24,14 @@
     {
       "symbol": "☂️",
       "name": "Umbrella",
-      "meaning": "UmbrellaOS / SymbolOS umbrella",
+      "meaning": "UmbrellaOS-private-dev-arch (private umbrella; fortress boundary)",
       "tags": ["branding", "system"]
+    },
+    {
+      "symbol": "🌸",
+      "name": "SymbolOS",
+      "meaning": "SymbolOS-public-dev-arch (public, light, external-facing surface)",
+      "tags": ["branding", "system", "public"]
     },
     {
       "symbol": "🔮",
