@@ -1,0 +1,34 @@
+{
+  "entries": [
+    {
+      "title": "MCP Servers Overview",
+      "path": "docs/mcp_servers.md",
+      "tags": ["MCP", "servers", "protocol", "tools", "resources", "prompts"],
+      "summary": "Overview of Model Context Protocol (MCP) servers, describing standardised protocol interfaces exposing tools, resources and prompts for AI applications. Details core features, server architecture and usage within SymbolOS."
+    },
+    {
+      "title": "Precog Thought Overview",
+      "path": "docs/precog_thought.md",
+      "tags": ["Precog", "anticipatory computing", "SymbolOS", "predictive context", "preloading"],
+      "summary": "Description of the anticipatory computing pattern 'precog thought' in SymbolOS, including conceptual foundations (predictive context, pre-loading resources, proactive prompts), design principles (transparency, accuracy, privacy), and implementation notes."
+    },
+    {
+      "title": "MCP Servers Internal",
+      "path": "internal_docs/mcp_servers_internal.md",
+      "tags": ["MCP", "servers", "internal", "development", "guidelines"],
+      "summary": "Internal guidelines for developing MCP servers, including project structure, naming conventions, development workflow, security practices, and future roadmap."
+    },
+    {
+      "title": "Precog Thought Internal",
+      "path": "internal_docs/precog_private.md",
+      "tags": ["precog", "internal", "prediction", "privacy", "algorithm"],
+      "summary": "Internal design notes for implementing the precog thought module, describing system architecture (data ingestion, prediction service, action planner), data privacy measures, algorithm design notes, and future enhancements."
+    },
+    {
+      "title": "Cross-border Data Transfer Report",
+      "path": "report.md",
+      "tags": ["data transfers", "privacy", "GDPR", "PIPL", "DPDP", "LGPD", "USA"],
+      "summary": "Comprehensive analysis of global legal regimes governing cross-border data transfers and localization requirements, including EU GDPR/Schrems II, China PIPL, India DPDP Act, Brazil LGPD, and U.S. sectoral laws. Provides risk matrix, enforcement cases, corporate strategies, and policy recommendations."
+    }
+  ]
+}
