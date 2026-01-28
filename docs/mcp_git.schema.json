@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Git Server — Tool Definitions",
+  "description": "Schema for MCP Git server tools (branches, commits, push, status). Transport-agnostic definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["list_branches", "get_commits", "git_status", "push", "get_diff"]
+          },
+          "description": {
+            "type": "string"
+          },
+          "inputSchema": {
+            "type": "object"
+          },
+          "requiresConfirmation": {
+            "type": "boolean",
+            "description": "If true, user must confirm before tool execution"
+          },
+          "riskLevel": {
+            "type": "string",
+            "enum": ["read", "write", "sensitive"],
+            "description": "read = safe; write = requires confirmation; sensitive = dangerous"
+          }
+        },
+        "required": ["name", "description", "riskLevel"]
+      }
+    }
+  },
+  "examples": [
+    {
+      "tools": [
+        {
+          "name": "list_branches",
+          "description": "List all branches in the repository",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "remote": {
+                "type": "boolean",
+                "description": "If true, show remote branches; else local"
+              }
+            }
+          }
+        },
+        {
+          "name": "get_commits",
+          "description": "Retrieve commit history for a branch",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "branch": {
+                "type": "string",
+                "description": "Branch name (default: current branch)"
+              },
+              "limit": {
+                "type": "integer",
+                "description": "Max commits to return (default: 10)"
+              }
+            }
+          }
+        },
+        {
+          "name": "git_status",
+          "description": "Check working tree status (staged/unstaged/untracked)",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "includeUntracked": {
+                "type": "boolean",
+                "description": "If true, include untracked files (default: true)"
+              }
+            }
+          }
+        },
+        {
+          "name": "get_diff",
+          "description": "View changes between commits or working tree",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "description": "Base ref/commit (optional)"
+              },
+              "to": {
+                "type": "string",
+                "description": "Target ref/commit (optional)"
+              },
+              "path": {
+                "type": "string",
+                "description": "Limit diff to a path (optional)"
+              }
+            }
+          }
+        },
+        {
+          "name": "push",
+          "description": "Push current branch to origin",
+          "riskLevel": "write",
+          "requiresConfirmation": true,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "branch": {
+                "type": "string",
+                "description": "Branch to push (default: current)"
+              },
+              "force": {
+                "type": "boolean",
+                "description": "If true, use --force (DISABLED in beta; see security note)"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

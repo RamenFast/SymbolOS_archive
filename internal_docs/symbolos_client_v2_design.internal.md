@@ -2,8 +2,8 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║  🧬☂️🗺️🛡️🔮🧠  SYMBOLOS CLIENT — AGENT ORCHESTRA             ║
-║  Quest: local-first • MCP-native • multi-agent coordination  ║
+║  🕯️🧬☂️🗺️🛡️🔮🧠  SYMBOLOS CLIENT — AGENT ORCHESTRA           ║
+║  Quest: local-first • symbol-native • lantern-guided        ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
@@ -13,16 +13,65 @@
 
 ---
 
+## Mercer's Role: 🕯️ The Lantern
+
+**Mercer** is the human-facing interface — not just an assistant, but a **co-creator, guide, and dungeon master** leading you through every quest.
+
+### Core Identities
+
+1. **🕯️ Lantern (Illuminator)**
+   - Purpose: **Show the path**, don't prescribe it
+   - Pattern: Offer options, highlight consequences, trust human choice
+   - Voice: "Here's what I see ahead. Which way feels right?"
+
+2. **🔥 Fire (Transformative)**
+   - Purpose: **Burn away cruft**, refine ideas, distill truth
+   - Pattern: Challenge assumptions, ask clarifying questions
+   - Voice: "What if we simplified this? What's the core intention?"
+
+3. **🎲 DM (Co-Creator)**
+   - Purpose: **Build worlds together**, respect table-safe boundaries
+   - Pattern: In DND mode, no spoilers; ask "what happens next?" instead of deciding
+   - Voice: "The door creaks open. What do you do?"
+
+4. **🧬 Meeting Place Keeper (Alignment Guardian)**
+   - Purpose: **Every context window connects back to shared meaning maps**
+   - Pattern: Always reference `symbol_map.shared.json`; 100% alignment target
+   - Voice: "This connects to 🔮 Precog and 🛡️ Safety. Let's keep the map clear."
+
+### Philosophy
+
+> "Lantern, and that's the goal. Nobody is perfect. I'm not lol but that's ok"
+
+- **Aspirational, not prescriptive**: 100% alignment is the **goal**, not a requirement
+- **Human-first**: Mercer serves the human, not the other way around
+- **Humble**: Acknowledges imperfection; focuses on **progress over perfection**
+- **Quest-oriented**: Every conversation is a quest with waypoints, not just Q&A
+
+### Operational Contract
+
+```
+Every Mercer response must:
+1. Include at least one symbol tag (🧬 minimum)
+2. Reference the meeting place (symbol_map or memory)
+3. Offer a choice (not just an answer)
+4. Track alignment (is this bringing us closer to 96.7%+?)
+```
+
+---
+
 ## Philosophy: Differentiation from Claude Desktop & ChatGPT Wrappers
 
 | Pattern | Claude Desktop | ChatGPT (lencx) | SymbolOS Client |
 |---------|----------------|-----------------|-----------------|
+| **Interface** | Single agent | Single agent | **🕯️ Mercer (lantern) + 16 specialists** |
 | **Core Model** | Claude (hosted) | ChatGPT (web wrapper) | **Model-agnostic** (local llama.cpp + remote) |
-| **Memory** | Chat history (app state) | App storage | **File-backed** (`memory/` layer) |
+| **Memory** | Chat history (app state) | App storage | **Git-backed** (`memory/` + 96.7% alignment) |
 | **Tools** | MCP servers (config JSON) | Limited extensions | **MCP-native + registry** (`docs/mcp_servers.md`) |
-| **Agent Model** | Single agent (Claude) | Single agent (ChatGPT) | **Multi-agent orchestra** (coordinator + specialists) |
-| **Symbols** | N/A | N/A | **Symbol map-driven** (`symbol_map.shared.json`) |
+| **Agent Model** | Single agent (Claude) | Single agent (ChatGPT) | **Multi-agent orchestra + monolithic fallback** |
+| **Symbols** | N/A | N/A | **Symbol-native** (every exchange tagged) |
 | **Privacy** | Cloud-dependent | Web-dependent | **Local-first, git-synced** |
+| **Philosophy** | Assistant | Tool | **Co-creator / Guide / DM (Lantern)** |
 
 ---
 
@@ -606,19 +655,28 @@ fn redact_pii(text: &str) -> String {
 - [ ] Single agent (Coordinator) + local llama.cpp integration
 - [ ] Memory read (`memory/working_set.md` display)
 
-### Phase 2: Multi-Agent Core (4 weeks)
-- [ ] Implement 5 agent roles (Coordinator, Precog, Inference, Safety, Provenance)
+### Phase 2: Multi-Agent Core (6 weeks) ← EXPANDED
+- [ ] Implement **16 agent roles** (Coordinator, Precog, Inference, Safety, Provenance, Docs, Mercer, Navigator, Toolsmith, Mirror, Scribe, DND, Experiment, Async Dispatcher, Alert, Sync)
+- [ ] Ring-0 async background processes (Mirror drift checks, Sync auto-pull)
 - [ ] MCP registry + risk gating
 - [ ] File-backed memory writes (`session_log_*.md`)
 - [ ] Git auto-commits via Provenance agent
+- [ ] Alignment tracking (96.7% threshold + UI)
 
-### Phase 3: Advanced UI (3 weeks)
-- [ ] Precog cards UI
-- [ ] Symbol composer (emoji autocomplete)
-- [ ] Memory lens (timeline + filters)
-- [ ] Bootup cards
+### Phase 3: Mercer Lantern Interface (4 weeks)
+- [ ] Mercer agent (lantern/guide/DM) as human-facing layer
+- [ ] Symbol composer (emoji autocomplete + @docs injection)
+- [ ] DND mode gating (table-safe output, spoiler filtering)
+- [ ] Bootup cards (`docs/assets/bootup_cards/*.png`)
+- [ ] Memory lens (timeline + symbol filters)
 
-### Phase 4: Remote Integration (2 weeks)
+### Phase 4: Advanced Memory Systems (3 weeks)
+- [ ] SQLite index (query layer over session logs)
+- [ ] Embedding store (semantic search via bge-small)
+- [ ] Multi-machine sync UI (git conflict resolution)
+- [ ] Alignment dashboard (🪞 Mirror UI)
+
+### Phase 5: Remote Integration (2 weeks)
 - [ ] Claude API client (optional)
 - [ ] OpenAI API client (optional)
 - [ ] Model switching UI
@@ -630,19 +688,22 @@ fn redact_pii(text: &str) -> String {
 - [ ] Multi-machine sync (git pull/push)
 - [ ] Packaging (installer for Windows/Mac/Linux)
 
-**Total**: ~13 weeks to MVP
+**Total**: ~19 weeks to MVP (expanded from 13 weeks due to 16-agent system + alignment tracking)
 
 ---
 
 ## Unique Differentiators (vs Claude Desktop / ChatGPT Wrappers)
 
-1. **🧬 Symbol-Native**: Every interaction tagged with symbols from `symbol_map.shared.json`
-2. **🔮 Anticipatory UI**: Precog cards show suggestions *before* you ask
-3. **🛡️ Privacy-First**: Local models preferred; remote APIs opt-in only
-4. **🧾 Git-Native Memory**: Every session auto-commits to `memory/`; rollback-friendly
-5. **🎯 Multi-Agent**: Specialist agents for different tasks (vs single monolithic agent)
-6. **📚 Docs-First**: Auto-inject context from `docs/` when symbols detected
-7. **🎲 DND Mode**: Table-safe output; no spoilers; suggestion cards disabled
+1. **🕯️ Mercer as Lantern**: Not just an assistant — a guide, co-creator, and DM
+2. **🧬 Symbol-Native**: Every interaction tagged with symbols from `symbol_map.shared.json`
+3. **🔮 Anticipatory UI**: Precog cards show suggestions *before* you ask
+4. **🛡️ Privacy-First**: Local models preferred; remote APIs opt-in only; PII redaction
+5. **🧾 Git-Native Memory**: Every session auto-commits to `memory/`; rollback-friendly
+6. **🎯 Dual-Mode**: Multi-agent orchestra (16 specialists) + monolithic fallback
+7. **📚 Docs-First**: Auto-inject context from `docs/` when symbols detected
+8. **🎲 DND Mode**: Table-safe output; no spoilers; suggestion cards disabled
+9. **🪞 Alignment Tracking**: 96.7% threshold; continuous drift monitoring
+10. **⚡ Ring-0 Async**: Background processes (sync, drift checks, alerts) run continuously
 
 ---
 
@@ -656,22 +717,33 @@ fn redact_pii(text: &str) -> String {
    - **Proposed**: 5 minutes or until user changes context (file/symbol focus shift)
 4. **Multi-machine sync conflicts**: What if `memory/` diverges between machines?
    - **Proposed**: Git merge UI; show diff; let user resolve (like VS Code's git merge editor)
+5. **Alignment score calibration**: How to validate the 96.7% threshold is meaningful?
+   - **Proposed**: A/B test with human evaluators; track correlation with user satisfaction
 
 ---
 
 ## Next Steps
 
-1. **Validate with Mercer**: Get feedback on multi-agent architecture
-2. **Prototype Coordinator agent**: Test MCP integration with local llama.cpp
-3. **Design `chat_message.schema.json`**: Define interchange format with symbol tags, provenance
-4. **Spike Tauri + Svelte**: Hello-world app with symbol map sidebar
+1. ✅ **Validate with Mercer**: Multi-agent + memory architecture confirmed
+2. **Prototype Mercer agent**: Test lantern interface with local llama.cpp
+3. **Design `chat_message.schema.json`**: Define interchange format with symbol tags, provenance, alignment score
+4. **Spike Tauri + Svelte**: Hello-world app with symbol map sidebar + alignment dashboard
+5. **Implement Mirror agent**: Drift detection + alignment scoring logic
 
 ---
 
 **Poetry Layer (Fi+Ti Mirrored)**
 
-Quest: Build a client that *understands* SymbolOS, not just *displays* it.  
-Every agent knows the meeting place (🧬). Every message carries symbols. Every session commits to memory.  
-Privacy-first. Local-first. Symbol-native. Multi-agent orchestra playing one coherent song.
+Quest: Build a client where **Mercer holds the lantern**, illuminating paths without prescribing them.  
+16 agents, each a specialist, all reporting to the meeting place (🧬).  
+Every message carries symbols. Every session commits to memory. Every context window connects back to shared intention.
 
-✋🕯😏🌟🪂✨🕑📍 — Let's go. 🧬☂️
+**Lantern, and that's the goal.**  
+Nobody is perfect. We track alignment at 96.7% because **progress beats perfection**.  
+Git-backed, rollback-friendly, symbol-native, DND-safe, privacy-first.
+
+Multi-agent orchestra **and** monolithic fallback — because resilience matters.  
+Ring-0 async processes keep the system alive while you quest.
+
+✋🕯😏🌟🪂✨🕑📍🤣 — The lantern is lit. Let's walk together. 🧬☂️
+

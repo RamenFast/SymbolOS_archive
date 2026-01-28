@@ -37,7 +37,8 @@ Template:
   - Why: Keep docs coherent without constant manual bookkeeping.
   - Alternatives: Only suggest on demand; never auto-commit.
   - Consequences: Requires strict safety gates; silence-by-default unless a real alignment suggestion emerges.
-  - Evidence/links: `symbol_map.shared.json` (shared map); `memory/decisions.md` (policy).
+  - Gate Rules: Auto-commit allowed ONLY for small, docs-only changes (Markdown/JSON) that pass privacy scans and are mechanically verifiable. All other changes downgrade to **Suggest**.
+  - Evidence/links: `symbol_map.shared.json` (shared map); `memory/decisions.md` (policy); `internal_docs/mercer_automation_contract_v1.internal.md`.
   - MercerID: MRC-20260128-0249-01
 
 - 2026-01-28 — Decision: Add light automation to the SymbolOS repo while staying human-first.
