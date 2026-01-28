@@ -72,6 +72,19 @@
         "-Uninstall"
       ],
       "problemMatcher": []
+    },
+    {
+      "label": "Mercer: status UI (interactive)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\mercer_status.ps1"
+      ],
+      "problemMatcher": []
     }
   ]
 }

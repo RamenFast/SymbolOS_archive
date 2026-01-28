@@ -33,6 +33,7 @@ This is the canonical entry point for SymbolOS documentation in this repo.
 
 ## Mercer
 - Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css)
+- Public/private expression + poetry: [public_private_expression.md](public_private_expression.md)
 
 ## Memory (repo-backed)
 - Private memory system (repo-backed): [../memory/README.md](../memory/README.md)

@@ -17,6 +17,10 @@ If you are integrating tooling (e.g., a VS Code assistant/extension), the canoni
 
 - [symbol_map.shared.json](symbol_map.shared.json)
 
+Optional (public-safe) Mercer expression:
+
+- [docs/public_private_expression.md](docs/public_private_expression.md)
+
 ## Getting Started
 
 1. **Project goals.**  The goal of SymbolOS is to create a symbolic interface layer that encodes system status and interactions using intuitive symbols and colour codes.  All future code and documentation should adhere to these principles.
