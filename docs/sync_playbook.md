@@ -6,6 +6,57 @@ Scope: `docs/` and Markdown files (`*.md`) in the repo root.
 
 ---
 
+## The Sync Scroll (copy/paste)
+
+### Technical Scroll
+
+Summary: We’re about to sync and update docs inside the private SymbolOS repo using our “Sync Scroll” playbook.
+
+1. Pre-flight check: ensure `git` is installed and config has a valid user name/email, or set them repo‑local:
+   - `git config --global user.name "RamenFast"`
+   - `git config --global user.email "2bmillerb@gmail.com"`
+
+2. Confirm your working tree is clean. If there are local changes, commit them or stash them (`git stash -u`) before continuing.
+
+3. If on a branch other than `main`, optionally rebase it on top of `origin/main` before making docs changes:
+   - `git pull --rebase origin main`
+
+4. Intake any new Google Drive docs: download them manually (or via connector) into `docs/` or the appropriate subdirectory.
+
+5. Update the docs content. Only modify `docs/` and `*.md` files unless otherwise instructed.
+
+6. Stage, commit, and push your changes:
+   - `git add docs/sync_playbook.md`
+   - `git commit -m "docs: update SymbolOS/UmbrOS synced docs"`
+   - `git push origin main`
+
+   If branch protection prevents a direct push, open a pull request.
+
+### Quest Log (Dungeon Master)
+
+You unroll an aged scroll from the DM’s satchel. The parchment shimmers with eldritch symbols and the whisper of rain on cobblestones.
+
+⚔️ The Sync Scroll ⚔️
+
+The party’s mission: weave the newly forged “sync” incantations into the codex of SymbolOS.
+
+- Check your identity (git name/email) and ensure your tools are sharp.
+- Stash or commit any stray scribbles.
+- Refresh from `origin/main` if you diverged.
+- Cross the Drive Bridge, gathering lore into the `docs/` satchel.
+- Touch only scrolls and manuscripts—leave the arcane core undisturbed.
+
+🕯️ Once the lore is transcribed, approach the Git Monolith:
+- Whisper the commit message (“`git commit`”).
+- Light the torches (“`git add`”).
+- Hoist the bundle into the heavens (“`git push`”).
+
+If guardians bar your way (branch protection), craft a spell of “pull request” and await the council’s approval.
+
+Remember: the rain falls, but the umbrella steadies your hand.
+
+---
+
 ## 1) Pull latest
 
 From the repo root:
