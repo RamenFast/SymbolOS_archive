@@ -1,25 +1,26 @@
 param(
   [switch]$SkipPrompt,
-  [switch]$StartAlignmentScan = $true,
-  [switch]$StartStatusUi = $true,
-  [switch]$StartLlama = $true
+  [bool]$StartAlignmentScan = $true,
+  [bool]$StartStatusUi = $true,
+  [bool]$StartLlama = $true,
+  [bool]$SyncClock = $true
 )
 
 $ErrorActionPreference = 'Stop'
 
 function Write-Banner {
   Write-Host ''
-  Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Cyan
-  Write-Host '║  🧬☂️🗺️  SYMBOL0S START — ALL ENDPOINTS IN SCOPE           ║' -ForegroundColor Cyan
-  Write-Host '║  Quest: sync • status • local inference                    ║' -ForegroundColor Cyan
-  Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Cyan
+  Write-Host '==============================================================' -ForegroundColor Cyan
+  Write-Host 'SYMBOL OS START - ALL ENDPOINTS IN SCOPE' -ForegroundColor Cyan
+  Write-Host 'Quest: sync | status | local inference' -ForegroundColor Cyan
+  Write-Host '==============================================================' -ForegroundColor Cyan
   Write-Host ''
 }
 
 function Confirm-Start {
   if ($SkipPrompt) { return $true }
   Write-Host 'Start all local endpoints now? (Y/N)' -ForegroundColor Yellow
-  $choice = (Read-Host '→').Trim().ToLower()
+  $choice = (Read-Host '>').Trim().ToLower()
   return ($choice -eq 'y' -or $choice -eq 'yes')
 }
 
@@ -29,6 +30,16 @@ function Resolve-RepoRoot {
     $scriptDir = Split-Path -Parent $PSCommandPath
   }
   return (Resolve-Path (Join-Path $scriptDir '..')).Path
+}
+
+function Sync-ClockIfNeeded {
+  if (-not $SyncClock) { return }
+  try {
+    Write-Host 'Syncing system clock (NTP)...' -ForegroundColor Gray
+    w32tm /resync /force | Out-Null
+  } catch {
+    Write-Host 'Clock sync skipped or failed. Continue anyway.' -ForegroundColor Yellow
+  }
 }
 
 function Start-AlignmentScan([string]$repoRoot) {
@@ -46,7 +57,7 @@ function Test-LlamaReady([string]$repoRoot) {
   $modelDir = Join-Path $repoRoot 'local_ai\models'
   $serverExe = Get-ChildItem -Path $binDir -Filter 'llama-server.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1
   $model = Get-ChildItem -Path $modelDir -Filter '*.gguf' -File -ErrorAction SilentlyContinue | Select-Object -First 1
-  return ($serverExe -and $model)
+  return ($null -ne $serverExe -and $null -ne $model)
 }
 
 function Start-Llama([string]$repoRoot) {
@@ -65,6 +76,8 @@ if (-not (Confirm-Start)) {
   Write-Host 'Start cancelled.' -ForegroundColor Yellow
   exit 0
 }
+
+Sync-ClockIfNeeded
 
 if ($StartAlignmentScan) { Start-AlignmentScan -repoRoot $root }
 if ($StartStatusUi) { Start-StatusUiOnce -repoRoot $root }
