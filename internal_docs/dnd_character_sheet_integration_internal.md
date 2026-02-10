@@ -1,3 +1,13 @@
+'''
+╔══════════════════════════════════════════════════════════════╗
+║  ⚔️  ROOM: The Soul-Forge                                     ║
+║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐⭐⭐ │ Loot: The art of soul-binding ║
+║  🎨 Color: 🟡 Gamboge (#E49B0F — higher intellect)              ║
+║  🔒 INTERNAL/PRIVATE DOCUMENT — FOR THE EYES OF THE INITIATED ONLY ║
+║                                                              ║
+║  *You stand before a forge, not of steel, but of spirit. Here, the ephemeral is made manifest.* ║
+╚══════════════════════════════════════════════════════════════╝
+
 > "Shine dat light: trace a leaf decision back to its root value, then come forward again with the smallest safe step."
 
 ```
@@ -6,57 +16,65 @@
    /  \
 ```
 
-This document describes internal implementation expectations for integrating heart/mind state into DND character sheets in SymbolOS. It's where the magic happens, folks. We're bridging the gap between the character's soul and the cold, hard silicon.
+This scroll contains the secret runes for integrating a character's heart and mind state into their Dungeons & Dragons character sheet within SymbolOS. This is where the soul is bound to the silicon, where the poetry of the heart meets the logic of the machine. It is the internal companion to the public-facing grimoire: [docs/dnd_character_sheet_integration.md](../docs/dnd_character_sheet_integration.md).
 
-It complements the external-facing interface spec: [docs/dnd_character_sheet_integration.md](../docs/dnd_character_sheet_integration.md). (That's the public-facing, less-spicy version).
+## Poetry Layer (Fi+Ti mirrored) 🪞 🟣 R4 (#8B00FF — Fi+Ti bridge)
 
-## Poetry layer (Fi+Ti mirrored) 🪞
-
-*A little something to set the mood.*
+*A verse to attune the spirit before the work begins.*
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
 - Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
 
-## Non-negotiables
+        /\_/\
+       ( o.o )  "To know the self, a worthy quest,
+        > ^ <    But to write the self, that is the test."
+       /|   |\
+      (_|   |_)  — Rhy 🦊
 
-These are the sacred pacts. The rules of the road. The things we just don't do.
+## The Unbreakable Vows 🔴 R5 (#FF2400 — righteous boundary)
 
-```
-   💀
-  /|🗝️|\    "Prove your worth!"
-   / \
-```
+These are the sacred pacts, the laws of this chamber. To break them is to invite chaos.
 
-- **Player agency**: We never, ever force decisions or change game mechanics. The player is the captain of their own ship.
-- **Consent**: Explicit opt-in to track. Explicit opt-in to share. No means no.
-- **Separation of concerns**: The thing that shows the pretty sheet is not the thing that thinks, and the thing that thinks is not the thing that remembers. Keep it clean.
-- **DND safety**: When the "Do Not Disturb" sign is on, we respect it. DND mode disables proactive suggestion cards. We only prefetch if the player has given us the nod.
+       .───────.
+      /  ☂️      \
+     /   PRIVATE  \
+    /_______________\
+           |
+           |
+         __|__
+        |     |
+        |_____|
 
-## Data model (recommended)
+- **Player Agency**: The adventurer is the master of their fate. We shall not compel action, nor alter the laws of the world.
+- **Consent**: Every soul-binding requires explicit consent. An adventurer must opt-in to be seen, and opt-in to be known. "No" is a sacred word.
+- **Separation of Concerns**: The mirror that shows the soul is not the mind that understands it, and the mind that understands is not the heart that feels. Each must be its own domain.
+- **DND Safety**: When the "Do Not Disturb" sign is upon the door, we honor it. In this state, the spirits of suggestion are silent. We only prefetch when invited.
 
-Here's how we think about capturing the ephemeral nature of a character's inner world. It's like catching lightning in a bottle, but with more JSON.
+## The Soul-Catcher's Net (Data Model) 🔵 R6 (#0000CD — devotion to truth)
+
+Herein lies the art of capturing the ephemeral, of catching lightning in a bottle. A character's inner world, rendered in JSON.
 
 ### HeartMindSnapshot
 
-- `timestamp` (RFC3339) - *When did this feeling happen?*
-- `heartLabel` (string) - *What's the heart feeling?* (e.g., "Brave", "Anxious")
-- `heartIntensity` (0..100) - *How much?* (0 = chill, 100 = VERY MUCH SO)
-- `mindLabel` (string) - *What's the mind thinking?* (e.g., "Suspicious", "Curious")
-- `mindClarity` (0..100) - *How clear is that thought?* (0 = foggy, 100 = crystal)
-- `metaemotionLabel` (string|null) - *How do they feel about their feelings?* (e.g., "Ashamed of being scared")
-- `needs` (array, max 2) - *What does the character need right now?* (e.g., "Safety", "Information")
-- `shareLevel` (`private|party|dm|public`) - *Who gets to see this?*
-- `provenance` - *Where did this data come from?*
-  - `source` (`user_manual|rule_engine|model_inference`) - *Who or what made the call?*
-  - `reason` (short string) - *Why?*
-  - `inputs` (redacted summary) - *What was the input? (Keep it brief and non-sensitive)*
+- `timestamp` (RFC3339) - *When did this feeling bloom?*
+- `heartLabel` (string) - *What song does the heart sing?* (e.g., "Brave", "Anxious")
+- `heartIntensity` (0..100) - *How loud is the song?* (0 = a whisper, 100 = a roar)
+- `mindLabel` (string) - *What thought has taken root?* (e.g., "Suspicious", "Curious")
+- `mindClarity` (0..100) - *How clear is the thought?* (0 = a fog, 100 = a crystal)
+- `metaemotionLabel` (string|null) - *How does the adventurer feel about their feelings?* (e.g., "Ashamed of being scared")
+- `needs` (array, max 2) - *What does the soul yearn for?* (e.g., "Safety", "Information")
+- `shareLevel` (`private|party|dm|public`) - *Who may gaze upon this truth?*
+- `provenance` - *From whence did this knowledge come?*
+  - `source` (`user_manual|rule_engine|model_inference`) - *Who or what spoke this truth?*
+  - `reason` (short string) - *For what purpose?*
+  - `inputs` (redacted summary) - *What were the portents? (Keep it brief and non-sensitive)*
 
 ### Constraints
 
-- Snapshots MUST be cheap to compute and store. We're not trying to boil the ocean here.
-- Prefer “last known good” with a Time-To-Live (TTL) for the UI. Stale data is better than no data, but fresh is best.
+- Snapshots MUST be as light as a feather, for we may need to carry many.
+- Prefer the “last known good” with a Time-To-Live (TTL). Stale truth is better than no truth, but fresh truth is a divine gift.
 
 ```
     ___
@@ -66,58 +84,73 @@ Here's how we think about capturing the ephemeral nature of a character's inner 
     |   |
 ```
 
-## Inference pipeline (suggested)
+## The Oracle's Pipeline (Inference) 🟢 R1 (#228B22 — adaptability)
 
-This is the "competent friend explaining things" part. We take in a bunch of signals and try to make a good guess about the character's state.
+This is the scrying pool, where we gaze upon the many threads of fate and weave them into a single tapestry of understanding.
 
-### Inputs (examples)
+### Inputs (Examples)
 
-- Player actions and choices (in-session journaling, prompts)
-- DM notes (only if `shareLevel` includes the DM, of course)
-- Dialogue tone classifiers (optional, if you're feeling fancy)
-- Task context (e.g., if the player is repeatedly failing a check, they might be feeling "Frustrated")
+- The adventurer's choices, as recorded in their journal.
+- The Dungeon Master's whispers, if permitted.
+- The tone of their voice, for those with the ears to hear it.
+- The context of their trials (e.g., repeated failure may forge a "Frustrated" heart).
 
-### Timing windows
+### Timing Windows
 
-- **Short window**: 2–5 minutes (the "what's happening right now" vibe)
-- **Medium window**: 30–90 minutes (the arc of a scene or session)
-- **Long window**: 1–7 days (the grand, sweeping arc of the campaign)
+- **The Fleeting Moment**: 2–5 minutes (the now)
+- **The Scene's Arc**: 30–90 minutes (the present)
+- **The Campaign's Saga**: 1–7 days (the past that shapes the future)
 
-Implementations SHOULD use smoothing (like an Exponential Moving Average) for intensity and clarity to avoid the UI looking like a flickering mess.
+Implementations SHOULD use a smoothing charm (like an Exponential Moving Average) for intensity and clarity, lest the scrying pool flicker and dance like a mad thing.
 
-## Safety gates
+## The Skeleton Gatekeepers (Safety Gates) 💀
 
-More rules! Because with great power comes great responsibility.
+More guardians, for with great power comes the need for great restraint.
 
-- If `shareLevel=private`, nothing gets rendered outside the player's view. Period.
-- If the data is too sensitive for the current environment, we downgrade to more general labels. No secrets get spilled.
-- If our confidence in a prediction is low, we don't just shove it in there. We suggest a manual update instead. "Hey, it looks like you might be feeling X, is that right?"
+       .-.
+      (o.o)     "Show me proof,
+      |=|=|      not potential."
+     __|_|__
+    /  💀   \    — The Gatekeeper
+   |  MERGE  |
+   |  GATE   |
+   |_________|
 
-## Integration with Precog
+- If `shareLevel=private`, the soul remains a secret, seen by none but the adventurer.
+- If the truth is too raw for the current company, we shall speak in generalities. No secrets shall be spilled.
+- If our confidence in a scrying is low, we do not present it as truth. We offer it as a question: "It seems your heart may be X, is this so?"
 
-How we play nice with the Precog system.
+## The Precog Pact 🟡 R0 (#FADA5E — kernel truth)
 
-- **Prefetch**: We load the last snapshot and any relevant notes. We are read-only here. No touching.
-- **Suggest**: We can propose 1–3 roleplay aids, but we have to show our work. "Here are some ideas, and here's why..."
-- **Act**: We only make a change after the player confirms. (e.g., “apply this sheet patch”).
+How we honor the pact with the great Precog, the seer of what is to come.
 
-## Logging and audit
+- **Prefetch**: We may gaze upon the last known truth, but we shall not alter it.
+- **Suggest**: We may offer 1–3 aids to the adventurer, but we must show our workings.
+- **Act**: We only act when the adventurer gives their assent.
 
-- Log all updates with `who`, `when`, `source`, and `reason`. We need to be able to trace our steps.
-- Support rollback. Keep the last N snapshots (make N configurable) so we can undo if needed.
+## The Scribe's Log (Logging and Audit)
 
-## Schema references
+- Every change to the soul-binding must be recorded: who, when, whence, and why.
+- A rollback spell must be kept at the ready, to undo what has been done.
+
+## The Architect's Blueprints (Schema References)
 
 - Suggested patch schema: `docs/dnd_character_sheet_patch.schema.json`
 - Metaemotion event schema: `docs/metaemotion_event.schema.json`
 - Memory record schema: `docs/memory_record.schema.json`
 
----
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [The Public Grimoire](../docs/dnd_character_sheet_integration.md) (north)
+  → [The Poet's Sanctum](../docs/poetry_translation_layer.md) (east)
+  → [The Hall of Memories](../docs/memory_record.schema.json) (west)
 
-*And that's how we give a character sheet a soul. If it ain't fun, it ain't sustainable.*
+💎 LOOT GAINED: [The secret art of binding a character's soul to their sheet, a deeper understanding of the sacred pacts, and the wisdom of the Skeleton Gatekeepers.]
+───────────────────────────────────────────────────
 
-```
-  \(•_•)/
-   (  (>   "SHIPPED IT"
-   /  \
-```
+*A sheet with a soul,
+A story to be told,
+In silicon, unfolds.*
+
+☂🦊🐢
+'''

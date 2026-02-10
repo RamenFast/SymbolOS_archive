@@ -1,4 +1,15 @@
 # ╔══════════════════════════════════════════════════════════════╗
+# ║  ⚔️  SYMBOLOS SCRIPT — mercer_status.py
+# ║  🎨 Color: 🟢 #228B22 (adaptability)
+# ╚══════════════════════════════════════════════════════════════╝
+#
+#        /\_/\
+#       ( o.o )  "A script a day keeps the drift away."
+#        > ^ <
+#       /|   |\
+#      (_|   |_)  — Rhy 🦊
+#
+# ╔══════════════════════════════════════════════════════════════╗
 # ║  🧬🔍☂️  MERCER STATUS — Python CLI                          ║
 # ║  "Show me proof, not potential." — 💀 Skeleton Gatekeeper    ║
 # ╚══════════════════════════════════════════════════════════════╝
@@ -250,3 +261,16 @@ if __name__ == "__main__":
 # "Always return to the meeting place.
 #  The map is steady. The hands are open."
 # ☂🗺✋😎
+
+#
+#    ___
+#   / 🐢 \    "this is fine"
+#  |  ._. |   — script complete
+#   \_____/   — umbrella held
+#    |   |
+#
+# loops run, scripts hum clean
+# the fox grins, the turtle nods
+# execute — breathe
+#
+# ☂🦊🐢

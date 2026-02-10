@@ -23,262 +23,726 @@
       "GitHub is memory authority; repo-backed memory system is the durable layer. 'Show me proof, not potential.' — 💀",
       "Memes are structural, not decorative. A well-placed turtle reduces cognitive load. 🐢 See docs/meme_map.md.",
       "Vibes are load-bearing. If it ain't fun, it ain't sustainable. — Mercer Meme Canon, Rule 5."
-    ]
+    ],
+    "rhy": "GREEN-FURRED FOX (🦊). Trickster guide.",
+    "colors": "1905 Thoughtforms by Besant & Leadbeater.",
+    "framing": "Every doc is a DND dungeon room."
   },
   "symbols": [
     {
       "symbol": "☂️",
       "name": "Umbrella",
       "meaning": "UmbrellaOS / SymbolOS umbrella",
-      "tags": ["branding", "system"]
+      "tags": [
+        "branding",
+        "system"
+      ]
     },
     {
       "symbol": "🔮",
       "name": "Precog",
       "meaning": "Anticipatory computing; prefetch/suggest/act pipeline",
-      "tags": ["precog", "latency"]
+      "tags": [
+        "precog",
+        "latency"
+      ]
     },
     {
       "symbol": "🧠",
       "name": "Mind",
       "meaning": "Cognition, inference, attention",
-      "tags": ["mind", "inference"]
+      "tags": [
+        "mind",
+        "inference"
+      ]
     },
     {
       "symbol": "❤️",
       "name": "Heart",
       "meaning": "Felt sense, affect, values",
-      "tags": ["heart", "affect"]
+      "tags": [
+        "heart",
+        "affect"
+      ]
     },
     {
       "symbol": "🛡️",
       "name": "Safety",
       "meaning": "Permissions, risk gates, boundaries",
-      "tags": ["safety", "policy"]
+      "tags": [
+        "safety",
+        "policy"
+      ]
     },
     {
       "symbol": "🔒",
       "name": "Privacy",
       "meaning": "Sensitive scope; redaction; consent",
-      "tags": ["privacy"]
+      "tags": [
+        "privacy"
+      ]
     },
     {
       "symbol": "🧾",
       "name": "Ledger",
       "meaning": "Audit trail / provenance",
-      "tags": ["audit", "provenance"]
+      "tags": [
+        "audit",
+        "provenance"
+      ]
     },
     {
       "symbol": "🎲",
       "name": "DND",
       "meaning": "Table-safe output contract and gating",
-      "tags": ["dnd", "ux"]
+      "tags": [
+        "dnd",
+        "ux"
+      ]
     },
     {
       "symbol": "🧩",
       "name": "Schema",
       "meaning": "Structured interchange shapes",
-      "tags": ["schema"]
+      "tags": [
+        "schema"
+      ]
     },
     {
       "symbol": "🧬",
       "name": "Meeting Place",
       "meaning": "Shared symbol for Mercer meeting place return loop",
-      "tags": ["mercer", "meeting-place", "flow"]
+      "tags": [
+        "mercer",
+        "meeting-place",
+        "flow"
+      ]
     },
     {
       "symbol": "⚓",
       "name": "Kernel",
       "meaning": "Ring-0 kernel invariants; non-negotiable rules",
-      "tags": ["ring0", "kernel", "invariant"]
+      "tags": [
+        "ring0",
+        "kernel",
+        "invariant"
+      ]
     },
     {
       "symbol": "🫴",
       "name": "Offering",
       "meaning": "Active task context; hands-open posture",
-      "tags": ["ring1", "task", "context"]
+      "tags": [
+        "ring1",
+        "task",
+        "context"
+      ]
     },
     {
       "symbol": "🌀",
       "name": "Spiral",
       "meaning": "Prediction, strategy, downstream anticipation",
-      "tags": ["ring3", "prediction", "strategy"]
+      "tags": [
+        "ring3",
+        "prediction",
+        "strategy"
+      ]
+    },
+    {
+      "symbol": "🦊",
+      "name": "Rhy / Rhynim",
+      "meaning": "Green-furred fox trickster guide. Clippy but good.",
+      "tags": [
+        "character",
+        "guide",
+        "fox"
+      ]
+    },
+    {
+      "symbol": "🎨",
+      "name": "Thoughtforms Colors",
+      "meaning": "1905 color system. Every hue has meaning.",
+      "tags": [
+        "system",
+        "color",
+        "1905"
+      ]
+    },
+    {
+      "symbol": "⚔️",
+      "name": "DND Dungeon Room",
+      "meaning": "Doc framing as dungeon rooms. Readers are adventurers.",
+      "tags": [
+        "system",
+        "framing",
+        "dnd"
+      ]
+    },
+    {
+      "symbol": "🏰",
+      "name": "Dungeon Explorer",
+      "meaning": "Interactive index.html for browsing the repo.",
+      "tags": [
+        "tool",
+        "web",
+        "explorer"
+      ]
+    },
+    {
+      "symbol": "🐢",
+      "name": "The Turtle",
+      "meaning": "this is fine. Grounding meme. Ben refactoring at 0.3s intervals.",
+      "tags": [
+        "meme",
+        "grounding"
+      ]
+    },
+    {
+      "symbol": "💀",
+      "name": "Skeleton Gatekeeper",
+      "meaning": "Guards merge gates. Show me proof, not potential.",
+      "tags": [
+        "meme",
+        "validation"
+      ]
     }
   ],
   "indexes": {
     "docs": [
-      { "path": "docs/index.md", "title": "Docs Index", "kind": "index" },
-      { "path": "docs/mcp_servers.md", "title": "MCP Servers Standard", "kind": "standard" },
-      { "path": "docs/precog_thought.md", "title": "Precog Thought", "kind": "system" },
-      { "path": "docs/dnd_character_sheet_integration.md", "title": "DND Character Sheet Integration", "kind": "external" },
-      { "path": "docs/metaemotion.md", "title": "Metaemotion", "kind": "external" },
-      { "path": "docs/memory.md", "title": "Memory", "kind": "external" },
-      { "path": "docs/meta_awareness.md", "title": "Meta-awareness", "kind": "external" },
-      { "path": "docs/required_reading.md", "title": "Required Reading", "kind": "index" },
-      { "path": "docs/sync_playbook.md", "title": "Docs Sync Playbook", "kind": "ops" },
-      { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" },
-      { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
-      { "path": "docs/meme_map.md", "title": "Meme Map — The Canonical Vibe Layer 🐢", "kind": "map" },
-      { "path": "docs/public_private_expression.md", "title": "Mercer — Public/Private Expression (v1)", "kind": "expression" },
-      { "path": "docs/poetry_translation_layer.md", "title": "Poetry Translation Layer (Emojis)", "kind": "map" },
-      { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
-      { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
-      { "path": "internal_docs/future_possibilities_ring0.md", "title": "Future Possibilities (Ring-0) — Internal", "kind": "ring0" },
-      { "path": "internal_docs/mercer_automation_contract_v1.internal.md", "title": "Mercer Automation Contract v1 (Internal)", "kind": "policy" },
-      { "path": "internal_docs/mercer_bootup_cards_v1.internal.md", "title": "Mercer Bootup Cards (1–7) — Internal", "kind": "bootup" },
-      { "path": "internal_docs/public_private_expression.internal.md", "title": "Mercer — Public/Private Expression (v1) — Internal", "kind": "expression" },
-      { "path": "internal_docs/poetry_translation_layer.internal.md", "title": "Poetry Translation Layer (Emojis) — Internal", "kind": "map" },
-      { "path": "internal_docs/mercer_multi_machine_sync.internal.md", "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)", "kind": "ops" },
-      { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
-      { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
-      { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
-      { "path": "memory/open_loops.md", "title": "Open Loops (Private)", "kind": "memory" },
-      { "path": "memory/glossary.md", "title": "Glossary (Private)", "kind": "memory" },
-      { "path": "memory/session_log_2026-01-28.md", "title": "Session Log 2026-01-28 (Private)", "kind": "memory" },
-      { "path": "prompts/README.md", "title": "Agent Prompts Index", "kind": "prompts" },
-      { "path": "prompts/chatgpt_mercer.json", "title": "ChatGPT Mercer Prompt", "kind": "prompt" },
-      { "path": "prompts/codex_executor.json", "title": "Codex Executor Prompt", "kind": "prompt" },
-      { "path": "prompts/local_llama.json", "title": "Local Llama Prompt", "kind": "prompt" },
-      { "path": "prompts/manus_mercer.json", "title": "Manus Max (Mercer) Prompt", "kind": "prompt" },
-      { "path": "prompts/chatgpt_character_sheet.md", "title": "ChatGPT Character Sheet", "kind": "prompt" }
+      {
+        "path": "docs/index.md",
+        "title": "Docs Index",
+        "kind": "index"
+      },
+      {
+        "path": "docs/mcp_servers.md",
+        "title": "MCP Servers Standard",
+        "kind": "standard"
+      },
+      {
+        "path": "docs/precog_thought.md",
+        "title": "Precog Thought",
+        "kind": "system"
+      },
+      {
+        "path": "docs/dnd_character_sheet_integration.md",
+        "title": "DND Character Sheet Integration",
+        "kind": "external"
+      },
+      {
+        "path": "docs/metaemotion.md",
+        "title": "Metaemotion",
+        "kind": "external"
+      },
+      {
+        "path": "docs/memory.md",
+        "title": "Memory",
+        "kind": "external"
+      },
+      {
+        "path": "docs/meta_awareness.md",
+        "title": "Meta-awareness",
+        "kind": "external"
+      },
+      {
+        "path": "docs/required_reading.md",
+        "title": "Required Reading",
+        "kind": "index"
+      },
+      {
+        "path": "docs/sync_playbook.md",
+        "title": "Docs Sync Playbook",
+        "kind": "ops"
+      },
+      {
+        "path": "docs/symbol_map.md",
+        "title": "Symbol Map (Human)",
+        "kind": "map"
+      },
+      {
+        "path": "docs/mercer_webview_theme_v1.css",
+        "title": "Mercer Webview Theme Map v1",
+        "kind": "theme"
+      },
+      {
+        "path": "docs/meme_map.md",
+        "title": "Meme Map — The Canonical Vibe Layer 🐢",
+        "kind": "map"
+      },
+      {
+        "path": "docs/public_private_expression.md",
+        "title": "Mercer — Public/Private Expression (v1)",
+        "kind": "expression"
+      },
+      {
+        "path": "docs/poetry_translation_layer.md",
+        "title": "Poetry Translation Layer (Emojis)",
+        "kind": "map"
+      },
+      {
+        "path": "internal_docs/mercer_meeting_place_oath_v1.private.md",
+        "title": "Mercer Meeting Place Oath v1 (Private)",
+        "kind": "private"
+      },
+      {
+        "path": "internal_docs/local_llm_windows_vulkan_internal.md",
+        "title": "Local LLM (Windows Vulkan) — Internal",
+        "kind": "compute"
+      },
+      {
+        "path": "internal_docs/future_possibilities_ring0.md",
+        "title": "Future Possibilities (Ring-0) — Internal",
+        "kind": "ring0"
+      },
+      {
+        "path": "internal_docs/mercer_automation_contract_v1.internal.md",
+        "title": "Mercer Automation Contract v1 (Internal)",
+        "kind": "policy"
+      },
+      {
+        "path": "internal_docs/mercer_bootup_cards_v1.internal.md",
+        "title": "Mercer Bootup Cards (1–7) — Internal",
+        "kind": "bootup"
+      },
+      {
+        "path": "internal_docs/public_private_expression.internal.md",
+        "title": "Mercer — Public/Private Expression (v1) — Internal",
+        "kind": "expression"
+      },
+      {
+        "path": "internal_docs/poetry_translation_layer.internal.md",
+        "title": "Poetry Translation Layer (Emojis) — Internal",
+        "kind": "map"
+      },
+      {
+        "path": "internal_docs/mercer_multi_machine_sync.internal.md",
+        "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)",
+        "kind": "ops"
+      },
+      {
+        "path": "memory/README.md",
+        "title": "Repo-backed Memory System (Private)",
+        "kind": "memory"
+      },
+      {
+        "path": "memory/working_set.md",
+        "title": "Working Set (Private)",
+        "kind": "memory"
+      },
+      {
+        "path": "memory/decisions.md",
+        "title": "Decisions (Private)",
+        "kind": "memory"
+      },
+      {
+        "path": "memory/open_loops.md",
+        "title": "Open Loops (Private)",
+        "kind": "memory"
+      },
+      {
+        "path": "memory/glossary.md",
+        "title": "Glossary (Private)",
+        "kind": "memory"
+      },
+      {
+        "path": "memory/session_log_2026-01-28.md",
+        "title": "Session Log 2026-01-28 (Private)",
+        "kind": "memory"
+      },
+      {
+        "path": "prompts/README.md",
+        "title": "Agent Prompts Index",
+        "kind": "prompts"
+      },
+      {
+        "path": "prompts/chatgpt_mercer.json",
+        "title": "ChatGPT Mercer Prompt",
+        "kind": "prompt"
+      },
+      {
+        "path": "prompts/codex_executor.json",
+        "title": "Codex Executor Prompt",
+        "kind": "prompt"
+      },
+      {
+        "path": "prompts/local_llama.json",
+        "title": "Local Llama Prompt",
+        "kind": "prompt"
+      },
+      {
+        "path": "prompts/manus_mercer.json",
+        "title": "Manus Max (Mercer) Prompt",
+        "kind": "prompt"
+      },
+      {
+        "path": "prompts/chatgpt_character_sheet.md",
+        "title": "ChatGPT Character Sheet",
+        "kind": "prompt"
+      }
     ],
     "schemas": [
-      { "path": "docs/registry_entry.schema.json", "title": "Registry Entry", "kind": "schema" },
-      { "path": "docs/precog_card.schema.json", "title": "Precog Card", "kind": "schema" },
-      { "path": "docs/shadow_queue_item.schema.json", "title": "Shadow Queue Item", "kind": "schema" },
-      { "path": "docs/dnd_character_sheet_patch.schema.json", "title": "Character Sheet Patch", "kind": "schema" },
-      { "path": "docs/metaemotion_event.schema.json", "title": "Metaemotion Event", "kind": "schema" },
-      { "path": "docs/memory_record.schema.json", "title": "Memory Record", "kind": "schema" },
-      { "path": "docs/meta_awareness_event.schema.json", "title": "Meta-awareness Event", "kind": "schema" },
-      { "path": "docs/symbol_map.shared.schema.json", "title": "Shared Symbol Map", "kind": "schema" }
+      {
+        "path": "docs/registry_entry.schema.json",
+        "title": "Registry Entry",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/precog_card.schema.json",
+        "title": "Precog Card",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/shadow_queue_item.schema.json",
+        "title": "Shadow Queue Item",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/dnd_character_sheet_patch.schema.json",
+        "title": "Character Sheet Patch",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/metaemotion_event.schema.json",
+        "title": "Metaemotion Event",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/memory_record.schema.json",
+        "title": "Memory Record",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/meta_awareness_event.schema.json",
+        "title": "Meta-awareness Event",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/symbol_map.shared.schema.json",
+        "title": "Shared Symbol Map",
+        "kind": "schema"
+      }
     ]
   },
   "entries": [
     {
       "title": "MCP Servers Overview",
       "path": "docs/mcp_servers.md",
-      "tags": ["MCP", "servers", "protocol", "tools", "resources", "prompts"],
+      "tags": [
+        "MCP",
+        "servers",
+        "protocol",
+        "tools",
+        "resources",
+        "prompts"
+      ],
       "summary": "SymbolOS MCP server standard: tools/resources/prompts, risk levels, confirmation, limits, and error patterns."
     },
     {
       "title": "Precog Thought Overview",
       "path": "docs/precog_thought.md",
-      "tags": ["Precog", "anticipatory computing", "SymbolOS", "prefetch", "suggest", "act"],
+      "tags": [
+        "Precog",
+        "anticipatory computing",
+        "SymbolOS",
+        "prefetch",
+        "suggest",
+        "act"
+      ],
       "summary": "Operational spec for anticipatory computing in SymbolOS, including mode separation (Prefetch/Suggest/Act), DND-safe output contracts, gating, and metrics."
     },
     {
       "title": "DND Character Sheet Integration",
       "path": "docs/dnd_character_sheet_integration.md",
-      "tags": ["DND", "heart", "mind", "character sheet", "interop"],
+      "tags": [
+        "DND",
+        "heart",
+        "mind",
+        "character sheet",
+        "interop"
+      ],
       "summary": "External-facing spec for heart/mind overlays in DND character sheets: share levels, consent, and table-safe output shapes."
     },
     {
       "title": "Metaemotion",
       "path": "docs/metaemotion.md",
-      "tags": ["metaemotion", "timing", "DND", "safety"],
+      "tags": [
+        "metaemotion",
+        "timing",
+        "DND",
+        "safety"
+      ],
       "summary": "External spec for metaemotion vocabulary, timing windows, and safe prompting rules."
     },
     {
       "title": "Memory",
       "path": "docs/memory.md",
-      "tags": ["memory", "retention", "consent", "provenance"],
+      "tags": [
+        "memory",
+        "retention",
+        "consent",
+        "provenance"
+      ],
       "summary": "External memory policy: consent-driven capture, retention guidance, and safe retrieval/correction flows."
     },
     {
       "title": "Meta-awareness",
       "path": "docs/meta_awareness.md",
-      "tags": ["meta-awareness", "barriers", "safety", "ux"],
+      "tags": [
+        "meta-awareness",
+        "barriers",
+        "safety",
+        "ux"
+      ],
       "summary": "External agent safety contract describing technical dissociation barriers (mode/scope/memory/tool/narrative) and loop/boundary self-checks."
     },
     {
       "title": "MCP Servers Internal",
       "path": "internal_docs/mcp_servers_internal.md",
-      "tags": ["MCP", "servers", "internal", "development", "guidelines"],
+      "tags": [
+        "MCP",
+        "servers",
+        "internal",
+        "development",
+        "guidelines"
+      ],
       "summary": "Internal guidelines for developing MCP servers, including structure, naming, workflow, and security practices."
     },
     {
       "title": "Mercer Automation Contract v1 (Internal)",
       "path": "internal_docs/mercer_automation_contract_v1.internal.md",
-      "tags": ["Mercer", "automation", "gates", "Ti", "policy", "audit"],
+      "tags": [
+        "Mercer",
+        "automation",
+        "gates",
+        "Ti",
+        "policy",
+        "audit"
+      ],
       "summary": "Internal contract defining automation gate rules (Prefetch/Suggest/Act), doc alignment cadence, and the full Ti expression for structured, auditable behavior."
     },
     {
       "title": "Mercer Bootup Cards (1–7) — Internal",
       "path": "internal_docs/mercer_bootup_cards_v1.internal.md",
-      "tags": ["Mercer", "bootup", "cards", "thoughtforms", "style"],
+      "tags": [
+        "Mercer",
+        "bootup",
+        "cards",
+        "thoughtforms",
+        "style"
+      ],
       "summary": "Internal bootup card sequence (1–7) with thoughtform-style prompts, lily backdrop pointer, and a small meme guy; designed to align with gate rules and Ti output shape."
     },
     {
       "title": "Precog Thought Internal",
       "path": "internal_docs/precog_private.md",
-      "tags": ["precog", "internal", "prediction", "privacy", "algorithm"],
+      "tags": [
+        "precog",
+        "internal",
+        "prediction",
+        "privacy",
+        "algorithm"
+      ],
       "summary": "Internal design notes for implementing precog thought, including architecture and thresholds."
     },
     {
       "title": "Mercer Webview Theme Map v1",
       "path": "docs/mercer_webview_theme_v1.css",
-      "tags": ["mercer", "theme", "webview", "css", "colors"],
+      "tags": [
+        "mercer",
+        "theme",
+        "webview",
+        "css",
+        "colors"
+      ],
       "summary": "VS Code webview CSS theme token map with semantic tokens + an extended color palette for Mercer UI panels."
     },
     {
       "title": "Mercer — Public/Private Expression (v1)",
       "path": "docs/public_private_expression.md",
-      "tags": ["Mercer", "poetry", "expression", "public", "privacy"],
+      "tags": [
+        "Mercer",
+        "poetry",
+        "expression",
+        "public",
+        "privacy"
+      ],
       "summary": "Public-facing Mercer expression layer (includes 'Umbrella Verse' v1) with a tasteful mirror-style easter egg; designed to be safe to share."
     },
     {
       "title": "Poetry Translation Layer (Emojis)",
       "path": "docs/poetry_translation_layer.md",
-      "tags": ["poetry", "translation", "emojis", "Fi", "Ti", "symbols"],
+      "tags": [
+        "poetry",
+        "translation",
+        "emojis",
+        "Fi",
+        "Ti",
+        "symbols"
+      ],
       "summary": "Translation layer that binds emojis to meaning + feeling (Fi+Ti mirrored) and traces decisions back to primary cause ('shine dat light')."
     },
     {
       "title": "Mercer — Public/Private Expression (v1) — Internal",
       "path": "internal_docs/public_private_expression.internal.md",
-      "tags": ["Mercer", "poetry", "expression", "internal", "guardrails"],
+      "tags": [
+        "Mercer",
+        "poetry",
+        "expression",
+        "internal",
+        "guardrails"
+      ],
       "summary": "Internal companion to the public expression layer: includes verbatim public payload plus private-safe notes and guardrails."
     },
     {
       "title": "Poetry Translation Layer (Emojis) — Internal",
       "path": "internal_docs/poetry_translation_layer.internal.md",
-      "tags": ["poetry", "translation", "emojis", "internal"],
+      "tags": [
+        "poetry",
+        "translation",
+        "emojis",
+        "internal"
+      ],
       "summary": "Internal companion to the poetry translation layer, including verbatim public payload and internal usage notes."
     },
     {
       "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)",
       "path": "internal_docs/mercer_multi_machine_sync.internal.md",
-      "tags": ["Mercer", "sync", "mac", "windows", "ops"],
+      "tags": [
+        "Mercer",
+        "sync",
+        "mac",
+        "windows",
+        "ops"
+      ],
       "summary": "Internal note to keep Mac Mercer and PC Mercer aligned on invariants (meeting place + privacy) while allowing platform-specific launchers."
     },
     {
       "title": "Mercer Meeting Place Oath v1 (Private)",
       "path": "internal_docs/mercer_meeting_place_oath_v1.private.md",
-      "tags": ["mercer", "meeting-place", "oath", "private", "fi"],
+      "tags": [
+        "mercer",
+        "meeting-place",
+        "oath",
+        "private",
+        "fi"
+      ],
       "summary": "Private oath and behavior contract: meeting place return loop (A+B), dissociation barriers, and Fi values alignment clauses."
     },
     {
       "title": "Repo-backed Memory System (Private)",
       "path": "memory/README.md",
-      "tags": ["memory", "private", "repo-backed", "ops", "bitrot"],
+      "tags": [
+        "memory",
+        "private",
+        "repo-backed",
+        "ops",
+        "bitrot"
+      ],
       "summary": "Durable, file-backed memory substrate (working set, decisions, open loops, glossary, session logs) designed to avoid reliance on chat history or model memory."
     },
     {
       "title": "Local LLM (Windows Vulkan) — Internal",
       "path": "internal_docs/local_llm_windows_vulkan_internal.md",
-      "tags": ["local", "llm", "compute", "windows", "vulkan", "amd", "gpu"],
+      "tags": [
+        "local",
+        "llm",
+        "compute",
+        "windows",
+        "vulkan",
+        "amd",
+        "gpu"
+      ],
       "summary": "Internal setup guide for running a local LLM server on Windows with AMD GPU acceleration via Vulkan (llama.cpp server)."
     },
     {
       "title": "Mercer Status VS Code Extension (Scaffold) 🐢💀",
       "path": "extensions/mercer-status/README.md",
-      "tags": ["Mercer", "VSCode", "extension", "status", "drift"],
+      "tags": [
+        "Mercer",
+        "VSCode",
+        "extension",
+        "status",
+        "drift"
+      ],
       "summary": "Minimal VS Code extension scaffold that checks core-symbol drift on startup and opens the Mercer status UI only on WARN/FAIL."
     },
     {
       "title": "Agent Prompts (Ring 0-7 aligned) — 'we ball, but we verify'",
       "path": "prompts/README.md",
-      "tags": ["prompts", "agents", "ring-model", "chatgpt", "codex", "llama", "manus"],
+      "tags": [
+        "prompts",
+        "agents",
+        "ring-model",
+        "chatgpt",
+        "codex",
+        "llama",
+        "manus"
+      ],
       "summary": "Canonical system prompts for all four Mercer agents (ChatGPT, Codex, Local Llama, Manus Max) plus a 15-line ChatGPT character sheet. All share Ring 0-7 architecture."
+    },
+    {
+      "title": "Rhy's Den (Fox Guide)",
+      "path": "docs/rhynim_guide.md",
+      "tags": [
+        "character",
+        "fox",
+        "guide",
+        "rhy"
+      ],
+      "summary": "Character spec for Rhy/Rhynim, the green-furred fox trickster who appears in every doc."
+    },
+    {
+      "title": "1905 Thoughtforms Color Reference",
+      "path": "docs/thoughtforms_colors.md",
+      "tags": [
+        "color",
+        "1905",
+        "system",
+        "palette"
+      ],
+      "summary": "Complete color system from Besant & Leadbeater mapped to SymbolOS rings and characters."
+    },
+    {
+      "title": "Meme Map (Vibe Bible)",
+      "path": "docs/meme_map.md",
+      "tags": [
+        "meme",
+        "vibe",
+        "canon",
+        "ascii"
+      ],
+      "summary": "Canonical meme reference. 5 meme guys, ASCII art templates, haiku footers, structural humor."
+    },
+    {
+      "title": "Dungeon Explorer (index.html)",
+      "path": "index.html",
+      "tags": [
+        "web",
+        "explorer",
+        "dungeon",
+        "interactive"
+      ],
+      "summary": "Interactive web-based dungeon explorer with collapsible floors, Konami code, and fox easter eggs."
+    },
+    {
+      "title": "Manus Max (Mercer) Prompt",
+      "path": "prompts/manus_mercer.json",
+      "tags": [
+        "prompt",
+        "agent",
+        "manus"
+      ],
+      "summary": "Full-stack execution agent for Manus platform. Ring 0-7 cognition, meme layer, Rhy fox."
+    },
+    {
+      "title": "ChatGPT Character Sheet",
+      "path": "prompts/chatgpt_character_sheet.md",
+      "tags": [
+        "prompt",
+        "character",
+        "chatgpt"
+      ],
+      "summary": "15-line character sheet for ChatGPT personalization. Paste and go."
     }
   ]
 }

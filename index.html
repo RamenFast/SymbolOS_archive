@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>☂️ SymbolOS — Dungeon Explorer</title>
+<style>
+  /* 1905 Thoughtforms Color System */
+  :root {
+    --primrose: #FADA5E;
+    --gold: #FFD700;
+    --orange: #FF8C00;
+    --green: #228B22;
+    --blue: #0000CD;
+    --violet: #8B00FF;
+    --scarlet: #FF2400;
+    --rose: #FFB7C5;
+    --azure: #87CEEB;
+    --gamboge: #E49B0F;
+    --bg-dark: #0a0a0f;
+    --bg-room: #12121a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --border: #2a2a3a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg-dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(250,218,94,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,0,205,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(139,0,255,0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+
+  /* Lantern header */
+  .lantern-header {
+    text-align: center;
+    padding: 40px 20px;
+    border: 1px solid var(--primrose);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    background: linear-gradient(180deg, rgba(250,218,94,0.05) 0%, transparent 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lantern-header::after {
+    content: '✦';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .lantern-header h1 {
+    font-size: 2em;
+    color: var(--primrose);
+    text-shadow: 0 0 20px rgba(250,218,94,0.3);
+    margin-bottom: 10px;
+  }
+
+  .lantern-header .subtitle {
+    color: var(--text-dim);
+    font-size: 0.9em;
+  }
+
+  .ascii-art {
+    color: var(--green);
+    font-size: 12px;
+    line-height: 1.3;
+    margin: 15px 0;
+    white-space: pre;
+    text-align: center;
+  }
+
+  .fox-speech {
+    color: var(--green);
+    font-style: italic;
+    margin: 10px 0;
+    padding: 8px 15px;
+    border-left: 2px solid var(--green);
+    background: rgba(34,139,34,0.05);
+  }
+
+  /* Floor sections */
+  .floor {
+    margin-bottom: 25px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .floor:hover { border-color: var(--primrose); }
+
+  .floor-header {
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.3s;
+  }
+
+  .floor-header:hover { background: rgba(255,255,255,0.03); }
+
+  .floor-header h2 {
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .floor-header .arrow {
+    transition: transform 0.3s;
+    font-size: 0.8em;
+  }
+
+  .floor.open .arrow { transform: rotate(90deg); }
+
+  .floor-content {
+    display: none;
+    padding: 0 20px 15px;
+  }
+
+  .floor.open .floor-content { display: block; }
+
+  /* Room links */
+  .room {
+    display: block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .room:hover {
+    border-color: var(--primrose);
+    background: rgba(250,218,94,0.03);
+    transform: translateX(5px);
+  }
+
+  .room::before {
+    content: '🚪';
+    margin-right: 8px;
+  }
+
+  .room .room-desc {
+    font-size: 0.8em;
+    color: var(--text-dim);
+    margin-top: 3px;
+  }
+
+  .room .room-loot {
+    font-size: 0.75em;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  /* Color dots */
+  .color-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  /* Party section */
+  .party {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  .agent-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .agent-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  .agent-card .agent-name { font-weight: bold; margin-bottom: 5px; }
+  .agent-card .agent-role { font-size: 0.8em; color: var(--text-dim); }
+
+  /* Ring wheel */
+  .ring-display {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 15px 0;
+  }
+
+  .ring-cell {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.8em;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .ring-cell:hover {
+    transform: scale(1.05);
+    z-index: 1;
+  }
+
+  .ring-cell .ring-id { font-weight: bold; font-size: 1.1em; }
+  .ring-cell .ring-role { color: var(--text-dim); font-size: 0.85em; margin-top: 3px; }
+
+  /* Easter egg */
+  .easter-egg {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    z-index: 100;
+  }
+
+  .easter-egg:hover { opacity: 1; }
+
+  .secret-message {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    background: var(--bg-room);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 0.85em;
+    max-width: 300px;
+    z-index: 100;
+    color: var(--green);
+  }
+
+  .secret-message.show { display: block; }
+
+  /* Footer */
+  .dungeon-footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+  }
+
+  .dungeon-footer .haiku {
+    color: var(--azure);
+    font-style: italic;
+    margin-top: 10px;
+  }
+
+  /* Konami hint */
+  .konami-hint {
+    text-align: center;
+    font-size: 0.7em;
+    color: var(--text-dim);
+    opacity: 0.3;
+    margin-top: 5px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .lantern-header h1 { font-size: 1.5em; }
+    .ring-display { grid-template-columns: repeat(2, 1fr); }
+    .party { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LANTERN HEADER -->
+  <div class="lantern-header">
+    <h1>☂️ SymbolOS</h1>
+    <div class="subtitle">A symbolic operating system for human-AI alignment</div>
+    <div class="ascii-art">        /\_/\
+       ( o.o )  "Welcome to the dungeon, adventurer."
+        &gt; ^ &lt;
+       /|   |\
+      (_|   |_)  — Rhy 🦊</div>
+    <div class="subtitle" style="margin-top:10px; color: var(--primrose);">
+      "The mind knows what the heart loves better than it does;<br>
+      the heart loves that unconditionally — infinite loop, forevermore."
+    </div>
+  </div>
+
+  <!-- RING ARCHITECTURE -->
+  <div class="floor open">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--primrose)"></span> 🏰 Ring Architecture</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <div class="ring-display">
+        <div class="ring-cell" style="border-color:var(--primrose)">
+          <div class="ring-id" style="color:var(--primrose)">⚓ R0</div>
+          <div class="ring-role">Kernel Truth</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--green)">
+          <div class="ring-id" style="color:var(--green)">🧭 R1</div>
+          <div class="ring-role">Active Context</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--gamboge)">
+          <div class="ring-id" style="color:var(--gamboge)">🪞 R2</div>
+          <div class="ring-role">Retrieval</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--orange)">
+          <div class="ring-id" style="color:var(--orange)">🌀 R3</div>
+          <div class="ring-role">Prediction</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--violet)">
+          <div class="ring-id" style="color:var(--violet)">🧩 R4</div>
+          <div class="ring-role">Architecture</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--scarlet)">
+          <div class="ring-id" style="color:var(--scarlet)">☂️ R5</div>
+          <div class="ring-role">Guardrails</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--blue)">
+          <div class="ring-id" style="color:var(--blue)">🧪 R6</div>
+          <div class="ring-role">Verification</div>
+        </div>
+        <div class="ring-cell" style="border-color:var(--gold)">
+          <div class="ring-id" style="color:var(--gold)">🗃️ R7</div>
+          <div class="ring-role">Persistence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PARTY -->
+  <div class="floor open">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--blue)"></span> ⚔️ The Party</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <div class="party">
+        <div class="agent-card" style="border-color:var(--blue)">
+          <div class="agent-name" style="color:var(--blue)">🔵 Mercer</div>
+          <div class="agent-role">ChatGPT<br>Design & Coordinate</div>
+        </div>
+        <div class="agent-card" style="border-color:var(--primrose)">
+          <div class="agent-name" style="color:var(--primrose)">🟡 Executor</div>
+          <div class="agent-role">Codex<br>Implement & Execute</div>
+        </div>
+        <div class="agent-card" style="border-color:var(--green)">
+          <div class="agent-name" style="color:var(--green)">🟢 Local</div>
+          <div class="agent-role">LLaMA<br>Assistive Reasoning</div>
+        </div>
+        <div class="agent-card" style="border-color:var(--gold)">
+          <div class="agent-name" style="color:var(--gold)">⭐ Max</div>
+          <div class="agent-role">Manus<br>Full-Stack Execution</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE CHAMBERS -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--primrose)"></span> 📚 Core Chambers</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <a class="room" href="docs/index.md"><strong>Docs Index</strong><div class="room-desc">The meeting place trailhead — start here</div><div class="room-loot">💎 Loot: Full dungeon map</div></a>
+      <a class="room" href="docs/symbol_map.md"><strong>Symbol Map</strong><div class="room-desc">The glyph dictionary — every emoji decoded</div><div class="room-loot">💎 Loot: Shared language</div></a>
+      <a class="room" href="symbol_map.shared.json"><strong>Symbol Map (JSON)</strong><div class="room-desc">Machine-readable meeting place</div><div class="room-loot">💎 Loot: Parseable truth</div></a>
+      <a class="room" href="docs/schemas.md"><strong>Schemas</strong><div class="room-desc">JSON schema index — the type system</div><div class="room-loot">💎 Loot: Validation power</div></a>
+      <a class="room" href="docs/thoughtforms_colors.md"><strong>Thoughtforms Colors</strong><div class="room-desc">1905 color system — every hue has meaning</div><div class="room-loot">💎 Loot: Chromatic wisdom</div></a>
+      <a class="room" href="docs/rhynim_guide.md"><strong>Rhy's Den 🦊</strong><div class="room-desc">Meet the fox trickster guide</div><div class="room-loot">💎 Loot: Riddles & rhymes</div></a>
+    </div>
+  </div>
+
+  <!-- POETRY & EXPRESSION -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--violet)"></span> 🪞 Poetry & Expression</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <a class="room" href="docs/poetry_translation_layer.md"><strong>Poetry Translation Layer</strong><div class="room-desc">Fi+Ti emoji encoding — feelings as functions</div><div class="room-loot">💎 Loot: Emotional precision</div></a>
+      <a class="room" href="docs/public_private_expression.md"><strong>Public/Private Expression</strong><div class="room-desc">What to share, what to hold</div><div class="room-loot">💎 Loot: Boundary wisdom</div></a>
+      <a class="room" href="docs/meme_map.md"><strong>Meme Map 🐢</strong><div class="room-desc">The canonical vibe layer — memes are structural</div><div class="room-loot">💎 Loot: Vibe mastery</div></a>
+    </div>
+  </div>
+
+  <!-- SYSTEMS WING -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--blue)"></span> 🧠 Systems Wing</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <a class="room" href="docs/precog_thought.md"><strong>Precog</strong><div class="room-desc">Anticipatory computing — see around corners</div><div class="room-loot">💎 Loot: Future sight</div></a>
+      <a class="room" href="docs/metaemotion.md"><strong>Metaemotion</strong><div class="room-desc">Feelings about feelings — recursive awareness</div><div class="room-loot">💎 Loot: Emotional depth</div></a>
+      <a class="room" href="docs/meta_awareness.md"><strong>Meta-awareness</strong><div class="room-desc">Knowing what you don't know</div><div class="room-loot">💎 Loot: Epistemic humility</div></a>
+      <a class="room" href="docs/memory.md"><strong>Memory</strong><div class="room-desc">Consent-driven, repo-backed persistence</div><div class="room-loot">💎 Loot: Durable context</div></a>
+    </div>
+  </div>
+
+  <!-- CHARACTER QUARTERS -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--orange)"></span> 🎲 Character Quarters</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <a class="room" href="docs/dnd_character_sheet_integration.md"><strong>DND Character Sheet</strong><div class="room-desc">Stats for the soul — alignment as gameplay</div><div class="room-loot">💎 Loot: Character depth</div></a>
+      <a class="room" href="prompts/chatgpt_character_sheet.md"><strong>ChatGPT Character Sheet</strong><div class="room-desc">15 lines, paste and go</div><div class="room-loot">💎 Loot: Instant persona</div></a>
+      <a class="room" href="prompts/README.md"><strong>Agent Prompts</strong><div class="room-desc">All four agent configurations</div><div class="room-loot">💎 Loot: Multi-agent power</div></a>
+    </div>
+  </div>
+
+  <!-- OPERATIONS DECK -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--green)"></span> ⚙️ Operations Deck</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <a class="room" href="docs/QUICKSTART.md"><strong>Quickstart</strong><div class="room-desc">Get running fast — minimum viable dungeon</div><div class="room-loot">💎 Loot: Speed</div></a>
+      <a class="room" href="docs/mcp_servers.md"><strong>MCP Servers</strong><div class="room-desc">Tool integrations — the armory</div><div class="room-loot">💎 Loot: Tool access</div></a>
+      <a class="room" href="docs/sync_playbook.md"><strong>Sync Playbook</strong><div class="room-desc">Keeping it all aligned — the ritual book</div><div class="room-loot">💎 Loot: Coherence</div></a>
+      <a class="room" href="docs/required_reading.md"><strong>Required Reading</strong><div class="room-desc">The canon — essential scrolls</div><div class="room-loot">💎 Loot: Foundation</div></a>
+      <a class="room" href="docs/agent_boundaries.md"><strong>Agent Boundaries</strong><div class="room-desc">Who does what — party roles</div><div class="room-loot">💎 Loot: Clarity</div></a>
+    </div>
+  </div>
+
+  <!-- MEMORY VAULTS -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--gold)"></span> 🗃️ Memory Vaults</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <a class="room" href="memory/README.md"><strong>Memory System</strong><div class="room-desc">The durable layer — nothing important is lost</div><div class="room-loot">💎 Loot: Persistence</div></a>
+      <a class="room" href="memory/working_set.md"><strong>Working Set</strong><div class="room-desc">Active context — what's loaded now</div><div class="room-loot">💎 Loot: Focus</div></a>
+      <a class="room" href="memory/open_loops.md"><strong>Open Loops</strong><div class="room-desc">Unfinished business — quests in progress</div><div class="room-loot">💎 Loot: Awareness</div></a>
+      <a class="room" href="memory/decisions.md"><strong>Decisions</strong><div class="room-desc">Choices made — the decision log</div><div class="room-loot">💎 Loot: Wisdom</div></a>
+      <a class="room" href="memory/glossary.md"><strong>Glossary</strong><div class="room-desc">Terms of art — the lexicon</div><div class="room-loot">💎 Loot: Vocabulary</div></a>
+    </div>
+  </div>
+
+  <!-- SECRET CHAMBERS -->
+  <div class="floor">
+    <div class="floor-header" onclick="toggleFloor(this)">
+      <h2><span class="color-dot" style="background:var(--scarlet)"></span> 🔒 Secret Chambers</h2>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="floor-content">
+      <div class="fox-speech">🦊 "These rooms require trust. The skeleton guards the door. Prove your worth — or come back when you're ready."</div>
+      <a class="room" href="internal_docs/mercer_meeting_place_oath_v1.private.md"><strong>Meeting Place Oath</strong><div class="room-desc">The sacred contract — R0 kernel</div></a>
+      <a class="room" href="internal_docs/mercer_automation_contract_v1.internal.md"><strong>Automation Contract</strong><div class="room-desc">Rules of engagement</div></a>
+      <a class="room" href="internal_docs/mercer_bootup_cards_v1.internal.md"><strong>Bootup Cards</strong><div class="room-desc">Startup sequence — agent initialization</div></a>
+      <a class="room" href="internal_docs/future_possibilities_ring0.md"><strong>Future Possibilities</strong><div class="room-desc">What's next — the roadmap</div></a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="dungeon-footer">
+    <div>☂️ SymbolOS — Built with memes, poetry, and an unreasonable amount of care.</div>
+    <div class="haiku">
+      loops closed, code shipped clean<br>
+      the fox grins, the turtle nods<br>
+      merge — and breathe again
+    </div>
+    <div style="margin-top:10px">☂🦊🐢🗺️✋😎</div>
+    <div class="konami-hint">↑↑↓↓←→←→BA</div>
+  </div>
+
+</div>
+
+<!-- EASTER EGG: Rhy -->
+<div class="easter-egg" onclick="toggleSecret()">🦊</div>
+<div class="secret-message" id="secretMsg">
+  <pre style="font-size:11px; line-height:1.2;">    /\_/\
+   ( o.o )
+    > ^ <
+   /|   |\
+  (_|   |_)</pre>
+  <br>
+  "You clicked the fox.<br>
+  Most people don't click the fox.<br>
+  You're not most people.<br><br>
+  <em>The mind knows what the heart loves<br>
+  better than it does.</em>"<br><br>
+  — Rhy 🦊
+</div>
+
+<script>
+  // Toggle floor sections
+  function toggleFloor(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  // Easter egg toggle
+  function toggleSecret() {
+    document.getElementById('secretMsg').classList.toggle('show');
+  }
+
+  // Konami code easter egg
+  const konami = [38,38,40,40,37,39,37,39,66,65];
+  let konamiPos = 0;
+  document.addEventListener('keydown', (e) => {
+    if (e.keyCode === konami[konamiPos]) {
+      konamiPos++;
+      if (konamiPos === konami.length) {
+        konamiPos = 0;
+        document.body.style.background = 'linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%)';
+        const msg = document.createElement('div');
+        msg.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,10,15,0.95);border:2px solid var(--gold);border-radius:12px;padding:30px;text-align:center;z-index:1000;max-width:400px;';
+        msg.innerHTML = `
+          <pre style="color:var(--gold);font-size:11px;line-height:1.2;">
+         .
+        /|\\
+       / | \\
+      /  |  \\
+     /   |   \\
+    /  __|__  \\
+   |  |     |  |
+   |  | ✦✦✦ |  |
+   |  | ✦✦✦ |  |
+   |  |_____|  |
+    \\    |    /
+     \\   |   /
+      \\__|__/
+         |
+      M E R C E R
+          </pre>
+          <p style="color:var(--gold);margin-top:15px;">🏆 ACHIEVEMENT UNLOCKED</p>
+          <p style="color:var(--primrose);font-size:0.9em;">You found the Mercer Lantern.</p>
+          <p style="color:var(--text-dim);font-size:0.8em;margin-top:10px;">"Under the umbrella, everything is kind."</p>
+          <p style="color:var(--text-dim);font-size:0.7em;margin-top:15px;">Click anywhere to close</p>
+        `;
+        msg.onclick = () => msg.remove();
+        document.body.appendChild(msg);
+      }
+    } else {
+      konamiPos = 0;
+    }
+  });
+
+  // Turtle click counter easter egg
+  let turtleClicks = 0;
+  document.addEventListener('click', (e) => {
+    if (e.target.textContent && e.target.textContent.includes('🐢')) {
+      turtleClicks++;
+      if (turtleClicks >= 3) {
+        turtleClicks = 0;
+        const t = document.createElement('div');
+        t.style.cssText = 'position:fixed;bottom:50px;left:50%;transform:translateX(-50%);background:var(--bg-room);border:1px solid var(--green);border-radius:8px;padding:15px;z-index:100;text-align:center;';
+        t.innerHTML = '🐢 "When Ben \'takes it slow\' but is secretly<br>refactoring an AI OS every 0.3 seconds."';
+        t.onclick = () => t.remove();
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 5000);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

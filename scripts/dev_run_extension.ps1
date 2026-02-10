@@ -1,3 +1,14 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  ⚔️  SYMBOLOS SCRIPT — dev_run_extension.ps1
+# ║  🎨 Color: 🟢 #228B22 (adaptability)
+# ╚══════════════════════════════════════════════════════════════╝
+#
+#        /\_/\
+#       ( o.o )  "PowerShell? More like PowerSpell. ✨"
+#        > ^ <
+#       /|   |\
+#      (_|   |_)  — Rhy 🦊
+#
 param(
   [string]$WorkspacePath = $PSScriptRoot + '\..',
   [string]$ExtensionPath = $PSScriptRoot + '\..\extensions\mercer-status'
@@ -37,3 +48,16 @@ Write-Host "Extension: $ext"
 Write-Host "Launching: $code" 
 
 & $code --extensionDevelopmentPath "$ext" "$workspace"
+
+#
+#    ___
+#   / 🐢 \    "this is fine"
+#  |  ._. |   — script complete
+#   \_____/   — umbrella held
+#    |   |
+#
+# loops run, scripts hum clean
+# the fox grins, the turtle nods
+# execute — breathe
+#
+# ☂🦊🐢

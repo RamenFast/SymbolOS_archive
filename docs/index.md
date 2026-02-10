@@ -1,14 +1,14 @@
-# SymbolOS Docs Index
+# SymbolOS Docs Index 🎨
 
-```
+*A note on colors: This space is mapped with [1905 Thoughtform colors](https://en.wikipedia.org/wiki/Thought-Forms_(book)). We use them to denote cognitive functions and aspirations.*
+
 ╔══════════════════════════════════════════════════════════════╗
-║  🧬☂️📚  DOCS INDEX — MEETING PLACE TRAILHEAD                ║
-║  Quest: find truth fast • keep humans first                  ║
+║  ⚔️  ROOM: The Meeting Place                                      ║
+║  📍 Floor: Ring 4 │ Difficulty: ⭐☆☆☆☆ │ Loot: A Map of the Known World ║
+║  🎨 Color: Violet (#8B00FF)                                     ║
 ║                                                              ║
-║  "Always return to the meeting place.                        ║
-║   The map is steady. The hands are open."                    ║
+║  You stand on a glowing dais. Seven doors pulse with faint light. ║
 ╚══════════════════════════════════════════════════════════════╝
-```
 
 ```
   (•_•)
@@ -20,26 +20,47 @@ This is the canonical entry point for SymbolOS documentation. If you're lost, yo
 
 ---
 
-## Ring 0–7 Architecture
+## Ring 0–7 Architecture ✨ 🟡 R0 (#FADA5E — highest reason)
 
 SymbolOS agents operate on an 8-ring cognition loop. Each ring has a defined role, symbol, and scope. The rings are the spine. Everything else hangs from them.
 
-| Ring | Symbol | Role | One-liner |
-|---|---|---|---|
-| R0 | ⚓🕯️ | Kernel invariants | The things that never change |
-| R1 | 🧭🫴 | Active task context | What are we doing right now? |
-| R2 | 🪞📚 | Retrieval + continuity | What did we decide before? |
-| R3 | 🌀🔭 | Prediction + strategy | What's coming next? |
-| R4 | 🧩🏗️ | Architecture synthesis | How does it all fit together? |
-| R5 | ☂️🛡️ | Guardrails + privacy | 💀 "Prove your worth!" |
-| R6 | 🧪✅ | Verification + evidence | Show me proof, not potential |
-| R7 | 🗃️🧾✅ | Persistence + indexing | Ship it, log it, remember it |
+              ✦ R0 ✦
+           ╱    ⚓    ╲
+        R7 ╱  ╱─────╲  ╲ R1
+       🗃️ ╱  ╱  KERNEL ╲  ╲ 🫴
+         ╱  ╱───────────╲  ╲
+    R6 ─┤  │   ☂️ TRUTH   │  ├─ R2
+    🧪  │  │  ───────── │  │  🪞
+        │  │   🧬 DNA    │  │
+    R5 ─┤  │             │  ├─ R3
+    ☂️   ╲  ╲───────────╱  ╱  🌀
+         ╲  ╲  MEETING  ╱  ╱
+        R4 ╲  ╲  PLACE ╱  ╱
+           ╲    🧩    ╱
+              ✦    ✦
+
+| Ring | Symbol | Role | One-liner | Thoughtform Color |
+|---|---|---|---|---|
+| R0 | ⚓🕯️ | Kernel invariants | The things that never change | Pale primrose yellow (#FADA5E) ✨ |
+| R1 | 🧭🫴 | Active task context | What are we doing right now? | Pure green (#228B22) 🦊 |
+| R2 | 🪞📚 | Retrieval + continuity | What did we decide before? | Clear gamboge (#E49B0F) 🧠 |
+| R3 | 🌀🔭 | Prediction + strategy | What's coming next? | Deep orange (#FF8C00) 🟠 |
+| R4 | 🧩🏗️ | Architecture synthesis | How does it all fit together? | Violet (#8B00FF) 🟣 |
+| R5 | ☂️🛡️ | Guardrails + privacy | 💀 "Prove your worth!" | Brilliant scarlet (#FF2400) 🔴 |
+| R6 | 🧪✅ | Verification + evidence | Show me proof, not potential | Rich deep blue (#0000CD) 🔵 |
+| R7 | 🗃️🧾✅ | Persistence + indexing | Ship it, log it, remember it | Golden stars (#FFD700) ⭐ |
+
+        /\_/\
+       ( o.o )  "To know the rings is to see the whole,
+        > ^ <    but a circle's start is its own goal."
+       /|   |\
+      (_|   |_)  — Rhy 🦊
 
 Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 
 ---
 
-## Agent Prompts
+## Agent Prompts 🔵 R6 (#0000CD — devotion to truth)
 
 > *Four agents, one meeting place, zero style drift.*
 
@@ -51,13 +72,13 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 
 ---
 
-## Vibe Layer (load-bearing)
+## Vibe Layer (load-bearing) 🌸 Agape (#FFB7C5 — unselfish love)
 
 - **Meme Map** (canonical vibe reference): [meme_map.md](meme_map.md) 🐢
 - Poetry Translation Layer (emojis, Fi+Ti): [poetry_translation_layer.md](poetry_translation_layer.md) 🪞
 - Public/Private Expression + poetry: [public_private_expression.md](public_private_expression.md) 🌸
 
-> *"If it ain't fun, it ain't sustainable."*
+> *“If it ain't fun, it ain't sustainable.”*
 
 ---
 
@@ -67,41 +88,48 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 ## Systems
 - Precog (anticipatory computing): [precog_thought.md](precog_thought.md) 🔮
 
-## Heart + Mind (DND-compatible)
+## Heart + Mind (DND-compatible) ❤️
 - Character sheet integration: [dnd_character_sheet_integration.md](dnd_character_sheet_integration.md) 🎲
 - Metaemotion: [metaemotion.md](metaemotion.md) ❤️
 - Memory (consent-driven): [memory.md](memory.md) 🧾
 
-## Schemas
+## Schemas 🧩
 - Schema index: [schemas.md](schemas.md) 🧩
 
-## Meta-awareness
+## Meta-awareness 🛡️
 - Barriers and self-checks: [meta_awareness.md](meta_awareness.md) 🛡️
 
-## Shared Maps
+## Shared Maps 🗺️
 - Symbol map (human): [symbol_map.md](symbol_map.md) 🗺️
 - Symbol map (shared JSON): [../symbol_map.shared.json](../symbol_map.shared.json)
 	- 🧬 Meeting place: the canonical return loop + shared symbol set.
 
-## Mercer
+## Mercer 🎨
 - Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css) 🎨
 
-## Memory (repo-backed)
+## Memory (repo-backed) 🗃️
 - Private memory system: [../memory/README.md](../memory/README.md) 🗃️
 
-## Ops
+## Ops ⚙️
 - Docs sync playbook: [sync_playbook.md](sync_playbook.md) ⚙️
 - Required reading list: [required_reading.md](required_reading.md) 📖
 
-## Inbox
+## Inbox 📥
 - Intake conventions: [inbox/README.md](inbox/README.md) 📥
 
 ---
 
-```
-    ___
-   / 🐢 \    "you made it to the end of the index"
-  |  ._. |   "that means you care"
-   \_____/   "the umbrella holds"
-    |   |
-```
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [Ring Architecture](../prompts/README.md) (north)
+  → [Agent Prompts](../prompts/chatgpt_mercer.json) (east)
+  → [Meme Map](meme_map.md) (west)
+
+💎 LOOT GAINED: You've discovered the central map of the SymbolOS dungeon, revealing the 8 rings of cognition and the paths to all major systems.
+───────────────────────────────────────────────────
+
+*The center holds true,
+Seven doors, one path for you,
+Start your journey now.*
+
+☂🦊🐢

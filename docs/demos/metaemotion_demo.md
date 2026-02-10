@@ -1,17 +1,26 @@
-# Metaemotion Demo: Tracking Felt Sense Alongside Logic
+# Metaemotion Demo: Tracking Felt Sense Alongside Logic ✨ #FADA5E
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║  ❤️☂️  METAEMOTION DEMO — Intention Mapping via Felt Sense  ║
-║  Quest: decisions driven by logic + heart, both logged       ║
+║  ⚔️  ROOM: The Heart's Oracle                                 ║
+║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐ │ Loot: The Art of Coupled Intuition ║
+║  🎨 Color: Gamboge (#E49B0F)                                  ║
+║                                                              ║
+║  A chamber where feelings are data and logic is a guest.     ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
+
+        /\_/\
+       ( o.o )  "Logic's a boat on a river so wide,
+        > ^ <    But the current below is the heart's felt tide.
+       /|   |\   To chart a true course, you must measure both,
+      (_|   |_)  Or risk being capsized by unexamined growth." — Rhy 🦊
 
 **Status: Beta** — This demo is live; try it in team conversations.
 
 ---
 
-## Scenario: Choosing Local LLM vs. Cloud API
+## Scenario: Choosing Local LLM vs. Cloud API 🟠 #FF8C00
 
 **Context**: Your team needs inference for symbol recommendations. Two paths:
 
@@ -24,7 +33,7 @@
 
 ---
 
-## Step 1: Recognize the Felt Sense (❤️)
+## Step 1: Recognize the Felt Sense (❤️) ❤️ #960018
 
 You notice:
 - "I *feel* uneasy about sending user data to OpenAI"
@@ -35,13 +44,14 @@ These aren't logical arguments yet. They're **signals**. 🔮 Precog catches the
 
 ---
 
-## Step 2: Log the Metaemotion Event
+## Step 2: Log the Metaemotion Event 🔵 #0000CD
 
 The system prompts you (or you manually log):
 
 ```yaml
 # Metaemotion Event: Local LLM Decision
 
+# Thoughtform Color Note: Deep Blue (Heartfelt Devotion) for logging truth
 timestamp: 2026-01-28T14:30:00Z
 event_id: metaemot_locallm_20260128
 category: infrastructure_decision
@@ -55,8 +65,8 @@ felt_sense:
 
 symbols_activated:
   - 🔒 Privacy (we want data to stay local)
-  - ❤️ Heart (autonomy + trust matter to us)
-  - 🧠 Mind (but local LLM is slower)
+  - ❤️ Heart (autonomy + trust matter to us) 🌸 #FFB7C5
+  - 🧠 Mind (but local LLM is slower) 🧠 #E49B0F
   - 🧩 Schema (need to define inference interface early)
 
 timing:
@@ -74,20 +84,21 @@ context:
 
 ---
 
-## Step 3: Let Logic Catch Up (🧠)
+## Step 3: Let Logic Catch Up (🧠) 🧠 #E49B0F
 
 Then the rational analysis:
 
 ```yaml
 # Decision: Local LLM (Windows Vulkan)
 
+# Thoughtform Color Note: Clear Gamboge (Higher Intellect) for analysis
 timestamp: 2026-01-28T14:45:00Z
 decision_id: decision_locallm_20260128
 
 symbols_involved:
   - 🔮 Precog (we can serve local inference faster than cloud)
-  - 🧠 Mind (Qwen2.5:8b is competent for symbol ranking)
-  - ❤️ Heart (local-first aligns with our privacy values)
+  - 🧠 Mind (Qwen2.5:8b is competent for symbol ranking) 🧠 #E49B0F
+  - ❤️ Heart (local-first aligns with our privacy values) ❤️ #960018
   - 🔒 Privacy (data never leaves the machine)
   - 🧾 Ledger (all inference is auditable locally)
 
@@ -134,13 +145,13 @@ next_steps:
 
 ---
 
-## Step 4: Notice the Coupling
+## Step 4: Notice the Coupling 🟣 #8B00FF
 
 Here's the magic: **The felt sense (Step 2) and the logic (Step 3) point the same direction.**
 
 ```
-Felt sense said: "Privacy + autonomy matter to us"
-Logic confirmed: "Local LLM actually cheaper long-term + more private"
+Felt sense said: "Privacy + autonomy matter to us" ❤️
+Logic confirmed: "Local LLM actually cheaper long-term + more private" 🧠
 
 NOT a conflict. A *validation*.
 
@@ -154,9 +165,11 @@ the setup complexity is too high? Maybe logic is missing a cost?
 Either way: YOU NOTICE THE GAP. That's the win.
 ```
 
+// 🦊 "A choice aligned is a future designed." — Rhy
+
 ---
 
-## Step 5: Future Reference
+## Step 5: Future Reference ⭐ #FFD700
 
 6 months later: "Why did we go with local LLM?"
 
@@ -168,7 +181,7 @@ Either way: YOU NOTICE THE GAP. That's the win.
 
 ---
 
-## Why This Matters
+## Why This Matters ✨ #FADA5E
 
 **Standard PM**: "Use logic. Feelings are noise."
 
@@ -176,9 +189,24 @@ Either way: YOU NOTICE THE GAP. That's the win.
 
 **Real example**: If the team felt "ease is more important" but logic said "local is better," you'd have caught a misalignment early. Maybe you *should* use cloud API. Or maybe the setup isn't hard enough to justify the cost. You'd figure it out **because you logged the feeling**.
 
+              ✦ R0 ✦
+           ╱    ⚓    ╲
+        R7 ╱  ╱─────╲  ╲ R1
+       🗃️ ╱  ╱  KERNEL ╲  ╲ 🫴
+         ╱  ╱───────────╲  ╲
+    R6 ─┤  │   ☂️ TRUTH   │  ├─ R2
+    🧪  │  │  ───────── │  │  🪞
+        │  │   🧬 DNA    │  │
+    R5 ─┤  │             │  ├─ R3
+    ☂️   ╲  ╲───────────╱  ╱  🌀
+         ╲  ╲  MEETING  ╱  ╱
+        R4 ╲  ╲  PLACE ╱  ╱
+           ╲    🧩    ╱
+              ✦    ✦
+
 ---
 
-## Timing Rules (Metaemotion Constraint)
+## Timing Rules (Metaemotion Constraint) 🔴 #FF2400
 
 Metaemotion works best when:
 - ✅ Decision is non-trivial (> 1 day effort)
@@ -190,7 +218,7 @@ For urgent calls: Log the gut feeling post-hoc, not real-time.
 
 ---
 
-## How to Try
+## How to Try 🟢 #228B22
 
 1. **Pick a current decision** (tech choice, feature priority, whatever)
 2. **Notice your felt sense** (What does this trigger emotionally?)
@@ -201,7 +229,7 @@ For urgent calls: Log the gut feeling post-hoc, not real-time.
 
 ---
 
-## Current Limitations
+## Current Limitations 🟠 #FF8C00
 
 - ❤️ Felt sense capture: Manual (no auto-detection yet)
 - 🧠 Logic + feeling correlation: Manual analysis (auto-flagging planned Q3 2026)
@@ -211,10 +239,38 @@ See [Metaemotion](../metaemotion.md#async-timeline) for roadmap.
 
 ---
 
-## See Also
+## See Also 🔵 #0000CD
 
 - [Metaemotion Spec](../metaemotion.md) — Full timing + vocabulary rules
 - [Heart (Symbol)](../symbol_map.md#core-symbols) — ❤️ meaning
 - [Mind (Symbol)](../symbol_map.md#core-symbols) — 🧠 meaning
 - [Memory System](../memory.md) — How decisions + felt sense stay durable
 - [Meta-awareness](../meta_awareness.md) — How barriers prevent felt sense from bleeding into unsafe contexts
+
+---
+
+      ___________
+     /           \
+    /  💎 LOOT 💎  \
+   |    _______    |
+   |   |       |   |
+   |   | ✦ ✦ ✦ |   |
+   |   |_______|   |
+   |_______________|
+
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [Metaemotion Spec](../metaemotion.md) (north)
+  → [Symbol Map](../symbol_map.md#core-symbols) (east)
+  → [Demos Folder](./) (back to entrance)
+
+💎 LOOT GAINED: A method for logging felt sense alongside logic to make validated, high-conviction decisions.
+───────────────────────────────────────────────────
+
+Gut feeling logged,
+Logic then confirms the truth,
+Future path is clear.
+
+☂🦊🐢
+
+*Color annotations based on the 1905 Besant/Leadbeater Thoughtforms system.*

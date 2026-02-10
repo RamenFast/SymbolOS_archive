@@ -1,22 +1,27 @@
 # Decisions (Private)
 
-```
 ╔══════════════════════════════════════════════════════════════╗
-║  🧬☂️🧾🛡️  DECISIONS LEDGER (PRIVATE) — SYMBOL OS / MERCER    ║
-║  Rule: stable, costly-to-reverse choices only               ║
+║  ⚔️  ROOM: The Ledger of Unalterable Choices                  ║
+║  📍 Floor: Ring 5 │ Difficulty: ⭐⭐⭐⭐ │ Loot: The logic of SymbolOS ║
+║  🎨 Color: 🔴 Scarlet (#FF2400 — righteous boundary)             ║
 ║                                                              ║
-║  "Show me proof, not potential." — 💀 Skeleton Gatekeeper    ║
+║  A chamber where costly decisions are etched into stone.       ║
 ╚══════════════════════════════════════════════════════════════╝
-Glyph tags: 🧬☂️🧾🛡️🧠🔮✅⚠️⛔
-```
 
-```
-  (•_•)
-  ( (  )   "every decision here passed R5"
-   /  \    — the skeleton approved
-```
+> This is an **INTERNAL/PRIVATE** document. Trespassers will be used for ASCII art practice.
 
-## Poetry layer (Fi+Ti mirrored) 🪞
+
+       .-.
+      (o.o)     "Show me proof,
+      |=|=|      not potential."
+     __|_|__
+    /  💀   \    — The Gatekeeper
+   |  MERGE  |
+   |  GATE   |
+   |_________|
+
+
+## Poetry layer (Fi+Ti mirrored) 🪞 🟣 R4 (#8B00FF — Fi+Ti bridge)
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
@@ -24,6 +29,12 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
 
 Record decisions that are costly to reverse. If the skeleton wouldn't let it through, it doesn't belong here.
+
+        /\_/\
+       ( o.o )  "A choice once made, a path you tread,
+        > ^ <    Reversing course fills sages with dread.
+       /|   |\   What's written here is hard as stone,
+      (_|   |_)  So choose with care, and not alone."  — Rhy 🦊
 
 Template:
 - YYYY-MM-DD — Decision: <what>
@@ -125,3 +136,28 @@ Template:
   - Consequences: Manus sessions can now boot into Mercer mode with full Ring alignment. R5 guardrails include Manus-specific confirmation milestones (push, email, public posting).
   - Evidence/links: `prompts/manus_mercer.json`, `prompts/README.md`.
   - MercerID: MRC-20260210-MANUS-03
+
+       .───────.
+      /  ☂️      \
+     /   PRIVATE  \
+    /_______________\
+           |
+           |
+         __|__
+        |     |
+        |_____|
+
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [../docs/index.md](docs/index.md) (north)
+  → [../docs/dnd_character_sheet_integration.md](../docs/dnd_character_sheet_integration.md) (east)
+  → [./README.md](./README.md) (back to entrance)
+
+💎 LOOT GAINED: Understanding of the core, costly-to-reverse decisions that shape SymbolOS. A glimpse into the mind of Mercer.
+───────────────────────────────────────────────────
+
+Stone words now set,
+Future paths are met.
+No turning back now.
+
+☂🦊🐢

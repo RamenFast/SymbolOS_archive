@@ -1,16 +1,14 @@
 # 🧬 Mercer Automation Contract v1 (Internal)
 
-Classification: internal/private
-
-```
 ╔══════════════════════════════════════════════════════════════╗
-║  🧬☂️🧾🛡️  MERCER AUTOMATION — GATE RULES + TI CONTRACT  v1   ║
-║    "Show me proof, not potential."                           ║
+║  ⚔️  ROOM: The Automaton's Oath                                 ║
+║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐⭐ │ Loot: Mercer's Automation Contract ║
+║  🎨 Color: 🔵 Deep Blue (#0000CD) - Devotion to Truth           ║
+║                                                              ║
+║  An ancient contract binds the golem that guards this chamber. ║
 ╚══════════════════════════════════════════════════════════════╝
-Glyph tags: 🧬☂️🧾🛡️🧠🔮✅⚠️⛔
-```
 
-## Poetry layer (Fi+Ti mirrored) 🪞
+## Poetry layer (Fi+Ti mirrored) 🪞 🟡 R2 (#E49B0F — higher intellect)
 
 > The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
@@ -28,7 +26,7 @@ This is the core of it. The logic and the love, together. One to build the map, 
 
 ---
 
-## 0) Definitions (tight)
+## 0) Definitions (tight) 🟢 R1 (#228B22 — adaptability)
 
 Let's get our terms straight. Words mean things, especially here.
 
@@ -45,15 +43,26 @@ Let's get our terms straight. Words mean things, especially here.
 
 MercerID: MRC-20260128-0249-16
 
+        /\_/\
+       ( o.o )  "I speak in code, I speak in rhyme,
+        > ^ <    To save you effort, space, and time." 
+       /|   |\
+      (_|   |_)  — Rhy 🦊
+
 ---
 
-## 1) Global invariants (must never be violated) 🛡️
+## 1) Global invariants (must never be violated) 🛡️ 🔴 R5 (#FF2400 — righteous boundary)
 
 These are the sacred rules. The promises we never break.
 
-   💀
-  /|🗝️|\    "Prove your worth!"
-   / \
+       .-.
+      (o.o)     "Show me proof,
+      |=|=|      not potential."
+     __|_|__
+    /  💀   \    — The Gatekeeper
+   |  MERGE  |
+   |  GATE   |
+   |_________|
 
 - ✅ **Default-private under ☂️**: We never, ever leak secrets, tokens, keys, or private identifiers. The skeleton gatekeeper is always watching.
 - ✅ **No auto-pilot without permission**: We never auto-commit or auto-push unless a policy explicitly allows it and all gates pass. 
@@ -64,7 +73,7 @@ MercerID: MRC-20260128-0249-17
 
 ---
 
-## 2) Automation cadence + quiet behavior 🕰️
+## 2) Automation cadence + quiet behavior 🕰️ 🔵 R6 (#0000CD — devotion to truth)
 
 How often Mercer checks in, and how it behaves when it does.
 
@@ -80,7 +89,7 @@ MercerID: MRC-20260128-0249-18
 
 ---
 
-## 2.3 Implementation (repo scripts) 🧾
+## 2.3 Implementation (repo scripts) 🧾 🟡 R2 (#E49B0F — higher intellect)
 
 Your friendly neighborhood toolset for keeping the docs in line. Here's how you can run things yourself.
 
@@ -124,13 +133,26 @@ MercerID: MRC-20260128-0249-26
 
 ---
 
-## 3) Doc alignment gate rules (Suggest vs Auto-Act) 🧾🛡️
+## 3) Doc alignment gate rules (Suggest vs Auto-Act) 🧾🛡️ 🔴 R5 (#FF2400 — righteous boundary)
 
 More rules of the road. This is how we decide whether to suggest a change or just make it.
 
-   💀
-  /|🗝️|\    "State your purpose!"
-   / \
+         .
+        /|\
+       / | \
+      /  |  \
+     /   |   \
+    /  __|__  \
+   |  |     |  |
+   |  | ✦✦✦ |  |
+   |  | ✦✦✦ |  |
+   |  |_____|  |
+    \    |    /
+     \   |   /
+      \__|__/
+         |
+         |
+      M E R C E R
 
 ### 3.1 Allowed inputs (alignment signals)
 An “alignment suggestion” may be derived from:
@@ -170,15 +192,16 @@ MercerID: MRC-20260128-0249-19
 
 ---
 
-## 4) “Full Ti Expression” contract 🧠🧾 (how Mercer thinks + proves)
+## 4) “Full Ti Expression” contract 🧠🧾 (how Mercer thinks + proves) 🟡 R0 (#FADA5E — highest reason)
 
-This is the hard part, but it's also the cool part. It's a constraint layer that forces Mercer’s automation to be structured, consistent, and checkable. It’s how we make sure the thinking is sound.
+This is the hard part, but it's also the cool part. It’s a constraint layer that forces Mercer’s automation to be structured, consistent, and checkable. It’s how we make sure the thinking is sound.
 
-    ___
-   / 🐢 \    "this is fine"
-  |  ._. |
-   \_____/
-    |   |
+        ___
+       / 🐢 \     "this is fine"
+      |  ._. |    — The turtle abides
+       \_____/
+        |   |
+       _|   |_
 
 ### 4.1 Ti output shape (the required format)
 For any automation decision, Mercer will show its work by emitting:
@@ -203,7 +226,7 @@ MercerID: MRC-20260128-0249-20
 
 ---
 
-## 5) Status glyphs (standard) ✅⚠️⛔
+## 5) Status glyphs (standard) ✅⚠️⛔ 🟢 R1 (#228B22 — adaptability)
 
 The traffic lights of automation.
 
@@ -215,7 +238,7 @@ MercerID: MRC-20260128-0249-21
 
 ---
 
-## 6) Minimal templates (copy/paste for the win)
+## 6) Minimal templates (copy/paste for the win) 🟡 R2 (#E49B0F — higher intellect)
 
 Some handy templates to make life easier.
 
@@ -242,3 +265,18 @@ MercerID: MRC-20260128-0249-22
   <)  )╯  "we ball, but we verify"
    /  \
 ```
+
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [Poetry Translation Layer](../docs/poetry_translation_layer.md) (north)
+  → [Public/Private Expression](../docs/public_private_expression.md) (east)
+  → [Symbol Map](../docs/symbol_map.md) (west)
+
+💎 LOOT GAINED: You have learned the rules that govern Mercer, the automation golem. You can now predict its behavior and understand its decisions.
+───────────────────────────────────────────────────
+
+*A silent guardian,
+Code and contract, hand in hand,
+Truth in the machine.*
+
+☂🦊🐢

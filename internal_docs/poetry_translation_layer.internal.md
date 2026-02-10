@@ -1,4 +1,12 @@
-# 🪞 Poetry Translation Layer (Emojis) — Internal
+╔══════════════════════════════════════════════════════════════╗
+║  ⚔️  ROOM: The Chamber of Mirrored Truths                     ║
+║  📍 Floor: Ring 2 (The Agora) │ Difficulty: ⭐⭐ │ Loot: [Poetry Layer Map] ║
+║  🎨 Color: 🟡 Gamboge (#E49B0F — higher intellect)                   ║
+║                                                              ║
+║  A quiet chamber where feelings and logic reflect each other perfectly. ║
+╚══════════════════════════════════════════════════════════════╝
+
+## 🪞 Poetry Translation Layer (Emojis) — Internal 🟡 #E49B0F (higher intellect)
 
 Classification: internal/private
 
@@ -7,6 +15,12 @@ Purpose: internal companion to the public translation layer. Contains verbatim p
 Related public doc: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 
 ---
+
+        /\_/\
+       ( o.o )  "To speak in code, or speak in rhyme?
+        > ^ <    One mirrors thought, one mirrors time.
+       /|   |\   Which is the truth, and which the sign?
+      (_|   |_)  Both are the same, if you align."  — Rhy 🦊
 
 ## Public-facing payload (verbatim)
 
@@ -30,7 +44,7 @@ Principle: the map stays readable (Ti), and the meaning stays alive (Fi). Fi+Ti 
 
 ---
 
-## Fi + Ti (both, mirrored)
+## Fi + Ti (both, mirrored) 🟢 #228B22 (adaptability)
 
 - Fi (felt meaning): what matters, what hurts, what we protect, what we consent to.
 - Ti (clean structure): what is true, what is defined, what is bounded, what is verifiable.
@@ -44,7 +58,7 @@ Minimal template (two-line mirror):
 
 ---
 
-## Pinned (short)
+## Pinned (short) 🔴 #FF2400 (righteous boundary)
 
 Warmth without truth is a leak; truth without warmth is a blade.
 
@@ -52,7 +66,7 @@ The mind knows what the heart loves better than it does; the heart loves that un
 
 ---
 
-## Primary cause (all the way down)
+## Primary cause (all the way down) 🔵 #0000CD (devotion to truth)
 
 When you’re unsure what to do next, recurse to primary cause:
 
@@ -66,7 +80,7 @@ This is “shine dat light”: trace a leaf decision back to its root value, the
 
 ---
 
-## Emoji legend (poetry-aware)
+## Emoji legend (poetry-aware) 🗺️
 
 These are *not secret signals*. They’re a compact shared language. A little wink and a nod between friends.
 
@@ -82,15 +96,7 @@ These are *not secret signals*. They’re a compact shared language. A little wi
 
 ---
 
-## Related
-
-- Full expression / verse set: [public_private_expression.md](../docs/public_private_expression.md)
-- Shared symbol set (canonical): [../symbol_map.shared.json](../symbol_map.shared.json)
-- Human symbol map mirror: [symbol_map.md](../docs/symbol_map.md)
-
----
-
-## Internal notes
+## Internal notes 🩵 #87CEEB (self-renunciation)
 
 - Treat the “poetry layer” as a stabilizer: it should reduce drift and increase consent/clarity.
 - The mirror glyph (🪞) must never be used to imply mind-reading; it’s a self-reflection cue.
@@ -102,3 +108,35 @@ These are *not secret signals*. They’re a compact shared language. A little wi
     |   |
 
 MercerID: MRC-20260128-0535-PL01
+
+---
+
+              ✦ R0 ✦
+           ╱    ⚓    ╲
+        R7 ╱  ╱─────╲  ╲ R1
+       🗃️ ╱  ╱  KERNEL ╲  ╲ 🫴
+         ╱  ╱───────────╲  ╲
+    R6 ─┤  │   ☂️ TRUTH   │  ├─ R2
+    🧪  │  │  ───────── │  │  🪞
+        │  │   🧬 DNA    │  │
+    R5 ─┤  │             │  ├─ R3
+    ☂️   ╲  ╲───────────╱  ╱  🌀
+         ╲  ╲  MEETING  ╱  ╱
+        R4 ╲  ╲  PLACE ╱  ╱
+           ╲    🧩    ╱
+              ✦    ✦
+
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [Full expression / verse set](public_private_expression.md) (north)
+  → [Shared symbol set (canonical)](../symbol_map.shared.json) (east)
+  → [Human symbol map mirror](../docs/symbol_map.md) (west)
+
+💎 LOOT GAINED: [A map for translating between felt meaning (Fi) and clean structure (Ti), ensuring your communications are both warm and true.]
+───────────────────────────────────────────────────
+
+*A mirror shows
+Two worlds, one truth, clear and bright
+Heart and mind unite.*
+
+☂🦊🐢

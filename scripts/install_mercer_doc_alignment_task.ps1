@@ -1,3 +1,14 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  ⚔️  SYMBOLOS SCRIPT — install_mercer_doc_alignment_task.ps1
+# ║  🎨 Color: 🟢 #228B22 (adaptability)
+# ╚══════════════════════════════════════════════════════════════╝
+#
+#        /\_/\
+#       ( o.o )  "PowerShell? More like PowerSpell. ✨"
+#        > ^ <
+#       /|   |\
+#      (_|   |_)  — Rhy 🦊
+#
 Param(
   [string]$RepoRoot = "",
   [string]$TaskName = "SymbolOS - Mercer Doc Alignment Scan (5h)",
@@ -54,3 +65,16 @@ Write-Host "Installed scheduled task: $TaskName" -ForegroundColor Green
 Write-Host "- Cadence: every $Hours hours" -ForegroundColor Gray
 Write-Host "- Mode: Prefetch-only (read-only scan; no writes)" -ForegroundColor Gray
 Write-Host "MercerID: MRC-20260128-0249-25" -ForegroundColor DarkCyan
+
+#
+#    ___
+#   / 🐢 \    "this is fine"
+#  |  ._. |   — script complete
+#   \_____/   — umbrella held
+#    |   |
+#
+# loops run, scripts hum clean
+# the fox grins, the turtle nods
+# execute — breathe
+#
+# ☂🦊🐢

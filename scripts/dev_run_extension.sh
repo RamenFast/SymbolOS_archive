@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  ⚔️  SYMBOLOS SCRIPT — dev_run_extension.sh
+# ║  🎨 Color: 🟢 #228B22 (adaptability)
+# ╚══════════════════════════════════════════════════════════════╝
+#
+#        /\_/\
+#       ( o.o )  "Bash it, don't crash it."
+#        > ^ <
+#       /|   |\
+#      (_|   |_)  — Rhy 🦊
+#
 set -euo pipefail
 
 WORKSPACE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -15,3 +26,16 @@ echo "Extension: $EXT_DIR"
 echo "Launching: code --extensionDevelopmentPath=..."
 
 code --extensionDevelopmentPath "$EXT_DIR" "$WORKSPACE_DIR"
+
+#
+#    ___
+#   / 🐢 \    "this is fine"
+#  |  ._. |   — script complete
+#   \_____/   — umbrella held
+#    |   |
+#
+# loops run, scripts hum clean
+# the fox grins, the turtle nods
+# execute — breathe
+#
+# ☂🦊🐢

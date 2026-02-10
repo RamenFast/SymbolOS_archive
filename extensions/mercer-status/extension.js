@@ -1,4 +1,15 @@
 // ╔══════════════════════════════════════════════════════════════╗
+// ║  ⚔️  SYMBOLOS EXTENSION — extension.js
+// ║  🎨 Color: 🟡 #E49B0F (higher intellect)
+// ╚══════════════════════════════════════════════════════════════╝
+//
+//        /\_/\
+//       ( o.o )  "Extensions extend, but foxes transcend."
+//        > ^ <
+//       /|   |\
+//      (_|   |_)  — Rhy 🦊
+//
+// ╔══════════════════════════════════════════════════════════════╗
 // ║  🧬🔍☂️  MERCER STATUS — VS Code Extension                   ║
 // ║  "Show me proof, not potential." — 💀 Skeleton Gatekeeper    ║
 // ╚══════════════════════════════════════════════════════════════╝
@@ -240,3 +251,12 @@ module.exports = {
 // loops closed, code shipped clean
 // the turtle nods, umbrella held
 // merge — and breathe again
+
+//
+//    ___
+//   / 🐢 \    "this is fine"
+//  |  ._. |   — extension loaded
+//   \_____/   — umbrella held
+//    |   |
+//
+// ☂🦊🐢

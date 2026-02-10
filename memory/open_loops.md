@@ -1,20 +1,22 @@
-# Open Loops (Your Friendly Quest Log)
+> **INTERNAL DOCUMENT // PRIVATE**
 
-```
 ╔══════════════════════════════════════════════════════════════╗
-║  🧬☂️🧾  OPEN LOOPS (PRIVATE) — QUEST LOG                    ║
-║  "The map is steady. The hands are open."                   ║
+║  ⚔️  ROOM: The Quest Log Chamber                                  ║
+║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐ │ Loot: Tracking Open Loops ║
+║  🎨 Color: Gamboge 🟡 (#E49B0F)                                   ║
+║                                                              ║
+║  A quiet room where promises are etched in stone.              ║
 ╚══════════════════════════════════════════════════════════════╝
-Glyph tags: 🧬☂️🧾🛡️✅⚠️⛔
-```
 
-    ___
-   / 🐢 \    "this is fine, we're tracking it all"
-  |  ._. |
-   \_____/
-    |   |
+> In the center of the chamber, a large, flat stone table glows faintly. Carved into its surface are glyphs that shift and update, tracking every promise made and every quest undertaken. A small, green-furred fox sits atop the table, tail twitching as it watches the glyphs.
 
-## Poetry layer (Fi+Ti mirrored) 🪞
+        /\_/\
+       ( o.o )  "A loop left open, a promise unkept,
+        > ^ <    Is a thread that unravels while you have slept."
+       /|   |\
+      (_|   |_)  — Rhy 🦊
+
+## Poetry Layer (Fi+Ti mirrored) 🪞 🟡 R2 (#E49B0F — higher intellect)
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
@@ -23,7 +25,8 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 
 Here are the quests we're on. The open loops, the promises we've made. We don't drop things.
 
-Template for new quests:
+### New Quest Template
+
 - [ ] ID: YYYYMMDD-###
   - Loop: <what is open>
   - Owner: <who>
@@ -33,11 +36,18 @@ Template for new quests:
 
 ---
 
-## Closed Loops (The Hall of Fame)
+## The Hall of Fame (Closed Loops) 💎
 
-  \(•_•)/
-   (  (>   "SHIPPED IT"
-   /  \
+> A series of pedestals lines one wall of the chamber. Atop each rests a crystal that hums with the energy of a completed quest. The air here is still and satisfying.
+
+      ___________
+     /           \
+    /  💎 LOOT 💎  \
+   |    _______    |
+   |   |       |   |
+   |   | ✦ ✦ ✦ |   |
+   |   |_______|   |
+   |_______________|
 
 - [x] ID: 20260128-001 ✅ CLOSED 2026-02-10
   - Loop: Make VS Code Chat/UI the stable home base using repo-backed memory.
@@ -60,7 +70,9 @@ Template for new quests:
   - Links: `memory/decisions.md`, `prompts/codex_executor.json`
   - MercerID: MRC-20260128-0249-15
 
-## Open Quests (The Adventure Continues)
+## The Adventure Continues (Open Quests) ⚔️
+
+> The air hums with potential. These are the quests in motion, the promises yet to be fulfilled. Each entry is a flickering candle in the darkness, a beacon guiding the way forward.
 
 - [ ] ID: 20260128-003
   - Loop: Define the exact safety condition for Precog “proactively act” (placeholder: virus-scanning logic).
@@ -78,9 +90,24 @@ Template for new quests:
   - Links: `internal_docs/future_possibilities_ring0.md`, `docs/index.md`
   - MercerID: MRC-20260128-0249-14
 
+        ___
+       / 🐢 \     "this is fine, we're tracking it all"
+      |  ._. |    — The Turtle of Tracking
+       \_____/
+        |   |
+       _|   |_
 
-    ___
-   / 🐢 \    "always return to the meeting place"
-  |  ._. |
-   \_____/
-    |   |
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [The Meeting Place](../docs/index.md) (north)
+  → [Decision Log](decisions.md) (east)
+  → [Poetry Translation Layer](../docs/poetry_translation_layer.md) (west)
+
+💎 LOOT GAINED: A clear view of all open and closed quests, a template for new quests, and the peace of mind that comes from knowing nothing is forgotten.
+───────────────────────────────────────────────────
+
+A promise made,
+A quest begun,
+Until it's done.
+
+☂🦊🐢

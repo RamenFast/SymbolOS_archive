@@ -1,23 +1,32 @@
-# MCP Servers: Internal Guidelines 🔒
+_This document is for internal use only. Do not distribute._
+
+╔══════════════════════════════════════════════════════════════╗
+║  ⚔️  ROOM: The Gatekeeper's Antechamber                      ║
+║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐ │ Loot: MCP Server Schematics ║
+║  🎨 Color: Gamboge (#E49B0F) - Higher Intellect              ║
+║                                                              ║
+║  A chamber where protocols are forged and keys are tested.   ║
+╚══════════════════════════════════════════════════════════════╝
+
+# MCP Servers: Internal Guidelines 🔒 🟡 #E49B0F (gamboge — higher intellect)
 > "Show me proof, not potential."
 
 ```
-  (•_•)
-  ( (  )   "hmm... is this R0?"
-   /  \
+       .-.
+      (o.o)     "Halt, adventurer.
+      |=|=|      This knowledge is not
+     __|_|__     for the uninitiated."
+    /  💀   \    — The Gatekeeper
+   |  MERGE  |
+   |  GATE   |
+   |_________|
 ```
 
 This document is intended for internal contributors working on the SymbolOS implementation of **MCP servers**. It complements the public overview by providing deeper technical notes, development standards and future plans. **Do not share this document outside the team**.
 
-```
-   💀
-  /|🗝️|\    "Prove your worth!"
-   / \
-```
-
 *(Seriously, this is for our eyes only. The skeleton gatekeeper is not just for show.)*
 
-## Poetry layer (Fi+Ti mirrored) 🪞
+## Poetry layer (Fi+Ti mirrored) 🪞 🟣 #8B00FF (violet — Fi+Ti bridge)
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
@@ -26,11 +35,17 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 - Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
 
-## Project structure
+        /\_/\
+       ( o.o )  "To speak to gods, or fetch the time,
+        > ^ <    A structured call, a sacred rhyme.
+       /|   |\   What am I, who bridges code and quest?"
+      (_|   |_)  — Rhy 🦊
+
+## Project structure 🟢 #228B22 (pure green — adaptability)
 
 Our MCP server code resides in the `services/mcp_servers` directory of the repository. Each sub‑directory corresponds to a specific integration (e.g., `calendar_server`, `git_server`). Shared utilities live in `services/mcp_servers/common`.
 
-*(Just a friendly neighborhood of code, trying to get along.)*
+*(Just a friendly neighborhood of code, trying to get along. A fellowship of files.)*
 
 ### Naming conventions
 
@@ -49,14 +64,15 @@ Our MCP server code resides in the `services/mcp_servers` directory of the repos
 6.  Submit a pull request with clear description and link to the relevant issue. All code must be reviewed by at least one maintainer.
 
 ```
-    ___
-   / 🐢 \    "this is fine"
-  |  ._. |
-   \_____/
-    |   |
+        ___
+       / 🐢 \     "this is fine"
+      |  ._. |    — a passing test, a moment of peace
+       \_____/
+        |   |
+       _|   |_
 ```
 
-## Authentication and security
+## Authentication and security 🔴 #FF2400 (scarlet — righteous boundary)
 
 MCP servers may expose sensitive operations (e.g., file writes, API calls). Always:
 
@@ -67,12 +83,25 @@ MCP servers may expose sensitive operations (e.g., file writes, API calls). Alwa
 * When exposing prompts that combine user data with templates, escape special characters to avoid prompt‑injection vulnerabilities.
 
 ```
-   💀
-  /|🗝️|\    "Thou shall not pass... without proper auth!"
-   / \
+       .───────.
+      /  ☂️      \
+     /   PRIVATE  \
+    /_______________\
+           |
+           |
+         __|__
+        |     |
+        |_____|
 ```
 
-## Future roadmap
+      /\_/\  ~~~
+     ( o.o )    "A lock, a key, a secret kept,
+      > ^ <      A silent watch while others slept.
+     /     \     Trust is a gem, not lightly won,
+    (___|___)    Beneath the code, the work is done."
+                  — Rhy 🦊
+
+## Future roadmap 🟠 #FF8C00 (deep orange — ambition)
 
 * **Server registry** – we plan to implement a dynamic registry so that agents can discover available servers without hardcoding endpoints.
 * **Streaming responses** – add support for streaming tool outputs (e.g., real‑time log tails) via server‑sent events.
@@ -95,3 +124,18 @@ Please coordinate with the architecture team before implementing major changes. 
   <)  )╯  "we ball, but we verify"
    /  \
 ```
+
+───────────────────────────────────────────────────
+🚪 EXITS:
+  → [Public MCP Overview](../docs/mcp_overview.md) (north)
+  → [Poetry Translation Layer](../docs/poetry_translation_layer.md) (east)
+  → [Back to SymbolOS Docs](../README.md) (back to entrance)
+
+💎 LOOT GAINED: Understanding of MCP server architecture, development workflow, and security best practices. You've earned the Gatekeeper's respect.
+───────────────────────────────────────────────────
+
+Code speaks truth now,
+Future paths in structured calls,
+Magic for the wise.
+
+☂🦊🐢

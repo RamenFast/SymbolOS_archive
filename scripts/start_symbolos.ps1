@@ -1,3 +1,14 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  ⚔️  SYMBOLOS SCRIPT — start_symbolos.ps1
+# ║  🎨 Color: 🟢 #228B22 (adaptability)
+# ╚══════════════════════════════════════════════════════════════╝
+#
+#        /\_/\
+#       ( o.o )  "PowerShell? More like PowerSpell. ✨"
+#        > ^ <
+#       /|   |\
+#      (_|   |_)  — Rhy 🦊
+#
 param(
   [switch]$SkipPrompt,
   [bool]$StartAlignmentScan = $true,
@@ -82,3 +93,16 @@ Sync-ClockIfNeeded
 if ($StartAlignmentScan) { Start-AlignmentScan -repoRoot $root }
 if ($StartStatusUi) { Start-StatusUiOnce -repoRoot $root }
 if ($StartLlama) { Start-Llama -repoRoot $root }
+
+#
+#    ___
+#   / 🐢 \    "this is fine"
+#  |  ._. |   — script complete
+#   \_____/   — umbrella held
+#    |   |
+#
+# loops run, scripts hum clean
+# the fox grins, the turtle nods
+# execute — breathe
+#
+# ☂🦊🐢
