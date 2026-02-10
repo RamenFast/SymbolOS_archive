@@ -22,17 +22,25 @@ The canonical shared set lives in `symbol_map.shared.json`. This file is the phy
 
 ## Core symbols 🟣 #8B00FF (Fi+Ti bridge)
 
-- `☂️` UmbrellaOS-private-dev-arch (private umbrella; fortress boundary) — Beautiful pale azure (#87CEEB) 💧
-- `🌸` SymbolOS-public-dev-arch (public, light, external-facing surface) — Pure pale rose (#FFB7C5) 🌸
-- `🔮` Precog / anticipatory computing — Deep orange (#FF8C00) 🟠
-- `🧠` Mind / cognition / inference — Clear gamboge (#E49B0F) 🧠
-- `❤️` Heart / felt sense / affect — Full clear carmine (#960018) ❤️
-- `🧾` Ledger / audit trail — Pale primrose yellow (#FADA5E) ✨
-- `🛡️` Safety / permissions / boundaries — Brilliant scarlet (#FF2400) 🔴
-- `🔒` Privacy / sensitive scope — Rich deep blue (#0000CD) 🔵
-- `🧩` Schema / structured shape — Violet (#8B00FF) 🟣
-- `🎲` DND mode (table-safe output) — Golden stars (#FFD700) ⭐
-- `🧬` Meeting place (return loop to `symbol_map.shared.json` + the active work surface) — Pure green (#228B22) 🟢
+- `☂️` Umbrella — UmbrellaOS / SymbolOS umbrella
+- `🔮` Precog — Anticipatory computing; prefetch/suggest/act pipeline
+- `🧠` Mind — Cognition, inference, attention
+- `❤️` Heart — Felt sense, affect, values
+- `🛡️` Safety — Permissions, risk gates, boundaries
+- `🔒` Privacy — Sensitive scope; redaction; consent
+- `🧾` Ledger — Audit trail / provenance
+- `🎲` DND — Table-safe output contract and gating
+- `🧩` Schema — Structured interchange shapes
+- `🧬` Meeting place — Shared symbol for Mercer meeting place return loop
+- `⚓` Kernel — Ring-0 kernel invariants; non-negotiable rules
+- `🫴` Offering — Active task context; hands-open posture
+- `🌀` Spiral — Prediction, strategy, downstream anticipation
+- `🦊` Rhy / Rhynim — Green-furred fox trickster guide. Clippy but good.
+- `🎨` Thoughtforms colors — 1905 color system. Every hue has meaning.
+- `⚔️` DND dungeon room — Doc framing as dungeon rooms. Readers are adventurers.
+- `🏰` Dungeon explorer — Interactive index.html for browsing the repo.
+- `🐢` The turtle — this is fine. Grounding meme. Ben refactoring at 0.3s intervals.
+- `💀` Skeleton gatekeeper — Guards merge gates. Show me proof, not potential.
 
               ✦ R0 ✦
            ╱    ⚓    ╲
@@ -51,6 +59,7 @@ The canonical shared set lives in `symbol_map.shared.json`. This file is the phy
 
 ## Extended (doc-only) 🟢 #228B22 (adaptability)
 
+- `🌸` SymbolOS public surface (doc-only)
 - `🧭` Guidance / navigation
 - `🧰` Tools / actions
 - `📚` Docs / references

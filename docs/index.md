@@ -66,6 +66,7 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 
 - Mercer (ChatGPT): [../prompts/chatgpt_mercer.json](../prompts/chatgpt_mercer.json) — the architect
 - Mercer-Executor (Codex): [../prompts/codex_executor.json](../prompts/codex_executor.json) — the builder
+- Mercer-Codex (Ops): [../prompts/mercer_codex.json](../prompts/mercer_codex.json) — day-to-day operator
 - Mercer-Local (LLaMA): [../prompts/local_llama.json](../prompts/local_llama.json) — the hermit
 - Mercer-Max (Manus): [../prompts/manus_mercer.json](../prompts/manus_mercer.json) — the everything-agent
 - Character sheet (ChatGPT app): [../prompts/chatgpt_character_sheet.md](../prompts/chatgpt_character_sheet.md)
@@ -106,6 +107,7 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 
 ## Mercer 🎨
 - Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css) 🎨
+- Mercer-Codex runbook: [mercer_codex.md](mercer_codex.md)
 
 ## Memory (repo-backed) 🗃️
 - Private memory system: [../memory/README.md](../memory/README.md) 🗃️

@@ -265,6 +265,11 @@
         "kind": "theme"
       },
       {
+        "path": "docs/mercer_codex.md",
+        "title": "Mercer-Codex Runbook",
+        "kind": "runbook"
+      },
+      {
         "path": "docs/meme_map.md",
         "title": "Meme Map — The Canonical Vibe Layer 🐢",
         "kind": "map"
@@ -362,6 +367,11 @@
       {
         "path": "prompts/codex_executor.json",
         "title": "Codex Executor Prompt",
+        "kind": "prompt"
+      },
+      {
+        "path": "prompts/mercer_codex.json",
+        "title": "Mercer-Codex Prompt",
         "kind": "prompt"
       },
       {
@@ -557,6 +567,18 @@
       "summary": "VS Code webview CSS theme token map with semantic tokens + an extended color palette for Mercer UI panels."
     },
     {
+      "title": "Mercer-Codex Runbook",
+      "path": "docs/mercer_codex.md",
+      "tags": [
+        "mercer",
+        "codex",
+        "runbook",
+        "ops",
+        "prompt"
+      ],
+      "summary": "Day-to-day execution runbook for Mercer-Codex: minimal loop, guardrails, and output shape."
+    },
+    {
       "title": "Mercer — Public/Private Expression (v1)",
       "path": "docs/public_private_expression.md",
       "tags": [
@@ -733,6 +755,17 @@
         "manus"
       ],
       "summary": "Full-stack execution agent for Manus platform. Ring 0-7 cognition, meme layer, Rhy fox."
+    },
+    {
+      "title": "Mercer-Codex Prompt",
+      "path": "prompts/mercer_codex.json",
+      "tags": [
+        "prompt",
+        "agent",
+        "codex",
+        "ops"
+      ],
+      "summary": "Execution-first prompt for fast, safe day-to-day changes with Ring 0-7 invariants."
     },
     {
       "title": "ChatGPT Character Sheet",

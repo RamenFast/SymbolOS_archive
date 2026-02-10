@@ -87,6 +87,19 @@
       "problemMatcher": []
     },
     {
+      "label": "Mercer-Codex: open prompt + runbook",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\open_mercer_codex.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "SymbolOS: autorun (MAC prompt)",
       "type": "shell",
       "command": "powershell",
