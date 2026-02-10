@@ -1,14 +1,42 @@
 # Mercer Status (SymbolOS) — Minimal VS Code Extension
 
-Purpose: on VS Code startup (when this workspace contains `symbol_map.shared.json`), check SymbolOS drift (core symbols) and only prompt/launch the status UI when drift is `WARN` or `FAIL`.
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🧬🔍☂️  MERCER STATUS — YOUR DRIFT EARLY WARNING SYSTEM      ║
+║  Quest: catch misalignment before it catches you             ║
+║                                                              ║
+║  "Good enough signal. Start. Adjust on the way."             ║
+╚══════════════════════════════════════════════════════════════╝
+```
 
-## What it does
+```
+  (•_•)
+  ( (  )   "hmm... is the symbol map drifting?"
+   /  \    — this extension checks so you don't have to
+```
+
+**Purpose:** On VS Code startup (when this workspace contains `symbol_map.shared.json`), check SymbolOS drift (core symbols) and only prompt/launch the status UI when drift is `WARN` or `FAIL`.
+
+> *Think of it as a smoke detector for your symbolic operating system. Quiet when things are fine. Loud when they're not.* 🐢
+
+## What It Does
+
 - Computes drift by comparing:
   - `symbol_map.shared.json` symbols
   - vs `docs/symbol_map.md` → **## Core symbols**
 - If drift is `WARN/FAIL`, it can run the existing task: **Mercer: status UI (interactive)**.
+- If drift is `OK`, it stays quiet. No news is good news.
 
-## Install (dev)
+```
+    ___
+   / 🐢 \    drift: OK
+  |  ._. |   "this is fine"
+   \_____/   — the symbols are aligned
+    |   |
+```
+
+## Install (Dev)
+
 This is a local workspace extension scaffold.
 
 1. Open this workspace in VS Code.
@@ -19,14 +47,27 @@ This is a local workspace extension scaffold.
 
 If you want this packaged and installable as a `.vsix`, we can add a proper TypeScript build and `vsce` packaging flow.
 
+> *"Imperfect action > perfect theory."* — Install it, see if it works, iterate.
+
 ## Settings
-- `mercerStatus.devMode` (default: false)
-- `mercerStatus.autoApproveOnDrift` (default: false)
-- `mercerStatus.promptBeforeAutoRun` (default: true)
-- `mercerStatus.autoLaunchOnDrift` (default: true)
-- `mercerStatus.notifyOnOk` (default: false)
-- `mercerStatus.taskLabel` (default: `Mercer: status UI (interactive)`)
+
+| Setting | Default | What It Does |
+|---|---|---|
+| `mercerStatus.autoLaunchOnDrift` | `true` | Auto-launch status UI when drift detected |
+| `mercerStatus.notifyOnOk` | `false` | Show notification even when everything's fine |
+| `mercerStatus.taskLabel` | `Mercer: status UI (interactive)` | The VS Code task to run on drift |
 
 ## Commands
-- **Mercer: Show Status UI**
-- **Mercer: Check Drift (Core Symbols)**
+
+- **Mercer: Show Status UI** — manually open the status dashboard
+- **Mercer: Check Drift (Core Symbols)** — run a drift check right now
+
+```
+   💀
+  /|🗝️|\    drift: FAIL
+   / \       — "Prove your worth! Fix the symbols."
+```
+
+---
+
+> *"Show me proof, not potential."* — The extension lives by this. It checks the actual files, not your intentions.

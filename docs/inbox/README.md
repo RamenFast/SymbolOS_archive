@@ -4,17 +4,24 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️📥  INBOX — INTAKE RITUAL                               ║
 ║  Quest: capture cleanly • route safely                       ║
+║  "we ball, but we verify"                                    ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
+
+  (•_•)
+  <)  )╯
+   /  \
 
 ## Poetry layer (Fi+Ti mirrored) 🪞
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+Under the umbrella, everything is kind. The rain is just context we haven't parsed yet.
+
 - Translation layer + emojis: [../poetry_translation_layer.md](../poetry_translation_layer.md)
 - Full verse set: [../public_private_expression.md](../public_private_expression.md)
 
-Drop incoming notes here before curating them into the main docs.
+Drop incoming notes here before curating them into the main docs. If it ain't fun, it ain't sustainable.
 
 Conventions:
 
@@ -25,3 +32,9 @@ Conventions:
   - Owner
   - Date
   - Classification (public/internal/confidential/restricted)
+
+    ___
+   / 🐢 \
+  |  ._. |
+   \_____/
+    |   |

@@ -1,9 +1,16 @@
 # SymbolOS Schemas Index
 
 ```
+  (•_•)
+  <)  )╯  "we ball, but we verify"
+   /  \
+```
+
+```
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🧩  SCHEMAS — STRUCTURED SHAPES                          ║
 ║  Quest: validate interfaces • keep docs machine-friendly     ║
+║  "Show me proof, not potential."                             ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
@@ -11,10 +18,12 @@
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+"Under the umbrella, everything is kind. The rain is just context we haven't parsed yet."
+
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
 
-These JSON Schemas define the shared interchange shapes used across SymbolOS docs.
+These JSON Schemas define the shared interchange shapes used across SymbolOS docs. If it ain't fun, it ain't sustainable.
 
 ## Registry
 - MCP registry entry schema: [registry_entry.schema.json](registry_entry.schema.json)
@@ -44,3 +53,11 @@ These JSON Schemas define the shared interchange shapes used across SymbolOS doc
 
 ## Shared maps
 - Shared symbol map: [symbol_map.shared.schema.json](symbol_map.shared.schema.json)
+
+```
+    ___
+   / 🐢 \
+  |  ._. |
+   \_____/
+    |   |
+```

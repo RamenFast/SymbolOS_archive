@@ -2,14 +2,18 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
+║  (•_•)                                                       ║
+║  <)  )╯  "we ball, but we verify"                             ║
+║   /  \                                                        ║
+║                                                              ║
 ║  🧬☂️🗺️  SYMBOL MAP — SHARED GLYPHS                          ║
 ║  Quest: consistency over novelty                             ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-A small, shared legend for symbols used across SymbolOS documentation.
+A small, shared legend for symbols used across SymbolOS documentation. Because even computers need a little bit of soul.
 
-This is *not* a UI spec; it’s a meaning map so docs, tools, and agents stay consistent.
+This is *not* a UI spec; it’s a meaning map so docs, tools, and agents stay consistent. Always return to the meeting place. The map is steady. The hands are open.
 
 The canonical shared set lives in `symbol_map.shared.json`. This page mirrors that core set and may list a few optional, doc-only extras.
 
@@ -37,7 +41,17 @@ The canonical shared set lives in `symbol_map.shared.json`. This page mirrors th
 If you want the emoji layer to carry meaning *and* feeling (Fi+Ti mirrored), see:
 - [poetry_translation_layer.md](poetry_translation_layer.md)
 
+"The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore."
+
 ## Usage rules
-- Symbols are optional; they should never replace clear text.
-- In DND mode, avoid using symbols as secret signals.
-- Prefer consistency over novelty: don’t invent new symbols casually.
+- Symbols are optional; they should never replace clear text. Clarity is kindness.
+- In DND mode, avoid using symbols as secret signals. No secret handshakes, please.
+- Prefer consistency over novelty: don’t invent new symbols casually. If it ain't fun, it ain't sustainable.
+
+```
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
+```

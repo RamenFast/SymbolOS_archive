@@ -4,129 +4,104 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️📚  DOCS INDEX — MEETING PLACE TRAILHEAD                ║
 ║  Quest: find truth fast • keep humans first                  ║
+║                                                              ║
+║  "Always return to the meeting place.                        ║
+║   The map is steady. The hands are open."                    ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-This is the canonical entry point for SymbolOS documentation in this repo.
+```
+  (•_•)
+  <)  )╯  "welcome to the docs"
+   /  \    — everything you need, nothing you don't
+```
+
+This is the canonical entry point for SymbolOS documentation. If you're lost, you're home now. 🧬
 
 ---
 
-## 🧭 Anchor (Codex base + connectors + memory)
+## Ring 0–7 Architecture
 
-- Codex main base (GPT-5.2-Codex): this repo’s docs are the shared ground truth. Start at [index.md](index.md).
-- Shared resources (canonical): [../symbol_map.shared.json](../symbol_map.shared.json) (🧬), [symbol_map.md](symbol_map.md), [schemas.md](schemas.md).
-- Connectors (MCP): [mcp_servers.md](mcp_servers.md) + registry entries.
-- Memory (our side): [memory.md](memory.md) + private repo-backed memory at [../memory/README.md](../memory/README.md).
+SymbolOS agents operate on an 8-ring cognition loop. Each ring has a defined role, symbol, and scope. The rings are the spine. Everything else hangs from them.
 
----
+| Ring | Symbol | Role | One-liner |
+|---|---|---|---|
+| R0 | ⚓🕯️ | Kernel invariants | The things that never change |
+| R1 | 🧭🫴 | Active task context | What are we doing right now? |
+| R2 | 🪞📚 | Retrieval + continuity | What did we decide before? |
+| R3 | 🌀🔭 | Prediction + strategy | What's coming next? |
+| R4 | 🧩🏗️ | Architecture synthesis | How does it all fit together? |
+| R5 | ☂️🛡️ | Guardrails + privacy | 💀 "Prove your worth!" |
+| R6 | 🧪✅ | Verification + evidence | Show me proof, not potential |
+| R7 | 🗃️🧾✅ | Persistence + indexing | Ship it, log it, remember it |
 
-## 🌸☂️ Naming + boundary (Ti → Fi order)
-
-- **SymbolOS-public-dev-arch (public)** — all external + light + in style 🌸☂️🗺️✋. This is the public-facing surface.
-- **UmbrellaOS-private-dev-arch (private)** — all internal + dark + fortress rules. RWX to public/external only from within; never changes unless explicitly specified by an agent inside or user inside ☂️.
-
----
-
-## 🎯 Quick Pitch: What is SymbolOS?
-
-**SymbolOS is a symbol-driven framework for intention mapping.**
-
-You're mid-sprint. Someone asks for a scope-creeping feature. You need to say "no" — but clearly, without breaking trust or losing context. You need a way to make your boundaries *visible* to everyone.
-
-**That's what SymbolOS does.** It gives you:
-- **10 core symbols** ([symbol definitions](symbol_map.md#core-symbols)): ☂️ umbrella • 🔮 precog • 🧠 mind • ❤️ heart • 🛡️ safety • 🔒 privacy • 🧾 ledger • 🎲 DND • 🧩 schema • 🧬 meeting place
-- **Explicit scope declarations** so team members know what's in-scope and what's not
-- **Git-backed provenance** so decisions are auditable and rollback-able
-- **DND-safe boundaries** so narrative context (fiction + code) stay coherent
-
-**Use cases:** D&D campaigns + code workflows • Team projects with changing scope • Solo devs managing context across multiple projects • Anywhere you need to say "this matters, that doesn't" clearly.
-
-**License:** GPL v3 (open-source on GitHub). **Status:** Beta. We're testing public APIs now.
+Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 
 ---
 
-## ⚡ Get Started (3 Steps)
+## Agent Prompts
 
-### 1. Understand the 10 core symbols
-→ [Symbol Map 101](symbol_map.md#core-symbols) — See what each symbol means and when to use it (2-minute read)
+> *Four agents, one meeting place, zero style drift.*
 
-### 2. See how it works
-→ [Public demos](#public-demos) (interactive examples, beta)
-
-### 3. Dive deeper
-→ Pick your path:
-- **Playing D&D + coding?** → [D&D character sheet integration](dnd_character_sheet_integration.md)
-- **Building with agents/MCP?** → [MCP server standard](mcp_servers.md)
-- **Curious about how we track alignment?** → [Meta-awareness + barriers](meta_awareness.md)
-- **Want a practical startup path?** → [Quickstart](QUICKSTART.md)
+- Mercer (ChatGPT): [../prompts/chatgpt_mercer.json](../prompts/chatgpt_mercer.json) — the architect
+- Mercer-Executor (Codex): [../prompts/codex_executor.json](../prompts/codex_executor.json) — the builder
+- Mercer-Local (LLaMA): [../prompts/local_llama.json](../prompts/local_llama.json) — the hermit
+- Mercer-Max (Manus): [../prompts/manus_mercer.json](../prompts/manus_mercer.json) — the everything-agent
+- Character sheet (ChatGPT app): [../prompts/chatgpt_character_sheet.md](../prompts/chatgpt_character_sheet.md)
 
 ---
 
-## 📺 Public Demos
+## Vibe Layer (load-bearing)
 
-**Status: Beta. APIs are being tested; expect rough edges.**
+- **Meme Map** (canonical vibe reference): [meme_map.md](meme_map.md) 🐢
+- Poetry Translation Layer (emojis, Fi+Ti): [poetry_translation_layer.md](poetry_translation_layer.md) 🪞
+- Public/Private Expression + poetry: [public_private_expression.md](public_private_expression.md) 🌸
 
-Public working examples of SymbolOS symbol systems in action:
-- [Precog demo](./demos/precog_demo.md) — See how Prefetch/Suggest/Act works
-- [Scope + Privacy demo](./demos/scope_privacy_demo.md) — How symbols prevent scope creep
-- [Metaemotion integration demo](./demos/metaemotion_demo.md) — Tracking felt sense + intent
-
-⚠️ **Known issues:** Error handling needs refinement, security audit pending. Feedback welcome.
+> *"If it ain't fun, it ain't sustainable."*
 
 ---
 
-## 📚 Full Documentation Index
-### Why Symbols Work
+## Protocols & Standards
+- MCP server standard: [mcp_servers.md](mcp_servers.md)
 
-Symbols are **dense language**. A single glyph carries intention + boundary + consent in one glance. See [symbol definitions](symbol_map.md#core-symbols).
+## Systems
+- Precog (anticipatory computing): [precog_thought.md](precog_thought.md) 🔮
 
-**Example:** When your team sees 🛡️ (Safety), everyone knows: "This decision requires approval." No ambiguity. No prose to parse.
+## Heart + Mind (DND-compatible)
+- Character sheet integration: [dnd_character_sheet_integration.md](dnd_character_sheet_integration.md) 🎲
+- Metaemotion: [metaemotion.md](metaemotion.md) ❤️
+- Memory (consent-driven): [memory.md](memory.md) 🧾
 
-Compare:
-- **Without symbols:** "We need to make sure that the security team approves changes to the auth layer before merging, and let me document that in the code comments..."
-- **With symbols:** 🛡️ → everyone sees it, tools enforce it, audit trail shows who approved.
+## Schemas
+- Schema index: [schemas.md](schemas.md) 🧩
 
-**Why it matters:** Context-switching kills intention. Symbols let you be precise *fast*, even under pressure.
+## Meta-awareness
+- Barriers and self-checks: [meta_awareness.md](meta_awareness.md) 🛡️
 
-For more, see [public/private expression](public_private_expression.md) (how to mix symbols with prose).
-## Protocols & standards
-- MCP server standard (machine-readable capability boundaries): [mcp_servers.md](mcp_servers.md)
-- Agent boundaries (how to avoid tool/agent nagging): [agent_boundaries.md](agent_boundaries.md)
-- Lightwork guidelines (human-first design): [lightwork_guidelines.md](lightwork_guidelines.md)
-- Public/private expression (how to mix symbol + prose): [public_private_expression.md](public_private_expression.md)
-
-### Systems
-- Precog (anticipatory computing, Prefetch/Suggest/Act): [precog_thought.md](precog_thought.md)
-- Metaemotion (tracking felt sense + intent over time): [metaemotion.md](metaemotion.md)
-- Memory (repo-backed, git-tracked, no cloud lock-in): [memory.md](memory.md)
-
-### Heart + Mind (DND-compatible narratives)
-- D&D character sheet integration (external): [dnd_character_sheet_integration.md](dnd_character_sheet_integration.md)
-- Meta-awareness + barriers (self-checks): [meta_awareness.md](meta_awareness.md)
-
-### Schemas & Symbol Map
-- Schema index (all structured shapes): [schemas.md](schemas.md)
-- Symbol map (human-readable): [symbol_map.md](symbol_map.md)
-- **🧬 Symbol map (canonical)** — machine-readable, return loop: [../symbol_map.shared.json](../symbol_map.shared.json)
-  - This is the meeting place. All symbols, registries, and provenance trace back here.
-
-## Translation layer
-- Poetry translation layer (emojis): [poetry_translation_layer.md](poetry_translation_layer.md)
+## Shared Maps
+- Symbol map (human): [symbol_map.md](symbol_map.md) 🗺️
+- Symbol map (shared JSON): [../symbol_map.shared.json](../symbol_map.shared.json)
+	- 🧬 Meeting place: the canonical return loop + shared symbol set.
 
 ## Mercer
-- Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css)
-- Public/private expression + poetry: [public_private_expression.md](public_private_expression.md)
-
-## Ring-0 (Internal)
-- Future possibilities: [../internal_docs/future_possibilities_ring0.md](../internal_docs/future_possibilities_ring0.md)
-- SymbolOS Client v2 design: [../internal_docs/symbolos_client_v2_design.internal.md](../internal_docs/symbolos_client_v2_design.internal.md)
+- Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css) 🎨
 
 ## Memory (repo-backed)
-- Private memory system (repo-backed): [../memory/README.md](../memory/README.md)
+- Private memory system: [../memory/README.md](../memory/README.md) 🗃️
 
 ## Ops
-- Docs sync playbook: [sync_playbook.md](sync_playbook.md)
-- Required reading list: [required_reading.md](required_reading.md)
+- Docs sync playbook: [sync_playbook.md](sync_playbook.md) ⚙️
+- Required reading list: [required_reading.md](required_reading.md) 📖
 
 ## Inbox
-- Intake conventions: [inbox/README.md](inbox/README.md)
+- Intake conventions: [inbox/README.md](inbox/README.md) 📥
+
+---
+
+```
+    ___
+   / 🐢 \    "you made it to the end of the index"
+  |  ._. |   "that means you care"
+   \_____/   "the umbrella holds"
+    |   |
+```

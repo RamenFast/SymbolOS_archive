@@ -3,13 +3,22 @@
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️📚  REQUIRED READING — THE PARTY BRIEF                  ║
+║  "If it ain't fun, it ain't sustainable."                    ║
 ║  Quest: learn the rules • keep the system safe               ║
 ╚══════════════════════════════════════════════════════════════╝
+```
+
+```
+  (•_•)
+  <)  )╯  "we ball, but we verify"
+   /  \
 ```
 
 ## Poetry layer (Fi+Ti mirrored) 🪞
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+> "Shine dat light: trace a leaf decision back to its root value, then come forward again with the smallest safe step."
 
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
@@ -35,6 +44,8 @@ These are expected to arrive via Google Drive / internal shares. Until they are 
 
 - Rhynim Reading List (Drive): TODO (paste link or place file in docs/inbox/)
 - Rhy Star Industries MOC (Drive): TODO (paste link or place file in docs/inbox/)
+
+> "Show me proof, not potential."
 
 ### Notes alignment (memory guidelines)
 
@@ -83,3 +94,11 @@ When importing notes from Drive into this repo:
 Put incoming PDFs/notes here before they are curated:
 
 - [docs/inbox/README.md](inbox/README.md)
+
+```
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
+```

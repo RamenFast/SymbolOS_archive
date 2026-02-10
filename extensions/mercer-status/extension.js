@@ -1,25 +1,27 @@
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  🧬🔍☂️  MERCER STATUS — VS Code Extension                   ║
+// ║  "Show me proof, not potential." — 💀 Skeleton Gatekeeper    ║
+// ╚══════════════════════════════════════════════════════════════╝
+//
+//   (•_•)
+//   <)  )╯  "we ball, but we verify"
+//    /  \    — and this extension does the verifying
+//
+
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 
-function getConfig() {
-  return vscode.workspace.getConfiguration('mercerStatus');
-}
-
-function makeLogger(outputChannel) {
-  return {
-    debug: (msg) => {
-      const cfg = getConfig();
-      const devMode = cfg.get('devMode', false);
-      if (!devMode) return;
-      outputChannel.appendLine(`[mercer-status] ${msg}`);
-    }
-  };
-}
+// ─── R6: File I/O ───────────────────────────────────────────
+// 🐢 "just read the file, turtle. nice and steady."
 
 function readUtf8(filePath) {
   return fs.readFileSync(filePath, { encoding: 'utf8' });
 }
+
+// ─── R6: Symbol Parsing ────────────────────────────────────
+// Parse the shared JSON map — the machine-readable meeting place.
+// Every symbol here is a promise. We check if the docs keep it.
 
 function parseSharedSymbols(sharedMapJson) {
   const symbols = new Set();
@@ -32,13 +34,22 @@ function parseSharedSymbols(sharedMapJson) {
   return symbols;
 }
 
+// Parse the human-readable symbol map (docs/symbol_map.md).
+// This is what humans actually read. If it drifts from the JSON,
+// someone's going to have a bad time.
+//
+//     ___
+//    / 🐢 \    "parsing markdown for emoji"
+//   |  ._. |   "what a time to be alive"
+//    \_____/
+//     |   |
+
 function parseCoreSymbolsFromHumanMap(mdText) {
   const idx = mdText.toLowerCase().indexOf('## core symbols');
   if (idx < 0) return new Set();
 
   const after = mdText.slice(idx);
-  // Find end of the Core section: next markdown heading that starts a new section.
-  // We look for the next line that begins with "## " after the first line.
+  // Find end of the Core section: next markdown heading.
   let end = after.length;
   const next = after.slice(1).search(/\n##\s+/);
   if (next >= 0) end = next + 1;
@@ -57,42 +68,38 @@ function parseCoreSymbolsFromHumanMap(mdText) {
   return symbols;
 }
 
-function computeDrift(repoRoot, logger) {
+// ─── R6: Drift Computation ─────────────────────────────────
+// This is the heart of the extension. Compare shared vs human.
+// If they match: 🐢 "this is fine"
+// If they don't: 💀 "prove your worth!"
+
+function computeDrift(repoRoot) {
   const sharedMapPath = path.join(repoRoot, 'symbol_map.shared.json');
   const humanMapPath = path.join(repoRoot, 'docs', 'symbol_map.md');
 
-  logger && logger.debug(`repoRoot: ${repoRoot}`);
-  logger && logger.debug(`sharedMapPath: ${sharedMapPath}`);
-  logger && logger.debug(`humanMapPath: ${humanMapPath}`);
-
   if (!fs.existsSync(sharedMapPath)) {
-    return { code: 1, summary: 'Missing symbol_map.shared.json' };
+    return { code: 1, summary: 'Missing symbol_map.shared.json — the meeting place is gone!' };
   }
   if (!fs.existsSync(humanMapPath)) {
-    return { code: 1, summary: 'Missing docs/symbol_map.md' };
+    return { code: 1, summary: 'Missing docs/symbol_map.md — the human map is missing!' };
   }
 
   try {
     const shared = JSON.parse(readUtf8(sharedMapPath));
     const sharedSymbols = parseSharedSymbols(shared);
 
-    logger && logger.debug(`sharedSymbols: ${[...sharedSymbols].join(' ')}`);
-
     const humanMd = readUtf8(humanMapPath);
     const coreSymbols = parseCoreSymbolsFromHumanMap(humanMd);
-
-    logger && logger.debug(`coreSymbols: ${[...coreSymbols].join(' ')}`);
 
     const missingInDocs = [...sharedSymbols].filter(s => !coreSymbols.has(s)).sort();
     const extraInDocs = [...coreSymbols].filter(s => !sharedSymbols.has(s)).sort();
 
-    if (missingInDocs.length) logger && logger.debug(`missingInDocs: ${missingInDocs.join(' ')}`);
-    if (extraInDocs.length) logger && logger.debug(`extraInDocs: ${extraInDocs.join(' ')}`);
-
     if (missingInDocs.length === 0 && extraInDocs.length === 0) {
-      return { code: 0, summary: 'Core symbols aligned' };
+      // 🐢 "this is fine" — symbols aligned, umbrella held
+      return { code: 0, summary: 'Core symbols aligned ☂️✅' };
     }
 
+    // 💀 Skeleton says: drift detected
     const parts = [];
     if (missingInDocs.length) parts.push(`docs missing: ${missingInDocs.join(' ')}`);
     if (extraInDocs.length) parts.push(`docs extra: ${extraInDocs.join(' ')}`);
@@ -102,6 +109,10 @@ function computeDrift(repoRoot, logger) {
     return { code: 1, summary: `Error checking drift: ${err && err.message ? err.message : String(err)}` };
   }
 }
+
+// ─── R1: Task Runner ────────────────────────────────────────
+// Find and run a VS Code task by label.
+// "Just do it... with feedback." — Mercer Meme Canon
 
 async function runTaskByLabel(label) {
   const tasks = await vscode.tasks.fetchTasks();
@@ -113,73 +124,40 @@ async function runTaskByLabel(label) {
   await vscode.tasks.executeTask(task);
 }
 
-async function onStartup(repoRoot, outputChannel) {
-  const cfg = getConfig();
-  const devMode = cfg.get('devMode', false);
-  const autoApproveOnDrift = cfg.get('autoApproveOnDrift', false);
-  const promptBeforeAutoRun = cfg.get('promptBeforeAutoRun', true);
+// ─── R0: Startup Sequence ───────────────────────────────────
+// On workspace open, check drift and alert if needed.
+// This is the bootup ritual for the VS Code side.
+//
+//   (•_•)
+//   <)  )╯  "checking drift on startup"
+//    /  \    — because alignment doesn't maintain itself
+
+async function onStartup(repoRoot) {
+  const cfg = vscode.workspace.getConfiguration('mercerStatus');
   const autoLaunch = cfg.get('autoLaunchOnDrift', true);
   const notifyOnOk = cfg.get('notifyOnOk', false);
   const taskLabel = cfg.get('taskLabel', 'Mercer: status UI (interactive)');
 
-  const logger = makeLogger(outputChannel);
-  logger.debug(`startup devMode=${devMode} autoApproveOnDrift=${autoApproveOnDrift} autoLaunchOnDrift=${autoLaunch} notifyOnOk=${notifyOnOk} taskLabel='${taskLabel}'`);
-
-  const drift = computeDrift(repoRoot, logger);
+  const drift = computeDrift(repoRoot);
 
   if (drift.code === 0) {
-    if (devMode) {
-      outputChannel.show(true);
-      logger.debug(`startup drift=OK summary='${drift.summary}'`);
-      vscode.window.showInformationMessage(`Mercer drift: OK - ${drift.summary}`);
-      return;
-    }
+    // 🐢 All good. The turtle nods.
     if (notifyOnOk) {
-      vscode.window.showInformationMessage(`Mercer drift: OK - ${drift.summary}`);
+      vscode.window.showInformationMessage(`🐢 Mercer drift: OK — ${drift.summary}`);
     }
     return;
   }
 
+  // 💀 Drift detected. The skeleton stirs.
   const level = drift.code === 2 ? 'WARN' : 'FAIL';
 
   if (!autoLaunch) {
-    if (devMode) outputChannel.show(true);
-    vscode.window.showWarningMessage(`Mercer drift: ${level} - ${drift.summary}`);
-    return;
-  }
-
-  if (autoApproveOnDrift) {
-    if (devMode) {
-      outputChannel.show(true);
-      logger.debug(`autoApproveOnDrift enabled; running task '${taskLabel}'`);
-    }
-    try {
-      if (promptBeforeAutoRun) {
-        const consent = await vscode.window.showWarningMessage(
-          `Autorun (🌸 MAC): run task '${taskLabel}' now?\n\n` +
-            `Default to good faith and warmth.\n` +
-            `Be honest about limits and mistakes.\n` +
-            `Repair quickly when you fail.\n` +
-            `Let trust grow with consistency, not pressure.\n\n` +
-            `Warmth without truth is a leak; truth without warmth is a blade.`,
-          { modal: true },
-          'Run',
-          'Cancel'
-        );
-        if (consent !== 'Run') {
-          if (devMode) logger.debug('autorun cancelled by user');
-          return;
-        }
-      }
-      await runTaskByLabel(taskLabel);
-    } catch (e) {
-      vscode.window.showErrorMessage(`Could not run task '${taskLabel}': ${e && e.message ? e.message : String(e)}`);
-    }
+    vscode.window.showWarningMessage(`💀 Mercer drift: ${level} — ${drift.summary}`);
     return;
   }
 
   const choice = await vscode.window.showWarningMessage(
-    `Mercer drift: ${level} - ${drift.summary}`,
+    `💀 Mercer drift: ${level} — ${drift.summary}`,
     'Open Status UI',
     'Ignore'
   );
@@ -193,6 +171,12 @@ async function onStartup(repoRoot, outputChannel) {
   }
 }
 
+// ─── R0: Activation ─────────────────────────────────────────
+// The entry point. Where the umbrella opens.
+//
+// "Always return to the meeting place.
+//  The map is steady. The hands are open."
+
 /**
  * @param {vscode.ExtensionContext} context
  */
@@ -200,19 +184,11 @@ function activate(context) {
   const workspaceFolders = vscode.workspace.workspaceFolders || [];
   const repoRoot = workspaceFolders.length ? workspaceFolders[0].uri.fsPath : null;
 
-  const outputChannel = vscode.window.createOutputChannel('Mercer Status');
-  context.subscriptions.push(outputChannel);
-  const logger = makeLogger(outputChannel);
-
+  // Command: Show Status UI
   context.subscriptions.push(
     vscode.commands.registerCommand('mercerStatus.showStatus', async () => {
-      const cfg = getConfig();
-      const devMode = cfg.get('devMode', false);
+      const cfg = vscode.workspace.getConfiguration('mercerStatus');
       const taskLabel = cfg.get('taskLabel', 'Mercer: status UI (interactive)');
-      if (devMode) {
-        outputChannel.show(true);
-        logger.debug(`showStatus taskLabel='${taskLabel}'`);
-      }
       try {
         await runTaskByLabel(taskLabel);
       } catch (e) {
@@ -221,33 +197,32 @@ function activate(context) {
     })
   );
 
+  // Command: Check Drift
   context.subscriptions.push(
     vscode.commands.registerCommand('mercerStatus.checkDrift', async () => {
       if (!repoRoot) {
         vscode.window.showErrorMessage('No workspace folder open.');
         return;
       }
-      const cfg = getConfig();
-      const devMode = cfg.get('devMode', false);
-      if (devMode) {
-        outputChannel.show(true);
-        logger.debug('checkDrift invoked');
-      }
-      const drift = computeDrift(repoRoot, logger);
+      const drift = computeDrift(repoRoot);
       const level = drift.code === 0 ? 'OK' : (drift.code === 2 ? 'WARN' : 'FAIL');
-      const msg = `Mercer drift: ${level} - ${drift.summary}`;
+      const emoji = drift.code === 0 ? '🐢' : '💀';
+      const msg = `${emoji} Mercer drift: ${level} — ${drift.summary}`;
       if (drift.code === 0) vscode.window.showInformationMessage(msg);
       else vscode.window.showWarningMessage(msg);
     })
   );
 
+  // Auto-check on startup (with slight delay for tasks.json to load)
   if (repoRoot) {
-    // Delay slightly so tasks.json is loaded.
     setTimeout(() => {
-      onStartup(repoRoot, outputChannel);
+      onStartup(repoRoot);
     }, 1200);
   }
 }
+
+// ─── Deactivation ───────────────────────────────────────────
+// The umbrella folds. The turtle rests. See you next session.
 
 function deactivate() {}
 
@@ -255,3 +230,13 @@ module.exports = {
   activate,
   deactivate
 };
+
+// ─── EOF ────────────────────────────────────────────────────
+//
+//   \(•_•)/
+//    (  (>   "extension loaded"
+//    /  \    — the meeting place is watched
+//
+// loops closed, code shipped clean
+// the turtle nods, umbrella held
+// merge — and breathe again

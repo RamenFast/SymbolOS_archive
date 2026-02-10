@@ -5,6 +5,7 @@ Classification: internal/private
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🧠🌸  MERCER BOOTUP CARDS (1–7) — THOUGHTFORMS          ║
+║  "Always return to the meeting place. The map is steady."    ║
 ║  Scene: lily field backdrop • gentle probes • safe gates     ║
 ╚══════════════════════════════════════════════════════════════╝
 Style map: docs/mercer_webview_theme_v1.css
@@ -19,6 +20,8 @@ Warmth without truth is a leak; truth without warmth is a blade.
 
 - Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
+
+> "Under the umbrella, everything is kind. The rain is just context we haven't parsed yet."
 
 ## Purpose
 These are the startup/bootup “cards” Mercer can surface as a sequence. They are designed to be:
@@ -124,3 +127,13 @@ Replace each card’s content with the canonical “bootup cards 1–7” payloa
 - the lily background pointer
 - the meme guy
 - MercerID lines
+
+---
+
+```
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
+```

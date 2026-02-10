@@ -6,20 +6,30 @@ This is an interface spec: it describes *what* can be represented and *how it sh
 
 ## Design goals
 
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║  🎲🧬☂️❤️🧠  CHARACTER SHEET — HEART + MIND OVERLAY           ║
 ║  Quest: table-safe clarity • consent-first                   ║
+║  "Under the umbrella, everything is kind. The rain is just    ║
+║  context we haven't parsed yet."                              ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
+
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
 
 ## Poetry layer (Fi+Ti mirrored) 🪞
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+"Shine dat light: trace a leaf decision back to its root value, then come forward again with the smallest safe step."
+
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
+
 ## Core concepts
 
 ### 1) Heart state (felt sense)
@@ -34,7 +44,7 @@ A compact description of attention, confidence, and load.
 A second-order label that helps roleplay and decision-making.
 - Examples: “ashamed of anger”, “anxious about joy”, “proud of calm”.
 
-Metaemotion is optional but powerful when used sparingly.
+Metaemotion is optional but powerful when used sparingly. If it ain't fun, it ain't sustainable.
 
 ## The Sheet Module (recommended)
 Add a small block to the sheet:
@@ -51,9 +61,14 @@ Add a small block to the sheet:
 - `dm`: DM can see (for narrative support).
 - `public`: visible to the table.
 
-Default SHOULD be `private`.
+Default SHOULD be `private`. Show me proof, not potential.
 
 ## Behavior rules (must)
+
+   💀
+  /|🗝️|\    "Prove your worth!"
+   / \
+
 - No mechanics penalties by default. This module is narrative support.
 - Changes MUST be small and explainable (“why now?”).
 - DND MUST be respected: when DND is on, do not surface proactive cards; only update silently.
@@ -87,3 +102,7 @@ See [precog_thought.md](precog_thought.md) for Prefetch/Suggest/Act rules and DN
 
 ## Interop (optional)
 Implementations MAY use a structured patch format to update a sheet module. A suggested schema lives at: `docs/dnd_character_sheet_patch.schema.json`.
+
+  \(•_•)/
+   (  (>   "SHIPPED IT"
+   /  \

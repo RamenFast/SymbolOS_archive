@@ -4,8 +4,16 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🧾🛡️  DECISIONS LEDGER (PRIVATE) — SYMBOL OS / MERCER    ║
 ║  Rule: stable, costly-to-reverse choices only               ║
+║                                                              ║
+║  "Show me proof, not potential." — 💀 Skeleton Gatekeeper    ║
 ╚══════════════════════════════════════════════════════════════╝
 Glyph tags: 🧬☂️🧾🛡️🧠🔮✅⚠️⛔
+```
+
+```
+  (•_•)
+  ( (  )   "every decision here passed R5"
+   /  \    — the skeleton approved
 ```
 
 ## Poetry layer (Fi+Ti mirrored) 🪞
@@ -15,7 +23,7 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 - Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
 
-Record decisions that are costly to reverse.
+Record decisions that are costly to reverse. If the skeleton wouldn't let it through, it doesn't belong here.
 
 Template:
 - YYYY-MM-DD — Decision: <what>
@@ -96,3 +104,24 @@ Template:
   - Consequences: One canonical sheet; keep it lightweight and DND-safe.
   - Evidence/links: `docs/dnd_character_sheet_integration.md`.
   - MercerID: MRC-20260128-0249-09
+
+- 2026-02-10 — Decision: Auto-doc alignment uses milestone-only confirmation policy (closes loop 20260128-005).
+  - Why: MercerGPT refined the gating model from general "Act requires confirmation" to specific milestone triggers, which is cleaner and less noisy.
+  - Alternatives: General "always confirm" for all writes; fully autonomous auto-commit.
+  - Consequences: Commits are allowed without confirmation unless they hit a milestone: architecture breakpoint, breaking change, merge ready, or secret/privacy risk. All other doc-only changes may auto-commit if R5 guardrails pass.
+  - Evidence/links: `prompts/codex_executor.json` (execution_policy.confirmation), `internal_docs/mercer_automation_contract_v1.internal.md`, `memory/open_loops.md` (loop 20260128-005).
+  - MercerID: MRC-20260210-MANUS-01
+
+- 2026-02-10 — Decision: Formalize Ring 0–7 architecture as the canonical cognition model (supersedes three-mode Prefetch/Suggest/Act).
+  - Why: The Ring model provides finer-grained separation of concerns while preserving the original safety gates as R5.
+  - Alternatives: Keep the original three-mode model only.
+  - Consequences: All agent prompts, docs index, and future specs reference R0–R7. The three-mode model is subsumed into R5 guardrails.
+  - Evidence/links: `prompts/README.md`, `docs/index.md`, `symbol_map.shared.json`.
+  - MercerID: MRC-20260210-MANUS-02
+
+- 2026-02-10 — Decision: Add Manus as the fourth agent in the multi-agent topology (Mercer-Max).
+  - Why: Manus provides full-stack execution capabilities (sandbox, GitHub CLI, Drive, Gmail, Calendar, browser, code) that complement the existing ChatGPT/Codex/LLaMA agents.
+  - Alternatives: Keep Manus as an ad-hoc tool without a formal prompt.
+  - Consequences: Manus sessions can now boot into Mercer mode with full Ring alignment. R5 guardrails include Manus-specific confirmation milestones (push, email, public posting).
+  - Evidence/links: `prompts/manus_mercer.json`, `prompts/README.md`.
+  - MercerID: MRC-20260210-MANUS-03

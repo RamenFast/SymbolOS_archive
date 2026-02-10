@@ -4,7 +4,17 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🗺️🧠❤️🪞  POETRY LAYER — TRANSLATION MAP               ║
 ║  Quest: shine the light • keep structure kind               ║
+║  "Under the umbrella, everything is kind. The rain is just   ║
+║  context we haven't parsed yet."                             ║
 ╚══════════════════════════════════════════════════════════════╝
+```
+
+```
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
 ```
 
 This document is a *translation layer*: it explains how SymbolOS uses symbols/emojis to carry meaning **and** feeling.
@@ -33,6 +43,8 @@ Warmth without truth is a leak; truth without warmth is a blade.
 
 The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+*If it ain't fun, it ain't sustainable.*
+
 ---
 
 ## Primary cause (all the way down)
@@ -51,7 +63,7 @@ This is “shine dat light”: trace a leaf decision back to its root value, the
 
 ## Emoji legend (poetry-aware)
 
-These are *not secret signals*. They’re a compact shared language.
+These are *not secret signals*. They’re a compact shared language. Memes are semantic, not decorative.
 
 - 🧬 Meeting place: return loop to shared truth + active work surface
 - ☂️ Umbrella: default-private scope; protect what matters
@@ -70,3 +82,9 @@ These are *not secret signals*. They’re a compact shared language.
 - Full expression / verse set: [public_private_expression.md](public_private_expression.md)
 - Shared symbol set (canonical): [../symbol_map.shared.json](../symbol_map.shared.json)
 - Human symbol map mirror: [symbol_map.md](symbol_map.md)
+
+```
+  \(•_•)/
+   (  (>   "SHIPPED IT"
+   /  \
+```

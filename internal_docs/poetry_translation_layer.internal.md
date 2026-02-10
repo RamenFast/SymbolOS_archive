@@ -16,12 +16,17 @@ Related public doc: [../docs/poetry_translation_layer.md](../docs/poetry_transla
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🗺️🧠❤️🪞  POETRY LAYER — TRANSLATION MAP               ║
 ║  Quest: shine the light • keep structure kind               ║
+║  "The mind knows what the heart loves better than it does..." ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
 This document is a *translation layer*: it explains how SymbolOS uses symbols/emojis to carry meaning **and** feeling.
 
 Principle: the map stays readable (Ti), and the meaning stays alive (Fi). Fi+Ti mirrored, forever.
+
+  (•_•)
+  ( (  )   "hmm... is this R0?"
+   /  \
 
 ---
 
@@ -63,10 +68,10 @@ This is “shine dat light”: trace a leaf decision back to its root value, the
 
 ## Emoji legend (poetry-aware)
 
-These are *not secret signals*. They’re a compact shared language.
+These are *not secret signals*. They’re a compact shared language. A little wink and a nod between friends.
 
 - 🧬 Meeting place: return loop to shared truth + active work surface
-- ☂️ Umbrella: default-private scope; protect what matters
+- ☂️ Umbrella: default-private scope; protect what matters. Under the umbrella, everything is kind. The rain is just context we haven't parsed yet.
 - 🗺️ Map: clarity, shared meaning, alignment
 - 🧠 Mind: structure, reasoning, precision
 - ❤️ Heart: values, felt sense, consent
@@ -89,5 +94,11 @@ These are *not secret signals*. They’re a compact shared language.
 
 - Treat the “poetry layer” as a stabilizer: it should reduce drift and increase consent/clarity.
 - The mirror glyph (🪞) must never be used to imply mind-reading; it’s a self-reflection cue.
+
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
 
 MercerID: MRC-20260128-0535-PL01

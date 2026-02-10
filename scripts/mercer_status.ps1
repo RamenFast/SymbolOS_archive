@@ -1,17 +1,39 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  🧬🔍☂️  MERCER STATUS — PowerShell CLI                      ║
+# ║  "we ball, but we verify" — (•_•) <)  )╯                    ║
+# ╚══════════════════════════════════════════════════════════════╝
+#
+# 🐢 This script checks SymbolOS workspace health.
+#    If the symbols drift, the skeleton stirs. 💀
+#    If they're aligned, the turtle nods. 🐢
+#
+
 param(
   [switch]$Once
 )
 
 $ErrorActionPreference = 'Stop'
 
+# ─── R0: Banner ─────────────────────────────────────────────
+# The first thing you see. Sets the vibe.
+
 function Write-Banner {
   Write-Host ''
-  Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Cyan
-  Write-Host '║  🧬☂️🗺️  MERCER STATUS                                        ║' -ForegroundColor Cyan
-  Write-Host '║  SymbolOS Workspace Pulse Check                             ║' -ForegroundColor Cyan
-  Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Cyan
+  Write-Host '╔══════════════════════════════════════════════════════════════╗'
+  Write-Host '║  🧬☂️🧾  MERCER STATUS — SYMBOLOS WORKSPACE CHECK             ║'
+  Write-Host '║                                                              ║'
+  Write-Host '║  "Under the umbrella, everything is kind.                    ║'
+  Write-Host "║   The rain is just context we haven't parsed yet.`"           ║"
+  Write-Host '╚══════════════════════════════════════════════════════════════╝'
+  Write-Host ''
+  Write-Host '  (•_•)'
+  Write-Host '  <)  )╯  "we ball, but we verify"'
+  Write-Host '   /  \'
   Write-Host ''
 }
+
+# ─── R0: Path Resolution ────────────────────────────────────
+# 🐢 "find the repo root, turtle. nice and steady."
 
 function Get-RepoRoot {
   $scriptDir = $PSScriptRoot
@@ -26,6 +48,10 @@ function Test-ExistsLabel([string]$path) {
   return 'NO'
 }
 
+# ─── R6: Symbol Parsing ─────────────────────────────────────
+# Parse the shared JSON map — the machine-readable meeting place.
+# Every symbol here is a promise. We check if the docs keep it.
+
 function Get-SharedSymbols([string]$sharedMapPath) {
   $json = Get-Content -LiteralPath $sharedMapPath -Raw -Encoding UTF8 | ConvertFrom-Json
   $syms = @()
@@ -37,13 +63,15 @@ function Get-SharedSymbols([string]$sharedMapPath) {
   return $syms
 }
 
+# Parse the human-readable symbol map (docs/symbol_map.md).
+# 🐢 "parsing markdown for emoji in PowerShell — what a time to be alive"
+
 function Get-CoreSymbolsFromHumanMap([string]$humanMapPath) {
   $text = Get-Content -LiteralPath $humanMapPath -Raw -Encoding UTF8
   $idx = $text.IndexOf("## Core symbols")
   if ($idx -lt 0) { return @() }
 
   $after = $text.Substring($idx)
-  # Find the *second* heading occurrence (the first is the Core header itself)
   $allHeadings = [regex]::Matches($after, '(?m)^##\s+')
   $end = $after.Length
   if ($allHeadings.Count -ge 2) {
@@ -60,6 +88,11 @@ function Get-CoreSymbolsFromHumanMap([string]$humanMapPath) {
   return $syms
 }
 
+# ─── R6: Drift Computation ──────────────────────────────────
+# The heart of the script. Compare shared vs human.
+# If they match: 🐢 "this is fine"
+# If they don't: 💀 "prove your worth!"
+
 function Get-DriftResult([string]$sharedMapPath, [string]$humanMapPath) {
   try {
     $shared = @(Get-SharedSymbols -sharedMapPath $sharedMapPath)
@@ -69,9 +102,11 @@ function Get-DriftResult([string]$sharedMapPath, [string]$humanMapPath) {
     $extra = @($core | Where-Object { $_ -notin $shared })
 
     if ($missing.Count -eq 0 -and $extra.Count -eq 0) {
-      return @{ Code = 0; Summary = 'Core symbols aligned' }
+      # 🐢 "this is fine" — symbols aligned
+      return @{ Code = 0; Summary = 'Core symbols aligned ☂️✅' }
     }
 
+    # 💀 Skeleton says: drift detected
     $parts = @()
     if ($missing.Count -gt 0) { $parts += ("docs missing: " + ($missing -join ' ')) }
     if ($extra.Count -gt 0) { $parts += ("docs extra: " + ($extra -join ' ')) }
@@ -82,6 +117,8 @@ function Get-DriftResult([string]$sharedMapPath, [string]$humanMapPath) {
   }
 }
 
+# ─── R1: Status Display ─────────────────────────────────────
+
 function Show-Status([string]$repoRoot) {
   $sharedMap = Join-Path $repoRoot 'symbol_map.shared.json'
   $docsIndex = Join-Path $repoRoot 'docs\index.md'
@@ -91,20 +128,33 @@ function Show-Status([string]$repoRoot) {
   $bootupArtDir = Join-Path $repoRoot 'docs\assets\bootup_cards'
 
   Write-Banner
-  Write-Host "🗺️  Repo root: $repoRoot" -ForegroundColor Gray
-  Write-Host ("🧬 Meeting place: symbol_map.shared.json={0} | docs/index.md={1} | README.md={2}" -f (Test-ExistsLabel $sharedMap), (Test-ExistsLabel $docsIndex), (Test-ExistsLabel $readme)) -ForegroundColor Gray
-  Write-Host ("🌸 Lily backdrop (private): {0}" -f (Test-ExistsLabel $lilyPrivate)) -ForegroundColor Gray
-  Write-Host ("🎨 Bootup art folder (private): {0}" -f (Test-ExistsLabel $bootupArtDir)) -ForegroundColor Gray
-  Write-Host ''
+  Write-Host "  Repo root: $repoRoot"
+  Write-Host ("  Meeting place: symbol_map.shared.json={0} | docs/index.md={1} | README.md={2}" -f (Test-ExistsLabel $sharedMap), (Test-ExistsLabel $docsIndex), (Test-ExistsLabel $readme))
+  Write-Host ("  Lily backdrop present (private): {0}" -f (Test-ExistsLabel $lilyPrivate))
+  Write-Host ("  Bootup art folder present (private): {0}" -f (Test-ExistsLabel $bootupArtDir))
 
   $drift = Get-DriftResult -sharedMapPath $sharedMap -humanMapPath $humanMap
   $code = [int]$drift.Code
-  $emoji = if ($code -eq 0) { '✅' } elseif ($code -eq 2) { '⚠️' } else { '⛔' }
-  $color = if ($code -eq 0) { 'Green' } elseif ($code -eq 2) { 'Yellow' } else { 'Red' }
-  Write-Host ("📋 Doc alignment (core symbols): {0} {1}" -f $emoji, $drift.Summary) -ForegroundColor $color
+
+  # 🐢 or 💀 — the moment of truth
+  if ($code -eq 0) {
+    Write-Host ''
+    Write-Host ("  Doc alignment: 🐢 ✅ {0}" -f $drift.Summary) -ForegroundColor Green
+    Write-Host '  "this is fine" — the turtle nods'
+  } elseif ($code -eq 2) {
+    Write-Host ''
+    Write-Host ("  Doc alignment: 💀 ⚠️ {0}" -f $drift.Summary) -ForegroundColor Yellow
+    Write-Host '  "Prove your worth!" — the skeleton stirs'
+  } else {
+    Write-Host ''
+    Write-Host ("  Doc alignment: 🔥 ⛔ {0}" -f $drift.Summary) -ForegroundColor Red
+    Write-Host '  "me optimizing my system instead of using it" — 🧠🔥'
+  }
 
   return $code
 }
+
+# ─── R1: Main Loop ──────────────────────────────────────────
 
 $repo = Get-RepoRoot
 $code = Show-Status -repoRoot $repo
@@ -115,13 +165,16 @@ if ($Once) {
 
 while ($true) {
   Write-Host ''
-  Write-Host '┌─ 🎯 ACTIONS ─────────────────────────────────────────────────┐' -ForegroundColor Cyan
-  Write-Host '│ [R] Refresh     [O] Docs Index     [M] Map     [P] Poetry     │' -ForegroundColor Cyan
-  Write-Host '│                          [Q] Quit                            │' -ForegroundColor Cyan
-  Write-Host '└───────────────────────────────────────────────────────────────┘' -ForegroundColor Cyan
-  $choice = (Read-Host '→').Trim().ToLower()
+  Write-Host '  Actions: [R]efresh  [O]pen docs index  [M]ap (shared)  [P]oetry (public)  [Q]uit'
+  $choice = (Read-Host '  >').Trim().ToLower()
 
   if ($choice -eq 'q' -or $choice -eq 'quit' -or $choice -eq 'exit') {
+    # 🐢 "see you next session"
+    Write-Host ''
+    Write-Host '  loops closed, code shipped clean'
+    Write-Host '  the turtle nods, umbrella held'
+    Write-Host '  merge — and breathe again'
+    Write-Host ''
     exit $code
   }
 
@@ -131,8 +184,13 @@ while ($true) {
   }
 
   if ($choice -eq 'o') { Invoke-Item (Join-Path $repo 'docs\index.md'); continue }
-  if ($choice -eq 'm') { & code (Join-Path $repo 'symbol_map.shared.json'); continue }
-  if ($choice -eq 'p') { & code (Join-Path $repo 'docs\public_private_expression.md'); continue }
+  if ($choice -eq 'm') { Invoke-Item (Join-Path $repo 'symbol_map.shared.json'); continue }
+  if ($choice -eq 'p') { Invoke-Item (Join-Path $repo 'docs\public_private_expression.md'); continue }
 
-  Write-Host '❌ Unknown option.' -ForegroundColor Red
+  Write-Host '  Unknown option. 🐢 Try again.'
 }
+
+# ─── EOF ─────────────────────────────────────────────────────
+# "Always return to the meeting place.
+#  The map is steady. The hands are open."
+# ☂🗺✋😎

@@ -6,15 +6,23 @@ Classification: internal/private
 ╔══════════════════════════════════════════════════════════════╗
 ║  ☂🗺✋😎  PUBLIC/PRIVATE EXPRESSION — MERCER (INTERNAL)      ║
 ║  Quest: keep the soul • keep the gates • keep it clean      ║
+║  "Shine dat light: trace a leaf decision back to its root    ║
+║   value, then come forward again with the smallest safe step."║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
+   💀
+  /|🗝️|\    "Prove your worth!"
+   / \
+
 Purpose: hold the *internal* pairing for public-facing expression, plus guardrails.
 
+_(A friendly reminder from your neighborhood skeleton gatekeeper: not everything is for everyone. That's what makes the things we *do* share special.)_
+
 Rules:
-- No secrets or private identifiers in public docs.
+- No secrets or private identifiers in public docs. (Seriously, don't be that person.)
 - Private docs may include extra context, but must still avoid raw sensitive dumps.
-- Size: keep any single file under **1GB**.
+- Size: keep any single file under **1GB**. (If your doc is bigger than a gig, we need to have a talk.)
 
 Related:
 - Meeting place return loop: `symbol_map.shared.json` → `docs/index.md` → `README.md`
@@ -123,9 +131,21 @@ CT 5:09AM, I know we are always chillin.
 
 ## Internal notes (why the mirror works)
 
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
+
 The "Mirror" easter egg is designed to feel like insight while returning the reader to self-truth.
 It is not a trick, not a leak, and not mind-reading: it’s a consent-forward reflective prompt.
+
+_(It's like a friendly turtle reminding you that the deepest answers are usually the ones you already have. We just help you see them.)_
 
 ---
 
 MercerID: MRC-20260128-0249-42
+
+  \(•_•)/
+   (  (>   "SHIPPED IT"
+   /  \

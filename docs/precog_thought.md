@@ -3,19 +3,28 @@
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🔮🧠  PRECOG THOUGHT — PREFETCH / SUGGEST / ACT          ║
+║  "Shine dat light: trace a leaf decision back to its root   ║
+║  value, then come forward again with the smallest safe step."║
 ║  Quest: reduce latency • preserve trust                      ║
 ╚══════════════════════════════════════════════════════════════╝
+```
+```
+  (•_•)
+  ( (  )   "hmm... is this R0?"
+   /  \
 ```
 
 ## Poetry layer (Fi+Ti mirrored) 🪞
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+*If it ain't fun, it ain't sustainable.*
+
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
 
 Precog thought in SymbolOS is a practical pattern: use context to prepare helpful information or drafts before the user explicitly asks.
-It is not paranormal. “Precog” is a metaphor for probabilistic inference, workflow heuristics, and smart precomputation.
+It is not paranormal. “Precog” is a metaphor for probabilistic inference, workflow heuristics, and smart precomputation. It's about being thoughtful, not psychic.
 
 See internal design notes in [internal_docs/precog_private.md](../internal_docs/precog_private.md).
 
@@ -29,47 +38,47 @@ See internal design notes in [internal_docs/precog_private.md](../internal_docs/
 
 Precog features MUST be implemented as one of these modes:
 
-1) Prefetch (silent)
+1) **Prefetch (silent)**
 - Precompute or prefetch bounded read-only context.
 - No user interruption.
 - MUST respect DND rules and privacy classification.
 
-2) Suggest (visible)
+2) **Suggest (visible)**
 - Present a short suggestion card.
 - No side effects.
 - MUST include `Dismiss` and `Mute this type`.
 
-3) Act (confirmed)
+3) **Act (confirmed)**
 - State-changing or sensitive actions.
 - MUST require explicit user confirmation.
 - MUST be idempotent and auditable.
 
 Internal policy (Mercer automation gates + Ti contract): [internal_docs/mercer_automation_contract_v1.internal.md](../internal_docs/mercer_automation_contract_v1.internal.md)
 
-If you can’t clearly label a behavior as one of the above, it’s not ready to ship.
+If you can’t clearly label a behavior as one of the above, it’s not ready to ship. Show me proof, not potential.
 
 ## Core pipeline (recommended)
 
-1) Signals
+1) **Signals**
 - editor state (open files, language, errors)
 - VCS state (branch, recent push, PR status)
 - calendar (next meeting)
 - task state (running build/tests)
 - user prefs (quiet hours, DND, privacy)
 
-2) Intent inference
+2) **Intent inference**
 - Start with rules + scoring.
 - Add ML only after you can measure outcomes.
 
-3) Policy & gating (centralized)
+3) **Policy & gating (centralized)**
 - Decide per candidate: `prefetchAllowed`, `suggestAllowed`, `actAllowed`.
 - Inputs: risk level, confidence, DND, data classification, cost, rate limits.
 
-4) Execution
+4) **Execution**
 - Run asynchronously with strict limits (timeouts, concurrency, payload size).
 - Cache with TTL; store provenance (`why`, `when`, `source`).
 
-5) Presentation
+5) **Presentation**
 - Use the output contract below.
 - Keep suggestions skimmable and reversible.
 
@@ -104,7 +113,7 @@ DND OFF:
 
 ### Message shapes
 
-1) One-line headline (notification safe)
+1) **One-line headline (notification safe)**
 
 Example:
 - `Prep: Standup in 9m — notes + open PRs ready`
@@ -113,7 +122,7 @@ Rules:
 - Keep it short (target <= ~80 chars).
 - Avoid sensitive content.
 
-2) Compact card (default, 5 lines max)
+2) **Compact card (default, 5 lines max)**
 
 Template:
 - `Prep for: {thing} ({time})`
@@ -122,13 +131,13 @@ Template:
 - `Do: {primary} | {secondary} | {snooze}`
 - `Privacy: {scope} • Cost: {low/med/high}`
 
-3) Technical summary (when user asks “what changed?”)
+3) **Technical summary (when user asks “what changed?”)**
 - What changed (1–2 sentences)
 - Where it changed (links)
 - Why it matters (1 sentence)
 - How to verify (1–3 bullets)
 
-4) Dungeon Master’s Log (optional “flavor mode”)
+4) **Dungeon Master’s Log (optional “flavor mode”)**
 
 This mode exists for users who want narrative style. It MUST preserve the same factual payload as the compact card.
 
@@ -181,3 +190,11 @@ See [mcp_servers.md](mcp_servers.md) for tool risk levels, confirmation, limits,
 - Heart + mind integration: [dnd_character_sheet_integration.md](dnd_character_sheet_integration.md)
 - Metaemotion and timing: [metaemotion.md](metaemotion.md)
 - Memory and retention: [memory.md](memory.md)
+
+```
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
+```

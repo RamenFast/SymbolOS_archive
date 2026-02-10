@@ -4,35 +4,39 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🧾  MEMORY — CONSENT + PROVENANCE                        ║
 ║  Quest: remember well • never store secrets                  ║
+║  "Always return to the meeting place. The map is steady."    ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
+
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
 
 ## Poetry layer (Fi+Ti mirrored) 🪞
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+"Shine dat light: trace a leaf decision back to its root value, then come forward again with the smallest safe step."
+
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
 
-This document defines a safe, consent-driven approach to “memory” in SymbolOS.
+This document defines a safe, consent-driven approach to “memory” in SymbolOS. It's about remembering the little things that make our dance together smoother.
 
----
-
-## 🧭 Anchor (Codex base + connectors + memory)
-
-- Codex main base (GPT-5.2-Codex): this repo’s docs are the shared ground truth. Start at [index.md](index.md).
-- Shared resources (canonical): [../symbol_map.shared.json](../symbol_map.shared.json) (🧬), [symbol_map.md](symbol_map.md), [schemas.md](schemas.md).
-- Connectors (MCP): [mcp_servers.md](mcp_servers.md) + registry entries.
-- Memory (our side): [memory.md](memory.md) + private repo-backed memory at [../memory/README.md](../memory/README.md).
-
-Memory here means: durable, retrievable notes and preferences that help future interactions.
+Memory here means: durable, retrievable notes and preferences that help future interactions. Think of it as our shared notebook.
 
 ## Principles
-- Consent first: users choose what is stored.
-- Minimum necessary: store the smallest useful representation.
-- Provenance: every memory includes why/when/source.
-- Correctability: users can view, edit, and delete memories.
-- DND compatibility: memory capture should not interrupt.
+- **Consent first**: You are the captain of this ship. You choose what is stored.
+- **Minimum necessary**: We store the smallest useful representation. No hoarding.
+- **Provenance**: Every memory includes why/when/source. We show our work.
+- **Correctability**: Users can view, edit, and delete memories. Your memory, your rules.
+- **DND compatibility**: Memory capture should not interrupt the flow. We're not paparazzi.
+
+  (•_•)
+  ( (  )   "hmm... is this R0?"
+   /  \
 
 ## What counts as memory
 
@@ -43,7 +47,7 @@ Memory here means: durable, retrievable notes and preferences that help future i
 - Stable “life patterns” the user explicitly enables
 
 ### Avoid by default
-- Secrets (API keys, passwords)
+- Secrets (API keys, passwords) - No, just no.
 - Sensitive personal info (health, finances) unless explicitly requested and protected
 - Unverified claims about real people
 
@@ -74,3 +78,9 @@ Memory here means: durable, retrievable notes and preferences that help future i
 
 ## Interop schema (optional)
 If emitting structured memory records, a suggested schema lives at: `docs/memory_record.schema.json`.
+
+```
+  \(•_•)/
+   (  (>   "SHIPPED IT"
+   /  \
+```

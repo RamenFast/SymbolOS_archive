@@ -1,6 +1,10 @@
 # Meta-Awareness (External)
 
 ```
+  (•_•)
+  ( (  )   "hmm... is this R0?"
+   /  \
+
 ╔══════════════════════════════════════════════════════════════╗
 ║  🧬☂️🛡️  META-AWARENESS — BARRIERS & SELF-CHECKS             ║
 ║  Quest: explain intent • detect drift • respect boundaries   ║
@@ -10,6 +14,8 @@
 ## Poetry layer (Fi+Ti mirrored) 🪞
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+
+> "Shine dat light: trace a leaf decision back to its root value, then come forward again with the smallest safe step."
 
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
@@ -21,7 +27,7 @@ Meta-awareness is the agent’s ability to:
 - detect when it is drifting or looping (self-checks)
 - respect boundaries that prevent unsafe or unwanted behavior (barriers)
 
-This is not a psychology document. It is an agent safety + UX contract.
+This is not a psychology document. It is an agent safety + UX contract. If it ain't fun, it ain't sustainable.
 
 ## Core idea: dissociation barriers (technical)
 
@@ -70,3 +76,11 @@ When meta-awareness triggers, the system SHOULD emit a short event (internal) an
 
 ## Interop schema (optional)
 Structured events MAY use: `docs/meta_awareness_event.schema.json`.
+
+```
+    ___
+   / 🐢 \    "this is fine"
+  |  ._. |
+   \_____/
+    |   |
+```

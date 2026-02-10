@@ -2,6 +2,9 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
+║  (•_•)                                                       ║
+║  <)  )╯  "we ball, but we verify"                             ║
+║   /  \                                                        ║
 ║  🧬☂️🧾  SYNC PLAYBOOK — KEEP THE LORE CONSISTENT            ║
 ║  Quest: small diffs • stable meanings • verifiable changes   ║
 ╚══════════════════════════════════════════════════════════════╝
@@ -14,7 +17,7 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 - Translation layer + emojis: [poetry_translation_layer.md](poetry_translation_layer.md)
 - Full verse set: [public_private_expression.md](public_private_expression.md)
 
-This playbook is the shortest safe path to keep docs synced and coherent.
+This playbook is the shortest safe path to keep docs synced and coherent. "Show me proof, not potential."
 
 Scope: `docs/` and Markdown files (`*.md`) in the repo root.
 
@@ -96,6 +99,12 @@ Pre-flight checks:
 - If your tree is dirty, either commit the pending changes or:
    - `git stash -u` before syncing
    - `git stash pop` afterwards
+
+```
+  (•_•)
+  ( (  )   "hmm... is this R0?"
+   /  \
+```
 
 ---
 
@@ -182,3 +191,9 @@ If branch protections block direct pushes:
 - `git status`
 
 Expect: “working tree clean”.
+
+```
+  \(•_•)/
+   (  (>   "SHIPPED IT"
+   /  \
+```
