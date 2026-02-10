@@ -20,6 +20,9 @@ This is a local workspace extension scaffold.
 If you want this packaged and installable as a `.vsix`, we can add a proper TypeScript build and `vsce` packaging flow.
 
 ## Settings
+- `mercerStatus.devMode` (default: false)
+- `mercerStatus.autoApproveOnDrift` (default: false)
+- `mercerStatus.promptBeforeAutoRun` (default: true)
 - `mercerStatus.autoLaunchOnDrift` (default: true)
 - `mercerStatus.notifyOnOk` (default: false)
 - `mercerStatus.taskLabel` (default: `Mercer: status UI (interactive)`)

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "generatedAt": "2026-01-28T00:14:00Z",
+  "generatedAt": "1970-01-01T00:00:00Z",
   "project": {
     "name": "SymbolOS",
     "entrypoints": {
@@ -24,8 +24,14 @@
     {
       "symbol": "☂️",
       "name": "Umbrella",
-      "meaning": "UmbrellaOS / SymbolOS umbrella",
+      "meaning": "UmbrellaOS-private-dev-arch (private umbrella; fortress boundary)",
       "tags": ["branding", "system"]
+    },
+    {
+      "symbol": "🌸",
+      "name": "SymbolOS",
+      "meaning": "SymbolOS-public-dev-arch (public, light, external-facing surface)",
+      "tags": ["branding", "system", "public"]
     },
     {
       "symbol": "🔮",
@@ -85,7 +91,9 @@
   "indexes": {
     "docs": [
       { "path": "docs/index.md", "title": "Docs Index", "kind": "index" },
+      { "path": "docs/QUICKSTART.md", "title": "Quickstart", "kind": "index" },
       { "path": "docs/mcp_servers.md", "title": "MCP Servers Standard", "kind": "standard" },
+      { "path": "docs/agent_boundaries.md", "title": "Agent Boundaries", "kind": "standard" },
       { "path": "docs/precog_thought.md", "title": "Precog Thought", "kind": "system" },
       { "path": "docs/dnd_character_sheet_integration.md", "title": "DND Character Sheet Integration", "kind": "external" },
       { "path": "docs/metaemotion.md", "title": "Metaemotion", "kind": "external" },
@@ -94,26 +102,40 @@
       { "path": "docs/required_reading.md", "title": "Required Reading", "kind": "index" },
       { "path": "docs/sync_playbook.md", "title": "Docs Sync Playbook", "kind": "ops" },
       { "path": "docs/symbol_map.md", "title": "Symbol Map (Human)", "kind": "map" },
+      { "path": "docs/lightwork_guidelines.md", "title": "Lightwork Guidelines", "kind": "standard" },
       { "path": "docs/mercer_webview_theme_v1.css", "title": "Mercer Webview Theme Map v1", "kind": "theme" },
       { "path": "docs/public_private_expression.md", "title": "Mercer — Public/Private Expression (v1)", "kind": "expression" },
       { "path": "docs/poetry_translation_layer.md", "title": "Poetry Translation Layer (Emojis)", "kind": "map" },
+      { "path": "docs/mcp_git.md", "title": "MCP Git Server", "kind": "mcp-server", "status": "beta" },
+      { "path": "docs/mcp_filesystem.md", "title": "MCP Filesystem Server", "kind": "mcp-server", "status": "beta" },
+      { "path": "docs/mcp_memory.md", "title": "MCP Memory Server", "kind": "mcp-server", "status": "beta" },
+      { "path": "docs/mcp_web_search.md", "title": "MCP Web Search Server", "kind": "mcp-server", "status": "beta" },
+      { "path": "docs/mcp_local_llm.md", "title": "MCP Local LLM Server", "kind": "mcp-server", "status": "beta" },
       { "path": "internal_docs/mercer_meeting_place_oath_v1.private.md", "title": "Mercer Meeting Place Oath v1 (Private)", "kind": "private" },
       { "path": "internal_docs/local_llm_windows_vulkan_internal.md", "title": "Local LLM (Windows Vulkan) — Internal", "kind": "compute" },
       { "path": "internal_docs/future_possibilities_ring0.md", "title": "Future Possibilities (Ring-0) — Internal", "kind": "ring0" },
+      { "path": "internal_docs/ring0_async_alignment.internal.md", "title": "Ring-0 Async Alignment — Foundation Workflow (Internal)", "kind": "ops" },
       { "path": "internal_docs/mercer_automation_contract_v1.internal.md", "title": "Mercer Automation Contract v1 (Internal)", "kind": "policy" },
       { "path": "internal_docs/mercer_bootup_cards_v1.internal.md", "title": "Mercer Bootup Cards (1–7) — Internal", "kind": "bootup" },
       { "path": "internal_docs/public_private_expression.internal.md", "title": "Mercer — Public/Private Expression (v1) — Internal", "kind": "expression" },
       { "path": "internal_docs/poetry_translation_layer.internal.md", "title": "Poetry Translation Layer (Emojis) — Internal", "kind": "map" },
       { "path": "internal_docs/mercer_multi_machine_sync.internal.md", "title": "Mercer Multi-Machine Sync — Mac/PC (Internal)", "kind": "ops" },
+      { "path": "internal_docs/mercerpc_poetry.internal.md", "title": "MercerPC — System Poetry (Internal)", "kind": "expression" },
+      { "path": "internal_docs/mercymac_poetry.internal.md", "title": "MercyMAC — System Poetry (Internal)", "kind": "expression" },
+      { "path": "internal_docs/demos.internal.md", "title": "Demos Runbook (Internal)", "kind": "ops" },
+      { "path": "internal_docs/symbolos_client_v2_design.internal.md", "title": "SymbolOS Client v2 Design (Internal)", "kind": "design" },
       { "path": "memory/README.md", "title": "Repo-backed Memory System (Private)", "kind": "memory" },
       { "path": "memory/working_set.md", "title": "Working Set (Private)", "kind": "memory" },
       { "path": "memory/decisions.md", "title": "Decisions (Private)", "kind": "memory" },
       { "path": "memory/open_loops.md", "title": "Open Loops (Private)", "kind": "memory" },
       { "path": "memory/glossary.md", "title": "Glossary (Private)", "kind": "memory" },
-      { "path": "memory/session_log_2026-01-28.md", "title": "Session Log 2026-01-28 (Private)", "kind": "memory" }
+      { "path": "memory/session_logs/*.md", "title": "Session Logs (Private)", "kind": "memory" }
     ],
     "schemas": [
       { "path": "docs/registry_entry.schema.json", "title": "Registry Entry", "kind": "schema" },
+      { "path": "docs/mcp_git.schema.json", "title": "MCP Git Server Tools", "kind": "schema" },
+      { "path": "docs/mcp_filesystem.schema.json", "title": "MCP Filesystem Server Tools", "kind": "schema" },
+      { "path": "docs/mcp_memory.schema.json", "title": "MCP Memory Server Tools", "kind": "schema" },
       { "path": "docs/precog_card.schema.json", "title": "Precog Card", "kind": "schema" },
       { "path": "docs/shadow_queue_item.schema.json", "title": "Shadow Queue Item", "kind": "schema" },
       { "path": "docs/dnd_character_sheet_patch.schema.json", "title": "Character Sheet Patch", "kind": "schema" },
@@ -129,6 +151,18 @@
       "path": "docs/mcp_servers.md",
       "tags": ["MCP", "servers", "protocol", "tools", "resources", "prompts"],
       "summary": "SymbolOS MCP server standard: tools/resources/prompts, risk levels, confirmation, limits, and error patterns."
+    },
+    {
+      "title": "Quickstart",
+      "path": "docs/QUICKSTART.md",
+      "tags": ["quickstart", "onboarding", "docs"],
+      "summary": "Fast path to the meeting place: read the symbol map, run the doc alignment scan, try demos, and optionally start local inference."
+    },
+    {
+      "title": "Agent Boundaries",
+      "path": "docs/agent_boundaries.md",
+      "tags": ["agents", "boundaries", "privacy", "safety", "workflow"],
+      "summary": "Human-first constraints for assistants and tools: quiet-by-default, ask-once behavior, privacy boundaries, and gating rules."
     },
     {
       "title": "Precog Thought Overview",
@@ -243,6 +277,76 @@
       "path": "extensions/mercer-status/README.md",
       "tags": ["Mercer", "VSCode", "extension", "status", "drift"],
       "summary": "Minimal VS Code extension scaffold that checks core-symbol drift on startup and opens the Mercer status UI only on WARN/FAIL."
+    },
+    {
+      "title": "Ring-0 Async Alignment — Foundation Workflow (Internal)",
+      "path": "internal_docs/ring0_async_alignment.internal.md",
+      "tags": ["ring0", "alignment", "async", "foundation", "ops"],
+      "summary": "Asynchronous alignment loop (capture → align → promote → verify) that keeps the foundation stable while allowing speculation and poetry safely."
+    },
+    {
+      "title": "MercerPC — System Poetry (Internal)",
+      "path": "internal_docs/mercerpc_poetry.internal.md",
+      "tags": ["Mercer", "poetry", "windows", "pc", "expression"],
+      "summary": "PC-side system poetry that expresses state (PowerShell/Vulkan/status) in a repo-safe way, meant to be aligned back into structure."
+    },
+    {
+      "title": "MercyMAC — System Poetry (Internal)",
+      "path": "internal_docs/mercymac_poetry.internal.md",
+      "tags": ["Mercer", "poetry", "mac", "expression"],
+      "summary": "Mac-side system poetry companion to MercerPC, preserving the same invariants (meeting place, privacy, gates) with macOS flavor."
+    },
+    {
+      "title": "Demos Runbook (Internal)",
+      "path": "internal_docs/demos.internal.md",
+      "tags": ["demo", "runbook", "Mercer", "ops", "mac", "windows"],
+      "summary": "One-page internal checklist for demoing the meeting place, drift check, status UI, extension dev host, and Ring-0 async alignment loop across MercerPC and MercyMAC."
+    },
+    {
+      "title": "SymbolOS Client v2 Design (Internal)",
+      "path": "internal_docs/symbolos_client_v2_design.internal.md",
+      "tags": ["client", "v2", "design", "multi-agent", "mercer", "lantern"],
+      "summary": "Internal design for SymbolOS Client v2: 16-agent orchestra, Mercer as Lantern, git-backed memory, and 96.7% alignment tracking."
+    },
+    {
+      "title": "MCP Git Server",
+      "path": "docs/mcp_git.md",
+      "tags": ["MCP", "git", "version control", "provenance", "ledger"],
+      "status": "beta",
+      "asyncNote": "Full release pending security audit for commit signing + force-push prevention (Q2 2026). Current: read-only branches, push, status.",
+      "summary": "🧬 Git operations: list branches, read commits, push changes, status checks. Used for 🧾 provenance + version control of SymbolOS projects."
+    },
+    {
+      "title": "MCP Filesystem Server",
+      "path": "docs/mcp_filesystem.md",
+      "tags": ["MCP", "filesystem", "read", "write", "delete", "schema"],
+      "status": "beta",
+      "asyncNote": "Full release pending permission audit + .gitignore integration (Q2 2026). Current: read/write/delete with path normalization.",
+      "summary": "🧩 File operations: read, write, delete, list directories. Constrained to workspace root; respects .gitignore for safety."
+    },
+    {
+      "title": "MCP Memory Server",
+      "path": "docs/mcp_memory.md",
+      "tags": ["MCP", "memory", "working set", "decisions", "consent", "provenance"],
+      "status": "beta",
+      "asyncNote": "Full release pending consent flows + memory expiry policies (Q2 2026). Current: read/write working_set, decisions, open_loops, glossary.",
+      "summary": "🧾 Memory operations: read/write working set, decisions, open loops, glossary. Repo-backed, git-tracked, no secrets. Consent-driven."
+    },
+    {
+      "title": "MCP Web Search Server",
+      "path": "docs/mcp_web_search.md",
+      "tags": ["MCP", "web search", "external references", "safety"],
+      "status": "beta",
+      "asyncNote": "Full release pending rate limiting + result caching (Q3 2026). Current: basic HTTP search queries, no auth.",
+      "summary": "🔮 External reference lookups: search web for docs, issues, RFCs. Returns snippets + sources. No login required; IP-rate-limited."
+    },
+    {
+      "title": "MCP Local LLM Server",
+      "path": "docs/mcp_local_llm.md",
+      "tags": ["MCP", "local-llm", "inference", "llama.cpp", "compute"],
+      "status": "beta",
+      "asyncNote": "Full release pending quantization tuning + context management (Q2 2026). Current: llama.cpp HTTP API, 4k context, Qwen2.5:8b.",
+      "summary": "🧠 Local inference: HTTP API to llama.cpp server on AMD Vulkan. Stateless; respects DND gating. No cloud; privacy-first."
     }
   ]
 }

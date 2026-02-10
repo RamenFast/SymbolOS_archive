@@ -25,7 +25,23 @@ Principle: the map stays readable (Ti), and the meaning stays alive (Fi). Fi+Ti 
 
 ---
 
+## Fi + Ti (both, mirrored)
+
+- Fi (felt meaning): what matters, what hurts, what we protect, what we consent to.
+- Ti (clean structure): what is true, what is defined, what is bounded, what is verifiable.
+
+If you only do Fi, you get warmth without repeatability. If you only do Ti, you get clarity without soul.
+
+Minimal template (two-line mirror):
+
+- Fi: "I care about X / this feels like Y / I want Z."
+- Ti: "Definition, constraints, next step."
+
+---
+
 ## Pinned (short)
+
+Warmth without truth is a leak; truth without warmth is a blade.
 
 The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 

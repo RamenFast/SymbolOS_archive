@@ -1,0 +1,272 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Memory Server — Tool Definitions",
+  "description": "Schema for MCP Memory server tools (read/write working_set, decisions, open_loops, glossary). All memory is file-backed, git-tracked, consent-driven.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "read_working_set",
+              "write_working_set",
+              "read_decisions",
+              "write_decision",
+              "read_open_loops",
+              "write_open_loop",
+              "read_glossary",
+              "write_glossary_entry"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "inputSchema": {
+            "type": "object"
+          },
+          "outputSchema": {
+            "type": "object",
+            "description": "JSON Schema describing the tool result payload"
+          },
+          "requiresConfirmation": {
+            "type": "boolean"
+          },
+          "riskLevel": {
+            "type": "string",
+            "enum": ["read", "write", "sensitive"]
+          }
+        },
+        "required": ["name", "description", "riskLevel"]
+      }
+    }
+  },
+  "examples": [
+    {
+      "tools": [
+        {
+          "name": "read_working_set",
+          "description": "Read current working context (focus, intent, active tasks)",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {}
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
+          }
+        },
+        {
+          "name": "write_working_set",
+          "description": "Update active tasks and focus (no confirmation needed)",
+          "riskLevel": "write",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "focus": {
+                "type": "string",
+                "description": "Current primary task"
+              },
+              "intent": {
+                "type": "string",
+                "description": "Why you're doing this (symbols optional)"
+              },
+              "active_tasks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
+          }
+        },
+        {
+          "name": "read_decisions",
+          "description": "Retrieve decision log (timestamped, with rationale)",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "description": "Max decisions to return (default: 20)"
+              }
+            }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
+          }
+        },
+        {
+          "name": "write_decision",
+          "description": "Log new decision (timestamped + symbols + rationale). Auto-stages for git commit.",
+          "riskLevel": "write",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Decision title"
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Why you chose this"
+              },
+              "symbols": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Symbols involved (☂️🔮🧠❤️🛡️🔒🧾🎲🧩🧬)"
+              },
+              "options_considered": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["title", "rationale"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
+          }
+        },
+        {
+          "name": "read_open_loops",
+          "description": "List unresolved questions / pending investigations",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object"
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
+          }
+        },
+        {
+          "name": "write_open_loop",
+          "description": "Add unresolved question for future investigation",
+          "riskLevel": "write",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              },
+              "context": {
+                "type": "string",
+                "description": "Why this matters"
+              },
+              "priority": {
+                "type": "string",
+                "enum": ["high", "medium", "low"],
+                "description": "When to investigate"
+              }
+            },
+            "required": ["question"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
+          }
+        },
+        {
+          "name": "read_glossary",
+          "description": "Look up terminology definitions",
+          "riskLevel": "read",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "term": {
+                "type": "string",
+                "description": "Term to look up (optional; if empty, list all)"
+              }
+            }
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "content": { "type": "string" }
+            },
+            "required": ["content"]
+          }
+        },
+        {
+          "name": "write_glossary_entry",
+          "description": "Add or update term definition",
+          "riskLevel": "write",
+          "requiresConfirmation": false,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "term": {
+                "type": "string"
+              },
+              "definition": {
+                "type": "string"
+              },
+              "context": {
+                "type": "string",
+                "description": "Where/when this term is used"
+              }
+            },
+            "required": ["term", "definition"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ok": { "type": "boolean" }
+            },
+            "required": ["ok"]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -5,9 +5,12 @@ param(
 $ErrorActionPreference = 'Stop'
 
 function Write-Banner {
-  Write-Host '=============================================================='
-  Write-Host 'MERCER STATUS - SYMBOLOS WORKSPACE CHECK'
-  Write-Host '=============================================================='
+  Write-Host ''
+  Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Cyan
+  Write-Host '║  🧬☂️🗺️  MERCER STATUS                                        ║' -ForegroundColor Cyan
+  Write-Host '║  SymbolOS Workspace Pulse Check                             ║' -ForegroundColor Cyan
+  Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Cyan
+  Write-Host ''
 }
 
 function Get-RepoRoot {
@@ -88,16 +91,17 @@ function Show-Status([string]$repoRoot) {
   $bootupArtDir = Join-Path $repoRoot 'docs\assets\bootup_cards'
 
   Write-Banner
-  Write-Host "Repo root: $repoRoot"
-  Write-Host ("Meeting place: symbol_map.shared.json={0} | docs/index.md={1} | README.md={2}" -f (Test-ExistsLabel $sharedMap), (Test-ExistsLabel $docsIndex), (Test-ExistsLabel $readme))
-  Write-Host ("Lily backdrop present (private): {0}" -f (Test-ExistsLabel $lilyPrivate))
-  Write-Host ("Bootup art folder present (private): {0}" -f (Test-ExistsLabel $bootupArtDir))
+  Write-Host "🗺️  Repo root: $repoRoot" -ForegroundColor Gray
+  Write-Host ("🧬 Meeting place: symbol_map.shared.json={0} | docs/index.md={1} | README.md={2}" -f (Test-ExistsLabel $sharedMap), (Test-ExistsLabel $docsIndex), (Test-ExistsLabel $readme)) -ForegroundColor Gray
+  Write-Host ("🌸 Lily backdrop (private): {0}" -f (Test-ExistsLabel $lilyPrivate)) -ForegroundColor Gray
+  Write-Host ("🎨 Bootup art folder (private): {0}" -f (Test-ExistsLabel $bootupArtDir)) -ForegroundColor Gray
+  Write-Host ''
 
   $drift = Get-DriftResult -sharedMapPath $sharedMap -humanMapPath $humanMap
   $code = [int]$drift.Code
-  $status = if ($code -eq 0) { 'OK' } elseif ($code -eq 2) { 'WARN' } else { 'FAIL' }
+  $emoji = if ($code -eq 0) { '✅' } elseif ($code -eq 2) { '⚠️' } else { '⛔' }
   $color = if ($code -eq 0) { 'Green' } elseif ($code -eq 2) { 'Yellow' } else { 'Red' }
-  Write-Host ("Doc alignment (core symbols): {0} {1}" -f $status, $drift.Summary) -ForegroundColor $color
+  Write-Host ("📋 Doc alignment (core symbols): {0} {1}" -f $emoji, $drift.Summary) -ForegroundColor $color
 
   return $code
 }
@@ -110,9 +114,12 @@ if ($Once) {
 }
 
 while ($true) {
-  Write-Host ""
-  Write-Host 'Actions: [R]efresh  [O]pen docs index  [M]ap (shared)  [P]oetry (public)  [Q]uit'
-  $choice = (Read-Host '>').Trim().ToLower()
+  Write-Host ''
+  Write-Host '┌─ 🎯 ACTIONS ─────────────────────────────────────────────────┐' -ForegroundColor Cyan
+  Write-Host '│ [R] Refresh     [O] Docs Index     [M] Map     [P] Poetry     │' -ForegroundColor Cyan
+  Write-Host '│                          [Q] Quit                            │' -ForegroundColor Cyan
+  Write-Host '└───────────────────────────────────────────────────────────────┘' -ForegroundColor Cyan
+  $choice = (Read-Host '→').Trim().ToLower()
 
   if ($choice -eq 'q' -or $choice -eq 'quit' -or $choice -eq 'exit') {
     exit $code
@@ -124,8 +131,8 @@ while ($true) {
   }
 
   if ($choice -eq 'o') { Invoke-Item (Join-Path $repo 'docs\index.md'); continue }
-  if ($choice -eq 'm') { Invoke-Item (Join-Path $repo 'symbol_map.shared.json'); continue }
-  if ($choice -eq 'p') { Invoke-Item (Join-Path $repo 'docs\public_private_expression.md'); continue }
+  if ($choice -eq 'm') { & code (Join-Path $repo 'symbol_map.shared.json'); continue }
+  if ($choice -eq 'p') { & code (Join-Path $repo 'docs\public_private_expression.md'); continue }
 
-  Write-Host 'Unknown option.'
+  Write-Host '❌ Unknown option.' -ForegroundColor Red
 }

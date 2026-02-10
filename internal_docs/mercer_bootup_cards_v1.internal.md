@@ -15,6 +15,8 @@ Background image (expected): docs/assets/lily_background.private.png (gitignored
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 
+Warmth without truth is a leak; truth without warmth is a blade.
+
 - Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
 
@@ -36,6 +38,20 @@ Reference policy:
   <)  )╯  "we ball, but we verify"
    /  \
 ```
+
+---
+
+## 🎲 DND overlay (table-safe prompts)
+
+Use these short prompts if running in DND mode:
+
+1) Meeting place → “What’s the map + next safe step?”
+2) Scope & privacy → “What’s in-scope at this table?”
+3) Ledger & provenance → “What changed, why, and how do we verify?”
+4) Barriers → “Are we just scouting or actually acting?”
+5) Ti expression → “State objective, inputs, constraints, decision, proof.”
+6) Precog → “Any low-risk preview or suggestion?”
+7) Self-reflection → “What did we assume vs. verify?”
 
 ---
 

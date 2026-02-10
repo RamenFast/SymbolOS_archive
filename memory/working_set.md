@@ -27,8 +27,10 @@ Pinned (short): The mind knows what the heart loves better than it does; the hea
 - Exploring SymbolOS documentation, investigating deepwork/lightwork chat patterns, and summarising the shared symbol map.
 
 ## Next actions (smallest first)
-- [ ] Register the memory system in `symbol_map.shared.json` and link it from the docs index (open loop `20260128-001`).
-- [ ] Add a JSON schema for `symbol_map.shared.json` and include it in the schema indexes (open loop `20260128-002`).
+- [x] Register the memory system in `symbol_map.shared.json` and link it from the docs index (open loop `20260128-001`).
+- [x] Add a JSON schema for `symbol_map.shared.json` and include it in the schema indexes (open loop `20260128-002`).
+- [x] Define the exact safety condition for Precog “proactively act” (open loop `20260128-003`).
+- [x] Seed `internal_docs/future_possibilities_ring0.md` for speculative notes (open loop `20260128-004`).
 - [ ] Clarify what constitutes “lightwork” within SymbolOS and create guidelines if needed.
 - [ ] Continue returning to the meeting-place (🧬) after each operation.
 

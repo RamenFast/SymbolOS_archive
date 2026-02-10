@@ -21,6 +21,11 @@ These JSON Schemas define the shared interchange shapes used across SymbolOS doc
 - Internal example entry: [registry_entry.example.json](registry_entry.example.json)
 - Partner example entry: [registry_entry.partner.example.json](registry_entry.partner.example.json)
 
+## MCP servers
+- MCP Git server tools: [mcp_git.schema.json](mcp_git.schema.json)
+- MCP Filesystem server tools: [mcp_filesystem.schema.json](mcp_filesystem.schema.json)
+- MCP Memory server tools: [mcp_memory.schema.json](mcp_memory.schema.json)
+
 ## Precog
 - Precog card: [precog_card.schema.json](precog_card.schema.json)
 - Shadow queue item: [shadow_queue_item.schema.json](shadow_queue_item.schema.json)

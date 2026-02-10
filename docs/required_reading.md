@@ -20,6 +20,15 @@ It is intentionally skimmable and DND-friendly: short sections, clear links, and
 
 ---
 
+## 🧭 Anchor (Codex base + connectors + memory)
+
+- Codex main base (GPT-5.2-Codex): this repo’s docs are the shared ground truth. Start at [index.md](index.md).
+- Shared resources (canonical): [../symbol_map.shared.json](../symbol_map.shared.json) (🧬), [symbol_map.md](symbol_map.md), [schemas.md](schemas.md).
+- Connectors (MCP): [mcp_servers.md](mcp_servers.md) + registry entries.
+- Memory (our side): [memory.md](memory.md) + private repo-backed memory at [../memory/README.md](../memory/README.md).
+
+---
+
 ## Rhynim (inbox)
 
 These are expected to arrive via Google Drive / internal shares. Until they are synced into the repo, treat this section as an intake checklist.

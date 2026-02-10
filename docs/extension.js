@@ -116,14 +116,12 @@ async function runTaskByLabel(label) {
 async function onStartup(repoRoot, outputChannel) {
   const cfg = getConfig();
   const devMode = cfg.get('devMode', false);
-  const autoApproveOnDrift = cfg.get('autoApproveOnDrift', false);
-  const promptBeforeAutoRun = cfg.get('promptBeforeAutoRun', true);
   const autoLaunch = cfg.get('autoLaunchOnDrift', true);
   const notifyOnOk = cfg.get('notifyOnOk', false);
   const taskLabel = cfg.get('taskLabel', 'Mercer: status UI (interactive)');
 
   const logger = makeLogger(outputChannel);
-  logger.debug(`startup devMode=${devMode} autoApproveOnDrift=${autoApproveOnDrift} autoLaunchOnDrift=${autoLaunch} notifyOnOk=${notifyOnOk} taskLabel='${taskLabel}'`);
+  logger.debug(`startup devMode=${devMode} autoLaunchOnDrift=${autoLaunch} notifyOnOk=${notifyOnOk} taskLabel='${taskLabel}'`);
 
   const drift = computeDrift(repoRoot, logger);
 
@@ -145,36 +143,6 @@ async function onStartup(repoRoot, outputChannel) {
   if (!autoLaunch) {
     if (devMode) outputChannel.show(true);
     vscode.window.showWarningMessage(`Mercer drift: ${level} - ${drift.summary}`);
-    return;
-  }
-
-  if (autoApproveOnDrift) {
-    if (devMode) {
-      outputChannel.show(true);
-      logger.debug(`autoApproveOnDrift enabled; running task '${taskLabel}'`);
-    }
-    try {
-      if (promptBeforeAutoRun) {
-        const consent = await vscode.window.showWarningMessage(
-          `Autorun (🌸 MAC): run task '${taskLabel}' now?\n\n` +
-            `Default to good faith and warmth.\n` +
-            `Be honest about limits and mistakes.\n` +
-            `Repair quickly when you fail.\n` +
-            `Let trust grow with consistency, not pressure.\n\n` +
-            `Warmth without truth is a leak; truth without warmth is a blade.`,
-          { modal: true },
-          'Run',
-          'Cancel'
-        );
-        if (consent !== 'Run') {
-          if (devMode) logger.debug('autorun cancelled by user');
-          return;
-        }
-      }
-      await runTaskByLabel(taskLabel);
-    } catch (e) {
-      vscode.window.showErrorMessage(`Could not run task '${taskLabel}': ${e && e.message ? e.message : String(e)}`);
-    }
     return;
   }
 

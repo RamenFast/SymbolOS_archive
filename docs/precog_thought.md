@@ -138,6 +138,16 @@ Template:
 - Ritual (what to do next)
 - Safety rune (privacy/cost/confirmation)
 
+## Proactive Act Safety Conditions (The "Virus-Scan" Gate) 🛡️
+
+For an action to move from **Suggest** to **Proactive Act** (auto-execution), it must pass the following safety gates:
+
+1. **Non-Destructive Scope**: The action must be strictly additive or reversible (e.g., creating a `.gitkeep`, warming a cache, or running a read-only security scan).
+2. **Security Clearance**: If the action involves external resources, it must pass a local integrity check (e.g., checksum verification or virus scan).
+3. **Privacy Barrier**: No data classified as `private` or `sensitive` may be transmitted or modified without a human-in-the-loop.
+4. **Audit Trail**: Every proactive act must be logged to the `shadow_queue` with a clear `why` and a `rollback` command.
+5. **DND Compliance**: Proactive acts are suspended when DND is ON, unless they are classified as "Critical Security Recovery."
+
 ## Safety and privacy requirements
 
 - Never exceed the user’s permission scope.

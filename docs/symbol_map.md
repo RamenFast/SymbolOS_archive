@@ -14,7 +14,8 @@ This is *not* a UI spec; it’s a meaning map so docs, tools, and agents stay co
 The canonical shared set lives in `symbol_map.shared.json`. This page mirrors that core set and may list a few optional, doc-only extras.
 
 ## Core symbols
-- `☂️` UmbrellaOS / SymbolOS umbrella
+- `☂️` UmbrellaOS-private-dev-arch (private umbrella; fortress boundary)
+- `🌸` SymbolOS-public-dev-arch (public, light, external-facing surface)
 - `🔮` Precog / anticipatory computing
 - `🧠` Mind / cognition / inference
 - `❤️` Heart / felt sense / affect

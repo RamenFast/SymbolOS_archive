@@ -18,6 +18,13 @@ This playbook is the shortest safe path to keep docs synced and coherent.
 
 Scope: `docs/` and Markdown files (`*.md`) in the repo root.
 
+Default rule: **Always, all sync** — keep shared resources aligned every run:
+- `docs/index.md`
+- `symbol_map.shared.json`
+- `docs/symbol_map.md`
+- `docs/schemas.md`
+- `docs/required_reading.md`
+
 ---
 
 ## The Sync Scroll (copy/paste)

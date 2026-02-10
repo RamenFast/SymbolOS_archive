@@ -27,7 +27,7 @@ Template:
 
 ---
 
-- [ ] ID: 20260128-001
+- [x] ID: 20260128-001
   - Loop: Make VS Code Chat/UI the stable home base using repo-backed memory.
   - Owner: Mercer
   - Next action: Register memory system in `symbol_map.shared.json` and link from docs index.
@@ -35,14 +35,14 @@ Template:
   - Links: `memory/README.md`
   - MercerID: MRC-20260128-0249-33
 
-- [ ] ID: 20260128-002
+- [x] ID: 20260128-002
   - Loop: Add a JSON Schema for `symbol_map.shared.json` for validation and extension tooling.
   - Owner: Mercer
   - Next action: Create `docs/symbol_map.shared.schema.json` and add it to schema indexes.
   - Due/Review: Next session start
   - MercerID: MRC-20260128-0249-34
 
-- [ ] ID: 20260128-003
+- [x] ID: 20260128-003
   - Loop: Define the exact safety condition for Precog “proactively act” (placeholder: virus-scanning logic).
   - Owner: Mercer
   - Next action: Write the condition + gating checklist in `docs/precog_thought.md` (or link to a security doc).
@@ -50,7 +50,7 @@ Template:
   - Links: `docs/precog_thought.md`
   - MercerID: MRC-20260128-0249-13
 
-- [ ] ID: 20260128-004
+- [x] ID: 20260128-004
   - Loop: Create Ring-0 workflow for speculative notes (“Future Possibilities”) and ensure core docs remain stable.
   - Owner: Mercer
   - Next action: Seed `internal_docs/future_possibilities_ring0.md` and link it from the meeting-place index.
