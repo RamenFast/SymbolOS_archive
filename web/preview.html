@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SymbolOS Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    overflow: hidden;
+    font-family: 'Cascadia Code','Fira Code','Source Code Pro',monospace;
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  canvas { position: fixed; inset: 0; z-index: 0; }
+  .center {
+    position: relative; z-index: 1;
+    text-align: center;
+    pointer-events: none;
+  }
+  .title {
+    font-size: 4.5vw;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    background: linear-gradient(135deg, #FADA5E 0%, #FFD700 25%, #00e5ff 50%, #8B00FF 75%, #FADA5E 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s ease-in-out infinite;
+    text-shadow: none;
+  }
+  .umbrella {
+    font-size: 8vw;
+    margin-bottom: 1vh;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(139,0,255,0.4));
+  }
+  .subtitle {
+    font-size: 1.4vw;
+    color: #555;
+    letter-spacing: 0.5em;
+    margin-top: 1vh;
+    animation: fadeInOut 6s ease-in-out infinite;
+  }
+  .tagline {
+    font-size: 1vw;
+    color: #333;
+    margin-top: 2vh;
+    letter-spacing: 0.2em;
+  }
+  .ring-display {
+    display: flex;
+    justify-content: center;
+    gap: 1.5vw;
+    margin-top: 3vh;
+  }
+  .ring-dot {
+    width: 2vw; height: 2vw;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7vw;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .ring-dot:nth-child(1) { border-color: #FADA5E; color: #FADA5E; animation-delay: 0s; }
+  .ring-dot:nth-child(2) { border-color: #228B22; color: #228B22; animation-delay: 0.25s; }
+  .ring-dot:nth-child(3) { border-color: #E49B0F; color: #E49B0F; animation-delay: 0.5s; }
+  .ring-dot:nth-child(4) { border-color: #FF8C00; color: #FF8C00; animation-delay: 0.75s; }
+  .ring-dot:nth-child(5) { border-color: #8B00FF; color: #8B00FF; animation-delay: 1.0s; }
+  .ring-dot:nth-child(6) { border-color: #FF2400; color: #FF2400; animation-delay: 1.25s; }
+  .ring-dot:nth-child(7) { border-color: #0000CD; color: #0000CD; animation-delay: 1.5s; }
+  .ring-dot:nth-child(8) { border-color: #FFD700; color: #FFD700; animation-delay: 1.75s; }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; box-shadow: none; }
+    50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 12px currentColor; }
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="center">
+  <div class="umbrella">☂️</div>
+  <div class="title">SYMBOL OS</div>
+  <div class="subtitle">HUMAN · AI · ALIGNMENT</div>
+  <div class="ring-display">
+    <div class="ring-dot">R0</div>
+    <div class="ring-dot">R1</div>
+    <div class="ring-dot">R2</div>
+    <div class="ring-dot">R3</div>
+    <div class="ring-dot">R4</div>
+    <div class="ring-dot">R5</div>
+    <div class="ring-dot">R6</div>
+    <div class="ring-dot">R7</div>
+  </div>
+  <div class="tagline">7 AGENTS · ZERO CLOUD · ONE UMBRELLA</div>
+</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const symbols = ['☂️','🔵','🟢','🟣','⭐','🦊','🔘','🟡','🗺','🛡️','🧬','🔮','🪞','🧩','🗃️','⚓','🧭','🌀','🧪'];
+const colors = ['#FADA5E','#0000CD','#228B22','#8B00FF','#FFD700','#FF8C00','#00e5ff','#FFB7C5','#87CEEB','#FF2400'];
+
+class Particle {
+  constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height + 40;
+    this.vy = -(Math.random() * 0.3 + 0.08);
+    this.vx = (Math.random() - 0.5) * 0.15;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.alpha = Math.random() * 0.3 + 0.03;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.y < -20) this.reset();
+  }
+  draw() {
+    ctx.globalAlpha = this.alpha;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
+
+class FloatingSymbol {
+  constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+  reset() {
+    this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height + 60;
+    this.vy = -(Math.random() * 0.25 + 0.06);
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.size = Math.random() * 16 + 10;
+    this.alpha = Math.random() * 0.15 + 0.03;
+    this.rot = Math.random() * Math.PI * 2;
+    this.rotV = (Math.random() - 0.5) * 0.005;
+    this.wobble = Math.random() * Math.PI * 2;
+    this.wobbleAmp = Math.random() * 0.3 + 0.1;
+  }
+  update() {
+    this.y += this.vy;
+    this.x += this.vx + Math.sin(this.wobble) * this.wobbleAmp;
+    this.wobble += 0.008;
+    this.rot += this.rotV;
+    if (this.y < -60) this.reset();
+  }
+  draw() {
+    ctx.globalAlpha = this.alpha;
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.font = `${this.size}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(this.symbol, 0, 0);
+    ctx.restore();
+  }
+}
+
+// Orbiting ring — symbols orbit around center
+class OrbitSymbol {
+  constructor(i, total) {
+    this.angle = (i / total) * Math.PI * 2;
+    this.speed = 0.003 + Math.random() * 0.002;
+    this.radius = Math.min(canvas.width, canvas.height) * (0.28 + Math.random() * 0.1);
+    this.symbol = symbols[i % symbols.length];
+    this.size = 20 + Math.random() * 8;
+    this.alpha = 0.08 + Math.random() * 0.06;
+  }
+  update() {
+    this.angle += this.speed;
+  }
+  draw() {
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const x = cx + Math.cos(this.angle) * this.radius;
+    const y = cy + Math.sin(this.angle) * this.radius * 0.6; // elliptical
+    ctx.globalAlpha = this.alpha;
+    ctx.font = `${this.size}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(this.symbol, x, y);
+  }
+}
+
+const particles = Array.from({length: 40}, () => new Particle());
+const floaters = Array.from({length: 15}, () => new FloatingSymbol());
+const orbiters = Array.from({length: 12}, (_, i) => new OrbitSymbol(i, 12));
+
+// Connection lines between random orbiters
+let t = 0;
+function drawConnections() {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  for (let i = 0; i < orbiters.length; i++) {
+    const j = (i + 1) % orbiters.length;
+    const a = orbiters[i], b = orbiters[j];
+    const ax = cx + Math.cos(a.angle) * a.radius;
+    const ay = cy + Math.sin(a.angle) * a.radius * 0.6;
+    const bx = cx + Math.cos(b.angle) * b.radius;
+    const by = cy + Math.sin(b.angle) * b.radius * 0.6;
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.strokeStyle = 'rgba(0, 229, 255, 0.04)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+}
+
+// Scanlines
+function drawScanlines() {
+  ctx.globalAlpha = 0.015;
+  for (let y = 0; y < canvas.height; y += 3) {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, y, canvas.width, 1);
+  }
+}
+
+function loop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  t += 0.01;
+
+  // Subtle radial gradient bg
+  const grad = ctx.createRadialGradient(
+    canvas.width/2, canvas.height/2, 0,
+    canvas.width/2, canvas.height/2, canvas.width * 0.6
+  );
+  grad.addColorStop(0, 'rgba(139,0,255,0.02)');
+  grad.addColorStop(0.5, 'rgba(0,0,205,0.01)');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawConnections();
+  particles.forEach(p => { p.update(); p.draw(); });
+  floaters.forEach(f => { f.update(); f.draw(); });
+  orbiters.forEach(o => { o.update(); o.draw(); });
+  drawScanlines();
+
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

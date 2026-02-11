@@ -71,35 +71,64 @@ function NetworkCanvas({ selectedId, onSelect }: { selectedId: string | null; on
       const w = canvas!.clientWidth
       const h = canvas!.clientHeight
       ctx!.clearRect(0, 0, w, h)
-      pulseRef.current += 0.015
+      pulseRef.current += 0.012
       const sel = selectedRef.current
+
+      // Subtle grid
+      ctx!.strokeStyle = 'rgba(34,139,34,0.03)'
+      ctx!.lineWidth = 0.5
+      for (let gx = 0; gx < w; gx += 40) {
+        ctx!.beginPath(); ctx!.moveTo(gx, 0); ctx!.lineTo(gx, h); ctx!.stroke()
+      }
+      for (let gy = 0; gy < h; gy += 40) {
+        ctx!.beginPath(); ctx!.moveTo(0, gy); ctx!.lineTo(w, gy); ctx!.stroke()
+      }
 
       // Draw connections
       for (const node of networkNodes) {
         for (const connId of node.connections) {
           const target = networkNodes.find(n => n.id === connId)
           if (!target) continue
-          // Only draw once per pair
           if (networkNodes.indexOf(target) < networkNodes.indexOf(node)) continue
 
           const x1 = node.x * w, y1 = node.y * h
           const x2 = target.x * w, y2 = target.y * h
           const isHot = node.id === sel || target.id === sel
 
+          // Connection line
           ctx!.beginPath()
           ctx!.moveTo(x1, y1)
           ctx!.lineTo(x2, y2)
-          ctx!.strokeStyle = isHot ? 'rgba(0, 229, 255, 0.45)' : 'rgba(0, 229, 255, 0.08)'
-          ctx!.lineWidth = isHot ? 1.5 : 0.5
+          ctx!.strokeStyle = isHot ? 'rgba(0, 229, 255, 0.35)' : 'rgba(0, 229, 255, 0.06)'
+          ctx!.lineWidth = isHot ? 2 : 0.8
           ctx!.stroke()
+
+          // Hot glow line
+          if (isHot) {
+            ctx!.beginPath()
+            ctx!.moveTo(x1, y1)
+            ctx!.lineTo(x2, y2)
+            ctx!.strokeStyle = 'rgba(0, 229, 255, 0.08)'
+            ctx!.lineWidth = 6
+            ctx!.stroke()
+          }
 
           // Travelling pulse dot
           const t = (Math.sin(pulseRef.current * 1.5 + networkNodes.indexOf(node) * 0.7) + 1) / 2
           const px = x1 + (x2 - x1) * t
           const py = y1 + (y2 - y1) * t
           ctx!.beginPath()
-          ctx!.arc(px, py, isHot ? 2.5 : 1.5, 0, Math.PI * 2)
-          ctx!.fillStyle = isHot ? 'rgba(0, 229, 255, 0.7)' : 'rgba(0, 229, 255, 0.15)'
+          ctx!.arc(px, py, isHot ? 3.5 : 2, 0, Math.PI * 2)
+          ctx!.fillStyle = isHot ? 'rgba(0, 229, 255, 0.8)' : 'rgba(0, 229, 255, 0.12)'
+          ctx!.fill()
+
+          // Second pulse going opposite direction
+          const t2 = (Math.cos(pulseRef.current * 1.2 + networkNodes.indexOf(node) * 1.1) + 1) / 2
+          const px2 = x1 + (x2 - x1) * t2
+          const py2 = y1 + (y2 - y1) * t2
+          ctx!.beginPath()
+          ctx!.arc(px2, py2, isHot ? 2 : 1, 0, Math.PI * 2)
+          ctx!.fillStyle = isHot ? 'rgba(0, 229, 255, 0.4)' : 'rgba(0, 229, 255, 0.06)'
           ctx!.fill()
         }
       }
@@ -110,36 +139,51 @@ function NetworkCanvas({ selectedId, onSelect }: { selectedId: string | null; on
         const x = node.x * w
         const y = node.y * h
         const isSel = node.id === sel
-        const breathe = Math.sin(pulseRef.current * 2 + i * 0.8) * 0.25 + 0.75
-        const r = isSel ? 16 : 10
+        const breathe = Math.sin(pulseRef.current * 2 + i * 0.8) * 0.2 + 0.8
+        const r = isSel ? 18 : 12
 
-        // Selection glow
-        if (isSel) {
-          const grad = ctx!.createRadialGradient(x, y, 0, x, y, 32)
-          grad.addColorStop(0, node.color + '35')
-          grad.addColorStop(1, 'transparent')
-          ctx!.fillStyle = grad
-          ctx!.beginPath()
-          ctx!.arc(x, y, 32, 0, Math.PI * 2)
-          ctx!.fill()
-        }
+        // Outer glow (always)
+        const outerGrad = ctx!.createRadialGradient(x, y, 0, x, y, isSel ? 50 : 28)
+        outerGrad.addColorStop(0, node.color + (isSel ? '20' : '08'))
+        outerGrad.addColorStop(1, 'transparent')
+        ctx!.fillStyle = outerGrad
+        ctx!.beginPath()
+        ctx!.arc(x, y, isSel ? 50 : 28, 0, Math.PI * 2)
+        ctx!.fill()
 
-        // Circle
+        // Circle fill
         ctx!.beginPath()
         ctx!.arc(x, y, r, 0, Math.PI * 2)
-        ctx!.fillStyle = isSel ? node.color + '28' : node.color + '12'
+        ctx!.fillStyle = isSel ? node.color + '20' : node.color + '0a'
         ctx!.fill()
+
+        // Circle stroke
         ctx!.strokeStyle = node.color
-        ctx!.lineWidth = isSel ? 2 : 1
+        ctx!.lineWidth = isSel ? 2.5 : 1.5
         ctx!.globalAlpha = isSel ? 1 : breathe
         ctx!.stroke()
         ctx!.globalAlpha = 1
 
+        // Inner dot
+        ctx!.beginPath()
+        ctx!.arc(x, y, isSel ? 4 : 2.5, 0, Math.PI * 2)
+        ctx!.fillStyle = node.color
+        ctx!.globalAlpha = isSel ? 0.8 : 0.4
+        ctx!.fill()
+        ctx!.globalAlpha = 1
+
         // Label
-        ctx!.font = '9px "Cascadia Code","Fira Code",monospace'
-        ctx!.fillStyle = isSel ? '#f0f0f0' : '#666'
+        ctx!.font = `${isSel ? 11 : 10}px "Cascadia Code","Fira Code",monospace`
+        ctx!.fillStyle = isSel ? '#e0e0e0' : '#555'
         ctx!.textAlign = 'center'
-        ctx!.fillText(node.label, x, y + r + 13)
+        ctx!.fillText(node.label, x, y + r + 15)
+
+        // Type badge for selected
+        if (isSel) {
+          ctx!.font = '8px "Cascadia Code","Fira Code",monospace'
+          ctx!.fillStyle = node.color + '80'
+          ctx!.fillText(node.type.toUpperCase(), x, y + r + 27)
+        }
       }
 
       animRef.current = requestAnimationFrame(draw)
