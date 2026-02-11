@@ -191,13 +191,109 @@ Template:
 
 ## Proactive Act Safety Conditions (The "Virus-Scan" Gate) 🛡️ 🔴 #FF2400 (righteous boundary)
 
-For an action to move from **Suggest** to **Proactive Act** (auto-execution), it must pass the following safety gates:
+For an action to move from **Suggest** to **Proactive Act** (auto-execution), it must pass **all seven** of the following gates. If any gate fails, the action stays at Suggest and requires human confirmation.
 
-1. **Non-Destructive Scope**: The action must be strictly additive or reversible (e.g., creating a `.gitkeep`, warming a cache, or running a read-only security scan).
-2. **Security Clearance**: If the action involves external resources, it must pass a local integrity check (e.g., checksum verification or virus scan).
-3. **Privacy Barrier**: No data classified as `private` or `sensitive` may be transmitted or modified without a human-in-the-loop.
-4. **Audit Trail**: Every proactive act must be logged to the `shadow_queue` with a clear `why` and a `rollback` command.
-5. **DND Compliance**: Proactive acts are suspended when DND is ON, unless they are classified as "Critical Security Recovery."
+### Gate 1: Non-Destructive Scope (MANDATORY)
+
+The action must be strictly **additive or reversible**. Allowed actions:
+
+| Allowed | Examples |
+|---------|----------|
+| Create new file | `.gitkeep`, cache file, log entry |
+| Append to log | Audit trail, session log, shadow queue |
+| Read-only operations | Cache warming, prefetch, health check |
+| Reversible write | Write with rollback command stored |
+
+Forbidden (always requires human confirmation):
+- Delete any file
+- Overwrite existing content
+- Modify `symbol_map.shared.json` or any schema file
+- Any git push, merge, or rebase
+- Any external network request that mutates state
+
+### Gate 2: Agent Identity (MANDATORY)
+
+The acting agent must have a **verified identity** (see `symbolos.sec.identity` in the cybersecurity doc). Specifically:
+- Agent must present a valid, non-expired identity token
+- Token must include the scope required for the action (e.g., `write:core.memory`)
+- If no identity system is running yet: **only `prefetch` mode is auto-approved; all `act` requires confirmation**
+
+### Gate 3: Integrity Check (The "Virus Scan") (MANDATORY)
+
+If the action involves **any external input** (downloaded file, API response, user-provided URL, parsed data from untrusted source):
+
+1. **Hash verification**: Compare against known-good hash if available
+2. **Size bounds**: Reject payloads exceeding expected size (default: 10MB for files, 1MB for API responses)
+3. **Content-type validation**: Confirm the content matches its declared type (no polyglot files)
+4. **Schema validation**: If the output has a defined schema (e.g., `precog_card.schema.json`), validate against it before acting
+5. **Sandbox execution**: If the action runs any code/script, it must execute in a sandbox (see `symbolos.sec.sandbox`). If no sandbox is available: **block the action entirely**
+
+If the action involves **only local, trusted data** (reading from `memory/`, writing to `shadow_queue`): skip this gate.
+
+### Gate 4: Privacy Barrier (MANDATORY)
+
+No data classified as `private` or `sensitive` may be:
+- Transmitted to any external endpoint
+- Written to any file outside `memory/` or `internal_docs/`
+- Included in any log entry (redact to `[REDACTED]`)
+- Passed to any MCP server with `dataClassification` other than `internal` or `restricted`
+
+Classification is determined by:
+- File path: `memory/*` and `internal_docs/*` = private
+- Schema field: `privacy.scope` on PrecogCard = authoritative
+- Default: if unknown, treat as private
+
+### Gate 5: Audit Trail (MANDATORY)
+
+Every proactive act MUST be logged **before execution** to the shadow queue:
+
+```json
+{
+  "id": "precog_act_<timestamp>_<nonce>",
+  "kind": "precog_suggestion",
+  "createdAt": "<ISO 8601>",
+  "payload": {
+    "mode": "act",
+    "headline": "<what this action does>",
+    "why": "<signal chain that triggered it>",
+    "rollback": "<exact command to undo this action>",
+    "agent": "<agent_id>",
+    "gates_passed": ["scope", "identity", "integrity", "privacy", "dnd", "confidence", "budget"]
+  }
+}
+```
+
+If the audit log write fails: **abort the action**. No silent failures.
+
+### Gate 6: DND Compliance (MANDATORY)
+
+| DND State | Behavior |
+|-----------|----------|
+| **DND OFF** | Proactive acts allowed (if all other gates pass) |
+| **DND ON** | All proactive acts suspended. Queued to shadow queue for later review. |
+| **DND ON + Critical Security** | Exception: only these 3 actions may auto-execute during DND: (1) Block a detected malicious IP via `symbolos.sec.netpolicy`, (2) Kill a process that fails anomaly detection, (3) Rotate a credential flagged as compromised. All three require immediate post-action notification when DND ends. |
+
+"Critical Security Recovery" is **not** a general escape hatch. It covers exactly the three cases above.
+
+### Gate 7: Confidence & Budget (MANDATORY)
+
+- **Minimum confidence**: The prediction confidence must be >= **0.85** (higher than the 0.7 threshold for suggestions)
+- **Annoyance budget**: Max **2 proactive acts per hour**. If budget is exhausted, demote to Suggest.
+- **Pattern stability**: The triggering pattern must have been observed **3+ times** before the system may auto-act on it. First and second occurrences stay at Suggest.
+- **Consecutive failures**: If the last 2 proactive acts for this pattern were dismissed/rolled-back by the user, **disable auto-act for this pattern** until manually re-enabled.
+
+### Gating checklist (for implementers)
+
+Before shipping any Precog Act behavior, verify:
+
+- [ ] Action is additive or has a tested rollback command
+- [ ] Agent identity is checked (or confirmation fallback is wired)
+- [ ] External inputs are hash-verified, size-bounded, and schema-validated
+- [ ] Privacy classification is checked; no private data leaks
+- [ ] Shadow queue entry is written before execution
+- [ ] DND state is checked; critical-security exception is one of the 3 defined cases
+- [ ] Confidence >= 0.85, budget not exhausted, pattern seen 3+ times
+- [ ] Failure path: if any gate fails, the action demotes to Suggest (never silently drops)
 
 ## Safety and privacy requirements 🔴 #FF2400 (righteous boundary)
 
