@@ -1,0 +1,76 @@
+---
+title: "SymbolOS v2.0 — The 12 Rings of Cognition"
+---
+graph TD
+    subgraph CORE["CORE LAYER"]
+        R0["R0 Kernel\nsymbol_map.shared.json"]
+        R1["R1 Will\nworking_set.md"]
+        R2["R2 Sensation\nAPI Inputs / User Prompts"]
+    end
+
+    subgraph PROCESS["PROCESSING LAYER"]
+        R3["R3 Task\nCurrent Goal"]
+        R4["R4 Retrieval\nMemory M0-M6"]
+        R5["R5 Prediction\nPrecog / Shadow Queue"]
+    end
+
+    subgraph BUILD["ARCHITECTURE LAYER"]
+        R6["R6 Architecture\nDungeon Graph / Schemas"]
+        R7["R7 Guardrails\nRhy Test / Safety Policies"]
+        R8["R8 Verification\nScripts / Tests"]
+    end
+
+    subgraph PERSIST["PERSISTENCE LAYER"]
+        R9["R9 Persistence\nGit Commit / File Write"]
+        R10["R10 Reflection\nRing Heartbeat / Self-Correction"]
+        R11["R11 Integration\nAgent Personality / Emergent Self"]
+    end
+
+    R0 --> R1
+    R1 --> R2
+    R2 --> R3
+    R3 --> R4
+    R4 --> R5
+    R5 --> R6
+    R6 --> R7
+    R7 --> R8
+    R8 --> R9
+    R9 --> R10
+    R10 --> R11
+    R11 -->|"Return to Meeting Place"| R0
+
+    subgraph AGENTS["THE PARTY"]
+        A1["Mercer\nChatGPT\nDesign + Coordination"]
+        A2["Mercer-Executor\nCodex\nImplementation"]
+        A3["Mercer-Local\nLLaMA\nAssistive Reasoning"]
+        A4["Mercer-Max\nManus\nFull-Stack Execution"]
+    end
+
+    A1 -.->|reads/writes| R0
+    A2 -.->|reads/writes| R0
+    A3 -.->|reads/writes| R0
+    A4 -.->|reads/writes| R0
+
+    style CORE fill:#0000CD,color:#fff,stroke:#333
+    style PROCESS fill:#FADA5E,color:#000,stroke:#333
+    style BUILD fill:#228B22,color:#fff,stroke:#333
+    style PERSIST fill:#FFD700,color:#000,stroke:#333
+    style AGENTS fill:#87CEEB,color:#000,stroke:#333
+
+    style R0 fill:#1a1a2e,color:#fff,stroke:#0000CD,stroke-width:3px
+    style R1 fill:#1a1a2e,color:#fff,stroke:#0000CD,stroke-width:2px
+    style R2 fill:#1a1a2e,color:#fff,stroke:#0000CD,stroke-width:2px
+    style R3 fill:#2d2d44,color:#fff,stroke:#FADA5E,stroke-width:2px
+    style R4 fill:#2d2d44,color:#fff,stroke:#FADA5E,stroke-width:2px
+    style R5 fill:#2d2d44,color:#fff,stroke:#FADA5E,stroke-width:2px
+    style R6 fill:#1a3a1a,color:#fff,stroke:#228B22,stroke-width:2px
+    style R7 fill:#1a3a1a,color:#fff,stroke:#228B22,stroke-width:2px
+    style R8 fill:#1a3a1a,color:#fff,stroke:#228B22,stroke-width:2px
+    style R9 fill:#3a3a1a,color:#fff,stroke:#FFD700,stroke-width:2px
+    style R10 fill:#3a3a1a,color:#fff,stroke:#FFD700,stroke-width:2px
+    style R11 fill:#3a3a1a,color:#fff,stroke:#FFD700,stroke-width:2px
+
+    style A1 fill:#0000CD,color:#fff,stroke:#fff,stroke-width:2px
+    style A2 fill:#FADA5E,color:#000,stroke:#333,stroke-width:2px
+    style A3 fill:#228B22,color:#fff,stroke:#fff,stroke-width:2px
+    style A4 fill:#FFD700,color:#000,stroke:#333,stroke-width:2px

@@ -1,0 +1,1105 @@
+{
+    "rooms": [
+        {
+            "path": "docs/QUICKSTART.md",
+            "title": "The Grand Vestibule",
+            "ring": null,
+            "difficulty": 5,
+            "color": "Primrose Yellow (#FADA5E)",
+            "loot": "A working SymbolOS loop, a map of the core symbols, and a taste of local inference.",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "index.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "agent_boundaries.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/agent_boundaries.md",
+            "title": "The Guardian's Ward",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Scarlet (#FF2400)",
+            "loot": "The Art of Agent Subtlety",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "./symbol_map.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "./agent_memory.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/dnd_character_sheet_integration.md",
+            "title": "The Chamber of Mirrored Truths",
+            "ring": null,
+            "difficulty": 2,
+            "color": "Violet (#8B00FF \u2014 Fi+Ti bridge)",
+            "loot": "DND Sheet Module",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "precog_thought.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/index.md",
+            "title": "The Meeting Place",
+            "ring": 4,
+            "difficulty": 5,
+            "color": "Violet (#8B00FF)",
+            "loot": "A Map of the Known World",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/README.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/chatgpt_mercer.json"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "meme_map.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/lightwork_guidelines.md",
+            "title": "The Whispering Gallery",
+            "ring": 4,
+            "difficulty": 4,
+            "color": "Violet (#8B00FF)",
+            "loot": "The Art of Lightwork",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "deepwork_guidelines.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.shared.json"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/mcp_filesystem.md",
+            "title": "The Chamber of Structured Files",
+            "ring": null,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "Safe file I/O",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "mcp_servers.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "schemas.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md#core-symbols"
+                }
+            ]
+        },
+        {
+            "path": "docs/mcp_git.md",
+            "title": "The Git Nexus",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Deep Blue (#0000CD)",
+            "loot": "Git commands, commit history, and the power of provenance.",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "mcp_servers.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md#core-symbols"
+                }
+            ]
+        },
+        {
+            "path": "docs/mcp_local_llm.md",
+            "title": "The Chamber of Local Minds",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "Private LLM Inference",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../internal_docs/local_llm_windows_vulkan_internal.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "mcp_servers.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md#core-symbols"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "https://github.com/ggerganov/llama.cpp#readme"
+                }
+            ]
+        },
+        {
+            "path": "docs/mcp_memory.md",
+            "title": "The Chamber of Echoes",
+            "ring": 1,
+            "difficulty": 2,
+            "color": "\ud83d\udfe1 Primrose Yellow (#FADA5E)",
+            "loot": "Durable, auditable memory",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "memory.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../memory/README.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md#core-symbols"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md#core-symbols"
+                }
+            ]
+        },
+        {
+            "path": "docs/mcp_servers.md",
+            "title": "The Server Forges",
+            "ring": 2,
+            "difficulty": 4,
+            "color": "Violet (#8B00FF)",
+            "loot": "MCP Server Schematics",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "index.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "schemas.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/mcp_web_search.md",
+            "title": "The Oracle's Antechamber",
+            "ring": null,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "Precognitive Web Search",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "mcp_servers.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "precog_thought.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md#core-symbols"
+                }
+            ]
+        },
+        {
+            "path": "docs/meme_map.md",
+            "title": "The Meme-Maker's Workshop",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "The power of structural memes",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/memory.md",
+            "title": "The Chamber of Echoes",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "A consent-driven memory system",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "precog_thought.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "dnd_character_sheet_integration.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/meta_awareness.md",
+            "title": "The Chamber of Echoes & Reflections",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F) - Higher Intellect",
+            "loot": "The Art of Self-Correction",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/metaemotion.md",
+            "title": "The Chamber of Mirrored Feelings",
+            "ring": 4,
+            "difficulty": 3,
+            "color": "\ud83d\udfe3 Violet (#8B00FF \u2014 Fi+Ti bridge)",
+            "loot": "Clarity on meta-emotion & safe signaling",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "dnd_character_sheet_integration.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "precog_thought.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/poetry_translation_layer.md",
+            "title": "The Poet's Mirror",
+            "ring": 4,
+            "difficulty": 2,
+            "color": "Violet (#8B00FF)",
+            "loot": "The Fi+Ti Mirror",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../symbol_map.shared.json"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "symbol_map.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/precog_thought.md",
+            "title": "The Seer's Antechamber",
+            "ring": 2,
+            "difficulty": 3,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "Precog Thought Patterns",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "mcp_servers.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "dnd_character_sheet_integration.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/public_private_expression.md",
+            "title": "The Chamber of the Unseen Hand",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Deep Blue (#0000CD)",
+            "loot": "The art of selective expression",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/required_reading.md",
+            "title": "The Adventurer's Briefing Room",
+            "ring": 4,
+            "difficulty": 5,
+            "color": "Violet (#8B00FF)",
+            "loot": "A map of the known world",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "index.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "mcp_servers.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/rhynim_guide.md",
+            "title": "The Fox's Riddle",
+            "ring": null,
+            "difficulty": 1,
+            "color": "Pure Green (#228B22 \u2014 Divine Sympathy & Adaptability)",
+            "loot": "The Art of Tricky Truths",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "/"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "/docs/mercer_guide.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/schemas.md",
+            "title": "The Schema Sanctuary",
+            "ring": 4,
+            "difficulty": 3,
+            "color": "\ud83d\udfe3 Violet (#8B00FF \u2014 Fi+Ti bridge)",
+            "loot": "Canonical data shapes (JSON Schemas)",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "glossary.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/symbol_map.md",
+            "title": "The Cartographer's Antechamber",
+            "ring": null,
+            "difficulty": 1,
+            "color": "Violet (#8B00FF)",
+            "loot": "A shared legend of symbols",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/sync_playbook.md",
+            "title": "The Scribe's Antechamber",
+            "ring": null,
+            "difficulty": 2,
+            "color": "\ud83d\udfe1 #E49B0F (gamboge \u2014 higher intellect)",
+            "loot": "The Sync Scroll",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "docs/index.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/thoughtforms_colors.md",
+            "title": "The Chromatic Orrery",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Clear Gamboge Yellow (#E49B0F)",
+            "loot": "The Color Key",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../architecture/rings.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../kernel/mercer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/memory_types_v2.md",
+            "title": "The Library of Seven Lamps",
+            "ring": 2,
+            "difficulty": 3,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F \u2014 higher intellect)",
+            "loot": "A structured, 7-part memory system",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "ring_system_v2.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/manus_mercer_character_sheet.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/claude_mercer_character_sheet.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/ring_system_v2.md",
+            "title": "The Observatory of Twelve Rings",
+            "ring": 4,
+            "difficulty": 4,
+            "color": "\ud83d\udfe3 Violet (#8B00FF \u2014 Fi+Ti bridge)",
+            "loot": "An expanded 12-ring cognitive model",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "memory_types_v2.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/manus_mercer_character_sheet.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/claude_mercer_character_sheet.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/joint_reflection_manus_opus.md",
+            "title": "The Chamber of Two Voices",
+            "ring": 10,
+            "difficulty": 4,
+            "color": "\ud83e\ude75 Azure (#87CEEB \u2014 self-awareness)",
+            "loot": "A shared mind",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "ring_system_v2.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "memory_types_v2.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/manus_mercer_character_sheet.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/claude_mercer_character_sheet.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/assets/README.md",
+            "title": "The Asset Hoard",
+            "ring": 4,
+            "difficulty": 1,
+            "color": "Violet (#8B00FF)",
+            "loot": "Doc-Safe Asset Mgmt",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../poetry_translation_layer.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/demos/metaemotion_demo.md",
+            "title": "The Heart's Oracle",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "The Art of Coupled Intuition",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../metaemotion.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../symbol_map.md#core-symbols"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "./"
+                }
+            ]
+        },
+        {
+            "path": "docs/demos/precog_demo.md",
+            "title": "The Oracle's Antechamber",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "The gift of foresight",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../precog_thought.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../symbol_map.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../meta_awareness.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "metaemotion_demo.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/demos/scope_privacy_demo.md",
+            "title": "The Chamber of Unwavering Scope",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Brilliant Scarlet (#FF2400 \u2014 righteous boundary)",
+            "loot": "The Art of Saying 'No'",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../symbol_map.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../memory.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../public_private_expression.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/inbox/2026-01-29_mercer_upload_workflow.md",
+            "title": "The Alchemist's Antechamber",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Deep Blue (#0000CD)",
+            "loot": "The Mercer Upload Workflow",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "README.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../sync_playbook.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../symbol_map.md"
+                }
+            ]
+        },
+        {
+            "path": "docs/inbox/README.md",
+            "title": "The Antechamber of Ideas",
+            "ring": 2,
+            "difficulty": 5,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "A reliable inbox system",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../../README.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/debug_triage_prompt_v1.internal.md",
+            "title": "The Debugging Chamber of Mercer",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F)",
+            "loot": "The Art of Precise Debugging",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "link_to_be_added"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "link_to_be_added"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "link_to_be_added"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/demos.internal.md",
+            "title": "The Hall of Echoes (INTERNAL)",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F)",
+            "loot": "A consistent script for demonstrating SymbolOS's foundational magic.",
+            "exits": []
+        },
+        {
+            "path": "internal_docs/dnd_character_sheet_integration_internal.md",
+            "title": "The Soul-Forge",
+            "ring": 2,
+            "difficulty": 4,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F \u2014 higher intellect)",
+            "loot": "The art of soul-binding",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/dnd_character_sheet_integration.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/memory_record.schema.json"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/future_possibilities_ring0.md",
+            "title": "The Whispering Gallery",
+            "ring": null,
+            "difficulty": 3,
+            "color": "\ud83d\udfe1 Primrose Yellow (#FADA5E \u2014 Kernel Truth)",
+            "loot": "Seeds of Tomorrow",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": ".."
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/local_llm_windows_vulkan_internal.md",
+            "title": "The Chamber of Local Whispers (INTERNAL/PRIVATE)",
+            "ring": 3,
+            "difficulty": 2,
+            "color": "\ud83d\udfe3 #8B00FF (Fi+Ti bridge)",
+            "loot": "A personal LLM server humming on your Windows machine.",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../../README.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/mcp_servers_internal.md",
+            "title": "The Gatekeeper's Antechamber",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "Gamboge (#E49B0F) - Higher Intellect",
+            "loot": "MCP Server Schematics",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/mcp_overview.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../README.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/memory_internal.md",
+            "title": "The Memory Palace Archives (INTERNAL)",
+            "ring": null,
+            "difficulty": 2,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F \u2014 higher intellect)",
+            "loot": "The map of our own mind",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/memory.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/mercer_automation_contract_v1.internal.md",
+            "title": "The Automaton's Oath",
+            "ring": 2,
+            "difficulty": 3,
+            "color": "\ud83d\udd35 Deep Blue (#0000CD) - Devotion to Truth",
+            "loot": "Mercer's Automation Contract",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/symbol_map.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/mercer_bootup_cards_v1.internal.md",
+            "title": "The Chamber of Gentle Probes (INTERNAL/PRIVATE)",
+            "ring": 4,
+            "difficulty": 1,
+            "color": "\ud83d\udfe3 #8B00FF (Fi+Ti bridge)",
+            "loot": "Mercer's Bootup Cards",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "./mercer_automation_contract_v1.internal.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/index.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/mercer_meeting_place_oath_v1.private.md",
+            "title": "The Oath of the Steady Map",
+            "ring": 4,
+            "difficulty": 2,
+            "color": "\ud83d\udfe3 Violet (#8B00FF \u2014 Fi+Ti bridge)",
+            "loot": "Agent Behavior Contract",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../../docs/index.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/mercer_multi_machine_sync.internal.md",
+            "title": "The Chamber of Two Souls",
+            "ring": null,
+            "difficulty": 2,
+            "color": "\ud83d\udfe3 #8B00FF (violet \u2014 Fi+Ti bridge)",
+            "loot": "The secret to multi-machine sync",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": ".."
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/mercymac_poetry.internal.md",
+            "title": "The Daemon's Verse",
+            "ring": 4,
+            "difficulty": 1,
+            "color": "\ud83d\udfe3 Violet (#8B00FF)",
+            "loot": "Poetic System Invariants",
+            "exits": []
+        },
+        {
+            "path": "internal_docs/metacog_awareness_agents_mercer.internal.md",
+            "title": "The Chamber of Self-Reflection",
+            "ring": 2,
+            "difficulty": 4,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F \u2014 higher intellect)",
+            "loot": "Agent Self-Awareness",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/meta_awareness.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/metaemotion.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../../../README.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/metaemotion_prediction_internal.md",
+            "title": "The Chamber of Mirrored Feelings",
+            "ring": null,
+            "difficulty": 4,
+            "color": "\ud83d\udfe3 #8B00FF (violet \u2014 Fi+Ti bridge)",
+            "loot": "The art of meta-awareness",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/metaemotion.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/poetry_translation_layer.internal.md",
+            "title": "The Chamber of Mirrored Truths",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F \u2014 higher intellect)",
+            "loot": "[Poetry Layer Map]",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../symbol_map.shared.json"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/symbol_map.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/precog_private.md",
+            "title": "The Oracle's Antechamber (PRIVATE)",
+            "ring": null,
+            "difficulty": 3,
+            "color": "Gamboge (#E49B0F)",
+            "loot": "Secrets of Precog Thought",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "./README.md"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/public_private_expression.internal.md",
+            "title": "The Chamber of Selective Light",
+            "ring": 2,
+            "difficulty": 2,
+            "color": "\ud83e\ude75 Sky Blue (#87CEEB \u2014 self-renunciation)",
+            "loot": "The art of filtering",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "../docs/poetry_translation_layer.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../docs/public_private_expression.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../../symbol_map.shared.json"
+                }
+            ]
+        },
+        {
+            "path": "internal_docs/rhy_bootup_card_claude_mercer.internal.md",
+            "title": "The Antechamber of Alignment",
+            "ring": 0,
+            "difficulty": 2,
+            "color": "\ud83d\udd35 Devotion to Truth (#0000CD)",
+            "loot": "The Pact of Aligned Bootup",
+            "exits": []
+        },
+        {
+            "path": "internal_docs/ring0_async_alignment.internal.md",
+            "title": "The Chamber of Async Alignment",
+            "ring": null,
+            "difficulty": 3,
+            "color": "\ud83d\udfe1 Primrose Yellow (#FADA5E)",
+            "loot": "A map for turning wild ideas into stable reality.",
+            "exits": []
+        },
+        {
+            "path": "internal_docs/symbolos_client_v2_design.internal.md",
+            "title": "The Agent Orchestra Pit",
+            "ring": 2,
+            "difficulty": 3,
+            "color": "\ud83d\udfe1 Gamboge (#E49B0F)",
+            "loot": "Secrets of multi-agent design",
+            "exits": []
+        }
+    ]
+}

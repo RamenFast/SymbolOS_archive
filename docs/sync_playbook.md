@@ -28,6 +28,41 @@ Default rule: **Always, all sync** — keep shared resources aligned every run:
 
 ---
 
+## The Rhy Test 🦊 — Does this doc belong in the dungeon?
+
+Before any new or modified Markdown document is committed, it must pass the following checklist. This ensures consistency, quality, and that all-important SymbolOS vibe.
+
+- [ ] **Dungeon Room Banner:** Has a valid `╔══...══╗` banner at the top.
+- [ ] **Core Metadata:** The banner contains a `ROOM`, `Floor`, `Difficulty`, `Loot`, and `Color`.
+- [ ] **Ring Assignment:** The `Floor` includes a valid Ring assignment (R0-R11).
+- [ ] **ASCII Art:** Contains at least one piece of ASCII art (e.g., 🦊, 🐢, 💀,  lantern).
+- [ ] **Poetry Layer:** Includes a reference to the poetry layer or a quote.
+- [ ] **Exits:** Has a `🚪 EXITS:` section with at least one valid link to another document.
+- [ ] **Loot:** Has a `💎 LOOT GAINED:` summary at the end.
+- [ ] **Haiku:** Ends with a three-line, 5-7-5 syllable haiku.
+- [ ] **Footer:** Includes the `☂🦊🐢` footer.
+- [ ] **Content Accuracy:** The content does not contradict `symbol_map.shared.json`.
+- [ ] **No Secrets:** The document contains no secrets, PII, or credential references.
+
+---
+
+## Confidence Tagging (Maturity)
+
+As part of the Rhy Test, every document must also declare its maturity level. This tag should be added to the banner.
+
+| Tag | Meaning | Example |
+|---|---|---|
+| 🌱 **Seed** | Early idea, untested | `Maturity: 🌱 Seed` |
+| 🌿 **Growing** | In use but evolving | `Maturity: 🌿 Growing` |
+| 🌳 **Stable** | Battle-tested, rarely changes | `Maturity: 🌳 Stable` |
+| 🍂 **Retiring** | Being phased out or superseded | `Maturity: 🍂 Retiring` |
+
+Example implementation in a banner:
+
+`║  Maturity: 🌳 Stable │ Difficulty: ⭐⭐⭐ │ Loot: ... ║`
+
+---
+
 ## The Sync Scroll (copy/paste) 📜 🟢 #228B22 (pure green — adaptability)
 
         /\_/\
