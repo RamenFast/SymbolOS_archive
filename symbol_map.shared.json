@@ -646,6 +646,16 @@
         "path": "scripts/generate_dungeon_graph.py",
         "title": "Dungeon Graph Generator (Python)",
         "kind": "tool"
+      },
+      {
+        "path": "docs/local_llama_design_v1.md",
+        "title": "Local Llama Design v1 (Forge of Local Minds)",
+        "kind": "compute"
+      },
+      {
+        "path": "scripts/setup_local_llama.ps1",
+        "title": "Local Llama Setup Script (PowerShell)",
+        "kind": "tool"
       }
     ],
     "schemas": [
@@ -1227,6 +1237,18 @@
       "path": "scripts/generate_dungeon_graph.py",
       "tags": ["tool", "python", "dungeon", "graph", "generator"],
       "summary": "Generates dungeon_graph.json from docs inventory."
+    },
+    {
+      "title": "Local Llama Design v1",
+      "path": "docs/local_llama_design_v1.md",
+      "tags": ["compute", "llama", "local", "vulkan", "qwen", "R6"],
+      "summary": "Co-authored Manus+Opus design spec: Qwen2.5-8B Q5_K_M primary, Phi-4-Mini sprint, 4-tier compute, ring-to-model mapping."
+    },
+    {
+      "title": "Local Llama Setup Script",
+      "path": "scripts/setup_local_llama.ps1",
+      "tags": ["tool", "powershell", "setup", "llama", "download"],
+      "summary": "Downloads llama.cpp Vulkan build + Qwen2.5-8B GGUF model. Resume-capable, multi-source fallback."
     }
   ]
 }
