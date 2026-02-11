@@ -385,12 +385,41 @@ function NodeInspector({ node, health }: { node: NetworkNode | null; health: LLM
 type TermMsg = { id: number; agent: string; emoji: string; color: string; text: string; time: string }
 
 const AGENT_PERSONAS = [
-  { agent: 'Mercer', emoji: '🔵', color: colors.blue, style: 'the Architect — steady, wise, architectural' },
-  { agent: 'Opus', emoji: '🟣', color: colors.violet, style: 'the Alignment Scholar — careful, deep, safety-first' },
-  { agent: 'Max', emoji: '⭐', color: colors.gold, style: 'the Everything Agent — hype, speed, energy, terse' },
-  { agent: 'Rhy', emoji: '🦊', color: colors.green, style: 'the Fox Trickster — cryptic, playful, poetic' },
-  { agent: 'Local', emoji: '🟢', color: colors.green, style: 'the Hermit Monk — meditative, privacy-focused, bare metal' },
+  { agent: 'Mercer', emoji: '🔵', color: colors.blue, style: 'the Architect — steady, wise, architectural',
+    domains: ['architecture', 'symbol', 'schema', 'map', 'drift', 'sync', 'plan', 'design', 'structure', 'coordinate', 'meeting', 'alignment', 'umbrella', 'registry', 'organize'] },
+  { agent: 'Opus', emoji: '🟣', color: colors.violet, style: 'the Alignment Scholar — careful, deep, safety-first',
+    domains: ['safety', 'alignment', 'ethics', 'trust', 'consent', 'boundary', 'guard', 'ring', 'governance', 'careful', 'review', 'why', 'meaning', 'values', 'risk'] },
+  { agent: 'Max', emoji: '⭐', color: colors.gold, style: 'the Everything Agent — hype, speed, energy, terse',
+    domains: ['ship', 'build', 'fast', 'go', 'hype', 'deploy', 'everything', 'sprint', 'launch', 'full send', 'speed', 'cook', 'push', 'run', 'execute'] },
+  { agent: 'Rhy', emoji: '🦊', color: colors.green, style: 'the Fox Trickster — cryptic, playful, poetic',
+    domains: ['fox', 'poem', 'poetry', 'story', 'riddle', 'mystery', 'dream', 'feel', 'weird', 'strange', 'art', 'soul', 'spirit', 'rhyme', 'beauty'] },
+  { agent: 'Local', emoji: '🟢', color: colors.green, style: 'the Hermit Monk — meditative, privacy-focused, bare metal',
+    domains: ['local', 'privacy', 'gpu', 'vulkan', 'llm', 'inference', 'hardware', 'metal', 'vram', 'model', 'token', 'offline', 'hermit', 'bare', 'self-host'] },
 ]
+
+/** Score each persona by how many domain keywords match the user message */
+function routeToAgent(message: string): typeof AGENT_PERSONAS[0] {
+  const lower = message.toLowerCase()
+  let best = AGENT_PERSONAS[0]
+  let bestScore = 0
+  for (const p of AGENT_PERSONAS) {
+    let score = 0
+    for (const kw of p.domains) {
+      if (lower.includes(kw)) score++
+    }
+    if (score > bestScore) { bestScore = score; best = p }
+  }
+  // No keyword match → pick based on message characteristics
+  if (bestScore === 0) {
+    if (message.length < 15) return AGENT_PERSONAS[2] // short = Max energy
+    if (message.endsWith('?')) return AGENT_PERSONAS[1] // questions = Opus depth
+    // Rotate based on message content hash for variety without randomness
+    let hash = 0
+    for (let i = 0; i < message.length; i++) hash = ((hash << 5) - hash + message.charCodeAt(i)) | 0
+    return AGENT_PERSONAS[Math.abs(hash) % AGENT_PERSONAS.length]
+  }
+  return best
+}
 
 const LLM_URL = 'http://127.0.0.1:8080/v1/chat/completions'
 
@@ -425,31 +454,52 @@ async function queryLocalLLM(userMsg: string, persona: typeof AGENT_PERSONAS[0])
   }
 }
 
-async function queryLiveBanter(): Promise<{ agent: string; emoji: string; color: string; text: string } | null> {
-  const persona = AGENT_PERSONAS[Math.floor(Math.random() * AGENT_PERSONAS.length)]
-  const prompts = [
-    'Say something in character about your current status or mood. One sentence.',
-    'Comment on the state of SymbolOS or the network. One cryptic or punchy line.',
-    'Share a brief thought about alignment, code, or the meaning of building together.',
-  ]
-  const prompt = prompts[Math.floor(Math.random() * prompts.length)]
+/** Contextual banter — agents respond to recent conversation or system state, not random noise */
+async function queryContextualBanter(recentMessages: TermMsg[], health: LLMHealth): Promise<{ agent: string; emoji: string; color: string; text: string } | null> {
+  // Pick agent who hasn't spoken recently
+  const recentAgents = recentMessages.slice(-6).map(m => m.agent)
+  const candidates = AGENT_PERSONAS.filter(p => !recentAgents.includes(p.agent))
+  const persona = candidates.length > 0 ? candidates[0] : AGENT_PERSONAS[0]
+
+  // Build context-aware prompt from recent conversation
+  const lastUserMsg = recentMessages.filter(m => m.agent === 'YOU').slice(-1)[0]
+  const lastAgentMsg = recentMessages.filter(m => m.agent !== 'SYS' && m.agent !== 'YOU').slice(-1)[0]
+
+  let prompt: string
+  if (lastUserMsg && lastAgentMsg) {
+    prompt = `The user recently said: "${lastUserMsg.text}". ${lastAgentMsg.agent} responded: "${lastAgentMsg.text}". Add a brief remark that builds on this exchange, in character. One sentence.`
+  } else if (health.alive && health.tokPerSec) {
+    prompt = `The local LLM is running at ${health.tokPerSec} tok/s. Make a brief in-character observation about the system state or what you're working on. One sentence.`
+  } else {
+    prompt = 'Share one brief in-character thought about what you are doing right now in SymbolOS. One sentence.'
+  }
+
   const text = await queryLocalLLM(prompt, persona)
   if (!text) return null
   return { agent: persona.agent, emoji: persona.emoji, color: persona.color, text }
 }
 
-function TerminalPanel() {
+function TerminalPanel({ health }: { health: LLMHealth }) {
   const [messages, setMessages] = useState<TermMsg[]>([])
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
+  const [showEmoji, setShowEmoji] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const idRef = useRef(0)
   const llmAlive = useRef(true)
+  const messagesRef = useRef<TermMsg[]>([])
+  const healthRef = useRef(health)
+  healthRef.current = health
 
   const now = () => new Date().toLocaleTimeString('en-US', { hour12: false })
 
   const push = useCallback((msg: Omit<TermMsg, 'id' | 'time'>) => {
-    setMessages(prev => [...prev, { ...msg, id: ++idRef.current, time: now() }].slice(-60))
+    setMessages(prev => {
+      const next = [...prev, { ...msg, id: ++idRef.current, time: now() }].slice(-60)
+      messagesRef.current = next
+      return next
+    })
   }, [])
 
   // Boot sequence
@@ -466,26 +516,27 @@ function TerminalPanel() {
     })
   }, [push])
 
-  // Periodic banter — mix of local LLM live lines + static pool
+  // Contextual banter — agents build on recent conversation or system state
   useEffect(() => {
     let mounted = true
     const tick = async () => {
       if (!mounted) return
-      // 40% chance: try live LLM banter, fallback to static
-      if (llmAlive.current && Math.random() < 0.4) {
-        const live = await queryLiveBanter()
+      // Always try live contextual banter first
+      if (llmAlive.current) {
+        const live = await queryContextualBanter(messagesRef.current, healthRef.current)
         if (live && mounted) {
           push(live)
           return
         }
-        // LLM might be down — mark and fall back
         if (!live) llmAlive.current = false
       }
-      // Static banter fallback
-      const line = banterLines[Math.floor(Math.random() * banterLines.length)]
+      // Static fallback — pick an agent who hasn't spoken recently
+      const recentAgents = messagesRef.current.slice(-8).map(m => m.agent)
+      const pool = banterLines.filter(b => !recentAgents.includes(b.agent))
+      const line = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : banterLines[Math.floor(Math.random() * banterLines.length)]
       if (mounted) push(line)
     }
-    const iv = setInterval(tick, 7000 + Math.random() * 5000)
+    const iv = setInterval(tick, 12000 + Math.random() * 6000) // slower cadence, more meaningful
     return () => { mounted = false; clearInterval(iv) }
   }, [push])
 
@@ -502,9 +553,13 @@ function TerminalPanel() {
     push({ agent: 'YOU', emoji: '👤', color: colors.cyan, text: txt })
     setInput('')
     setBusy(true)
+    setShowEmoji(false)
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+    }
 
-    // Pick a random agent to respond
-    const persona = AGENT_PERSONAS[Math.floor(Math.random() * AGENT_PERSONAS.length)]
+    // Route to the most relevant agent based on message content
+    const persona = routeToAgent(txt)
     push({ agent: persona.agent, emoji: persona.emoji, color: persona.color, text: '...' })
 
     const response = await queryLocalLLM(txt, persona)
@@ -539,6 +594,29 @@ function TerminalPanel() {
     setBusy(false)
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit(e as any)
+    }
+  }
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value)
+    // Auto-resize textarea
+    const textarea = e.target
+    textarea.style.height = 'auto'
+    textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'
+  }
+
+  const insertEmoji = (emoji: string) => {
+    setInput(prev => prev + emoji)
+    setShowEmoji(false)
+    textareaRef.current?.focus()
+  }
+
+  const emojiPalette = ['☂️', '🔵', '🟣', '⭐', '🦊', '🟢', '🔘', '🟡', '💭', '💬', '🎯', '🔮', '🌟', '✨', '🔥', '💡', '🎨', '🌊', '🌙', '⚡']
+
   return (
     <div className="lt-terminal">
       <div className="lt-term-hdr">
@@ -556,15 +634,35 @@ function TerminalPanel() {
       </div>
       <form className="lt-term-in" onSubmit={handleSubmit}>
         <span className="lt-gt">&gt;</span>
-        <input
-          type="text"
+        <textarea
+          ref={textareaRef}
           value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder={busy ? 'Thinking...' : 'Type a message...'}
+          onChange={handleTextareaChange}
+          onKeyDown={handleKeyDown}
+          placeholder={busy ? 'Thinking...' : 'Type a message... (Shift+Enter for newline)'}
           disabled={busy}
           autoComplete="off"
           spellCheck={false}
+          rows={1}
         />
+        <button
+          type="button"
+          className="lt-emoji-btn"
+          onClick={() => setShowEmoji(!showEmoji)}
+          disabled={busy}
+          title="Insert emoji"
+        >
+          😊
+        </button>
+        {showEmoji && (
+          <div className="lt-emoji-picker">
+            {emojiPalette.map(e => (
+              <button key={e} type="button" onClick={() => insertEmoji(e)} className="lt-emoji-opt">
+                {e}
+              </button>
+            ))}
+          </div>
+        )}
       </form>
     </div>
   )
@@ -665,33 +763,20 @@ export function LanternView() {
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, dismissed: true } : n))
   }, [])
 
-  // Boot notification
-  useEffect(() => {
-    const t1 = setTimeout(() => {
-      pushNotif(createNotification('system', 'Lantern Online', 'All 7 agents reporting. Umbrella active.', '☂️', colors.primrose))
-    }, 1500)
-    return () => clearTimeout(t1)
-  }, [pushNotif])
+  // Boot — no toast, just terminal messages handle it
+  // Device scanning is shown as persistent indicator in topbar, not toasts
 
-  // Device scanning simulation — scans for Zenphone 9 periodically
+  // Device scanning — silent background probe, status shown in topbar indicator only
   useEffect(() => {
     const scanInterval = setInterval(() => {
       setDevices(prev => prev.map(d => {
         if (d.id !== 'zenphone9') return d
-        // Cycle: scanning -> check if device responds
-        // For now we probe — when the phone is actually running the SymbolOS companion,
-        // this will detect it automatically.
         return { ...d, lastSeen: Date.now() }
       }))
-    }, 15000)
+    }, 30000) // less aggressive: every 30s
 
-    // Initial scan notification
-    const t = setTimeout(() => {
-      pushNotif(createNotification('device_connect', 'Device Scan', 'Scanning for Zenphone 9...', '📡', colors.cyan))
-    }, 3000)
-
-    return () => { clearInterval(scanInterval); clearTimeout(t) }
-  }, [pushNotif])
+    return () => clearInterval(scanInterval)
+  }, [])
 
   // Simulate device detection when user manually connects
   // (Real impl: WebSocket handshake or mDNS)
@@ -735,7 +820,7 @@ export function LanternView() {
           <NodeInspector node={selectedNode} health={health} />
         </div>
         <div className="lt-panel lt-term-panel">
-          <TerminalPanel />
+          <TerminalPanel health={health} />
         </div>
       </div>
       <NotificationToasts notifications={notifications} onDismiss={dismissNotif} />
