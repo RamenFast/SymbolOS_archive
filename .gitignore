@@ -19,3 +19,6 @@ desktop/target/
 /docs/assets/**/*.private.*
 /docs/assets/lily_background.*
 /docs/assets/photos_import_private/
+
+# Local secrets (never commit)
+.env.local
