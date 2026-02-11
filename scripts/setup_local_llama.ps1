@@ -25,7 +25,8 @@ Param(
   [switch]$SkipModel,
   [switch]$SkipVerify,
   [ValidateSet('qwen8b', 'phi4')]
-  [string]$Model = 'qwen8b'
+  [string]$Model = 'qwen8b',
+  [string]$HfToken = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -63,22 +64,22 @@ $models = @{
 
 function Write-Step {
   Param([string]$Msg)
-  Write-Host "`n═══ $Msg ═══" -ForegroundColor Cyan
+  Write-Host "`n=== $Msg ===" -ForegroundColor Cyan
 }
 
 function Write-Ok {
   Param([string]$Msg)
-  Write-Host "  ✓ $Msg" -ForegroundColor Green
+  Write-Host "  [OK] $Msg" -ForegroundColor Green
 }
 
 function Write-Warn {
   Param([string]$Msg)
-  Write-Host "  ⚠ $Msg" -ForegroundColor Yellow
+  Write-Host "  [WARN] $Msg" -ForegroundColor Yellow
 }
 
 function Write-Fail {
   Param([string]$Msg)
-  Write-Host "  ✗ $Msg" -ForegroundColor Red
+  Write-Host "  [FAIL] $Msg" -ForegroundColor Red
 }
 
 function Ensure-Dir {
@@ -95,7 +96,8 @@ function Download-WithResume {
   Param(
     [string]$Url,
     [string]$OutPath,
-    [string]$Label
+    [string]$Label,
+    [string]$AuthToken = ''
   )
   # Use curl.exe (Windows built-in) for resume support + progress bar
   $curlExe = Get-Command curl.exe -ErrorAction SilentlyContinue
@@ -109,15 +111,18 @@ function Download-WithResume {
 
   # -L = follow redirects, -C - = resume, --progress-bar = visual progress
   # --fail = return error on HTTP 4xx/5xx
-  $args = @(
+  $curlArgs = @(
     '-L', '-C', '-',
     '--fail',
     '--progress-bar',
-    '-o', $OutPath,
-    $Url
+    '-o', $OutPath
   )
+  if ($AuthToken) {
+    $curlArgs += @('-H', "Authorization: Bearer $AuthToken")
+  }
+  $curlArgs += $Url
 
-  & curl.exe @args
+  & curl.exe @curlArgs
   if ($LASTEXITCODE -ne 0) {
     return $false
   }
@@ -126,10 +131,10 @@ function Download-WithResume {
 
 # ── Banner ─────────────────────────────────────────────────────
 Write-Host ''
-Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor DarkYellow
-Write-Host '║  ⚔️  SymbolOS Local Llama Setup                              ║' -ForegroundColor DarkYellow
-Write-Host '║  🏗️  Quest: QT-004 — The Forge of Local Minds               ║' -ForegroundColor DarkYellow
-Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor DarkYellow
+Write-Host '+--------------------------------------------------------------+' -ForegroundColor DarkYellow
+Write-Host '|  SymbolOS Local Llama Setup                                  |' -ForegroundColor DarkYellow
+Write-Host '|  Quest: QT-004 -- The Forge of Local Minds                   |' -ForegroundColor DarkYellow
+Write-Host '+--------------------------------------------------------------+' -ForegroundColor DarkYellow
 Write-Host ''
 
 $selectedModel = $models[$Model]
@@ -232,7 +237,7 @@ if (-not $SkipModel) {
     $success = $false
     foreach ($sourceUrl in $selectedModel.Sources) {
       Write-Host "  Trying source..." -ForegroundColor White
-      $success = Download-WithResume -Url $sourceUrl -OutPath $modelPath -Label $selectedModel.Name
+      $success = Download-WithResume -Url $sourceUrl -OutPath $modelPath -Label $selectedModel.Name -AuthToken $HfToken
       if ($success) {
         $dlSize = (Get-Item $modelPath).Length
         if ($dlSize -ge $selectedModel.MinSizeBytes) {
@@ -248,12 +253,19 @@ if (-not $SkipModel) {
     }
 
     if (-not $success) {
-      Write-Fail "All model sources failed."
+      Write-Fail "All model sources failed (likely 401 -- HuggingFace requires auth)."
       Write-Host ''
-      Write-Host "  Manual download instructions:" -ForegroundColor Yellow
-      Write-Host "  1. Go to: https://huggingface.co/Qwen/Qwen2.5-8B-Instruct-GGUF" -ForegroundColor Yellow
-      Write-Host "  2. Download: $($selectedModel.FileName)" -ForegroundColor Yellow
-      Write-Host "  3. Place in: $modelDir" -ForegroundColor Yellow
+      Write-Host '  Qwen models on HuggingFace require a free access token.' -ForegroundColor Yellow
+      Write-Host '  To get one:' -ForegroundColor Yellow
+      Write-Host '    1. Create account at https://huggingface.co/join' -ForegroundColor Yellow
+      Write-Host '    2. Accept model license at https://huggingface.co/Qwen/Qwen2.5-8B-Instruct-GGUF' -ForegroundColor Yellow
+      Write-Host '    3. Create token at https://huggingface.co/settings/tokens' -ForegroundColor Yellow
+      Write-Host '    4. Re-run:' -ForegroundColor Yellow
+      Write-Host '       .\scripts\setup_local_llama.ps1 -SkipBinary -HfToken YOUR_TOKEN' -ForegroundColor Cyan
+      Write-Host ''
+      Write-Host '  Or download manually:' -ForegroundColor Yellow
+      Write-Host "    1. Download: $($selectedModel.FileName)" -ForegroundColor Yellow
+      Write-Host "    2. Place in: $modelDir" -ForegroundColor Yellow
       Write-Host ''
       exit 1
     }
@@ -301,15 +313,15 @@ if (-not $SkipVerify) {
   if ($vulkanDll) {
     Write-Ok "Vulkan DLL: $($vulkanDll.Name)"
   } else {
-    Write-Warn "No vulkan DLL in bin dir (may use system Vulkan — usually fine for AMD)"
+    Write-Warn "No vulkan DLL in bin dir (may use system Vulkan -- usually fine for AMD)"
   }
 
   # Summary
   Write-Host ''
   if ($allGood) {
-    Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Green
-    Write-Host '║  ✅ Setup complete! Ready to launch.                         ║' -ForegroundColor Green
-    Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Green
+    Write-Host '+--------------------------------------------------------------+' -ForegroundColor Green
+    Write-Host '|  Setup complete! Ready to launch.                            |' -ForegroundColor Green
+    Write-Host '+--------------------------------------------------------------+' -ForegroundColor Green
     Write-Host ''
     Write-Host '  To start the server:' -ForegroundColor White
     Write-Host '    .\scripts\run_llama_server.ps1' -ForegroundColor Cyan
@@ -321,13 +333,13 @@ if (-not $SkipVerify) {
     Write-Host '    Invoke-RestMethod http://127.0.0.1:8080/' -ForegroundColor Cyan
     Write-Host ''
   } else {
-    Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Red
-    Write-Host '║  ❌ Setup incomplete. Check errors above.                    ║' -ForegroundColor Red
-    Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Red
+    Write-Host '+--------------------------------------------------------------+' -ForegroundColor Red
+    Write-Host '|  Setup incomplete. Check errors above.                       |' -ForegroundColor Red
+    Write-Host '+--------------------------------------------------------------+' -ForegroundColor Red
     exit 1
   }
 } else {
-  Write-Step "Step 4/4: Skip verification (--SkipVerify)"
+  Write-Step 'Step 4/4: Skip verification (-SkipVerify)'
 }
 
 #
