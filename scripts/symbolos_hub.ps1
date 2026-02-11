@@ -331,11 +331,16 @@ function Update-MercerLocalContext {
     $jsonText = [System.IO.File]::ReadAllText($symbolMapPath, [System.Text.Encoding]::UTF8)
     $map = $jsonText | ConvertFrom-Json
 
-    # Build compact symbol list (name + meaning, no emoji chars to avoid PS 5.1 UTF-8 issues)
+    # Build compact symbol list (symbol + name + meaning)
+    # Context file is written with .NET UTF-8 APIs, so emoji survive here.
     $symbolLines = @()
     foreach ($s in $map.symbols) {
       if ($s.name) {
-        $symbolLines += "- $($s.name): $($s.meaning)"
+        if ($s.symbol) {
+          $symbolLines += "- $($s.symbol) $($s.name): $($s.meaning)"
+        } else {
+          $symbolLines += "- $($s.name): $($s.meaning)"
+        }
       }
     }
 
@@ -350,8 +355,6 @@ function Update-MercerLocalContext {
     foreach ($kind in ($docsByKind.Keys | Sort-Object)) {
       $docsLines += "### $kind"
       foreach ($item in $docsByKind[$kind]) {
-        # Strip non-ASCII to avoid PS 5.1 encoding issues
-        $item = $item -replace '[^\x20-\x7E]', ''
         $docsLines += "- $item"
       }
     }
@@ -364,10 +367,9 @@ function Update-MercerLocalContext {
         $firstLines = Get-Content $qf.FullName -TotalCount 10 -ErrorAction SilentlyContinue
         $title = ($firstLines | Where-Object { $_ -match '^# ' } | Select-Object -First 1) -replace '^# ', ''
         $status = ($firstLines | Where-Object { $_ -match 'Status:' } | Select-Object -First 1) -replace '.*Status:\s*', ''
-        # Strip emoji from status to avoid PS 5.1 UTF-8 issues in JSON
-        $status = $status -replace '[^\x20-\x7E]', '' -replace '\s+', ' '
+        $status = $status -replace '\s+', ' '
         if ($title) {
-          $title = $title -replace '[^\x20-\x7E]', '' -replace '\s+', ' '
+          $title = $title -replace '\s+', ' '
           $questLines += "- $($qf.BaseName): $($title.Trim()) [$($status.Trim())]"
         }
       }
