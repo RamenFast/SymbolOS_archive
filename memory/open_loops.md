@@ -147,13 +147,63 @@ Here are the quests we're on. The open loops, the promises we've made. We don't 
   - Links: `internal_docs/symbolos_backend_v1_research.internal.md`, `docs/architecture/unified_architecture_lantern_backend_mcp.md`, Issue #5
   - MercerID: MRC-20260211-OPUS-04
 
-- [ ] ID: 20260211-005
+- [ ] ID: 20260211-005 ⏸️ PAUSED:offline
   - Loop: API/MCP server fleet + cybersecurity toolkit — 26 servers, 155 tools, Umbrella Doctrine, gateway/discovery, vault, agent identity, network recon, sandboxing
   - Owner: Opus / Mercer-GPT / Manus-Max
   - Next action: APPROVED by Ben. Implementation starting. Build MCP server fleet + gateway routing + Umbrella Doctrine enforcement.
-  - Due/Review: Active development
+  - Status: PAUSED — internet disconnecting. Resume on reconnect.
+  - Due/Review: Resume on internet reconnect
   - Links: `internal_docs/symbolos_api_mcp_cybersecurity_v1.internal.md`, `docs/security/open_questions_resolutions.md`, Issue #5
   - MercerID: MRC-20260211-OPUS-05
+- [x] ID: 20260211-006 ✅ CLOSED 2026-02-11
+  - Loop: Agent handoff payload schema for structured agent-to-agent communication
+  - Owner: Manus-Max
+  - Resolution: Created `docs/agent_handoff_payload.schema.json`, `docs/agent_handoff_payload.example.json`, `memory/handoffs/template.payload.json`.
+  - Links: `docs/agent_handoff_payload.schema.json`, `memory/handoffs/template.payload.json`
+  - MercerID: MRC-20260211-MAX-01
+- [x] ID: 20260211-007 ✅ CLOSED 2026-02-11
+  - Loop: Token ledger + compute router scripts
+  - Owner: Manus-Max
+  - Resolution: Created `scripts/token_ledger.py` and `scripts/compute_router.py`. Both tested.
+  - Links: `scripts/token_ledger.py`, `scripts/compute_router.py`
+  - MercerID: MRC-20260211-MAX-02
+- [x] ID: 20260211-008 ✅ CLOSED 2026-02-11
+  - Loop: Blob emoji system — blobmoji manifest parser + React component
+  - Owner: Manus-Max
+  - Resolution: Created `web/src/blobmoji.ts` and `web/src/BlobEmoji.tsx`. Apache 2.0.
+  - Links: `web/src/blobmoji.ts`, `web/src/BlobEmoji.tsx`
+  - MercerID: MRC-20260211-MAX-03
+- [x] ID: 20260211-009 ✅ CLOSED 2026-02-11
+  - Loop: Schema v2 updates — memory_record + precog_card
+  - Owner: Manus-Max
+  - Resolution: Updated both schemas with 7 memory types, ring mapping, emotional valence, compute tier, agent routing.
+  - Links: `docs/memory_record.schema.json`, `docs/precog_card.schema.json`
+  - MercerID: MRC-20260211-MAX-04
+- [x] ID: 20260211-010 ✅ CLOSED 2026-02-11
+  - Loop: Gemini character sheet + party roster update (8 members)
+  - Owner: Manus-Max
+  - Resolution: Created `docs/characters/gemini_android_studio.md`. Updated party roster.
+  - Links: `docs/characters/gemini_android_studio.md`, `docs/agent_character_sheets.md`
+  - MercerID: MRC-20260211-MAX-05
+- [x] ID: 20260211-011 ✅ CLOSED 2026-02-11
+  - Loop: Music library v1 manifest + iPhone 4S jailbreak plan
+  - Owner: Manus-Max
+  - Resolution: Created `docs/music_library_v1.md` (300 songs), `docs/iphone4s_jailbreak_music_player.md`, `scripts/music_library_builder.py`.
+  - Links: `docs/music_library_v1.md`, `docs/iphone4s_jailbreak_music_player.md`
+  - MercerID: MRC-20260211-MAX-06
+- [x] ID: 20260211-012 ✅ CLOSED 2026-02-11
+  - Loop: Mercer mobile activation prompt for ChatGPT on phone
+  - Owner: Manus-Max
+  - Resolution: Issue #6 created + compact custom instructions for personality tab. Ben confirmed working.
+  - Links: Issue #6
+  - MercerID: MRC-20260211-MAX-07
+- [ ] ID: 20260211-013 ⏸️ PAUSED:offline
+  - Loop: Zenfone 9 USB debugging / GBT issue — device disconnected
+  - Owner: Ben (local)
+  - Status: Zenfone 9 disconnected. GBT weird with USB debugging. Needs local diagnosis.
+  - Next action: Reconnect device, verify `adb devices`, troubleshoot USB debugging.
+  - Due/Review: Resume when Zenfone is reconnected
+  - MercerID: MRC-20260211-MAX-08
 
 - [x] ID: 20260128-004 ✅ CLOSED 2026-02-10
   - Loop: Create Ring-0 workflow for speculative notes ("Future Possibilities") and ensure core docs remain stable.

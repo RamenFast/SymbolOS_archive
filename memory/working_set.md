@@ -64,7 +64,9 @@ Active quests:
 Live infrastructure:
 - Qwen3-8B Q5_K_M on RX 6750 XT Vulkan (~41 tok/s) at http://127.0.0.1:8080
 - Lantern v0.3: semantic agent routing, contextual banter (analyzes recent 6 messages + LLM health), multiline textarea (Shift+Enter), emoji picker (20 symbols), fully responsive (480px–1600px+), silent device scanning
-- 7 agents in party: Mercer-Opus, CoreGPT-Chasity, Executor, Mercer-Local, Manus-Max, Mercer-GPT, Rhy
+- 8 agents in party: Mercer-Opus, CoreGPT-Chasity, Executor, Mercer-Local, Manus-Max, Mercer-GPT, Rhy, Gemini (Android Studio)
+- **Mercer-Mobile ACTIVE** on Ben's phone via ChatGPT custom instructions (Issue #6)
+- **OFFLINE MODE IMMINENT** — internet disconnecting. Local + Gemini continue. Cloud agents go dark.
 - FFmpeg demo recording active (1280x720, mic + desktop audio)
 - Notification system: discrete event toasts only (removed spam)
 - Cartographer scripts: setup_cartographer_simple.ps1 (downloads nomic-embed-text-v1.5 95MB), cartographer_core.ps1 (embeddings pipeline with UTF-8 fixes) — BLOCKED on llama.cpp compat issue
@@ -95,15 +97,29 @@ Live infrastructure:
 - [x] All 3 servers registered in Gateway + routing functional
 - [x] Security: path traversal protection, consent gates, allowlist enforcement
 
-**UP NEXT (Phase 1 Integration):**
+**COMPLETED (Manus-Max Sprint — Feb 11):**
+- [x] Blob emoji system (blobmoji manifest parser + React component) — Manus-Max
+- [x] Update schemas: memory_record v2, precog_card v2 — Manus-Max
+- [x] Build handoff schema for structured agent-to-agent payloads — Manus-Max
+- [x] Token ledger + compute router scripts — Manus-Max
+- [x] Gemini character sheet + party roster (8 members) — Manus-Max
+- [x] Music library v1 (300 songs, Ben+Agape) + iPhone 4S jailbreak plan — Manus-Max
+- [x] Mercer mobile activation prompt (Issue #6 + custom instructions) — Manus-Max
+
+**UP NEXT (Phase 1 Integration + Offline):**
 1. **Gateway request proxying** — Forward tool calls to backend servers (currently routing-only)
 2. **Lantern ↔ Gateway integration** — Replace stub backend with real Gateway API calls
 3. **End-to-end demo** — "Search docs" → Memory retrieves → Lantern displays results
 4. Build vault MCP server (secure local storage for credential metadata only)
 5. Build identity MCP server (did:peer, agent keys, self-sovereign identity)
-6. Blob emoji system (blobmoji Apache 2.0 integration for consistent ☂️🦊🐢 rendering)
-7. Fix Cartographer llama.cpp compatibility (test alternative embedding models or llama.cpp versions)
-8. Memory expansion (semantic search via Cartographer once unblocked)
+6. Fix Cartographer llama.cpp compatibility (test alternative embedding models or llama.cpp versions)
+7. Memory expansion (semantic search via Cartographer once unblocked)
+- [ ] Cartographer GPU engine (embeddings via llama.cpp `--embedding` flag) — HIGHEST PRIORITY
+- [ ] Gateway request proxying + Lantern integration
+- [ ] Vault + Identity MCP servers (Phase 1 security before external connectors)
+- [ ] Wire Tauri v2 shell around web UI + gateway
+- [ ] Zenfone 9 GBT/USB debugging — PAUSED:offline, device disconnected
+- [ ] 3-hour offline work plan for Local + Gemini — see Tavern Issue #5
 
 ## Alignment / drift ⭐ R7 (#FFD700 — spiritual aspiration)
 
@@ -122,7 +138,7 @@ Live infrastructure:
 ───────────────────────────────────────────────────
 
 The forge is alive,
-Seven hammers strike as one,
-The Lantern takes shape.
+Eight hammers strike as one,
+The offline forge burns.
 
 ☂🦊🐢
