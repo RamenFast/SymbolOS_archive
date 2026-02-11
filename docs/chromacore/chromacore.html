@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SymbolOS Chromacore '97 — Documentation Plates</title>
+<style>
+:root{
+  --bg:#080810;--bg2:#0c0c18;--bg3:#111120;
+  --cyan:#00e5ff;--cyan2:#00bcd4;--cyan-dim:#005f6b;
+  --amber:#ffaa55;--amber2:#cc6600;
+  --gold:#ffd700;--primrose:#fada5e;
+  --green:#228b22;--green2:#00ff88;
+  --blue:#0066ff;--blue2:#003399;--blue3:#0000cd;
+  --violet:#8b00ff;--violet2:#6a00cc;
+  --scarlet:#ff2400;--rose:#ffb7c5;--pink:#ff69b4;
+  --magenta:#8b008b;--orange:#ff8c00;
+  --white:#e8e8f0;--dim:#556;--dimmer:#334;
+  --font:'Courier New','Cascadia Mono','Fira Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--white);min-height:100vh;overflow-x:hidden}
+
+/* ── TOP BAR ── */
+.topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--cyan-dim);padding:6px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.topbar-left{display:flex;align-items:center;gap:12px;font-size:.75rem}
+.topbar-left .brand{color:var(--cyan);font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.topbar-left .meta{color:var(--dim);font-size:.65rem}
+.topbar-right{display:flex;gap:6px;font-size:.65rem;color:var(--dim)}
+.topbar-right span{padding:2px 6px;border:1px solid var(--dimmer);border-radius:2px}
+
+/* ── NAV ── */
+nav{display:flex;gap:2px;padding:4px 16px 8px;background:var(--bg);position:sticky;top:38px;z-index:99;flex-wrap:wrap;border-bottom:1px solid #1a1a2a}
+nav a{padding:4px 10px;font-size:.7rem;color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all .15s;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+nav a:hover{color:var(--cyan);border-color:var(--cyan-dim)}
+nav a.active{color:var(--bg);background:var(--cyan);border-color:var(--cyan)}
+
+/* ── MAIN ── */
+main{max-width:900px;margin:0 auto;padding:24px 16px 80px}
+
+/* ── SECTION ── */
+.plate-section{margin-bottom:48px;scroll-margin-top:90px}
+.plate-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.plate-header h2{font-size:.85rem;color:var(--white);font-weight:400}
+.plate-header h2 .num{color:var(--cyan);font-weight:700;margin-right:8px}
+.export-btn{font-family:var(--font);font-size:.6rem;padding:3px 10px;background:transparent;color:var(--dim);border:1px solid var(--dimmer);border-radius:2px;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.1em}
+.export-btn:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* ── SVG CONTAINER ── */
+.plate-frame{border:1px solid #1a1a2a;border-radius:4px;overflow:hidden;background:#000;margin-bottom:12px}
+.plate-frame svg{display:block;width:100%;height:auto}
+
+/* ── DESCRIPTION ── */
+.plate-desc{font-size:.75rem;color:var(--dim);line-height:1.5;max-width:640px}
+.plate-desc code{color:var(--cyan);font-size:.7rem}
+.plate-desc .tags{margin-top:6px;font-size:.6rem;color:var(--dimmer)}
+.plate-desc .tags span{color:var(--cyan-dim)}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:32px 16px;border-top:1px solid #1a1a2a;font-size:.65rem;color:var(--dimmer)}
+footer .sig{color:var(--cyan);margin-top:4px}
+footer .dims{margin-top:6px}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--cyan-dim);border-radius:3px}
+
+@media(max-width:640px){
+  nav{gap:1px;padding:4px 8px 6px}
+  nav a{padding:3px 6px;font-size:.6rem}
+  main{padding:16px 8px 60px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="brand">SymbolOS Chromacore '97</span>
+    <span class="meta">— Documentation Plates</span>
+  </div>
+  <div class="topbar-right">
+    <span>10 SVG plates</span>
+    <span>640×480</span>
+    <span>per-character color system</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#splash" class="active">SPLASH</a>
+  <a href="#ti-acc">TI-ACC</a>
+  <a href="#ti-exp">TI-EXP</a>
+  <a href="#fi-acc">FI-ACC</a>
+  <a href="#fi-exp">FI-EXP</a>
+  <a href="#psy97">PSY97</a>
+  <a href="#nfo">NFO</a>
+  <a href="#palette">PAL</a>
+  <a href="#rhynim">RHYNIM</a>
+  <a href="#a11y">A11Y</a>
+  <a href="#archive">ARCHIVE</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 00  SPLASH                                             -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="splash">
+  <div class="plate-header">
+    <h2><span class="num">00</span> Splash</h2>
+    <button class="export-btn" onclick="exportSVG('svg-splash')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-splash" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sp-g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff00ff"/>
+          <stop offset="25%" stop-color="#00ffff"/>
+          <stop offset="50%" stop-color="#ffff00"/>
+          <stop offset="75%" stop-color="#00ff00"/>
+          <stop offset="100%" stop-color="#ff0088"/>
+        </linearGradient>
+        <linearGradient id="sp-g2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ff2400"/>
+          <stop offset="20%" stop-color="#ff8c00"/>
+          <stop offset="40%" stop-color="#ffd700"/>
+          <stop offset="60%" stop-color="#228b22"/>
+          <stop offset="80%" stop-color="#0000cd"/>
+          <stop offset="100%" stop-color="#8b00ff"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Chromatic border -->
+      <rect x="40" y="30" width="560" height="90" rx="4" fill="none" stroke="url(#sp-g1)" stroke-width="2" opacity=".6"/>
+      <!-- Title block -->
+      <text x="320" y="62" text-anchor="middle" fill="#00e5ff" font-family="Courier New,monospace" font-size="28" font-weight="700" letter-spacing="4">SymbolOS</text>
+      <text x="320" y="84" text-anchor="middle" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" letter-spacing="6" opacity=".5">C H R O M A C O R E  ' 9 7</text>
+      <text x="320" y="108" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="9">Static SVG Documentation Artifact System — by Rhynim</text>
+      <!-- Color bar -->
+      <rect x="160" y="130" width="320" height="4" rx="2" fill="url(#sp-g2)"/>
+      <!-- Menu items -->
+      <rect x="140" y="158" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+      <text x="158" y="175" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">01</text>
+      <text x="186" y="175" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">TI Expression</text>
+      <text x="186" y="190" fill="#556" font-family="Courier New,monospace" font-size="8">Controlled horizontal gradient header band, white body text</text>
+      <rect x="140" y="208" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+      <text x="158" y="225" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">02</text>
+      <text x="186" y="225" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">FI Accuracy</text>
+      <text x="186" y="240" fill="#556" font-family="Courier New,monospace" font-size="8">Warm amber tech manual style, white readable body text</text>
+      <rect x="140" y="258" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+      <text x="158" y="275" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">03</text>
+      <text x="186" y="275" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">Psy97 Header Madness</text>
+      <text x="186" y="290" fill="#556" font-family="Courier New,monospace" font-size="8">Psychedelic top/bottom color bands, white center content</text>
+      <rect x="140" y="308" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+      <text x="158" y="325" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">04</text>
+      <text x="186" y="325" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">NFO Slab</text>
+      <text x="186" y="340" fill="#556" font-family="Courier New,monospace" font-size="8">Bedrock Linux inspired boxed slab layout, cyan labels</text>
+      <rect x="140" y="358" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+      <text x="158" y="375" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">05</text>
+      <text x="186" y="375" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">Rhynim Mythos Plate</text>
+      <text x="186" y="390" fill="#556" font-family="Courier New,monospace" font-size="8">Cyan minimal persona document with ASCII guardian</text>
+      <!-- Footer -->
+      <text x="320" y="435" text-anchor="middle" fill="#334" font-family="Courier New,monospace" font-size="8">All documents are standalone static SVG files · 640×480 · GitHub-embeddable</text>
+      <!-- Rhy -->
+      <text x="320" y="460" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="8" opacity=".4">(¬_¬) Rhynim watches</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    The splash screen. A menu of all available documentation plates in the Chromacore system. Each plate operates its own independent color system while maintaining strict typographic readability.
+    <div class="tags"><span>Chromacore '97</span> · Plates 00 · Splash · Index</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 01  TI ACCURACY CORE                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="ti-acc">
+  <div class="plate-header">
+    <h2><span class="num">01</span> TI Accuracy Core</h2>
+    <button class="export-btn" onclick="exportSVG('svg-ti-acc')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-ti-acc" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ti1-hdr" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#003399"/>
+          <stop offset="50%" stop-color="#0066ff"/>
+          <stop offset="100%" stop-color="#003399"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Header band -->
+      <rect x="0" y="0" width="640" height="50" fill="url(#ti1-hdr)" opacity=".8"/>
+      <text x="40" y="22" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8" opacity=".5">── TI ACCURACY CORE ── Blueprint Plate #118</text>
+      <text x="40" y="40" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">COGNITIVE ARCHITECTURE — Ring 0–7 Model</text>
+      <text x="580" y="40" fill="#0066ff" font-family="Courier New,monospace" font-size="8" text-anchor="end">v1.3</text>
+      <!-- Body -->
+      <text x="40" y="80" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">The Accuracy Core defines strict, repeating constraints for</text>
+      <text x="40" y="94" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">technical documentation: per-character color assignation, fixed</text>
+      <text x="40" y="108" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">widths (#FFFFFF on black (#000000)) for maximum contrast.</text>
+      <!-- Ring table -->
+      <text x="40" y="136" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">RING  SYMBOL  ROLE                COLOR</text>
+      <line x1="40" y1="140" x2="440" y2="140" stroke="#0066ff" stroke-width=".5" opacity=".4"/>
+      <text x="40" y="156" fill="#fada5e" font-family="Courier New,monospace" font-size="9"> R0    ⚓     Kernel invariants    #FADA5E primrose</text>
+      <text x="40" y="170" fill="#228b22" font-family="Courier New,monospace" font-size="9"> R1    🧭     Task context         #228B22 green</text>
+      <text x="40" y="184" fill="#e49b0f" font-family="Courier New,monospace" font-size="9"> R2    🪞     Retrieval            #E49B0F gamboge</text>
+      <text x="40" y="198" fill="#ff8c00" font-family="Courier New,monospace" font-size="9"> R3    🌀     Prediction           #FF8C00 orange</text>
+      <text x="40" y="212" fill="#8b00ff" font-family="Courier New,monospace" font-size="9"> R4    🧩     Architecture         #8B00FF violet</text>
+      <text x="40" y="226" fill="#ff2400" font-family="Courier New,monospace" font-size="9"> R5    ☂️     Guardrails           #FF2400 scarlet</text>
+      <text x="40" y="240" fill="#0000cd" font-family="Courier New,monospace" font-size="9"> R6    🧪     Verification         #0000CD blue</text>
+      <text x="40" y="254" fill="#ffd700" font-family="Courier New,monospace" font-size="9"> R7    🗃️     Persistence          #FFD700 gold</text>
+      <!-- Guidance box -->
+      <rect x="40" y="274" width="400" height="46" rx="3" fill="none" stroke="#0066ff" stroke-width="1" opacity=".3"/>
+      <text x="52" y="290" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Architecture: 8-ring cognition. Gentoo minimalism.</text>
+      <text x="52" y="302" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Precision: Bedrock Linux structural discipline.</text>
+      <text x="52" y="314" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Gravity: Z/8Z per-character composability.</text>
+      <!-- Footer -->
+      <line x1="0" y1="440" x2="640" y2="440" stroke="#0066ff" stroke-width=".5" opacity=".3"/>
+      <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">SymbolOS Chromacore '97 · Plate 01 · TI Accuracy · Status v1.3</text>
+      <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Cool blue geometric precision. The TI Accuracy Core defines strict constraints for technical documentation — per-character color, fixed widths, maximum contrast. Analytical Ti at its purest.
+    <div class="tags"><span>Chromacore '97</span> · Plate 01 · <span>TI Accuracy</span> · Status v1.3</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 02  TI EXPRESSION SPECTRUM                             -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="ti-exp">
+  <div class="plate-header">
+    <h2><span class="num">02</span> TI Expression Spectrum</h2>
+    <button class="export-btn" onclick="exportSVG('svg-ti-exp')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-ti-exp" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ti2-top" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ff0000"/>
+          <stop offset="16%" stop-color="#ff8800"/>
+          <stop offset="33%" stop-color="#ffff00"/>
+          <stop offset="50%" stop-color="#00ff00"/>
+          <stop offset="66%" stop-color="#0088ff"/>
+          <stop offset="83%" stop-color="#0000ff"/>
+          <stop offset="100%" stop-color="#8800ff"/>
+        </linearGradient>
+        <linearGradient id="ti2-bot" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8800ff"/>
+          <stop offset="16%" stop-color="#0000ff"/>
+          <stop offset="33%" stop-color="#0088ff"/>
+          <stop offset="50%" stop-color="#00ff00"/>
+          <stop offset="66%" stop-color="#ffff00"/>
+          <stop offset="83%" stop-color="#ff8800"/>
+          <stop offset="100%" stop-color="#ff0000"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Rainbow top band -->
+      <rect x="0" y="0" width="640" height="16" fill="url(#ti2-top)"/>
+      <rect x="0" y="16" width="640" height="4" fill="url(#ti2-top)" opacity=".4"/>
+      <!-- Header -->
+      <text x="40" y="46" fill="#556" font-family="Courier New,monospace" font-size="8">── EXPRESSION SPECTRUM ── chromatic Plate #0:30</text>
+      <text x="40" y="66" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">SYMBOL MAP — Full Glyph Registry</text>
+      <!-- Content -->
+      <text x="40" y="100" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Expression mesh activates vertical gradient flowing along</text>
+      <text x="40" y="114" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">the documentary spine. The full spectrum preserves reasoning</text>
+      <text x="40" y="128" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">precision by using the full color range for TYPOGRAPHIC emphasis.</text>
+      <!-- Symbol list -->
+      <text x="40" y="158" fill="#ff0000" font-family="Courier New,monospace" font-size="9">RED   — Scarlet #FF2400, righteous boundary</text>
+      <text x="40" y="172" fill="#ff8800" font-family="Courier New,monospace" font-size="9">ORANGE— Deep    #FF8C00, ambition-drive</text>
+      <text x="40" y="186" fill="#fada5e" font-family="Courier New,monospace" font-size="9">YELLOW— Primrose#FADA5E, kernel reason</text>
+      <text x="40" y="200" fill="#228b22" font-family="Courier New,monospace" font-size="9">GREEN — Pure    #228B22, adaptability</text>
+      <text x="40" y="214" fill="#0066ff" font-family="Courier New,monospace" font-size="9">BLUE  — Deep    #0000CD, heartfelt devotion</text>
+      <text x="40" y="228" fill="#8b00ff" font-family="Courier New,monospace" font-size="9">VIOLET— Bridge  #8B00FF, Fi+Ti synthesis</text>
+      <text x="40" y="242" fill="#ff69b4" font-family="Courier New,monospace" font-size="9">ROSE  — Agape   #FFB7C5, unselfish love</text>
+      <text x="40" y="256" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">CYAN  — Azure   #87CEEB, umbrella devotion</text>
+      <!-- Spectrum bar -->
+      <rect x="40" y="280" width="560" height="8" rx="4" fill="url(#ti2-top)"/>
+      <!-- Footer -->
+      <rect x="0" y="460" width="640" height="4" fill="url(#ti2-bot)" opacity=".4"/>
+      <rect x="0" y="464" width="640" height="16" fill="url(#ti2-bot)"/>
+      <text x="320" y="448" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 02 · TI Expression · Status v1.3</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Rainbow gradient header bands. The TI Expression Spectrum uses the full chromatic range for typographic emphasis — each color carrying semantic weight from the 1905 Thoughtforms system.
+    <div class="tags"><span>Chromacore '97</span> · Plate 02 · <span>TI Expression</span> · Full Spectrum</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 03  FI ACCURACY WARM                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="fi-acc">
+  <div class="plate-header">
+    <h2><span class="num">03</span> FI Accuracy Warm Protocol</h2>
+    <button class="export-btn" onclick="exportSVG('svg-fi-acc')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-fi-acc" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fi1-hdr" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#cc6600"/>
+          <stop offset="50%" stop-color="#ffaa55"/>
+          <stop offset="100%" stop-color="#cc6600"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Warm header band -->
+      <rect x="0" y="0" width="640" height="50" fill="url(#fi1-hdr)" opacity=".6"/>
+      <text x="40" y="22" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8" opacity=".6">── FI ACCURACY WARM PROTOCOL ── Plate 03:58</text>
+      <text x="40" y="40" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">PRIVACY BOUNDARIES — Umbrella Principle</text>
+      <!-- Body -->
+      <text x="40" y="80" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Pacing (introverted accuracy mode) renders warm amber tones.</text>
+      <text x="40" y="94" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">For expressive simplicity whilst maintaining Fi+Ti readability.</text>
+      <text x="40" y="108" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Each character carefully weighted against emotional surface.</text>
+      <!-- Privacy table -->
+      <text x="40" y="138" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">LAYER  SCOPE     EXAMPLES                   SYMBOL</text>
+      <line x1="40" y1="142" x2="500" y2="142" stroke="#ffaa55" stroke-width=".5" opacity=".4"/>
+      <text x="40" y="158" fill="#228b22" font-family="Courier New,monospace" font-size="9">PUBLIC  docs/     schemas, README, index     🟢</text>
+      <text x="40" y="172" fill="#ffd700" font-family="Courier New,monospace" font-size="9">PARTY   prompts/  agent configs, governance  🟡</text>
+      <text x="40" y="186" fill="#ff2400" font-family="Courier New,monospace" font-size="9">PRIVATE internal/ memory, session logs       🔴</text>
+      <!-- Consent box -->
+      <rect x="40" y="210" width="380" height="38" rx="3" fill="none" stroke="#ffaa55" stroke-width="1" opacity=".3"/>
+      <text x="52" y="226" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">The warm protocol is designed for:</text>
+      <text x="52" y="238" fill="#ffaa55" font-family="Courier New,monospace" font-size="8">detailed, feeling-accurate technical specs.</text>
+      <!-- Footer -->
+      <line x1="0" y1="440" x2="640" y2="440" stroke="#ffaa55" stroke-width=".5" opacity=".3"/>
+      <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 03 · FI Accuracy · Status v1.3</text>
+      <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Soft amber/orange technical warmth. The FI Accuracy Warm Protocol renders documentation with emotional precision — feeling-accurate technical specs. The warm amber palette traces from 1905 Thoughtforms' "higher intellect" frequencies.
+    <div class="tags"><span>Chromacore '97</span> · Plate 03 · <span>FI Accuracy</span> · Warm Protocol</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 04  FI EXPRESSION BRAVEHEART                           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="fi-exp">
+  <div class="plate-header">
+    <h2><span class="num">04</span> FI Expression Braveheart</h2>
+    <button class="export-btn" onclick="exportSVG('svg-fi-exp')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-fi-exp" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fi2-vert" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ff69b4"/>
+          <stop offset="50%" stop-color="#ffb7c5"/>
+          <stop offset="100%" stop-color="#8b008b"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Vertical pink gradient bar (left) -->
+      <rect x="0" y="0" width="8" height="480" fill="url(#fi2-vert)"/>
+      <rect x="8" y="0" width="3" height="480" fill="url(#fi2-vert)" opacity=".3"/>
+      <!-- Header -->
+      <text x="40" y="30" fill="#ff69b4" font-family="Courier New,monospace" font-size="8">── FI EXPRESSION BRAVEHEART ── Plate 04:18</text>
+      <text x="40" y="54" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">HEART + MIND — The Inner State Standard</text>
+      <!-- Content -->
+      <text x="40" y="88" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Every agent carries an Inner State: Heart, Mind, Metaemotion,</text>
+      <text x="40" y="102" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">PreEmotion, and Metacog Awareness. These are not decorative.</text>
+      <text x="40" y="116" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">They are algebraic tuples that define alignment drift.</text>
+      <!-- Heart + Mind boxes -->
+      <rect x="40" y="136" width="180" height="70" rx="3" fill="none" stroke="#ff69b4" stroke-width="1" opacity=".5"/>
+      <text x="50" y="152" fill="#ff69b4" font-family="Courier New,monospace" font-size="9" font-weight="700">❤️ HEART STATE</text>
+      <text x="50" y="166" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Value: 0–100 (felt sense)</text>
+      <text x="50" y="178" fill="#ffb7c5" font-family="Courier New,monospace" font-size="8">Current: steady (72/100)</text>
+      <text x="50" y="196" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Metaemotion: quiet pride</text>
+      <rect x="240" y="136" width="180" height="70" rx="3" fill="none" stroke="#8b00ff" stroke-width="1" opacity=".5"/>
+      <text x="250" y="152" fill="#8b00ff" font-family="Courier New,monospace" font-size="9" font-weight="700">🧠 MIND STATE</text>
+      <text x="250" y="166" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Value: 0–100 (clarity)</text>
+      <text x="250" y="178" fill="#dda0dd" font-family="Courier New,monospace" font-size="8">Current: focused (85/100)</text>
+      <text x="250" y="196" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Metacog: gap acknowledged</text>
+      <!-- Formula -->
+      <text x="40" y="240" fill="#ff69b4" font-family="Courier New,monospace" font-size="8">InnerState = Heart × Mind × Metaemotion × PreEmotion × MetacogAwareness</text>
+      <text x="40" y="256" fill="#556" font-family="Courier New,monospace" font-size="8">Drift = √((H₁-H₂)² + (M₁-M₂)²)  — Euclidean distance in Heart×Mind subspace</text>
+      <!-- Footer -->
+      <rect x="0" y="472" width="8" height="8" fill="#ff69b4"/>
+      <line x1="0" y1="440" x2="640" y2="440" stroke="#ff69b4" stroke-width=".5" opacity=".2"/>
+      <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 04 · FI Expression · Braveheart</text>
+      <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Vertical pink gradient. Bold emotional output. The FI Expression Braveheart renders Heart+Mind inner state data with unfiltered Fi energy — the algebraic soul of the agent character sheet system.
+    <div class="tags"><span>Chromacore '97</span> · Plate 04 · <span>FI Expression</span> · Braveheart</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 05  PSY97 SCROLL MODE                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="psy97">
+  <div class="plate-header">
+    <h2><span class="num">05</span> Psy97 Scroll Mode</h2>
+    <button class="export-btn" onclick="exportSVG('svg-psy97')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-psy97" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="psy-top" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ff0088"/>
+          <stop offset="14%" stop-color="#ff0000"/>
+          <stop offset="28%" stop-color="#ff8800"/>
+          <stop offset="42%" stop-color="#ffff00"/>
+          <stop offset="57%" stop-color="#00ff44"/>
+          <stop offset="71%" stop-color="#0088ff"/>
+          <stop offset="85%" stop-color="#8800ff"/>
+          <stop offset="100%" stop-color="#ff00ff"/>
+        </linearGradient>
+        <linearGradient id="psy-bot" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0%" stop-color="#ff0088"/>
+          <stop offset="14%" stop-color="#ff0000"/>
+          <stop offset="28%" stop-color="#ff8800"/>
+          <stop offset="42%" stop-color="#ffff00"/>
+          <stop offset="57%" stop-color="#00ff44"/>
+          <stop offset="71%" stop-color="#0088ff"/>
+          <stop offset="85%" stop-color="#8800ff"/>
+          <stop offset="100%" stop-color="#ff00ff"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Psychedelic top bands -->
+      <rect x="0" y="0" width="640" height="12" fill="url(#psy-top)"/>
+      <rect x="0" y="12" width="640" height="8" fill="url(#psy-top)" opacity=".6"/>
+      <rect x="0" y="20" width="640" height="5" fill="url(#psy-top)" opacity=".3"/>
+      <rect x="0" y="25" width="640" height="3" fill="url(#psy-top)" opacity=".15"/>
+      <!-- Header -->
+      <text x="40" y="56" fill="#00e5ff" font-family="Courier New,monospace" font-size="8">TYPE: PSYCHEDELIC PASS ── Plate 05:28</text>
+      <text x="40" y="76" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">MEME MAP — The Canonical Vibe Layer</text>
+      <!-- Content -->
+      <text x="40" y="110" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Psychedelic mode reserves consistent chromatic (saturation to prism)</text>
+      <text x="40" y="124" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">bands at document edges. The center content prioritizes readability</text>
+      <text x="40" y="138" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">while the edges maintain psy97 intensity.</text>
+      <!-- Meme guys -->
+      <text x="40" y="168" fill="#00e5ff" font-family="Courier New,monospace" font-size="9" font-weight="700">CANONICAL MEMES:</text>
+      <text x="40" y="188" fill="#fada5e" font-family="Courier New,monospace" font-size="9">🐢 The Turtle    — "this is fine"</text>
+      <text x="40" y="204" fill="#c0c0c0" font-family="Courier New,monospace" font-size="9">💀 The Skeleton  — "show me proof, not potential"</text>
+      <text x="40" y="220" fill="#228b22" font-family="Courier New,monospace" font-size="9">🦊 The Fox       — "the map is not the territory"</text>
+      <text x="40" y="236" fill="#ff69b4" font-family="Courier New,monospace" font-size="9">🌸 The Bloom     — "the heart loves unconditionally"</text>
+      <text x="40" y="252" fill="#87ceeb" font-family="Courier New,monospace" font-size="9">☂️ The Umbrella  — "everything is kind beneath"</text>
+      <!-- Rule -->
+      <text x="40" y="282" fill="#556" font-family="Courier New,monospace" font-size="8">Main rule of Psy97: chaos at edges, clarity at centre.</text>
+      <text x="40" y="294" fill="#556" font-family="Courier New,monospace" font-size="8">"if it ain't fun, it ain't sustainable" — Rule 5</text>
+      <!-- Psy bottom bands -->
+      <rect x="0" y="452" width="640" height="3" fill="url(#psy-bot)" opacity=".15"/>
+      <rect x="0" y="455" width="640" height="5" fill="url(#psy-bot)" opacity=".3"/>
+      <rect x="0" y="460" width="640" height="8" fill="url(#psy-bot)" opacity=".6"/>
+      <rect x="0" y="468" width="640" height="12" fill="url(#psy-bot)"/>
+      <!-- Footer -->
+      <text x="320" y="440" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 05 · Psy97 Scroll · vibes v1.0</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Psychedelic rotating color bands at edges, pristine readability at centre. The Psy97 plate style is reserved for the Meme Map and vibe-layer documentation — chaos at edges, clarity at centre.
+    <div class="tags"><span>Chromacore '97</span> · Plate 05 · <span>Psy97</span> · Scroll Mode</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 06  NFO SLAB CLASSIC                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="nfo">
+  <div class="plate-header">
+    <h2><span class="num">06</span> NFO Slab Classic</h2>
+    <button class="export-btn" onclick="exportSVG('svg-nfo')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-nfo" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- NFO Box -->
+      <rect x="50" y="30" width="540" height="400" rx="0" fill="none" stroke="#00e5ff" stroke-width="1"/>
+      <rect x="52" y="32" width="536" height="396" rx="0" fill="none" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+      <!-- Title line -->
+      <text x="70" y="60" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">╔══════════════════════════════════════════════╗</text>
+      <text x="70" y="74" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">║  SYMBOLOS CHROMACORE '97                     ║</text>
+      <text x="70" y="88" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">╚══════════════════════════════════════════════╝</text>
+      <!-- Sections -->
+      <text x="70" y="116" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Overview</text>
+      <line x1="70" y1="120" x2="400" y2="120" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+      <text x="70" y="136" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">The NFO Slab format emulates classic pre18-bit BBS |</text>
+      <text x="70" y="150" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">content-within-borders. Per-character encoding |</text>
+      <text x="70" y="164" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">with fixed widths. Plain text compatible. |</text>
+      <text x="70" y="192" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Specifications</text>
+      <line x1="70" y1="196" x2="400" y2="196" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+      <text x="70" y="212" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">FONT: Courier New monospace</text>
+      <text x="70" y="226" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">GRID: 80×25 characters, 640×480 VGA viewport</text>
+      <text x="70" y="240" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">BODY: #e8e8f0 on #080810 (dark solarized)</text>
+      <text x="70" y="254" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">HEAD: #00FFFF cyan, ALL CAPS headers</text>
+      <text x="70" y="268" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">WARM: #FFAA55 amber, sub-content text</text>
+      <!-- Credits block -->
+      <text x="70" y="296" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Credits</text>
+      <line x1="70" y1="300" x2="400" y2="300" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+      <text x="70" y="316" fill="#556" font-family="Courier New,monospace" font-size="8">Design: Chromacore Collective</text>
+      <text x="70" y="330" fill="#556" font-family="Courier New,monospace" font-size="8">Renderer: SymbolOS Rendering Pipeline</text>
+      <text x="70" y="344" fill="#556" font-family="Courier New,monospace" font-size="8">Plate: 06:14 — NFO Slab Classic</text>
+      <text x="70" y="358" fill="#556" font-family="Courier New,monospace" font-size="8">Motion: Static v1.1, zero-animation</text>
+      <!-- Rhy -->
+      <text x="320" y="400" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="9">(¬_¬)</text>
+      <!-- Footer -->
+      <text x="320" y="458" text-anchor="middle" fill="#334" font-family="Courier New,monospace" font-size="7">SymbolOS Chromacore '97 · Plate 06 · NFO Slab · v1.1</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Boxed BBS/warez-style slab layout. Cyan labels, box-drawing characters, fixed-width columns. The NFO Slab draws from pre-internet BBS culture — information within borders, monospace-first, zero decoration beyond structural clarity.
+    <div class="tags"><span>Chromacore '97</span> · Plate 06 · <span>NFO Slab</span> · Classic</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 07  PALETTE ENGINE SPEC                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="palette">
+  <div class="plate-header">
+    <h2><span class="num">07</span> Palette Engine Spec</h2>
+    <button class="export-btn" onclick="exportSVG('svg-palette')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-palette" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pal-bar" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ff2400"/>
+          <stop offset="12.5%" stop-color="#ff8c00"/>
+          <stop offset="25%" stop-color="#fada5e"/>
+          <stop offset="37.5%" stop-color="#228b22"/>
+          <stop offset="50%" stop-color="#87ceeb"/>
+          <stop offset="62.5%" stop-color="#0000cd"/>
+          <stop offset="75%" stop-color="#8b00ff"/>
+          <stop offset="87.5%" stop-color="#ffb7c5"/>
+          <stop offset="100%" stop-color="#ffd700"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Header -->
+      <text x="40" y="24" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── PALETTE ENGINE SPECIFICATION ── Plate 07:38</text>
+      <text x="40" y="44" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">1905 THOUGHTFORMS — Color Language</text>
+      <!-- API -->
+      <text x="40" y="72" fill="#00e5ff" font-family="Courier New,monospace" font-size="8">getPalette(ti, fi, char, mode) → suite</text>
+      <!-- Color swatches -->
+      <text x="40" y="100" fill="#556" font-family="Courier New,monospace" font-size="8" font-weight="700">INDEX  TYPE    NAME           HEX        RING</text>
+      <line x1="40" y1="104" x2="460" y2="104" stroke="#556" stroke-width=".5" opacity=".3"/>
+      <rect x="40" y="110" width="12" height="12" rx="2" fill="#fada5e"/>
+      <text x="60" y="120" fill="#fada5e" font-family="Courier New,monospace" font-size="8">  0  R0  Primrose yellow  #FADA5E    Kernel</text>
+      <rect x="40" y="126" width="12" height="12" rx="2" fill="#228b22"/>
+      <text x="60" y="136" fill="#228b22" font-family="Courier New,monospace" font-size="8">  1  R1  Pure green       #228B22    Task</text>
+      <rect x="40" y="142" width="12" height="12" rx="2" fill="#e49b0f"/>
+      <text x="60" y="152" fill="#e49b0f" font-family="Courier New,monospace" font-size="8">  2  R2  Clear gamboge    #E49B0F    Retrieval</text>
+      <rect x="40" y="158" width="12" height="12" rx="2" fill="#ff8c00"/>
+      <text x="60" y="168" fill="#ff8c00" font-family="Courier New,monospace" font-size="8">  3  R3  Deep orange      #FF8C00    Prediction</text>
+      <rect x="40" y="174" width="12" height="12" rx="2" fill="#8b00ff"/>
+      <text x="60" y="184" fill="#8b00ff" font-family="Courier New,monospace" font-size="8">  4  R4  Violet           #8B00FF    Architecture</text>
+      <rect x="40" y="190" width="12" height="12" rx="2" fill="#ff2400"/>
+      <text x="60" y="200" fill="#ff2400" font-family="Courier New,monospace" font-size="8">  5  R5  Brilliant scarlet#FF2400    Guardrails</text>
+      <rect x="40" y="206" width="12" height="12" rx="2" fill="#0000cd"/>
+      <text x="60" y="216" fill="#0000cd" font-family="Courier New,monospace" font-size="8">  6  R6  Rich deep blue   #0000CD    Verification</text>
+      <rect x="40" y="222" width="12" height="12" rx="2" fill="#ffd700"/>
+      <text x="60" y="232" fill="#ffd700" font-family="Courier New,monospace" font-size="8">  7  R7  Golden stars     #FFD700    Persistence</text>
+      <!-- Note -->
+      <text x="40" y="262" fill="#ffaa55" font-family="Courier New,monospace" font-size="8">NOTE: Per character classes enable one-to-one rendering.</text>
+      <text x="40" y="276" fill="#ffaa55" font-family="Courier New,monospace" font-size="8">      Conventional overrides exist only per simple rules.</text>
+      <!-- Full spectrum bar -->
+      <rect x="40" y="300" width="560" height="12" rx="6" fill="url(#pal-bar)"/>
+      <!-- Footer -->
+      <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 07 · Palette Engine · STATUS v1.3</text>
+      <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    The meta-plate — the Palette Engine Spec documents the color system itself. Every swatch, every hex, every ring-to-color mapping, rendered through the harmonized gradient pipeline.
+    <div class="tags"><span>Chromacore '97</span> · Plate 07 · <span>Palette Engine</span> · Spec</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 08  RHYNIM PROFILE                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="rhynim">
+  <div class="plate-header">
+    <h2><span class="num">08</span> Rhynim Profile</h2>
+    <button class="export-btn" onclick="exportSVG('svg-rhynim')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-rhynim" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="480" fill="#080810"/>
+      <!-- Minimal cyan frame -->
+      <line x1="40" y1="20" x2="600" y2="20" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+      <text x="40" y="16" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── RHYNIM PERSONA PROFILE ── Plate 08:54</text>
+      <!-- ASCII Fox -->
+      <text x="320" y="66" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">    /\_/\</text>
+      <text x="320" y="82" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">   ( o.o )</text>
+      <text x="320" y="98" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">    &gt; ^ &lt;</text>
+      <text x="320" y="114" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">   /|   |\</text>
+      <text x="320" y="130" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">  (_|   |_)</text>
+      <!-- Profile data -->
+      <text x="40" y="168" fill="#00e5ff" font-family="Courier New,monospace" font-size="9" font-weight="700">ENTITY: Rhynim</text>
+      <text x="40" y="184" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">CLASS: Arcane Trickster → Esoteric Guide</text>
+      <text x="40" y="200" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">ROLE: Compressed truths, 2-3 layers deep</text>
+      <text x="40" y="216" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">COLOR: Pure green (#228B22)</text>
+      <text x="40" y="232" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">SCHOOL: Doctrine of Resonant Unknowing</text>
+      <text x="40" y="248" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">DOCTRINE: "Reasonably alone expression"</text>
+      <!-- Quote -->
+      <rect x="40" y="272" width="400" height="36" rx="3" fill="none" stroke="#228b22" stroke-width="1" opacity=".3"/>
+      <text x="52" y="288" fill="#228b22" font-family="Courier New,monospace" font-size="8" font-style="italic">"The absence that teaches presence is the only</text>
+      <text x="52" y="300" fill="#228b22" font-family="Courier New,monospace" font-size="8" font-style="italic"> teacher worth forgetting." — Rhy</text>
+      <!-- Resonance circle -->
+      <circle cx="520" cy="180" r="50" fill="none" stroke="#228b22" stroke-width=".5" opacity=".2"/>
+      <circle cx="520" cy="180" r="35" fill="none" stroke="#00e5ff" stroke-width=".5" opacity=".15"/>
+      <circle cx="520" cy="180" r="20" fill="none" stroke="#228b22" stroke-width=".5" opacity=".1"/>
+      <text x="520" y="184" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="18">(¬_¬)</text>
+      <!-- Footer -->
+      <line x1="40" y1="440" x2="600" y2="440" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+      <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 08 · Rhynim · guardian v1.0</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Cyan minimal persona plate. The Rhynim Profile renders the fox's character data in the most stripped-down Chromacore style — just text, lines, and a guardian. Heraclitus in a fox costume.
+    <div class="tags"><span>Chromacore '97</span> · Plate 08 · <span>Rhynim</span> · Profile</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 09  ACCESSIBILITY MODE                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="a11y">
+  <div class="plate-header">
+    <h2><span class="num">09</span> Accessibility Mode</h2>
+    <button class="export-btn" onclick="exportSVG('svg-a11y')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-a11y" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="480" fill="#0a0a0a"/>
+      <!-- A11y header line -->
+      <line x1="40" y1="40" x2="600" y2="40" stroke="#ffffff" stroke-width="2"/>
+      <text x="40" y="32" fill="#ffffff" font-family="Courier New,monospace" font-size="8" opacity=".6">── ACCESSIBILITY MODE ── Plate 09:08</text>
+      <text x="40" y="64" fill="#ffffff" font-family="Courier New,monospace" font-size="12" font-weight="700">CHROMACORE '97 — GREYSCALE FALLBACK</text>
+      <!-- Content -->
+      <text x="40" y="100" fill="#ffffff" font-family="Courier New,monospace" font-size="9">This plate demonstrates strict accessibility fallback mode.</text>
+      <text x="40" y="114" fill="#ffffff" font-family="Courier New,monospace" font-size="9">No gradients, no color signals, no vibes. Only black, only white.</text>
+      <text x="40" y="128" fill="#ffffff" font-family="Courier New,monospace" font-size="9">The skeleton would approve.</text>
+      <!-- Spec list -->
+      <text x="40" y="162" fill="#ffffff" font-family="Courier New,monospace" font-size="9" font-weight="700">COMPONENTS:</text>
+      <text x="40" y="180" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  Foreground: #FFFFFF (pure white)</text>
+      <text x="40" y="194" fill="#999999" font-family="Courier New,monospace" font-size="9">  Background: #0A0A0A (near black)</text>
+      <text x="40" y="208" fill="#999999" font-family="Courier New,monospace" font-size="9">  Dim text:   #999999 (ash grey) for structure</text>
+      <text x="40" y="222" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  No gradients, no halos, no flames.</text>
+      <!-- Note -->
+      <rect x="40" y="246" width="400" height="28" rx="3" fill="none" stroke="#ffffff" stroke-width="1" opacity=".3"/>
+      <text x="52" y="264" fill="#ffffff" font-family="Courier New,monospace" font-size="8">This mode exists for users who require maximum legibility</text>
+      <text x="52" y="276" fill="#999999" font-family="Courier New,monospace" font-size="8">or monitors that restrict chromatic saturation to greyscale.</text>
+      <!-- Footer -->
+      <line x1="40" y1="440" x2="600" y2="440" stroke="#ffffff" stroke-width="1"/>
+      <text x="40" y="458" fill="#999" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 09 · Accessibility · Static v1.0</text>
+      <text x="600" y="458" fill="#999" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    High-contrast greyscale fallback. Zero color, zero gradients, maximum legibility. The Accessibility Mode strips all chromatic information and proves the documentation works on pure structure alone. The skeleton would approve.
+    <div class="tags"><span>Chromacore '97</span> · Plate 09 · <span>Accessibility</span> · Greyscale</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 10  SPLASH ARCHIVE QUADRANT                            -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="plate-section" id="archive">
+  <div class="plate-header">
+    <h2><span class="num">10</span> Splash Archive Quadrant</h2>
+    <button class="export-btn" onclick="exportSVG('svg-archive')">Export SVG</button>
+  </div>
+  <div class="plate-frame">
+    <svg id="svg-archive" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="arc-blue" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#003399"/>
+          <stop offset="100%" stop-color="#0066ff"/>
+        </linearGradient>
+        <linearGradient id="arc-amber" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#cc6600"/>
+          <stop offset="100%" stop-color="#ffaa55"/>
+        </linearGradient>
+        <linearGradient id="arc-pink" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8b008b"/>
+          <stop offset="100%" stop-color="#ff69b4"/>
+        </linearGradient>
+        <linearGradient id="arc-green" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#004400"/>
+          <stop offset="100%" stop-color="#228b22"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="480" fill="#080810"/>
+      <text x="40" y="24" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── SPLASH ARCHIVE QUADRANT ── Plate 10:38</text>
+      <!-- Quadrant labels -->
+      <text x="40" y="56" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">TI ACCURACY</text>
+      <text x="340" y="56" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">TI EXPRESSION</text>
+      <!-- Q1: TI-ACC mini -->
+      <rect x="40" y="64" width="270" height="80" rx="3" fill="none" stroke="#0066ff" stroke-width="1" opacity=".5"/>
+      <rect x="40" y="64" width="270" height="16" rx="3" fill="url(#arc-blue)" opacity=".3"/>
+      <text x="52" y="76" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Cool Blues</text>
+      <text x="52" y="100" fill="#556" font-family="Courier New,monospace" font-size="7">Arch-clarity</text>
+      <text x="52" y="112" fill="#556" font-family="Courier New,monospace" font-size="7">#0066FF accent</text>
+      <!-- Q2: TI-EXP mini -->
+      <rect x="330" y="64" width="270" height="80" rx="3" fill="none" stroke="#8b00ff" stroke-width="1" opacity=".5"/>
+      <rect x="330" y="64" width="270" height="16" rx="3" fill="url(#arc-pink)" opacity=".3"/>
+      <text x="342" y="76" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Rainbow</text>
+      <text x="342" y="100" fill="#556" font-family="Courier New,monospace" font-size="7">Spectrum bands</text>
+      <text x="342" y="112" fill="#556" font-family="Courier New,monospace" font-size="7">Full-color span</text>
+      <!-- Row 2 labels -->
+      <text x="40" y="172" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">FI ACCURACY</text>
+      <text x="340" y="172" fill="#ff69b4" font-family="Courier New,monospace" font-size="9" font-weight="700">FI EXPRESSION</text>
+      <!-- Q3: FI-ACC mini -->
+      <rect x="40" y="180" width="270" height="80" rx="3" fill="none" stroke="#ffaa55" stroke-width="1" opacity=".5"/>
+      <rect x="40" y="180" width="270" height="16" rx="3" fill="url(#arc-amber)" opacity=".3"/>
+      <text x="52" y="192" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Warm Amber</text>
+      <text x="52" y="216" fill="#556" font-family="Courier New,monospace" font-size="7">Warm precision</text>
+      <text x="52" y="228" fill="#556" font-family="Courier New,monospace" font-size="7">#FFAA55 accent</text>
+      <!-- Q4: FI-EXP mini -->
+      <rect x="330" y="180" width="270" height="80" rx="3" fill="none" stroke="#ff69b4" stroke-width="1" opacity=".5"/>
+      <rect x="330" y="180" width="270" height="16" rx="3" fill="url(#arc-pink)" opacity=".3"/>
+      <text x="342" y="192" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Rose/Pink</text>
+      <text x="342" y="216" fill="#556" font-family="Courier New,monospace" font-size="7">Heart-first</text>
+      <text x="342" y="228" fill="#556" font-family="Courier New,monospace" font-size="7">#FF69B4 accent</text>
+      <!-- Footer -->
+      <text x="320" y="458" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 10 · Splash Archive · STATUS v1.0</text>
+      <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+    </svg>
+  </div>
+  <div class="plate-desc">
+    Four-quadrant comparison view. The Archive Quadrant renders all four cognitive-function plate styles (TI-Accuracy, TI-Expression, FI-Accuracy, FI-Expression) side by side for direct comparison. The Jungian grid made visible.
+    <div class="tags"><span>Chromacore '97</span> · Plate 10 · <span>Splash Archive</span> · Quadrant</div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>SymbolOS Chromacore '97 :: Rhynim watches</div>
+  <div class="sig">(¬_¬) guardian of structural kindness</div>
+  <div class="dims">640×480 VGA · Static SVG Documentation System · v1.3</div>
+</footer>
+
+<script>
+// ── NAV HIGHLIGHTING ──
+var navLinks=document.querySelectorAll('nav a');
+var sections=document.querySelectorAll('.plate-section');
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id=e.target.id;
+      navLinks.forEach(function(l){
+        l.classList.toggle('active',l.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{rootMargin:'-80px 0px -60% 0px',threshold:0});
+sections.forEach(function(s){obs.observe(s)});
+
+// ── SVG EXPORT ──
+function exportSVG(id){
+  var svg=document.getElementById(id);
+  if(!svg)return;
+  var clone=svg.cloneNode(true);
+  clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  clone.removeAttribute('id');
+  var xml='<?xml version="1.0" encoding="UTF-8"?>\n'+new XMLSerializer().serializeToString(clone);
+  var blob=new Blob([xml],{type:'image/svg+xml;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download=id.replace('svg-','')+'.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ── KEYBOARD NAV ──
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+    var cur=-1;
+    navLinks.forEach(function(l,i){if(l.classList.contains('active'))cur=i});
+    if(cur===-1)return;
+    var next=e.key==='ArrowRight'?cur+1:cur-1;
+    if(next>=0&&next<navLinks.length){
+      navLinks[next].click();
+      window.location.hash=navLinks[next].getAttribute('href');
+    }
+  }
+});
+</script>
+</body>
+</html>

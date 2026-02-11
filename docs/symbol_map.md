@@ -41,6 +41,7 @@ The canonical shared set lives in `symbol_map.shared.json`. This file is the phy
 - `🏰` Dungeon explorer — Interactive index.html for browsing the repo.
 - `🐢` The turtle — this is fine. Grounding meme. Ben refactoring at 0.3s intervals.
 - `💀` Skeleton gatekeeper — Guards merge gates. Show me proof, not potential.
+- `🔮❤️` PreEmotion — Anticipatory emotional signal; the heart's prediction layer (R3).
 
               ✦ R0 ✦
            ╱    ⚓    ╲

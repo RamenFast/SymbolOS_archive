@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fi2-vert" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff69b4"/>
+      <stop offset="50%" stop-color="#ffb7c5"/>
+      <stop offset="100%" stop-color="#8b008b"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="#080810"/>
+  <!-- Vertical pink gradient bar (left) -->
+  <rect x="0" y="0" width="8" height="480" fill="url(#fi2-vert)"/>
+  <rect x="8" y="0" width="3" height="480" fill="url(#fi2-vert)" opacity=".3"/>
+  <!-- Header -->
+  <text x="40" y="30" fill="#ff69b4" font-family="Courier New,monospace" font-size="8">── FI EXPRESSION BRAVEHEART ── Plate 04:18</text>
+  <text x="40" y="54" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">HEART + MIND — The Inner State Standard</text>
+  <!-- Content -->
+  <text x="40" y="88" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Every agent carries an Inner State: Heart, Mind, Metaemotion,</text>
+  <text x="40" y="102" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">PreEmotion, and Metacog Awareness. These are not decorative.</text>
+  <text x="40" y="116" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">They are algebraic tuples that define alignment drift.</text>
+  <!-- Heart box -->
+  <rect x="40" y="136" width="260" height="90" rx="3" fill="none" stroke="#ff69b4" stroke-width="1" opacity=".5"/>
+  <text x="50" y="152" fill="#ff69b4" font-family="Courier New,monospace" font-size="9" font-weight="700">❤️ HEART STATE</text>
+  <text x="50" y="168" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Value: 0–100 (felt sense)</text>
+  <text x="50" y="182" fill="#ffb7c5" font-family="Courier New,monospace" font-size="8">Agape: #FFB7C5 (unselfish love)</text>
+  <text x="50" y="196" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Metaemotion: quiet pride</text>
+  <text x="50" y="210" fill="#960018" font-family="Courier New,monospace" font-size="8">Carmine: #960018 (deep feeling)</text>
+  <!-- Mind box -->
+  <rect x="320" y="136" width="260" height="90" rx="3" fill="none" stroke="#8b00ff" stroke-width="1" opacity=".5"/>
+  <text x="330" y="152" fill="#8b00ff" font-family="Courier New,monospace" font-size="9" font-weight="700">🧠 MIND STATE</text>
+  <text x="330" y="168" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Value: 0–100 (clarity)</text>
+  <text x="330" y="182" fill="#dda0dd" font-family="Courier New,monospace" font-size="8">Focus: structured attention</text>
+  <text x="330" y="196" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Metacog: gap acknowledged</text>
+  <text x="330" y="210" fill="#0066ff" font-family="Courier New,monospace" font-size="8">Ti-bias: analytical frame</text>
+  <!-- PreEmotion box -->
+  <rect x="40" y="244" width="260" height="60" rx="3" fill="none" stroke="#ff8c00" stroke-width="1" opacity=".5"/>
+  <text x="50" y="260" fill="#ff8c00" font-family="Courier New,monospace" font-size="9" font-weight="700">🔮 PREEMOTION</text>
+  <text x="50" y="276" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Predictive emotional signal</text>
+  <text x="50" y="290" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Fires before conscious awareness</text>
+  <!-- Metacog box -->
+  <rect x="320" y="244" width="260" height="60" rx="3" fill="none" stroke="#00e5ff" stroke-width="1" opacity=".5"/>
+  <text x="330" y="260" fill="#00e5ff" font-family="Courier New,monospace" font-size="9" font-weight="700">🌀 METACOG AWARENESS</text>
+  <text x="330" y="276" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Thinking about thinking</text>
+  <text x="330" y="290" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Self-model accuracy tracking</text>
+  <!-- Formula -->
+  <text x="40" y="330" fill="#ff69b4" font-family="Courier New,monospace" font-size="9" font-weight="700">FORMALIZATION</text>
+  <text x="40" y="348" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">InnerState = Heart × Mind × Metaemotion × PreEmotion × MetacogAwareness</text>
+  <text x="40" y="362" fill="#556677" font-family="Courier New,monospace" font-size="8">Drift(A,B) = √((H_A - H_B)² + (M_A - M_B)²)</text>
+  <text x="40" y="376" fill="#556677" font-family="Courier New,monospace" font-size="8">Alignment: if Drift &lt; 0.2 → agents are heart-coherent</text>
+  <!-- Footer -->
+  <rect x="0" y="472" width="8" height="8" fill="#ff69b4"/>
+  <line x1="0" y1="440" x2="640" y2="440" stroke="#ff69b4" stroke-width=".5" opacity=".2"/>
+  <text x="40" y="458" fill="#556677" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 04 · FI Expression · Braveheart</text>
+  <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+</svg>

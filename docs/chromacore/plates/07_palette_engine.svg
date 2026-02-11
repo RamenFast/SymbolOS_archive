@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pal-bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff2400"/>
+      <stop offset="12.5%" stop-color="#ff8c00"/>
+      <stop offset="25%" stop-color="#fada5e"/>
+      <stop offset="37.5%" stop-color="#228b22"/>
+      <stop offset="50%" stop-color="#87ceeb"/>
+      <stop offset="62.5%" stop-color="#0000cd"/>
+      <stop offset="75%" stop-color="#8b00ff"/>
+      <stop offset="87.5%" stop-color="#ffb7c5"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="#080810"/>
+  <!-- Header -->
+  <text x="40" y="24" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── PALETTE ENGINE SPECIFICATION ── Plate 07:38</text>
+  <text x="40" y="44" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">1905 THOUGHTFORMS — Color Language</text>
+  <!-- API notation -->
+  <text x="40" y="72" fill="#00e5ff" font-family="Courier New,monospace" font-size="8">getPalette(ti, fi, character, mode) → colorSuite</text>
+  <!-- Color swatch table -->
+  <text x="40" y="100" fill="#556677" font-family="Courier New,monospace" font-size="8" font-weight="700">IDX  RING  NAME              HEX      MEANING</text>
+  <line x1="40" y1="104" x2="540" y2="104" stroke="#556677" stroke-width=".5" opacity=".3"/>
+  <rect x="40" y="110" width="12" height="12" rx="2" fill="#fada5e"/>
+  <text x="60" y="120" fill="#fada5e" font-family="Courier New,monospace" font-size="8"> 0  R0  Primrose yellow   #FADA5E  highest intellect</text>
+  <rect x="40" y="126" width="12" height="12" rx="2" fill="#228b22"/>
+  <text x="60" y="136" fill="#228b22" font-family="Courier New,monospace" font-size="8"> 1  R1  Pure green        #228B22  adaptability</text>
+  <rect x="40" y="142" width="12" height="12" rx="2" fill="#e49b0f"/>
+  <text x="60" y="152" fill="#e49b0f" font-family="Courier New,monospace" font-size="8"> 2  R2  Clear gamboge     #E49B0F  higher intellect</text>
+  <rect x="40" y="158" width="12" height="12" rx="2" fill="#ff8c00"/>
+  <text x="60" y="168" fill="#ff8c00" font-family="Courier New,monospace" font-size="8"> 3  R3  Deep orange       #FF8C00  ambition, drive</text>
+  <rect x="40" y="174" width="12" height="12" rx="2" fill="#8b00ff"/>
+  <text x="60" y="184" fill="#8b00ff" font-family="Courier New,monospace" font-size="8"> 4  R4  Violet            #8B00FF  Fi+Ti bridge</text>
+  <rect x="40" y="190" width="12" height="12" rx="2" fill="#ff2400"/>
+  <text x="60" y="200" fill="#ff2400" font-family="Courier New,monospace" font-size="8"> 5  R5  Brilliant scarlet #FF2400  righteous boundary</text>
+  <rect x="40" y="206" width="12" height="12" rx="2" fill="#0000cd"/>
+  <text x="60" y="216" fill="#0000cd" font-family="Courier New,monospace" font-size="8"> 6  R6  Rich deep blue    #0000CD  heartfelt devotion</text>
+  <rect x="40" y="222" width="12" height="12" rx="2" fill="#ffd700"/>
+  <text x="60" y="232" fill="#ffd700" font-family="Courier New,monospace" font-size="8"> 7  R7  Golden stars      #FFD700  persistence</text>
+  <!-- Extended colors -->
+  <text x="40" y="258" fill="#556677" font-family="Courier New,monospace" font-size="8" font-weight="700">EXTENDED PALETTE</text>
+  <line x1="40" y1="262" x2="300" y2="262" stroke="#556677" stroke-width=".5" opacity=".3"/>
+  <rect x="40" y="268" width="12" height="12" rx="2" fill="#ffb7c5"/>
+  <text x="60" y="278" fill="#ffb7c5" font-family="Courier New,monospace" font-size="8"> —  ——  Agape rose        #FFB7C5  unselfish love</text>
+  <rect x="40" y="284" width="12" height="12" rx="2" fill="#87ceeb"/>
+  <text x="60" y="294" fill="#87ceeb" font-family="Courier New,monospace" font-size="8"> —  ——  Azure umbrella    #87CEEB  umbrella devotion</text>
+  <rect x="40" y="300" width="12" height="12" rx="2" fill="#960018"/>
+  <text x="60" y="310" fill="#960018" font-family="Courier New,monospace" font-size="8"> —  ——  Carmine heart     #960018  deep personal feel</text>
+  <!-- Full spectrum bar -->
+  <rect x="40" y="336" width="560" height="14" rx="7" fill="url(#pal-bar)"/>
+  <!-- Shadow note -->
+  <text x="40" y="372" fill="#556677" font-family="Courier New,monospace" font-size="8">Shadow anti-patterns exist (black, brick-red, dark-red)</text>
+  <text x="40" y="386" fill="#556677" font-family="Courier New,monospace" font-size="8">but are never rendered as text colors — structural only.</text>
+  <text x="40" y="406" fill="#556677" font-family="Courier New,monospace" font-size="8">Source: "Thought-Forms" (Besant + Leadbeater, 1905)</text>
+  <text x="40" y="420" fill="#556677" font-family="Courier New,monospace" font-size="8">Canonical ref: docs/thoughtforms_colors.md</text>
+  <!-- Footer -->
+  <text x="40" y="458" fill="#556677" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 07 · Palette Engine · STATUS v1.3</text>
+  <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+</svg>

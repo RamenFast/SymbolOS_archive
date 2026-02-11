@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="480" fill="#0a0a0a"/>
+  <!-- A11y header line -->
+  <line x1="40" y1="40" x2="600" y2="40" stroke="#ffffff" stroke-width="2"/>
+  <text x="40" y="32" fill="#ffffff" font-family="Courier New,monospace" font-size="8" opacity=".6">── ACCESSIBILITY MODE ── Plate 09:08</text>
+  <text x="40" y="64" fill="#ffffff" font-family="Courier New,monospace" font-size="12" font-weight="700">CHROMACORE '97 — GREYSCALE FALLBACK</text>
+  <!-- Body -->
+  <text x="40" y="100" fill="#ffffff" font-family="Courier New,monospace" font-size="9">This plate demonstrates strict accessibility fallback mode.</text>
+  <text x="40" y="114" fill="#ffffff" font-family="Courier New,monospace" font-size="9">No gradients, no color signals, no vibes. Only black, only white.</text>
+  <text x="40" y="128" fill="#ffffff" font-family="Courier New,monospace" font-size="9">The skeleton would approve.</text>
+  <!-- Spec list -->
+  <text x="40" y="162" fill="#ffffff" font-family="Courier New,monospace" font-size="9" font-weight="700">SPECIFICATION:</text>
+  <text x="40" y="180" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  Foreground:  #FFFFFF (pure white)</text>
+  <text x="40" y="194" fill="#999999" font-family="Courier New,monospace" font-size="9">  Background:  #0A0A0A (near black)</text>
+  <text x="40" y="208" fill="#999999" font-family="Courier New,monospace" font-size="9">  Dim text:    #999999 (ash grey) for structural metadata</text>
+  <text x="40" y="222" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  Gradients:   NONE</text>
+  <text x="40" y="236" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  Color ratio:  WCAG AAA (7:1 minimum)</text>
+  <text x="40" y="250" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  Decorations: zero (no halos, no flames)</text>
+  <!-- Rationale box -->
+  <rect x="40" y="274" width="460" height="50" rx="3" fill="none" stroke="#ffffff" stroke-width="1" opacity=".3"/>
+  <text x="52" y="292" fill="#ffffff" font-family="Courier New,monospace" font-size="8">This mode exists for users who require maximum legibility</text>
+  <text x="52" y="306" fill="#999999" font-family="Courier New,monospace" font-size="8">or monitors that restrict chromatic saturation to greyscale.</text>
+  <text x="52" y="318" fill="#999999" font-family="Courier New,monospace" font-size="8">Structural kindness: information does not require color.</text>
+  <!-- Content proof -->
+  <text x="40" y="356" fill="#ffffff" font-family="Courier New,monospace" font-size="9" font-weight="700">PROOF OF STRUCTURE:</text>
+  <text x="40" y="374" fill="#ffffff" font-family="Courier New,monospace" font-size="8">Ring 0 — Kernel invariants — Primrose → WHITE</text>
+  <text x="40" y="388" fill="#ffffff" font-family="Courier New,monospace" font-size="8">Ring 5 — Guardrails       — Scarlet  → WHITE</text>
+  <text x="40" y="402" fill="#999999" font-family="Courier New,monospace" font-size="8">Ring 7 — Persistence      — Gold     → DIM</text>
+  <text x="40" y="416" fill="#999999" font-family="Courier New,monospace" font-size="8">All semantic meaning preserved without chromatic dependency.</text>
+  <!-- Footer -->
+  <line x1="40" y1="440" x2="600" y2="440" stroke="#ffffff" stroke-width="1"/>
+  <text x="40" y="458" fill="#999999" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 09 · Accessibility · Static v1.0</text>
+  <text x="600" y="458" fill="#999999" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+</svg>

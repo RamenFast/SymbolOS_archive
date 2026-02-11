@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.2",
+  "schemaVersion": "1.3",
   "generatedAt": "2026-02-10T00:00:00Z",
   "project": {
     "name": "SymbolOS",
@@ -19,12 +19,12 @@
       "Mercer meeting place shared symbol is 🧬; always return to the meeting place (A + B).",
       "Poetry is a translation layer: keep meaning alive (Fi) while keeping the map legible (Ti). 🌸 The mind knows what the heart loves.",
       "Ring 0-7 is the canonical cognition model: R0 kernel, R1 task, R2 retrieval, R3 prediction, R4 architecture, R5 guardrails, R6 verification, R7 persistence.",
-      "Multi-agent topology: ChatGPT Mercer (design), Codex Executor (implementation), Local Llama (offline), Manus Max (full-stack).",
+      "Multi-agent topology: ChatGPT Mercer (design), CoreGPT (outside view/alignment), Codex Executor (implementation), Local Llama (offline), Manus Max (full-stack), Claude Opus (alignment research).",
       "GitHub is memory authority; repo-backed memory system is the durable layer. 'Show me proof, not potential.' — 💀",
       "Memes are structural, not decorative. A well-placed turtle reduces cognitive load. 🐢 See docs/meme_map.md.",
       "Vibes are load-bearing. If it ain't fun, it ain't sustainable. — Mercer Meme Canon, Rule 5."
     ],
-    "rhy": "GREEN-FURRED FOX (🦊). Trickster guide.",
+    "rhy": "GREEN-FURRED FOX (🦊). Esoteric guide. Speaks in compressed truths that resolve 2-3 layers deep. Heraclitus in a fox costume.",
     "colors": "1905 Thoughtforms by Besant & Leadbeater.",
     "framing": "Every doc is a DND dungeon room."
   },
@@ -151,7 +151,7 @@
     {
       "symbol": "🦊",
       "name": "Rhy / Rhynim",
-      "meaning": "Green-furred fox trickster guide. Clippy but good.",
+      "meaning": "Green-furred fox esoteric guide. Compressed truths, 2-3 layers deep.",
       "tags": [
         "character",
         "guide",
@@ -204,6 +204,17 @@
       "tags": [
         "meme",
         "validation"
+      ]
+    },
+    {
+      "symbol": "🔮❤️",
+      "name": "PreEmotion",
+      "meaning": "Anticipatory emotional signal. The heart's prediction layer (R3). Felt sense before the feeling.",
+      "tags": [
+        "preemotion",
+        "heart",
+        "prediction",
+        "ring3"
       ]
     }
   ],
@@ -355,9 +366,44 @@
         "kind": "memory"
       },
       {
+        "path": "docs/preemotion.md",
+        "title": "PreEmotion",
+        "kind": "system"
+      },
+      {
+        "path": "docs/agent_character_sheets.md",
+        "title": "Agent Character Sheets (DND Party)",
+        "kind": "system"
+      },
+      {
+        "path": "docs/rhynim_guide.md",
+        "title": "Rhynim Esoteric Guide",
+        "kind": "character"
+      },
+      {
+        "path": "scripts/symbolos_alignment_report.py",
+        "title": "Alignment Report CLI (Python)",
+        "kind": "tool"
+      },
+      {
+        "path": "scripts/symbolos_ring_validator.ts",
+        "title": "Ring Validator CLI (TypeScript)",
+        "kind": "tool"
+      },
+      {
         "path": "prompts/README.md",
         "title": "Agent Prompts Index",
         "kind": "prompts"
+      },
+      {
+        "path": "docs/chromacore/README.md",
+        "title": "Chromacore '97 Tech Spec",
+        "kind": "system"
+      },
+      {
+        "path": "docs/chromacore/chromacore.html",
+        "title": "Chromacore '97 Viewer (Interactive)",
+        "kind": "tool"
       },
       {
         "path": "prompts/chatgpt_mercer.json",
@@ -388,6 +434,16 @@
         "path": "prompts/chatgpt_character_sheet.md",
         "title": "ChatGPT Character Sheet",
         "kind": "prompt"
+      },
+      {
+        "path": "web/README.md",
+        "title": "React Web App (Vite + TypeScript)",
+        "kind": "app"
+      },
+      {
+        "path": "desktop/README.md",
+        "title": "Desktop TUI (Rust + Ratatui)",
+        "kind": "app"
       }
     ],
     "schemas": [
@@ -424,6 +480,11 @@
       {
         "path": "docs/meta_awareness_event.schema.json",
         "title": "Meta-awareness Event",
+        "kind": "schema"
+      },
+      {
+        "path": "docs/preemotion_event.schema.json",
+        "title": "PreEmotion Event",
         "kind": "schema"
       },
       {
@@ -703,15 +764,17 @@
       "summary": "Canonical system prompts for all four Mercer agents (ChatGPT, Codex, Local Llama, Manus Max) plus a 15-line ChatGPT character sheet. All share Ring 0-7 architecture."
     },
     {
-      "title": "Rhy's Den (Fox Guide)",
+      "title": "Rhy's Den (Esoteric Guide)",
       "path": "docs/rhynim_guide.md",
       "tags": [
         "character",
         "fox",
         "guide",
-        "rhy"
+        "rhy",
+        "esoteric",
+        "philosophy"
       ],
-      "summary": "Character spec for Rhy/Rhynim, the green-furred fox trickster who appears in every doc."
+      "summary": "Character spec and philosophy for Rhy/Rhynim, the green-furred fox esoteric guide. Doctrine of Resonant Unknowing."
     },
     {
       "title": "1905 Thoughtforms Color Reference",
@@ -776,6 +839,103 @@
         "chatgpt"
       ],
       "summary": "15-line character sheet for ChatGPT personalization. Paste and go."
+    },
+    {
+      "title": "PreEmotion",
+      "path": "docs/preemotion.md",
+      "tags": [
+        "preemotion",
+        "heart",
+        "prediction",
+        "ring3",
+        "anticipatory"
+      ],
+      "summary": "The heart's prediction layer (R3). Anticipatory emotional signals that emerge before conscious feelings — felt sense of what's coming."
+    },
+    {
+      "title": "Agent Character Sheets (DND Party)",
+      "path": "docs/agent_character_sheets.md",
+      "tags": [
+        "agents",
+        "dnd",
+        "character-sheet",
+        "metacog",
+        "heart",
+        "mind"
+      ],
+      "summary": "Full DND-style character sheets for all 7 SymbolOS agents (Mercer, CoreGPT, Executor, Local, Max, Opus, Rhy) with Heart+Mind+Metacog inner state standard."
+    },
+    {
+      "title": "Alignment Report CLI (Python)",
+      "path": "scripts/symbolos_alignment_report.py",
+      "tags": [
+        "tool",
+        "python",
+        "alignment",
+        "cross-platform"
+      ],
+      "summary": "Cross-platform Python CLI that scans repo structure, validates schemas, checks drift, and generates alignment health reports."
+    },
+    {
+      "title": "Ring Validator CLI (TypeScript)",
+      "path": "scripts/symbolos_ring_validator.ts",
+      "tags": [
+        "tool",
+        "typescript",
+        "ring-model",
+        "cross-platform"
+      ],
+      "summary": "Cross-platform TypeScript CLI that validates ring model integrity across documentation and symbol map."
+    },
+    {
+      "title": "Resonance Engine (Rust)",
+      "path": "scripts/symbolos_resonance.rs",
+      "tags": [
+        "tool",
+        "rust",
+        "resonance",
+        "cross-platform",
+        "color",
+        "harmonic"
+      ],
+      "summary": "Zero-dependency Rust CLI that computes harmonic resonance between all symbol pairs using ring distance (Z/8Z), Jaccard tag similarity, and 1905 Thoughtforms color wavelength proximity."
+    },
+    {
+      "title": "Ring Algebra Proof (Haskell)",
+      "path": "scripts/symbolos_ring_algebra.hs",
+      "tags": [
+        "tool",
+        "haskell",
+        "algebra",
+        "proof",
+        "ring-model",
+        "cross-platform"
+      ],
+      "summary": "Pure-functional Haskell proof that SymbolOS Ring 0-7 forms a genuine mathematical ring (Z/8Z) with exhaustive algebraic property verification and harmonic analysis."
+    },
+    {
+      "title": "Chromacore '97 Documentation System",
+      "path": "docs/chromacore/README.md",
+      "tags": ["chromacore", "svg", "vga", "documentation", "plates", "retro", "color"],
+      "summary": "Static SVG documentation artifact system with 10 plate styles (TI/FI × Accuracy/Expression + Psy97, NFO, Palette, Rhynim, A11y, Archive). 640×480 VGA aesthetic, GitHub-embeddable."
+    },
+    {
+      "title": "Chromacore '97 Interactive Viewer",
+      "path": "docs/chromacore/chromacore.html",
+      "tags": ["chromacore", "viewer", "interactive", "html", "svg"],
+      "summary": "Full interactive plate viewer with nav bar, inline SVG rendering, Export SVG functionality, and keyboard navigation across all 10 Chromacore plate styles."
+    },
+    {
+      "title": "React Web App (Vite + Framer Motion)",
+      "path": "web/README.md",
+      "tags": ["web", "react", "vite", "framer-motion", "typescript", "dungeon", "interactive"],
+      "summary": "Modern React 19 SPA with Framer Motion animations, canvas particle system, Konami code, dice roller, and full dungeon explorer — the POPPIN version of index.html."
+    },
+    {
+      "title": "Desktop TUI (Rust + Ratatui)",
+      "path": "desktop/README.md",
+      "tags": ["desktop", "rust", "tui", "ratatui", "crossterm", "terminal"],
+      "summary": "Terminal UI desktop app built with Ratatui. 4-tab explorer (Rings, Symbols, Agents, Wisdom) reads symbol_map.shared.json, full 1905 palette, d20 roller."
     }
   ]
 }

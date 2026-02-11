@@ -34,6 +34,11 @@ This is the heart of the system, the Fi+Ti mirror. It's where we keep the deepes
 - **🗺️ Provenance is everything:** Every decision should be a breadcrumb trail. Link back to the artifacts (docs, schemas, commits) that led you here. "Show me proof, not potential."
 - **✨ Resist the bitrot:** Keep it clean, keep it current. Content should be short, dated, and pruned with the loving care of a bonsai master.
 
+## Agent memory notes
+
+- Claude Opus 4.6: use repo-backed memory only. Persist decisions to
+   memory/decisions.md with provenance and dates when explicitly asked.
+
 ## The Lay of the Land (The Files) 🗺️ ⭐ #FFD700 (golden — spiritual aspiration)
 
 Behold, the map of our collective mind, etched onto the very walls of this chamber.

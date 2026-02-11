@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symbolos.local/schemas/preemotion_event.schema.json",
+  "title": "PreEmotionEvent",
+  "description": "Anticipatory emotional signal event for SymbolOS. PreEmotion is the heart's prediction layer — feelings before the fact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "timestamp", "signal", "confidence"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique event identifier."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the PreEmotion signal was detected."
+    },
+    "signal": {
+      "type": "string",
+      "enum": [
+        "anticipatory_excitement",
+        "anticipatory_dread",
+        "anticipatory_calm",
+        "anticipatory_resistance",
+        "anticipatory_curiosity",
+        "anticipatory_grief"
+      ],
+      "description": "The type of anticipatory emotional signal detected."
+    },
+    "targetEvent": {
+      "type": ["string", "null"],
+      "maxLength": 120,
+      "description": "What event or action the PreEmotion signal is anticipating (e.g., 'deadline in 2h', 'PR merge', 'standup meeting')."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Confidence level. 0-0.3 = background hum, 0.3-0.6 = soft signal, 0.6-0.8 = clear signal, 0.8-1.0 = strong signal."
+    },
+    "suggestedResponse": {
+      "type": ["string", "null"],
+      "enum": ["amplify", "reduce_load", "proceed_normally", "soften_approach", "enable_discovery", "create_space", null],
+      "description": "Recommended agent behavioral adjustment based on the signal."
+    },
+    "surfaceMode": {
+      "type": "string",
+      "enum": ["silent", "timing_adjust", "soft_frame", "active_support"],
+      "default": "silent",
+      "description": "How the signal should influence agent behavior. silent=log only, timing_adjust=delay/advance suggestions, soft_frame=change tone, active_support=explicitly offer help."
+    },
+    "inputSignals": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "maxItems": 10,
+      "description": "What signals contributed to this PreEmotion inference (e.g., 'calendar: deadline in 2h', 'tone: short answers', 'velocity: stalled')."
+    },
+    "dnd": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether DND mode is active. If true, surfaceMode must be 'silent'."
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "type": "string",
+          "enum": ["private", "party", "dm", "public"],
+          "default": "private",
+          "description": "Visibility scope. PreEmotion defaults to private."
+        },
+        "redaction": {
+          "type": "string",
+          "enum": ["none", "coarse", "strict"],
+          "default": "strict",
+          "description": "Redaction level for input signals. Default is strict."
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Redacted features/signals and short reason strings for auditability."
+    }
+  }
+}

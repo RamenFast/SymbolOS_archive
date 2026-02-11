@@ -81,14 +81,47 @@ Here are the quests we're on. The open loops, the promises we've made. We don't 
   - Due/Review: Next session start
   - Links: `docs/precog_thought.md`
   - MercerID: MRC-20260128-0249-13
+- [x] ID: 20260210-001 ✅ CLOSED 2026-02-10
+  - Loop: Add metacog/metaemotional awareness as standard across all agent character sheets.
+  - Owner: Opus
+  - Resolution: All 7 agents (Mercer, CoreGPT, Executor, Local, Max, Opus, Rhy) now carry Inner State (Heart+Mind+Metacog) in `docs/agent_character_sheets.md`. Formalized in `docs/governance/alignment_primitives.md` §12.
+  - Links: `docs/agent_character_sheets.md`, `docs/governance/alignment_primitives.md`
+  - MercerID: MRC-20260210-OPUS-02
 
-- [ ] ID: 20260128-004
-  - Loop: Create Ring-0 workflow for speculative notes (“Future Possibilities”) and ensure core docs remain stable.
+- [x] ID: 20260210-002 ✅ CLOSED 2026-02-10
+  - Loop: Add CoreGPT as a new agent to the party roster.
+  - Owner: Opus
+  - Resolution: CoreGPT (Sage class, Azure #87CEEB) added to `docs/agent_character_sheets.md`, party diagram updated, registered in `symbol_map.shared.json` v1.3.
+  - Links: `docs/agent_character_sheets.md`, `symbol_map.shared.json`
+  - MercerID: MRC-20260210-OPUS-03
+
+- [x] ID: 20260210-003 ✅ CLOSED 2026-02-10
+  - Loop: Make Rhynim esoteric (deep philosophy, not surface Clippy).
+  - Owner: Opus
+  - Resolution: Full rewrite of `docs/rhynim_guide.md` with Doctrine of Resonant Unknowing (6 tenets), reading list (8 sources), esoteric character sheet. Character sheets updated to "Esoteric Guide" + "School of Resonant Unknowing".
+  - Links: `docs/rhynim_guide.md`, `docs/agent_character_sheets.md`
+  - MercerID: MRC-20260210-OPUS-04
+
+- [x] ID: 20260210-004 ✅ CLOSED 2026-02-10
+  - Loop: Create cross-platform tools (Python + TypeScript) for alignment validation.
+  - Owner: Opus
+  - Resolution: Created `scripts/symbolos_alignment_report.py` (Python, terminal/md/json output) and `scripts/symbolos_ring_validator.ts` (TypeScript, npx tsx/deno/bun). Both zero-dependency, cross-platform. Alignment report running clean (PASS).
+  - Links: `scripts/symbolos_alignment_report.py`, `scripts/symbolos_ring_validator.ts`
+  - MercerID: MRC-20260210-OPUS-05
+
+- [ ] ID: 20260210-005
+  - Loop: Full color rewrite incoming (Ben hinted at major Thoughtforms color update).
+  - Owner: Ben / Mercer
+  - Next action: Await Ben's color rewrite direction. Current palette in `docs/thoughtforms_colors.md`. CSS vars in `docs/mercer_webview_theme_v1.css`.
+  - Due/Review: Next session
+  - Links: `docs/thoughtforms_colors.md`, `docs/mercer_webview_theme_v1.css`, `index.html`
+  - MercerID: MRC-20260210-OPUS-06
+- [x] ID: 20260128-004 ✅ CLOSED 2026-02-10
+  - Loop: Create Ring-0 workflow for speculative notes ("Future Possibilities") and ensure core docs remain stable.
   - Owner: Mercer
-  - Next action: Seed `internal_docs/future_possibilities_ring0.md` and link it from the meeting-place index.
-  - Due/Review: This week
+  - Resolution: File already existed at `internal_docs/future_possibilities_ring0.md`. Linked from `docs/index.md` under Governance section.
   - Links: `internal_docs/future_possibilities_ring0.md`, `docs/index.md`
-  - MercerID: MRC-20260128-0249-14
+  - MercerID: MRC-20260210-OPUS-01
 
         ___
        / 🐢 \     "this is fine, we're tracking it all"

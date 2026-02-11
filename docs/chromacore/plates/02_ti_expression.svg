@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ti2-top" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff0000"/>
+      <stop offset="16%" stop-color="#ff8800"/>
+      <stop offset="33%" stop-color="#ffff00"/>
+      <stop offset="50%" stop-color="#00ff00"/>
+      <stop offset="66%" stop-color="#0088ff"/>
+      <stop offset="83%" stop-color="#0000ff"/>
+      <stop offset="100%" stop-color="#8800ff"/>
+    </linearGradient>
+    <linearGradient id="ti2-bot" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8800ff"/>
+      <stop offset="16%" stop-color="#0000ff"/>
+      <stop offset="33%" stop-color="#0088ff"/>
+      <stop offset="50%" stop-color="#00ff00"/>
+      <stop offset="66%" stop-color="#ffff00"/>
+      <stop offset="83%" stop-color="#ff8800"/>
+      <stop offset="100%" stop-color="#ff0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="#080810"/>
+  <!-- Rainbow top band -->
+  <rect x="0" y="0" width="640" height="16" fill="url(#ti2-top)"/>
+  <rect x="0" y="16" width="640" height="4" fill="url(#ti2-top)" opacity=".4"/>
+  <!-- Header -->
+  <text x="40" y="46" fill="#556677" font-family="Courier New,monospace" font-size="8">── EXPRESSION SPECTRUM ── chromatic Plate #0:30</text>
+  <text x="40" y="66" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">SYMBOL MAP — Full Glyph Registry</text>
+  <!-- Content -->
+  <text x="40" y="100" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Expression mesh activates vertical gradient flowing along</text>
+  <text x="40" y="114" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">the documentary spine. The full spectrum preserves reasoning</text>
+  <text x="40" y="128" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">precision by using the full color range for typographic emphasis.</text>
+  <!-- Symbol list with semantic colors -->
+  <text x="40" y="158" fill="#ff2400" font-family="Courier New,monospace" font-size="9">RED    — Scarlet  #FF2400  righteous boundary</text>
+  <text x="40" y="174" fill="#ff8c00" font-family="Courier New,monospace" font-size="9">ORANGE — Deep     #FF8C00  ambition-drive</text>
+  <text x="40" y="190" fill="#fada5e" font-family="Courier New,monospace" font-size="9">YELLOW — Primrose #FADA5E  kernel reason</text>
+  <text x="40" y="206" fill="#228b22" font-family="Courier New,monospace" font-size="9">GREEN  — Pure     #228B22  adaptability</text>
+  <text x="40" y="222" fill="#0000cd" font-family="Courier New,monospace" font-size="9">BLUE   — Deep     #0000CD  heartfelt devotion</text>
+  <text x="40" y="238" fill="#8b00ff" font-family="Courier New,monospace" font-size="9">VIOLET — Bridge   #8B00FF  Fi+Ti synthesis</text>
+  <text x="40" y="254" fill="#ffb7c5" font-family="Courier New,monospace" font-size="9">ROSE   — Agape    #FFB7C5  unselfish love</text>
+  <text x="40" y="270" fill="#87ceeb" font-family="Courier New,monospace" font-size="9">CYAN   — Azure    #87CEEB  umbrella devotion</text>
+  <text x="40" y="286" fill="#960018" font-family="Courier New,monospace" font-size="9">CARM   — Heart    #960018  deep feeling</text>
+  <text x="40" y="302" fill="#ffd700" font-family="Courier New,monospace" font-size="9">GOLD   — Stars    #FFD700  persistence</text>
+  <text x="40" y="318" fill="#e49b0f" font-family="Courier New,monospace" font-size="9">GAMB   — Clear    #E49B0F  higher intellect</text>
+  <!-- Spectrum bar -->
+  <rect x="40" y="344" width="560" height="8" rx="4" fill="url(#ti2-top)"/>
+  <!-- Note -->
+  <text x="40" y="378" fill="#556677" font-family="Courier New,monospace" font-size="8">Source: "Thought-Forms" (Besant+Leadbeater, 1905)</text>
+  <text x="40" y="392" fill="#556677" font-family="Courier New,monospace" font-size="8">Canonical reference: docs/thoughtforms_colors.md</text>
+  <!-- Footer -->
+  <rect x="0" y="460" width="640" height="4" fill="url(#ti2-bot)" opacity=".4"/>
+  <rect x="0" y="464" width="640" height="16" fill="url(#ti2-bot)"/>
+  <text x="320" y="450" text-anchor="middle" fill="#556677" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 02 · TI Expression · Status v1.3</text>
+</svg>

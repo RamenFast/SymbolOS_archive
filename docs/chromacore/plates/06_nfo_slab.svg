@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="480" fill="#080810"/>
+  <!-- NFO Double Box -->
+  <rect x="50" y="30" width="540" height="420" rx="0" fill="none" stroke="#00e5ff" stroke-width="1"/>
+  <rect x="52" y="32" width="536" height="416" rx="0" fill="none" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+  <!-- Title box -->
+  <text x="70" y="60" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">╔══════════════════════════════════════════════════╗</text>
+  <text x="70" y="74" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">║  SYMBOLOS CHROMACORE '97  ·  NFO SLAB CLASSIC   ║</text>
+  <text x="70" y="88" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">╚══════════════════════════════════════════════════╝</text>
+  <!-- Section: Overview -->
+  <text x="70" y="116" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Overview</text>
+  <line x1="70" y1="120" x2="400" y2="120" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+  <text x="70" y="136" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">The NFO Slab format emulates classic pre-internet BBS</text>
+  <text x="70" y="150" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">content-within-borders. Per-character encoding with</text>
+  <text x="70" y="164" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">fixed widths. Plain text compatible. No gradients.</text>
+  <!-- Section: Specifications -->
+  <text x="70" y="192" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Specifications</text>
+  <line x1="70" y1="196" x2="400" y2="196" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+  <text x="70" y="212" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">FONT: Courier New monospace 10pt</text>
+  <text x="70" y="226" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">GRID: 80×25 characters, 640×480 VGA viewport</text>
+  <text x="70" y="240" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">BODY: #e8e8f0 on #080810 (dark solarized)</text>
+  <text x="70" y="254" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">HEAD: #00FFFF cyan, ALL CAPS headers</text>
+  <text x="70" y="268" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">WARM: #FFAA55 amber, sub-content text</text>
+  <text x="70" y="282" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">DIMS: #556677 dim, metadata and credits</text>
+  <!-- Section: Inspirations -->
+  <text x="70" y="310" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Inspirations</text>
+  <line x1="70" y1="314" x2="400" y2="314" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+  <text x="70" y="330" fill="#556677" font-family="Courier New,monospace" font-size="8">gentoo.org      — minimal, monospace docs</text>
+  <text x="70" y="344" fill="#556677" font-family="Courier New,monospace" font-size="8">Arch Wiki        — dense, hyper-technical</text>
+  <text x="70" y="358" fill="#556677" font-family="Courier New,monospace" font-size="8">Bedrock Linux    — structural kindness</text>
+  <text x="70" y="372" fill="#556677" font-family="Courier New,monospace" font-size="8">BBS/Warez NFO    — boxed slab layouts</text>
+  <text x="70" y="386" fill="#556677" font-family="Courier New,monospace" font-size="8">DemoScene        — VGA precision art</text>
+  <!-- Credits -->
+  <text x="70" y="410" fill="#556677" font-family="Courier New,monospace" font-size="8">Design: Mercer-GPT + Mercer-Opus · Renderer: Chromacore Pipeline</text>
+  <!-- Rhy -->
+  <text x="320" y="430" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="9">(¬_¬)</text>
+  <!-- Footer -->
+  <text x="320" y="464" text-anchor="middle" fill="#334455" font-family="Courier New,monospace" font-size="7">SymbolOS Chromacore '97 · Plate 06 · NFO Slab · v1.1</text>
+</svg>

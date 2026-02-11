@@ -66,6 +66,9 @@ _(Psst... we use the 1905 Thoughtforms color system for annotations!)_
 ## Meta-awareness ⭐ #FFD700 (spiritual aspiration)
 - Meta-awareness event: [meta_awareness_event.schema.json](meta_awareness_event.schema.json)
 
+## PreEmotion 🔮❤️ (the heart's prediction layer)
+- PreEmotion event: [preemotion_event.schema.json](preemotion_event.schema.json)
+
 ## Shared maps 🔴 #FF2400 (righteous boundary)
 - Shared symbol map: [symbol_map.shared.schema.json](symbol_map.shared.schema.json)
 

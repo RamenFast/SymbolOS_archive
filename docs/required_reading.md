@@ -98,12 +98,14 @@ When importing notes from Drive into this repo:
 - Tooling boundaries, permissions, and auditability
 - Transport-independent error models and retries
 - Data minimization and DND-safe UX
+- Alignment primitives (governance/alignment_primitives.md)
 
 ### Practical workflows
 
 - Meeting prep and task context
 - Build/test failure recovery patterns
 - PR/commit follow-ups and review flows
+- Workflow guidelines (README, commits, labels, pruning)
 
 ---
 

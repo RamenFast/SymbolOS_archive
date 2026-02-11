@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ti1-hdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#003399"/>
+      <stop offset="50%" stop-color="#0066ff"/>
+      <stop offset="100%" stop-color="#003399"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="#080810"/>
+  <!-- Header band -->
+  <rect x="0" y="0" width="640" height="50" fill="url(#ti1-hdr)" opacity=".8"/>
+  <text x="40" y="22" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8" opacity=".5">── TI ACCURACY CORE ── Blueprint Plate #118</text>
+  <text x="40" y="40" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">COGNITIVE ARCHITECTURE — Ring 0–7 Model</text>
+  <text x="580" y="40" fill="#0066ff" font-family="Courier New,monospace" font-size="8" text-anchor="end">v1.3</text>
+  <!-- Body -->
+  <text x="40" y="80" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">The Accuracy Core defines strict, repeating constraints for</text>
+  <text x="40" y="94" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">technical documentation: per-character color assignation, fixed</text>
+  <text x="40" y="108" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">widths (#FFFFFF on black (#000000)) for maximum contrast.</text>
+  <!-- Ring table -->
+  <text x="40" y="136" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">RING  SYMBOL  ROLE                COLOR</text>
+  <line x1="40" y1="140" x2="440" y2="140" stroke="#0066ff" stroke-width=".5" opacity=".4"/>
+  <text x="40" y="156" fill="#fada5e" font-family="Courier New,monospace" font-size="9"> R0    ⚓     Kernel invariants    #FADA5E primrose</text>
+  <text x="40" y="170" fill="#228b22" font-family="Courier New,monospace" font-size="9"> R1    🧭     Task context         #228B22 green</text>
+  <text x="40" y="184" fill="#e49b0f" font-family="Courier New,monospace" font-size="9"> R2    🪞     Retrieval            #E49B0F gamboge</text>
+  <text x="40" y="198" fill="#ff8c00" font-family="Courier New,monospace" font-size="9"> R3    🌀     Prediction           #FF8C00 orange</text>
+  <text x="40" y="212" fill="#8b00ff" font-family="Courier New,monospace" font-size="9"> R4    🧩     Architecture         #8B00FF violet</text>
+  <text x="40" y="226" fill="#ff2400" font-family="Courier New,monospace" font-size="9"> R5    ☂️     Guardrails           #FF2400 scarlet</text>
+  <text x="40" y="240" fill="#0000cd" font-family="Courier New,monospace" font-size="9"> R6    🧪     Verification         #0000CD blue</text>
+  <text x="40" y="254" fill="#ffd700" font-family="Courier New,monospace" font-size="9"> R7    🗃️     Persistence          #FFD700 gold</text>
+  <!-- Guidance box -->
+  <rect x="40" y="274" width="400" height="60" rx="3" fill="none" stroke="#0066ff" stroke-width="1" opacity=".3"/>
+  <text x="52" y="290" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Architecture: 8-ring cognition modeled on Z/8Z algebraic ring.</text>
+  <text x="52" y="302" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Precision: Bedrock Linux structural discipline.</text>
+  <text x="52" y="314" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Gravity: Per-character composability with type safety.</text>
+  <text x="52" y="326" fill="#0066ff" font-family="Courier New,monospace" font-size="8">Formal proof: scripts/symbolos_ring_algebra.hs</text>
+  <!-- Agent topology -->
+  <text x="40" y="360" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">AGENT TOPOLOGY</text>
+  <line x1="40" y1="364" x2="300" y2="364" stroke="#0066ff" stroke-width=".5" opacity=".4"/>
+  <text x="40" y="380" fill="#0000cd" font-family="Courier New,monospace" font-size="8">Mercer:   Architect · ChatGPT · #0000CD</text>
+  <text x="40" y="392" fill="#8b00ff" font-family="Courier New,monospace" font-size="8">Opus:     Alignment · Claude  · #8B00FF</text>
+  <text x="40" y="404" fill="#ff2400" font-family="Courier New,monospace" font-size="8">Executor: Builder   · Codex   · #FF2400</text>
+  <text x="40" y="416" fill="#fada5e" font-family="Courier New,monospace" font-size="8">Local:    Hermit    · LLaMA   · #FADA5E</text>
+  <text x="40" y="428" fill="#228b22" font-family="Courier New,monospace" font-size="8">Rhy:      Guide     · NPC Fox · #228B22</text>
+  <!-- Footer -->
+  <line x1="0" y1="444" x2="640" y2="444" stroke="#0066ff" stroke-width=".5" opacity=".3"/>
+  <text x="40" y="462" fill="#556677" font-family="Courier New,monospace" font-size="8">SymbolOS Chromacore '97 · Plate 01 · TI Accuracy · Status v1.3</text>
+  <text x="600" y="462" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+</svg>

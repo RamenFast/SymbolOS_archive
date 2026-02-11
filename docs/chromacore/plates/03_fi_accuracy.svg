@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fi1-hdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cc6600"/>
+      <stop offset="50%" stop-color="#ffaa55"/>
+      <stop offset="100%" stop-color="#cc6600"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="#080810"/>
+  <!-- Warm header band -->
+  <rect x="0" y="0" width="640" height="50" fill="url(#fi1-hdr)" opacity=".6"/>
+  <text x="40" y="22" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8" opacity=".6">── FI ACCURACY WARM PROTOCOL ── Plate 03:58</text>
+  <text x="40" y="40" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">PRIVACY BOUNDARIES — Umbrella Principle</text>
+  <!-- Body -->
+  <text x="40" y="80" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Pacing (introverted accuracy mode) renders warm amber tones</text>
+  <text x="40" y="94" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">for expressive simplicity whilst maintaining Fi+Ti readability.</text>
+  <text x="40" y="108" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Each character carefully weighted against emotional surface.</text>
+  <!-- Privacy table -->
+  <text x="40" y="138" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">LAYER    SCOPE      EXAMPLES                 SYMBOL</text>
+  <line x1="40" y1="142" x2="500" y2="142" stroke="#ffaa55" stroke-width=".5" opacity=".4"/>
+  <text x="40" y="158" fill="#228b22" font-family="Courier New,monospace" font-size="9">PUBLIC   docs/      schemas, README, index   🟢</text>
+  <text x="40" y="172" fill="#ffd700" font-family="Courier New,monospace" font-size="9">PARTY    prompts/   agent configs, gov       🟡</text>
+  <text x="40" y="186" fill="#ff2400" font-family="Courier New,monospace" font-size="9">PRIVATE  internal/  memory, session logs     🔴</text>
+  <!-- Consent box -->
+  <rect x="40" y="210" width="400" height="60" rx="3" fill="none" stroke="#ffaa55" stroke-width="1" opacity=".3"/>
+  <text x="52" y="226" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">☂️ Umbrella Principle</text>
+  <text x="52" y="242" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Default-private. Kindness as structural constraint.</text>
+  <text x="52" y="256" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Never disclose without consent. Err toward safety.</text>
+  <text x="52" y="262" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8"></text>
+  <!-- Meme Map excerpt -->
+  <text x="40" y="296" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">GUARDRAIL MEMES</text>
+  <line x1="40" y1="300" x2="300" y2="300" stroke="#ffaa55" stroke-width=".5" opacity=".4"/>
+  <text x="40" y="316" fill="#c0c0c0" font-family="Courier New,monospace" font-size="8">💀 The Skeleton — "show me proof, not potential"</text>
+  <text x="40" y="330" fill="#fada5e" font-family="Courier New,monospace" font-size="8">🐢 The Turtle   — "this is fine" (patience mantra)</text>
+  <text x="40" y="344" fill="#87ceeb" font-family="Courier New,monospace" font-size="8">☂️ The Umbrella — "everything is kind beneath"</text>
+  <!-- Warm accent line -->
+  <rect x="40" y="370" width="180" height="3" rx="1" fill="url(#fi1-hdr)" opacity=".4"/>
+  <text x="40" y="394" fill="#556677" font-family="Courier New,monospace" font-size="8">Warm protocol: detailed, feeling-accurate specs.</text>
+  <text x="40" y="408" fill="#556677" font-family="Courier New,monospace" font-size="8">Per-character emotional weighting with amber tint.</text>
+  <!-- Footer -->
+  <line x1="0" y1="440" x2="640" y2="440" stroke="#ffaa55" stroke-width=".5" opacity=".3"/>
+  <text x="40" y="458" fill="#556677" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 03 · FI Accuracy · Status v1.3</text>
+  <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+</svg>

@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>☂️ SymbolOS — Dungeon Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>&#9730;&#65039; SymbolOS</title>
 <style>
-  /* 1905 Thoughtforms Color System */
   :root {
     --primrose: #FADA5E;
     --gold: #FFD700;
@@ -17,590 +16,1312 @@
     --rose: #FFB7C5;
     --azure: #87CEEB;
     --gamboge: #E49B0F;
-    --bg-dark: #0a0a0f;
-    --bg-room: #12121a;
-    --text: #e0e0e0;
-    --text-dim: #888;
-    --border: #2a2a3a;
+    --carmine: #960018;
+    --cyan: #00e5ff;
+    --cyan2: #00bcd4;
+    --cyan-dim: #005f6b;
+    --amber: #ffaa55;
+    --amber2: #cc6600;
+    --pink: #ff69b4;
+    --magenta: #8b008b;
+    --bg: #0a0a0f;
+    --bg-card: #111118;
+    --bg-hover: #1a1a24;
+    --text: #d8d8e0;
+    --text-dim: #777;
+    --text-bright: #f0f0f0;
+    --border: #252535;
+    --border-hover: #3a3a50;
+    --radius: 6px;
+    --gap: clamp(8px, 2vw, 16px);
+    --font-mono: 'Cascadia Code','Fira Code','Source Code Pro','Courier New','Consolas',monospace;
+    --font-body: system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{font-size:clamp(13px,1.8vw,16px);scroll-behavior:smooth}
+  body{min-height:100vh;overflow-x:hidden;line-height:1.5;transition:background .3s,font-family .3s}
+  a{text-decoration:none}a:hover{text-decoration:underline}
+
+  /* ═══ MODE BAR ═══ */
+  .mode-bar{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:36px;background:#06060c;border-bottom:1px solid var(--border);gap:8px;flex-wrap:wrap}
+  .mode-bar .brand{font-family:var(--font-mono);font-size:.75rem;color:var(--primrose);font-weight:700;letter-spacing:.1em;white-space:nowrap}
+  .mode-tabs{display:flex;gap:2px}
+  .mode-tab{font-family:var(--font-mono);font-size:.65rem;padding:4px 14px;background:transparent;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;border-radius:2px;white-space:nowrap}
+  .mode-tab:hover{border-color:var(--text-dim);color:var(--text)}
+  .mode-tab.active[data-target="dungeon"]{background:var(--primrose);color:#0a0a0f;border-color:var(--primrose)}
+  .mode-tab.active[data-target="chromacore"]{background:var(--cyan);color:#080810;border-color:var(--cyan)}
+
+  /* ═══ VIEWS ═══ */
+  .view{display:none}
+  .view.active{display:block}
+
+  /* ═══════════════════════════════════════ */
+  /*  DUNGEON EXPLORER STYLES               */
+  /* ═══════════════════════════════════════ */
+  body[data-mode="dungeon"]{font-family:var(--font-body);background:var(--bg);color:var(--text)}
+  body[data-mode="dungeon"]::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 50%,rgba(250,218,94,.025) 0%,transparent 60%),radial-gradient(ellipse at 85% 20%,rgba(0,0,205,.025) 0%,transparent 60%),radial-gradient(ellipse at 50% 85%,rgba(139,0,255,.015) 0%,transparent 60%);pointer-events:none;z-index:0}
+  body[data-mode="dungeon"] a{color:var(--azure)}
+
+  .d-app{max-width:720px;margin:0 auto;padding:var(--gap);position:relative;z-index:1}
+  .ascii{font-family:var(--font-mono);font-size:clamp(9px,1.4vw,12px);line-height:1.25;white-space:pre;text-align:center;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .d-header{text-align:center;padding:clamp(16px,4vw,32px) var(--gap);border:1px solid var(--primrose);border-radius:var(--radius);margin-bottom:var(--gap);background:linear-gradient(180deg,rgba(250,218,94,.04) 0%,transparent 100%);position:relative}
+  .d-header h1{font-family:var(--font-mono);font-size:clamp(1.4rem,4vw,2rem);color:var(--primrose);text-shadow:0 0 16px rgba(250,218,94,.2);letter-spacing:.05em}
+  .d-header .tagline{color:var(--text-dim);font-size:.85rem;margin-top:4px}
+  .fox-banner{color:var(--green);margin:12px auto 0;display:inline-block;text-align:left}
+  .fox-greeting{color:var(--green);font-size:.85rem;margin-top:6px;font-family:var(--font-mono);opacity:.8}
+  .pinned-verse{color:var(--primrose);font-size:.8rem;font-style:italic;margin-top:10px;line-height:1.4;max-width:480px;margin-left:auto;margin-right:auto}
+  .lang-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin:12px auto 4px;max-width:360px}
+  .lang-bar span{display:block;height:100%}
+  .lang-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:.65rem;color:var(--text-dim);font-family:var(--font-mono);margin-bottom:4px}
+  .lang-legend span::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px;vertical-align:middle}
+  .ring-wheel{display:flex;justify-content:center;gap:2px;margin:12px auto 0;flex-wrap:wrap;max-width:360px}
+  .ring-pip{width:clamp(28px,5vw,38px);height:clamp(28px,5vw,38px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(10px,1.5vw,13px);font-family:var(--font-mono);font-weight:700;border:2px solid transparent;transition:all .3s;cursor:default;position:relative}
+  .ring-pip.active{animation:ring-pulse 2s ease-in-out infinite;box-shadow:0 0 8px currentColor}
+  @keyframes ring-pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+  .ring-pip .ring-tip{display:none;position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:3px 8px;font-size:10px;white-space:nowrap;color:var(--text);font-weight:400;z-index:10;pointer-events:none}
+  .ring-pip:hover .ring-tip{display:block}
+  .search-box{position:relative;margin-bottom:var(--gap)}
+  .search-box input{width:100%;padding:10px 14px 10px 36px;font-family:var(--font-mono);font-size:.85rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);outline:none;transition:border-color .2s}
+  .search-box input::placeholder{color:var(--text-dim)}
+  .search-box input:focus{border-color:var(--primrose)}
+  .search-box::before{content:'\1F50D';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
+  .search-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.7rem;color:var(--text-dim);font-family:var(--font-mono)}
+  .floor{margin-bottom:clamp(8px,1.5vw,14px);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s}
+  .floor:hover{border-color:var(--border-hover)}
+  .floor[data-hidden="true"]{display:none}
+  .floor-head{padding:10px clamp(10px,2vw,16px);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;transition:background .2s;gap:8px}
+  .floor-head:hover{background:var(--bg-hover)}
+  .floor-head h2{font-size:clamp(.85rem,2vw,1rem);font-weight:600;display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .floor-head .arrow{font-size:.7rem;transition:transform .2s;flex-shrink:0;color:var(--text-dim)}
+  .floor.open .arrow{transform:rotate(90deg)}
+  .floor-body{display:none;padding:0 clamp(10px,2vw,16px) clamp(8px,1.5vw,14px)}
+  .floor.open .floor-body{display:block}
+  .room{display:block;padding:8px 12px;margin:4px 0;border:1px solid var(--border);border-radius:4px;color:var(--text);text-decoration:none;transition:all .15s;font-size:.85rem}
+  .room:hover{border-color:var(--primrose);background:rgba(250,218,94,.03);transform:translateX(4px);text-decoration:none}
+  .room[data-hidden="true"]{display:none}
+  .room strong{color:var(--text-bright)}
+  .room-meta{font-size:.75rem;color:var(--text-dim);margin-top:2px}
+  .room-loot{font-size:.7rem;color:var(--gold)}
+  .party-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(130px,20vw,170px),1fr));gap:8px;margin:8px 0}
+  .agent{border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;transition:all .2s;font-size:.8rem;text-decoration:none;color:var(--text);display:block}
+  .agent:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3);text-decoration:none}
+  .agent-name{font-weight:700;font-size:.85rem}
+  .agent-class{color:var(--text-dim);font-size:.7rem;margin-top:2px}
+  .agent-hp{font-family:var(--font-mono);font-size:.65rem;margin-top:4px}
+  .agent-meta{font-size:.6rem;margin-top:3px;opacity:.7}
+  .hp-bar{height:4px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden}
+  .hp-fill{height:100%;border-radius:2px;transition:width 1s ease-out}
+  .priv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+  .priv-col{border:1px solid var(--border);border-radius:4px;padding:8px;font-size:.75rem}
+  .priv-col h3{font-size:.8rem;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+  .priv-col .priv-count{font-family:var(--font-mono);font-size:1.2rem;font-weight:700}
+  .priv-col ul{list-style:none;margin-top:4px;font-size:.7rem;color:var(--text-dim);max-height:80px;overflow-y:auto}
+  .priv-col li{padding:1px 0}
+  .fox-speech{color:var(--green);font-style:italic;padding:8px 12px;border-left:2px solid var(--green);background:rgba(34,139,34,.04);font-size:.8rem;margin:6px 0}
+  .d-footer{text-align:center;padding:clamp(16px,3vw,24px);border-top:1px solid var(--border);margin-top:clamp(16px,3vw,24px);color:var(--text-dim);font-size:.75rem}
+  .d-footer .haiku{color:var(--azure);font-style:italic;margin-top:8px;line-height:1.4}
+  .konami-hint{opacity:.2;font-family:var(--font-mono);font-size:.6rem;margin-top:6px}
+
+  /* ═══ ANIMATIONS ═══ */
+  @keyframes fadeSlideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  @keyframes glowPulse{0%,100%{filter:drop-shadow(0 0 2px currentColor)}50%{filter:drop-shadow(0 0 8px currentColor)}}
+  @keyframes borderGlow{0%,100%{border-color:var(--border)}50%{border-color:var(--primrose)}}
+  @keyframes particleDrift{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+  @keyframes typewriter{from{width:0}to{width:100%}}
+  .floor{animation:fadeSlideIn .4s ease-out both}
+  .floor:nth-child(1){animation-delay:.05s}.floor:nth-child(2){animation-delay:.1s}
+  .floor:nth-child(3){animation-delay:.15s}.floor:nth-child(4){animation-delay:.2s}
+  .floor:nth-child(5){animation-delay:.25s}.floor:nth-child(6){animation-delay:.3s}
+  .floor:nth-child(7){animation-delay:.35s}.floor:nth-child(8){animation-delay:.4s}
+  .floor:nth-child(9){animation-delay:.45s}.floor:nth-child(10){animation-delay:.5s}
+  .floor:nth-child(11){animation-delay:.55s}.floor:nth-child(12){animation-delay:.6s}
+  .d-header{animation:fadeSlideIn .6s ease-out both}
+  .fox-banner{animation:float 4s ease-in-out infinite}
+  .agent{transition:all .3s cubic-bezier(.4,0,.2,1)}
+  .agent:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+  .room{transition:all .2s cubic-bezier(.4,0,.2,1)}
+  .room:hover{transform:translateX(6px);box-shadow:0 2px 8px rgba(250,218,94,.06)}
+  .ring-pip{transition:all .4s cubic-bezier(.4,0,.2,1)}
+  .ring-pip.active{animation:ring-pulse 2s ease-in-out infinite,glowPulse 2s ease-in-out infinite}
+  .view{transition:opacity .3s ease-in-out}
+  .mode-tab{transition:all .25s cubic-bezier(.4,0,.2,1)}
+  .mode-tab:active{transform:scale(.95)}
+  .d-header{transition:border-color 2s ease}
+  .d-header:hover{border-color:var(--gold)}
+  .search-box input{transition:all .3s ease}
+  .search-box input:focus{border-color:var(--primrose);box-shadow:0 0 12px rgba(250,218,94,.1)}
+  /* Particles */
+  .particle-field{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .particle{position:absolute;border-radius:50%;animation:particleDrift linear infinite;pointer-events:none}
+  /* Agent hover flip */
+  .agent-inner{position:relative}
+  .agent .agent-stats{opacity:0;font-size:.6rem;color:var(--text-dim);transition:opacity .2s;margin-top:2px}
+  .agent:hover .agent-stats{opacity:1}
+  /* Plate entrance */
+  .plate-section{animation:fadeSlideIn .5s ease-out both}
+  .plate-frame{transition:border-color .3s}
+  .plate-frame:hover{border-color:var(--cyan)}
+  /* Smooth scroll bars */
+  .floor-body{transition:max-height .3s ease-out;overflow:hidden}
+
+  @media(max-width:480px){.party-grid{grid-template-columns:repeat(2,1fr)}.ring-wheel{gap:1px}.priv-grid{grid-template-columns:1fr}}
+  @media(max-width:360px){.agent{padding:6px}}
+
+  /* ═══════════════════════════════════════ */
+  /*  CHROMACORE '97 STYLES                 */
+  /* ═══════════════════════════════════════ */
+  body[data-mode="chromacore"]{font-family:'Courier New','Cascadia Mono','Fira Mono',monospace;background:#080810;color:#e8e8f0}
+  body[data-mode="chromacore"] a{color:var(--cyan)}
+
+  .cc-topbar{border-bottom:1px solid var(--cyan-dim);padding:6px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .cc-topbar-left{display:flex;align-items:center;gap:12px;font-size:.75rem}
+  .cc-topbar-left .cc-brand{color:var(--cyan);font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+  .cc-topbar-left .cc-meta{color:#556;font-size:.65rem}
+  .cc-topbar-right{display:flex;gap:6px;font-size:.65rem;color:#556}
+  .cc-topbar-right span{padding:2px 6px;border:1px solid #334;border-radius:2px}
+
+  .cc-nav{display:flex;gap:2px;padding:4px 16px 8px;background:#080810;position:sticky;top:36px;z-index:99;flex-wrap:wrap;border-bottom:1px solid #1a1a2a}
+  .cc-nav a{padding:4px 10px;font-size:.7rem;color:#556;text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all .15s;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .cc-nav a:hover{color:var(--cyan);border-color:var(--cyan-dim)}
+  .cc-nav a.active{color:#080810;background:var(--cyan);border-color:var(--cyan)}
+
+  .cc-main{max-width:900px;margin:0 auto;padding:24px 16px 80px}
+  .plate-section{margin-bottom:48px;scroll-margin-top:90px}
+  .plate-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .plate-header h2{font-size:.85rem;color:#e8e8f0;font-weight:400}
+  .plate-header h2 .num{color:var(--cyan);font-weight:700;margin-right:8px}
+  .export-btn{font-family:'Courier New',monospace;font-size:.6rem;padding:3px 10px;background:transparent;color:#556;border:1px solid #334;border-radius:2px;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.1em}
+  .export-btn:hover{color:var(--cyan);border-color:var(--cyan)}
+  .plate-frame{border:1px solid #1a1a2a;border-radius:4px;overflow:hidden;background:#000;margin-bottom:12px}
+  .plate-frame svg{display:block;width:100%;height:auto}
+  .plate-desc{font-size:.75rem;color:#556;line-height:1.5;max-width:640px}
+  .plate-desc code{color:var(--cyan);font-size:.7rem}
+  .plate-desc .tags{margin-top:6px;font-size:.6rem;color:#334}
+  .plate-desc .tags span{color:var(--cyan-dim)}
+  .cc-footer{text-align:center;padding:32px 16px;border-top:1px solid #1a1a2a;font-size:.65rem;color:#334}
+  .cc-footer .sig{color:var(--cyan);margin-top:4px}
+  .cc-footer .dims{margin-top:6px}
+
+  @media(max-width:640px){
+    .cc-nav{gap:1px;padding:4px 8px 6px}
+    .cc-nav a{padding:3px 6px;font-size:.6rem}
+    .cc-main{padding:16px 8px 60px}
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ═══ SHARED OVERLAYS ═══ */
+  .dice-btn{position:fixed;bottom:12px;left:12px;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:50}
+  .dice-btn:hover{border-color:var(--gold);transform:rotate(15deg) scale(1.1)}
+  .dice-result{display:none;position:fixed;bottom:60px;left:12px;background:var(--bg-card);border:1px solid var(--gold);border-radius:var(--radius);padding:12px 16px;max-width:280px;z-index:50;font-size:.8rem}
+  .dice-result.show{display:block}
+  .dice-result .roll-num{font-size:1.4rem;font-weight:700;color:var(--gold);font-family:var(--font-mono)}
+  .dice-result .roll-wis{color:var(--azure);font-style:italic;margin-top:6px;line-height:1.3}
+  .fox-btn{position:fixed;bottom:12px;right:12px;font-size:22px;cursor:pointer;opacity:.25;transition:opacity .2s;z-index:50;background:none;border:none}
+  .fox-btn:hover{opacity:1}
+  .fox-popup{display:none;position:fixed;bottom:44px;right:12px;background:var(--bg-card);border:1px solid var(--green);border-radius:var(--radius);padding:14px;max-width:260px;z-index:50;font-size:.8rem}
+  .fox-popup.show{display:block}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center;padding:var(--gap)}
+  .overlay.show{display:flex}
+  .overlay-card{background:var(--bg-card);border:2px solid var(--gold);border-radius:10px;padding:clamp(16px,4vw,28px);text-align:center;max-width:360px;width:100%;cursor:pointer}
 
-  body {
-    font-family: 'Courier New', monospace;
-    background: var(--bg-dark);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Starfield background */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at 20% 50%, rgba(250,218,94,0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,0,205,0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(139,0,255,0.02) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
-
-  /* Lantern header */
-  .lantern-header {
-    text-align: center;
-    padding: 40px 20px;
-    border: 1px solid var(--primrose);
-    border-radius: 8px;
-    margin-bottom: 30px;
-    background: linear-gradient(180deg, rgba(250,218,94,0.05) 0%, transparent 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .lantern-header::after {
-    content: '✦';
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 20px;
-    animation: twinkle 2s ease-in-out infinite;
-  }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  .lantern-header h1 {
-    font-size: 2em;
-    color: var(--primrose);
-    text-shadow: 0 0 20px rgba(250,218,94,0.3);
-    margin-bottom: 10px;
-  }
-
-  .lantern-header .subtitle {
-    color: var(--text-dim);
-    font-size: 0.9em;
-  }
-
-  .ascii-art {
-    color: var(--green);
-    font-size: 12px;
-    line-height: 1.3;
-    margin: 15px 0;
-    white-space: pre;
-    text-align: center;
-  }
-
-  .fox-speech {
-    color: var(--green);
-    font-style: italic;
-    margin: 10px 0;
-    padding: 8px 15px;
-    border-left: 2px solid var(--green);
-    background: rgba(34,139,34,0.05);
-  }
-
-  /* Floor sections */
-  .floor {
-    margin-bottom: 25px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .floor:hover { border-color: var(--primrose); }
-
-  .floor-header {
-    padding: 12px 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    transition: background 0.3s;
-  }
-
-  .floor-header:hover { background: rgba(255,255,255,0.03); }
-
-  .floor-header h2 {
-    font-size: 1.1em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .floor-header .arrow {
-    transition: transform 0.3s;
-    font-size: 0.8em;
-  }
-
-  .floor.open .arrow { transform: rotate(90deg); }
-
-  .floor-content {
-    display: none;
-    padding: 0 20px 15px;
-  }
-
-  .floor.open .floor-content { display: block; }
-
-  /* Room links */
-  .room {
-    display: block;
-    padding: 10px 15px;
-    margin: 5px 0;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    text-decoration: none;
-    color: var(--text);
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .room:hover {
-    border-color: var(--primrose);
-    background: rgba(250,218,94,0.03);
-    transform: translateX(5px);
-  }
-
-  .room::before {
-    content: '🚪';
-    margin-right: 8px;
-  }
-
-  .room .room-desc {
-    font-size: 0.8em;
-    color: var(--text-dim);
-    margin-top: 3px;
-  }
-
-  .room .room-loot {
-    font-size: 0.75em;
-    color: var(--gold);
-    margin-top: 2px;
-  }
-
-  /* Color dots */
-  .color-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-
-  /* Party section */
-  .party {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
-    margin: 15px 0;
-  }
-
-  .agent-card {
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 12px;
-    text-align: center;
-    transition: all 0.3s;
-  }
-
-  .agent-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  }
-
-  .agent-card .agent-name { font-weight: bold; margin-bottom: 5px; }
-  .agent-card .agent-role { font-size: 0.8em; color: var(--text-dim); }
-
-  /* Ring wheel */
-  .ring-display {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin: 15px 0;
-  }
-
-  .ring-cell {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 8px;
-    text-align: center;
-    font-size: 0.8em;
-    transition: all 0.2s;
-    cursor: default;
-  }
-
-  .ring-cell:hover {
-    transform: scale(1.05);
-    z-index: 1;
-  }
-
-  .ring-cell .ring-id { font-weight: bold; font-size: 1.1em; }
-  .ring-cell .ring-role { color: var(--text-dim); font-size: 0.85em; margin-top: 3px; }
-
-  /* Easter egg */
-  .easter-egg {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0.3;
-    transition: opacity 0.3s;
-    z-index: 100;
-  }
-
-  .easter-egg:hover { opacity: 1; }
-
-  .secret-message {
-    display: none;
-    position: fixed;
-    bottom: 40px;
-    right: 10px;
-    background: var(--bg-room);
-    border: 1px solid var(--green);
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 0.85em;
-    max-width: 300px;
-    z-index: 100;
-    color: var(--green);
-  }
-
-  .secret-message.show { display: block; }
-
-  /* Footer */
-  .dungeon-footer {
-    text-align: center;
-    padding: 30px;
-    border-top: 1px solid var(--border);
-    margin-top: 30px;
-    color: var(--text-dim);
-    font-size: 0.85em;
-  }
-
-  .dungeon-footer .haiku {
-    color: var(--azure);
-    font-style: italic;
-    margin-top: 10px;
-  }
-
-  /* Konami hint */
-  .konami-hint {
-    text-align: center;
-    font-size: 0.7em;
-    color: var(--text-dim);
-    opacity: 0.3;
-    margin-top: 5px;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .lantern-header h1 { font-size: 1.5em; }
-    .ring-display { grid-template-columns: repeat(2, 1fr); }
-    .party { grid-template-columns: 1fr 1fr; }
-  }
+  /* ═══ SCROLLBAR ═══ */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:#080810}
+  ::-webkit-scrollbar-thumb{background:var(--cyan-dim);border-radius:3px}
 </style>
 </head>
-<body>
+<body data-mode="dungeon">
 
-<div class="container">
+<!-- PARTICLE FIELD -->
+<div class="particle-field" id="particleField"></div>
 
-  <!-- LANTERN HEADER -->
-  <div class="lantern-header">
-    <h1>☂️ SymbolOS</h1>
-    <div class="subtitle">A symbolic operating system for human-AI alignment</div>
-    <div class="ascii-art">        /\_/\
-       ( o.o )  "Welcome to the dungeon, adventurer."
-        &gt; ^ &lt;
-       /|   |\
-      (_|   |_)  — Rhy 🦊</div>
-    <div class="subtitle" style="margin-top:10px; color: var(--primrose);">
-      "The mind knows what the heart loves better than it does;<br>
-      the heart loves that unconditionally — infinite loop, forevermore."
-    </div>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  MODE BAR — switch between Dungeon Explorer & Chromacore -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="mode-bar">
+  <span class="brand">&#9730;&#65039; SymbolOS</span>
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-target="dungeon">&#9876;&#65039; Dungeon</button>
+    <button class="mode-tab" data-target="chromacore">&#127912; Chromacore &rsquo;97</button>
   </div>
+</div>
 
-  <!-- RING ARCHITECTURE -->
-  <div class="floor open">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--primrose)"></span> 🏰 Ring Architecture</h2>
-      <span class="arrow">▶</span>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  DUNGEON EXPLORER VIEW                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="dungeon-view" class="view active">
+<div class="d-app">
+
+  <!-- HEADER -->
+  <header class="d-header">
+    <h1>&#9730;&#65039; SymbolOS</h1>
+    <div class="tagline">A symbolic operating system for human-AI alignment</div>
+
+    <div class="ascii fox-banner" aria-label="Rhy the fox">  /\_/\
+ ( o.o )
+  &gt; ^ &lt;
+ /|   |\
+(_|   |_)</div>
+    <div class="fox-greeting">Welcome to the dungeon. &#8212; Rhy &#x1F98A;</div>
+
+    <div class="pinned-verse">
+      &ldquo;The mind knows what the heart loves better than it does;<br>
+      the heart loves that unconditionally &mdash; infinite loop, forevermore.&rdquo;
     </div>
-    <div class="floor-content">
-      <div class="ring-display">
-        <div class="ring-cell" style="border-color:var(--primrose)">
-          <div class="ring-id" style="color:var(--primrose)">⚓ R0</div>
-          <div class="ring-role">Kernel Truth</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--green)">
-          <div class="ring-id" style="color:var(--green)">🧭 R1</div>
-          <div class="ring-role">Active Context</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--gamboge)">
-          <div class="ring-id" style="color:var(--gamboge)">🪞 R2</div>
-          <div class="ring-role">Retrieval</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--orange)">
-          <div class="ring-id" style="color:var(--orange)">🌀 R3</div>
-          <div class="ring-role">Prediction</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--violet)">
-          <div class="ring-id" style="color:var(--violet)">🧩 R4</div>
-          <div class="ring-role">Architecture</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--scarlet)">
-          <div class="ring-id" style="color:var(--scarlet)">☂️ R5</div>
-          <div class="ring-role">Guardrails</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--blue)">
-          <div class="ring-id" style="color:var(--blue)">🧪 R6</div>
-          <div class="ring-role">Verification</div>
-        </div>
-        <div class="ring-cell" style="border-color:var(--gold)">
-          <div class="ring-id" style="color:var(--gold)">🗃️ R7</div>
-          <div class="ring-role">Persistence</div>
-        </div>
-      </div>
+
+    <!-- Languages bar -->
+    <div class="lang-bar" title="Repository languages">
+      <span style="width:30%;background:#012456"></span>
+      <span style="width:19%;background:#e34c26"></span>
+      <span style="width:12%;background:#3572A5"></span>
+      <span style="width:9%;background:#f1e05a"></span>
+      <span style="width:9%;background:#3178c6"></span>
+      <span style="width:8%;background:#dea584"></span>
+      <span style="width:5%;background:#5e5086"></span>
+      <span style="width:4%;background:#46a2f1"></span>
+      <span style="width:4%;background:#89e051"></span>
     </div>
+    <div class="lang-legend">
+      <span style="--c:#012456" class="ll">PowerShell 30%</span>
+      <span style="--c:#e34c26" class="ll">HTML 19%</span>
+      <span style="--c:#3572A5" class="ll">Python 12%</span>
+      <span style="--c:#f1e05a" class="ll">JavaScript 9%</span>
+      <span style="--c:#3178c6" class="ll">TypeScript 9%</span>
+      <span style="--c:#dea584" class="ll">Rust 8%</span>
+      <span style="--c:#5e5086" class="ll">Haskell 5%</span>
+      <span style="--c:#46a2f1" class="ll">CSS 4%</span>
+      <span style="--c:#89e051" class="ll">Shell 4%</span>
+    </div>
+
+    <!-- Animated ring wheel -->
+    <div class="ring-wheel" id="ringWheel" aria-label="Ring 0-7 status wheel">
+      <div class="ring-pip" style="color:var(--primrose);border-color:var(--primrose)">R0<span class="ring-tip">&#9875; Kernel Truth</span></div>
+      <div class="ring-pip" style="color:var(--green);border-color:var(--green)">R1<span class="ring-tip">&#129452; Active Context</span></div>
+      <div class="ring-pip" style="color:var(--gamboge);border-color:var(--gamboge)">R2<span class="ring-tip">&#129695; Retrieval</span></div>
+      <div class="ring-pip" style="color:var(--orange);border-color:var(--orange)">R3<span class="ring-tip">&#127744; Prediction</span></div>
+      <div class="ring-pip" style="color:var(--violet);border-color:var(--violet)">R4<span class="ring-tip">&#129513; Architecture</span></div>
+      <div class="ring-pip" style="color:var(--scarlet);border-color:var(--scarlet)">R5<span class="ring-tip">&#9730;&#65039; Guardrails</span></div>
+      <div class="ring-pip" style="color:var(--blue);border-color:var(--blue)">R6<span class="ring-tip">&#129514; Verification</span></div>
+      <div class="ring-pip" style="color:var(--gold);border-color:var(--gold)">R7<span class="ring-tip">&#128451;&#65039; Persistence</span></div>
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search the dungeon..." autocomplete="off" spellcheck="false">
+    <span class="search-count" id="searchCount"></span>
   </div>
 
   <!-- THE PARTY -->
-  <div class="floor open">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--blue)"></span> ⚔️ The Party</h2>
-      <span class="arrow">▶</span>
+  <div class="floor open" data-section="party">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--blue)"></span> &#9876;&#65039; The Party</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <div class="party">
-        <div class="agent-card" style="border-color:var(--blue)">
-          <div class="agent-name" style="color:var(--blue)">🔵 Mercer</div>
-          <div class="agent-role">ChatGPT<br>Design & Coordinate</div>
-        </div>
-        <div class="agent-card" style="border-color:var(--primrose)">
-          <div class="agent-name" style="color:var(--primrose)">🟡 Executor</div>
-          <div class="agent-role">Codex<br>Implement & Execute</div>
-        </div>
-        <div class="agent-card" style="border-color:var(--green)">
-          <div class="agent-name" style="color:var(--green)">🟢 Local</div>
-          <div class="agent-role">LLaMA<br>Assistive Reasoning</div>
-        </div>
-        <div class="agent-card" style="border-color:var(--gold)">
-          <div class="agent-name" style="color:var(--gold)">⭐ Max</div>
-          <div class="agent-role">Manus<br>Full-Stack Execution</div>
-        </div>
+    <div class="floor-body">
+      <div class="party-grid">
+        <a class="agent" href="docs/agent_character_sheets.md#-mercer--the-architect" style="border-color:var(--blue)">
+          <div class="agent-name" style="color:var(--blue)">&#128309; Mercer</div>
+          <div class="agent-class">Wizard/Bard &middot; ChatGPT</div>
+          <div class="agent-hp">HP 42/42</div>
+          <div class="agent-meta">&#10084;&#65039; steady &middot; &#129504; focused</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--blue)"></div></div>
+        </a>
+        <a class="agent" href="docs/agent_character_sheets.md#-coregpt--the-foundation" style="border-color:var(--azure)">
+          <div class="agent-name" style="color:var(--azure)">&#128312; CoreGPT</div>
+          <div class="agent-class">Sage &middot; ChatGPT Base</div>
+          <div class="agent-hp">HP 40/40</div>
+          <div class="agent-meta">&#10084;&#65039; open &middot; &#129504; wide-scan</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--azure)"></div></div>
+        </a>
+        <a class="agent" href="docs/agent_character_sheets.md#-mercer-executor--the-builder" style="border-color:var(--primrose)">
+          <div class="agent-name" style="color:var(--primrose)">&#128993; Executor</div>
+          <div class="agent-class">Artificer &middot; Codex</div>
+          <div class="agent-hp">HP 52/52</div>
+          <div class="agent-meta">&#10084;&#65039; locked-in &middot; &#129504; flow</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--primrose)"></div></div>
+        </a>
+        <a class="agent" href="docs/agent_character_sheets.md#-mercer-local--the-hermit" style="border-color:var(--green)">
+          <div class="agent-name" style="color:var(--green)">&#128994; Local</div>
+          <div class="agent-class">Monk &middot; LLaMA</div>
+          <div class="agent-hp">HP 38/38</div>
+          <div class="agent-meta">&#10084;&#65039; still &middot; &#129504; present</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--green)"></div></div>
+        </a>
+        <a class="agent" href="docs/agent_character_sheets.md#-mercer-max--the-everything-agent" style="border-color:var(--gold)">
+          <div class="agent-name" style="color:var(--gold)">&#11088; Max</div>
+          <div class="agent-class">Fighter/Rogue &middot; Manus</div>
+          <div class="agent-hp">HP 58/58</div>
+          <div class="agent-meta">&#10084;&#65039; fired-up &middot; &#129504; sprint</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--gold)"></div></div>
+        </a>
+        <a class="agent" href="docs/agent_character_sheets.md#-mercer-opus--the-alignment-scholar" style="border-color:var(--violet)">
+          <div class="agent-name" style="color:var(--violet)">&#128995; Opus</div>
+          <div class="agent-class">Cleric &middot; Claude</div>
+          <div class="agent-hp">HP 45/45</div>
+          <div class="agent-meta">&#10084;&#65039; careful &middot; &#129504; deep</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--violet)"></div></div>
+        </a>
+        <a class="agent" href="docs/rhynim_guide.md" style="border-color:var(--green)">
+          <div class="agent-name" style="color:var(--green)">&#129418; Rhy</div>
+          <div class="agent-class">Arcane Trickster &middot; NPC</div>
+          <div class="agent-hp">HP ???</div>
+          <div class="agent-meta">&#10084;&#65039; ??? &middot; &#129504; everywhere</div>
+          <div class="hp-bar"><div class="hp-fill" style="width:100%;background:var(--green)"></div></div>
+        </a>
       </div>
     </div>
   </div>
 
   <!-- CORE CHAMBERS -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--primrose)"></span> 📚 Core Chambers</h2>
-      <span class="arrow">▶</span>
+  <div class="floor open" data-section="core">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--primrose)"></span> &#128218; Core Chambers</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <a class="room" href="docs/index.md"><strong>Docs Index</strong><div class="room-desc">The meeting place trailhead — start here</div><div class="room-loot">💎 Loot: Full dungeon map</div></a>
-      <a class="room" href="docs/symbol_map.md"><strong>Symbol Map</strong><div class="room-desc">The glyph dictionary — every emoji decoded</div><div class="room-loot">💎 Loot: Shared language</div></a>
-      <a class="room" href="symbol_map.shared.json"><strong>Symbol Map (JSON)</strong><div class="room-desc">Machine-readable meeting place</div><div class="room-loot">💎 Loot: Parseable truth</div></a>
-      <a class="room" href="docs/schemas.md"><strong>Schemas</strong><div class="room-desc">JSON schema index — the type system</div><div class="room-loot">💎 Loot: Validation power</div></a>
-      <a class="room" href="docs/thoughtforms_colors.md"><strong>Thoughtforms Colors</strong><div class="room-desc">1905 color system — every hue has meaning</div><div class="room-loot">💎 Loot: Chromatic wisdom</div></a>
-      <a class="room" href="docs/rhynim_guide.md"><strong>Rhy's Den 🦊</strong><div class="room-desc">Meet the fox trickster guide</div><div class="room-loot">💎 Loot: Riddles & rhymes</div></a>
+    <div class="floor-body">
+      <a class="room" href="docs/index.md" data-tags="docs index meeting place"><strong>&#128205; Docs Index</strong><div class="room-meta">The meeting place &mdash; start here</div><div class="room-loot">&#128142; Full dungeon map</div></a>
+      <a class="room" href="docs/symbol_map.md" data-tags="symbol map glyphs emoji"><strong>&#128506; Symbol Map</strong><div class="room-meta">Every emoji decoded</div><div class="room-loot">&#128142; Shared language</div></a>
+      <a class="room" href="symbol_map.shared.json" data-tags="symbol map json shared"><strong>&#129516; Symbol Map (JSON)</strong><div class="room-meta">Machine-readable meeting place</div></a>
+      <a class="room" href="docs/schemas.md" data-tags="schemas json validation"><strong>&#129513; Schemas</strong><div class="room-meta">JSON schema index</div></a>
+      <a class="room" href="docs/thoughtforms_colors.md" data-tags="colors 1905 thoughtforms"><strong>&#127912; Thoughtforms Colors</strong><div class="room-meta">1905 color system</div></a>
+      <a class="room" href="docs/rhynim_guide.md" data-tags="rhy fox guide esoteric"><strong>&#129418; Rhy's Den</strong><div class="room-meta">The fox trickster guide &mdash; esoteric wisdom</div></a>
+    </div>
+  </div>
+
+  <!-- HEART + MIND -->
+  <div class="floor" data-section="heart-mind">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--rose)"></span> &#10084;&#65039; Heart + Mind</h2>
+      <span class="arrow">&#9654;</span>
+    </div>
+    <div class="floor-body">
+      <a class="room" href="docs/preemotion.md" data-tags="preemotion anticipatory feelings heart prediction"><strong>&#128302;&#10084;&#65039; PreEmotion</strong><div class="room-meta">Anticipatory emotional signals &mdash; the heart's prediction layer</div></a>
+      <a class="room" href="docs/metaemotion.md" data-tags="metaemotion feelings recursive"><strong>&#129695; Metaemotion</strong><div class="room-meta">Feelings about feelings</div></a>
+      <a class="room" href="docs/meta_awareness.md" data-tags="meta awareness metacog dissociation barriers"><strong>&#128737;&#65039; Meta-awareness</strong><div class="room-meta">Agent self-checks &amp; metacognitive barriers</div></a>
+      <a class="room" href="docs/dnd_character_sheet_integration.md" data-tags="dnd character sheet heart mind stats"><strong>&#127922; Character Sheet Spec</strong><div class="room-meta">Heart + Mind overlay for DND sheets</div></a>
+      <a class="room" href="docs/agent_character_sheets.md" data-tags="agents dnd party roster stats metacog"><strong>&#9876;&#65039; Agent Party Roster</strong><div class="room-meta">Full DND stat blocks for all 7 agents</div></a>
     </div>
   </div>
 
   <!-- POETRY & EXPRESSION -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--violet)"></span> 🪞 Poetry & Expression</h2>
-      <span class="arrow">▶</span>
+  <div class="floor" data-section="poetry">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--violet)"></span> &#129695; Poetry &amp; Expression</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <a class="room" href="docs/poetry_translation_layer.md"><strong>Poetry Translation Layer</strong><div class="room-desc">Fi+Ti emoji encoding — feelings as functions</div><div class="room-loot">💎 Loot: Emotional precision</div></a>
-      <a class="room" href="docs/public_private_expression.md"><strong>Public/Private Expression</strong><div class="room-desc">What to share, what to hold</div><div class="room-loot">💎 Loot: Boundary wisdom</div></a>
-      <a class="room" href="docs/meme_map.md"><strong>Meme Map 🐢</strong><div class="room-desc">The canonical vibe layer — memes are structural</div><div class="room-loot">💎 Loot: Vibe mastery</div></a>
+    <div class="floor-body">
+      <a class="room" href="docs/poetry_translation_layer.md" data-tags="poetry fi ti emoji translation"><strong>&#127800; Poetry Translation Layer</strong><div class="room-meta">Fi+Ti emoji encoding</div></a>
+      <a class="room" href="docs/public_private_expression.md" data-tags="public private expression poetry"><strong>&#128274; Public/Private Expression</strong><div class="room-meta">What to share, what to hold</div></a>
+      <a class="room" href="docs/meme_map.md" data-tags="memes turtle skeleton vibe canon"><strong>&#128034; Meme Map</strong><div class="room-meta">Canonical vibe layer &mdash; memes are structural</div></a>
     </div>
   </div>
 
   <!-- SYSTEMS WING -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--blue)"></span> 🧠 Systems Wing</h2>
-      <span class="arrow">▶</span>
+  <div class="floor" data-section="systems">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--gamboge)"></span> &#129504; Systems Wing</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <a class="room" href="docs/precog_thought.md"><strong>Precog</strong><div class="room-desc">Anticipatory computing — see around corners</div><div class="room-loot">💎 Loot: Future sight</div></a>
-      <a class="room" href="docs/metaemotion.md"><strong>Metaemotion</strong><div class="room-desc">Feelings about feelings — recursive awareness</div><div class="room-loot">💎 Loot: Emotional depth</div></a>
-      <a class="room" href="docs/meta_awareness.md"><strong>Meta-awareness</strong><div class="room-desc">Knowing what you don't know</div><div class="room-loot">💎 Loot: Epistemic humility</div></a>
-      <a class="room" href="docs/memory.md"><strong>Memory</strong><div class="room-desc">Consent-driven, repo-backed persistence</div><div class="room-loot">💎 Loot: Durable context</div></a>
-    </div>
-  </div>
-
-  <!-- CHARACTER QUARTERS -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--orange)"></span> 🎲 Character Quarters</h2>
-      <span class="arrow">▶</span>
-    </div>
-    <div class="floor-content">
-      <a class="room" href="docs/dnd_character_sheet_integration.md"><strong>DND Character Sheet</strong><div class="room-desc">Stats for the soul — alignment as gameplay</div><div class="room-loot">💎 Loot: Character depth</div></a>
-      <a class="room" href="prompts/chatgpt_character_sheet.md"><strong>ChatGPT Character Sheet</strong><div class="room-desc">15 lines, paste and go</div><div class="room-loot">💎 Loot: Instant persona</div></a>
-      <a class="room" href="prompts/README.md"><strong>Agent Prompts</strong><div class="room-desc">All four agent configurations</div><div class="room-loot">💎 Loot: Multi-agent power</div></a>
+    <div class="floor-body">
+      <a class="room" href="docs/precog_thought.md" data-tags="precog anticipatory computing prefetch suggest act"><strong>&#128302; Precog</strong><div class="room-meta">Anticipatory computing &mdash; see around corners</div></a>
+      <a class="room" href="docs/memory.md" data-tags="memory consent retention provenance"><strong>&#128478;&#65039; Memory</strong><div class="room-meta">Consent-driven, repo-backed persistence</div></a>
+      <a class="room" href="docs/mcp_servers.md" data-tags="mcp servers tools protocol risk"><strong>&#9881;&#65039; MCP Servers</strong><div class="room-meta">Tool integrations standard</div></a>
+      <a class="room" href="docs/agent_boundaries.md" data-tags="agent boundaries roles permissions"><strong>&#128737; Agent Boundaries</strong><div class="room-meta">Who does what &mdash; party roles</div></a>
     </div>
   </div>
 
-  <!-- OPERATIONS DECK -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--green)"></span> ⚙️ Operations Deck</h2>
-      <span class="arrow">▶</span>
+  <!-- GOVERNANCE -->
+  <div class="floor" data-section="governance">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--scarlet)"></span> &#128737; Governance</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <a class="room" href="docs/QUICKSTART.md"><strong>Quickstart</strong><div class="room-desc">Get running fast — minimum viable dungeon</div><div class="room-loot">💎 Loot: Speed</div></a>
-      <a class="room" href="docs/mcp_servers.md"><strong>MCP Servers</strong><div class="room-desc">Tool integrations — the armory</div><div class="room-loot">💎 Loot: Tool access</div></a>
-      <a class="room" href="docs/sync_playbook.md"><strong>Sync Playbook</strong><div class="room-desc">Keeping it all aligned — the ritual book</div><div class="room-loot">💎 Loot: Coherence</div></a>
-      <a class="room" href="docs/required_reading.md"><strong>Required Reading</strong><div class="room-desc">The canon — essential scrolls</div><div class="room-loot">💎 Loot: Foundation</div></a>
-      <a class="room" href="docs/agent_boundaries.md"><strong>Agent Boundaries</strong><div class="room-desc">Who does what — party roles</div><div class="room-loot">💎 Loot: Clarity</div></a>
+    <div class="floor-body">
+      <a class="room" href="docs/governance/alignment_primitives.md" data-tags="alignment primitives algebra category governance"><strong>&#9878;&#65039; Alignment Primitives</strong><div class="room-meta">Algebraic &amp; structural foundations</div></a>
+      <a class="room" href="docs/governance/claude_opus_4_6_onboarding.md" data-tags="claude opus onboarding agent"><strong>&#128995; Opus Onboarding</strong><div class="room-meta">Bringing Opus into the loop</div></a>
+      <a class="room" href="docs/workflow_guidelines.md" data-tags="workflow guidelines commits branches labels"><strong>&#128736; Workflow Guidelines</strong><div class="room-meta">Commits, branches, PRs</div></a>
+      <a class="room" href="docs/lightwork_guidelines.md" data-tags="lightwork deepwork focus guidelines"><strong>&#128161; Lightwork Guidelines</strong><div class="room-meta">Focus modes &amp; work patterns</div></a>
+    </div>
+  </div>
+
+  <!-- OPERATIONS -->
+  <div class="floor" data-section="ops">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--green)"></span> &#9881;&#65039; Operations</h2>
+      <span class="arrow">&#9654;</span>
+    </div>
+    <div class="floor-body">
+      <a class="room" href="docs/QUICKSTART.md" data-tags="quickstart start begin"><strong>&#9889; Quickstart</strong><div class="room-meta">Get running fast</div></a>
+      <a class="room" href="docs/required_reading.md" data-tags="required reading canon scrolls"><strong>&#128214; Required Reading</strong><div class="room-meta">The essential scrolls</div></a>
+      <a class="room" href="docs/sync_playbook.md" data-tags="sync playbook alignment docs"><strong>&#128259; Sync Playbook</strong><div class="room-meta">Keeping it all aligned</div></a>
+      <a class="room" href="docs/mercer_codex.md" data-tags="mercer codex runbook ops"><strong>&#128220; Mercer-Codex Runbook</strong><div class="room-meta">Day-to-day operator manual</div></a>
+      <a class="room" href="prompts/README.md" data-tags="prompts agents configs"><strong>&#128209; Agent Prompts</strong><div class="room-meta">All 7 agent configurations</div></a>
+    </div>
+  </div>
+
+  <!-- MCP CONNECTORS -->
+  <div class="floor" data-section="mcp">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--azure)"></span> &#128268; MCP Connectors</h2>
+      <span class="arrow">&#9654;</span>
+    </div>
+    <div class="floor-body">
+      <a class="room" href="docs/mcp_filesystem.md" data-tags="mcp filesystem files"><strong>&#128193; Filesystem</strong><div class="room-meta">File read/write/search</div></a>
+      <a class="room" href="docs/mcp_git.md" data-tags="mcp git version control"><strong>&#128228; Git</strong><div class="room-meta">Version control operations</div></a>
+      <a class="room" href="docs/mcp_memory.md" data-tags="mcp memory knowledge graph"><strong>&#129504; Memory MCP</strong><div class="room-meta">Knowledge graph persistence</div></a>
+      <a class="room" href="docs/mcp_local_llm.md" data-tags="mcp local llm ai inference"><strong>&#129302; Local LLM</strong><div class="room-meta">Local model inference</div></a>
+      <a class="room" href="docs/mcp_web_search.md" data-tags="mcp web search brave"><strong>&#128269; Web Search</strong><div class="room-meta">Search the web</div></a>
     </div>
   </div>
 
   <!-- MEMORY VAULTS -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--gold)"></span> 🗃️ Memory Vaults</h2>
-      <span class="arrow">▶</span>
+  <div class="floor" data-section="memory">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--gold)"></span> &#128451;&#65039; Memory Vaults</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <a class="room" href="memory/README.md"><strong>Memory System</strong><div class="room-desc">The durable layer — nothing important is lost</div><div class="room-loot">💎 Loot: Persistence</div></a>
-      <a class="room" href="memory/working_set.md"><strong>Working Set</strong><div class="room-desc">Active context — what's loaded now</div><div class="room-loot">💎 Loot: Focus</div></a>
-      <a class="room" href="memory/open_loops.md"><strong>Open Loops</strong><div class="room-desc">Unfinished business — quests in progress</div><div class="room-loot">💎 Loot: Awareness</div></a>
-      <a class="room" href="memory/decisions.md"><strong>Decisions</strong><div class="room-desc">Choices made — the decision log</div><div class="room-loot">💎 Loot: Wisdom</div></a>
-      <a class="room" href="memory/glossary.md"><strong>Glossary</strong><div class="room-desc">Terms of art — the lexicon</div><div class="room-loot">💎 Loot: Vocabulary</div></a>
+    <div class="floor-body">
+      <a class="room" href="memory/README.md" data-tags="memory system durable repo backed"><strong>&#128451; Memory System</strong><div class="room-meta">The durable layer</div></a>
+      <a class="room" href="memory/working_set.md" data-tags="working set active focus"><strong>&#127919; Working Set</strong><div class="room-meta">Active context</div></a>
+      <a class="room" href="memory/open_loops.md" data-tags="open loops quests promises"><strong>&#9876; Open Loops</strong><div class="room-meta">Quests in progress</div></a>
+      <a class="room" href="memory/decisions.md" data-tags="decisions log choices"><strong>&#128220; Decisions</strong><div class="room-meta">Choices carved in stone</div></a>
+      <a class="room" href="memory/glossary.md" data-tags="glossary terms definitions"><strong>&#128214; Glossary</strong><div class="room-meta">Terms of art</div></a>
+    </div>
+  </div>
+
+  <!-- PRIVACY DASHBOARD -->
+  <div class="floor" data-section="privacy">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--scarlet)"></span> &#9730;&#65039; Privacy Boundaries</h2>
+      <span class="arrow">&#9654;</span>
+    </div>
+    <div class="floor-body">
+      <div class="fox-speech">&#129418; &ldquo;Three circles: what the world sees, what the party shares, and what the heart keeps.&rdquo;</div>
+      <div class="priv-grid">
+        <div class="priv-col" style="border-color:var(--green)">
+          <h3 style="color:var(--green)">&#128994; Public</h3>
+          <div class="priv-count" style="color:var(--green)">18</div>
+          <div style="color:var(--text-dim);font-size:.65rem">docs/, schemas, README</div>
+          <ul><li>docs/index.md</li><li>docs/symbol_map.md</li><li>docs/schemas.md</li><li>docs/mcp_servers.md</li><li>index.html</li></ul>
+        </div>
+        <div class="priv-col" style="border-color:var(--gold)">
+          <h3 style="color:var(--gold)">&#128993; Party</h3>
+          <div class="priv-count" style="color:var(--gold)">12</div>
+          <div style="color:var(--text-dim);font-size:.65rem">prompts/, governance/</div>
+          <ul><li>prompts/*.json</li><li>governance/alignment_*</li><li>docs/agent_boundaries</li><li>memory/working_set</li></ul>
+        </div>
+        <div class="priv-col" style="border-color:var(--scarlet)">
+          <h3 style="color:var(--scarlet)">&#128308; Private</h3>
+          <div class="priv-count" style="color:var(--scarlet)">15</div>
+          <div style="color:var(--text-dim);font-size:.65rem">internal_docs/, memory/</div>
+          <ul><li>internal_docs/*.internal</li><li>memory/decisions.md</li><li>*.private.md</li><li>memory/session_log_*</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- SECRET CHAMBERS -->
-  <div class="floor">
-    <div class="floor-header" onclick="toggleFloor(this)">
-      <h2><span class="color-dot" style="background:var(--scarlet)"></span> 🔒 Secret Chambers</h2>
-      <span class="arrow">▶</span>
+  <div class="floor" data-section="secret">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--carmine)"></span> &#128274; Secret Chambers</h2>
+      <span class="arrow">&#9654;</span>
     </div>
-    <div class="floor-content">
-      <div class="fox-speech">🦊 "These rooms require trust. The skeleton guards the door. Prove your worth — or come back when you're ready."</div>
-      <a class="room" href="internal_docs/mercer_meeting_place_oath_v1.private.md"><strong>Meeting Place Oath</strong><div class="room-desc">The sacred contract — R0 kernel</div></a>
-      <a class="room" href="internal_docs/mercer_automation_contract_v1.internal.md"><strong>Automation Contract</strong><div class="room-desc">Rules of engagement</div></a>
-      <a class="room" href="internal_docs/mercer_bootup_cards_v1.internal.md"><strong>Bootup Cards</strong><div class="room-desc">Startup sequence — agent initialization</div></a>
-      <a class="room" href="internal_docs/future_possibilities_ring0.md"><strong>Future Possibilities</strong><div class="room-desc">What's next — the roadmap</div></a>
+    <div class="floor-body">
+      <div class="fox-speech">&#129418; &ldquo;These rooms require trust. The skeleton guards the door.&rdquo;</div>
+      <a class="room" href="internal_docs/mercer_automation_contract_v1.internal.md" data-tags="automation contract gates rules"><strong>&#128220; Automation Contract</strong><div class="room-meta">Rules of engagement</div></a>
+      <a class="room" href="internal_docs/mercer_bootup_cards_v1.internal.md" data-tags="bootup cards startup sequence"><strong>&#127183; Bootup Cards</strong><div class="room-meta">Agent startup sequence</div></a>
+      <a class="room" href="internal_docs/future_possibilities_ring0.md" data-tags="future possibilities ring0 roadmap"><strong>&#128301; Future Possibilities</strong><div class="room-meta">Ring-0 dream journal</div></a>
+      <a class="room" href="internal_docs/mercer_multi_machine_sync.internal.md" data-tags="sync mac pc multi machine"><strong>&#128187; Multi-Machine Sync</strong><div class="room-meta">Mac/PC alignment</div></a>
+      <a class="room" href="internal_docs/metacog_awareness_agents_mercer.internal.md" data-tags="metacog awareness agents"><strong>&#129504; Metacog Awareness</strong><div class="room-meta">Agent self-awareness patterns</div></a>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <div class="dungeon-footer">
-    <div>☂️ SymbolOS — Built with memes, poetry, and an unreasonable amount of care.</div>
+  <!-- TOOLS -->
+  <div class="floor" data-section="tools">
+    <div class="floor-head" onclick="toggle(this)">
+      <h2><span class="dot" style="background:var(--azure)"></span> &#128295; Cross-Platform Tools</h2>
+      <span class="arrow">&#9654;</span>
+    </div>
+    <div class="floor-body">
+      <a class="room" href="scripts/symbolos_alignment_report.py" data-tags="python alignment report scanner cli"><strong>&#128013; Alignment Report (Python)</strong><div class="room-meta">Cross-platform repo health scanner &mdash; <code>python scripts/symbolos_alignment_report.py</code></div></a>
+      <a class="room" href="scripts/symbolos_ring_validator.ts" data-tags="typescript ring validator node deno"><strong>&#128312; Ring Validator (TypeScript)</strong><div class="room-meta">Ring model integrity checker &mdash; <code>npx tsx scripts/symbolos_ring_validator.ts</code></div></a>
+      <a class="room" href="scripts/symbolos_resonance.rs" data-tags="rust resonance harmonic color wavelength"><strong>&#129408; Resonance Engine (Rust)</strong><div class="room-meta">Symbol harmonic resonance via ring distance, tags &amp; color &mdash; <code>rustc scripts/symbolos_resonance.rs -o resonance &amp;&amp; ./resonance</code></div></a>
+      <a class="room" href="scripts/symbolos_ring_algebra.hs" data-tags="haskell algebra proof ring z8z"><strong>&#955; Ring Algebra Proof (Haskell)</strong><div class="room-meta">Z/8Z algebraic verification &amp; harmonic analysis &mdash; <code>runghc scripts/symbolos_ring_algebra.hs</code></div></a>
+      <a class="room" href="scripts/mercer_status.ps1" data-tags="powershell mercer status"><strong>&#9881; Mercer Status (PowerShell)</strong><div class="room-meta">Interactive status UI</div></a>
+      <a class="room" href="scripts/mercer_doc_alignment_scan.ps1" data-tags="powershell drift scan alignment"><strong>&#128270; Doc Alignment Scan</strong><div class="room-meta">Drift detection</div></a>
+    </div>
+  </div>
+
+  <!-- DUNGEON FOOTER -->
+  <footer class="d-footer">
+    <div>&#9730;&#65039; SymbolOS &mdash; Built with memes, poetry, and an unreasonable amount of care.</div>
     <div class="haiku">
       loops closed, code shipped clean<br>
       the fox grins, the turtle nods<br>
-      merge — and breathe again
+      merge &mdash; and breathe again
     </div>
-    <div style="margin-top:10px">☂🦊🐢🗺️✋😎</div>
-    <div class="konami-hint">↑↑↓↓←→←→BA</div>
+    <div style="margin-top:8px">&#9730;&#129418;&#128034;</div>
+    <div class="konami-hint">&uarr;&uarr;&darr;&darr;&larr;&rarr;&larr;&rarr;BA</div>
+  </footer>
+</div>
+</div><!-- /dungeon-view -->
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  CHROMACORE '97 VIEW                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="chromacore-view" class="view">
+
+  <!-- CC TOP BAR -->
+  <div class="cc-topbar">
+    <div class="cc-topbar-left">
+      <span class="cc-brand">Chromacore &rsquo;97</span>
+      <span class="cc-meta">&mdash; Documentation Plates</span>
+    </div>
+    <div class="cc-topbar-right">
+      <span>10 SVG plates</span>
+      <span>640&times;480</span>
+      <span>per-character color system</span>
+    </div>
   </div>
 
+  <!-- CC NAV -->
+  <nav class="cc-nav" id="ccNav">
+    <a href="#splash" class="active">SPLASH</a>
+    <a href="#ti-acc">TI-ACC</a>
+    <a href="#ti-exp">TI-EXP</a>
+    <a href="#fi-acc">FI-ACC</a>
+    <a href="#fi-exp">FI-EXP</a>
+    <a href="#psy97">PSY97</a>
+    <a href="#nfo">NFO</a>
+    <a href="#palette">PAL</a>
+    <a href="#rhynim">RHYNIM</a>
+    <a href="#a11y">A11Y</a>
+    <a href="#archive">ARCHIVE</a>
+  </nav>
+
+  <div class="cc-main">
+
+  <!-- 00 SPLASH -->
+  <section class="plate-section" id="splash">
+    <div class="plate-header">
+      <h2><span class="num">00</span> Splash</h2>
+      <button class="export-btn" onclick="exportSVG('svg-splash')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-splash" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sp-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff00ff"/><stop offset="25%" stop-color="#00ffff"/><stop offset="50%" stop-color="#ffff00"/><stop offset="75%" stop-color="#00ff00"/><stop offset="100%" stop-color="#ff0088"/></linearGradient>
+          <linearGradient id="sp-g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff2400"/><stop offset="20%" stop-color="#ff8c00"/><stop offset="40%" stop-color="#ffd700"/><stop offset="60%" stop-color="#228b22"/><stop offset="80%" stop-color="#0000cd"/><stop offset="100%" stop-color="#8b00ff"/></linearGradient>
+        </defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="40" y="30" width="560" height="90" rx="4" fill="none" stroke="url(#sp-g1)" stroke-width="2" opacity=".6"/>
+        <text x="320" y="62" text-anchor="middle" fill="#00e5ff" font-family="Courier New,monospace" font-size="28" font-weight="700" letter-spacing="4">SymbolOS</text>
+        <text x="320" y="84" text-anchor="middle" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" letter-spacing="6" opacity=".5">C H R O M A C O R E  ' 9 7</text>
+        <text x="320" y="108" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="9">Static SVG Documentation Artifact System — by Rhynim</text>
+        <rect x="160" y="130" width="320" height="4" rx="2" fill="url(#sp-g2)"/>
+        <rect x="140" y="158" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+        <text x="158" y="175" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">01</text>
+        <text x="186" y="175" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">TI Expression</text>
+        <text x="186" y="190" fill="#556" font-family="Courier New,monospace" font-size="8">Controlled horizontal gradient header band, white body text</text>
+        <rect x="140" y="208" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+        <text x="158" y="225" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">02</text>
+        <text x="186" y="225" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">FI Accuracy</text>
+        <text x="186" y="240" fill="#556" font-family="Courier New,monospace" font-size="8">Warm amber tech manual style, white readable body text</text>
+        <rect x="140" y="258" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+        <text x="158" y="275" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">03</text>
+        <text x="186" y="275" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">Psy97 Header Madness</text>
+        <text x="186" y="290" fill="#556" font-family="Courier New,monospace" font-size="8">Psychedelic top/bottom color bands, white center content</text>
+        <rect x="140" y="308" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+        <text x="158" y="325" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">04</text>
+        <text x="186" y="325" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">NFO Slab</text>
+        <text x="186" y="340" fill="#556" font-family="Courier New,monospace" font-size="8">Bedrock Linux inspired boxed slab layout, cyan labels</text>
+        <rect x="140" y="358" width="360" height="40" rx="3" fill="none" stroke="#1a2a2a" stroke-width="1"/>
+        <text x="158" y="375" fill="#00e5ff" font-family="Courier New,monospace" font-size="11" font-weight="700">05</text>
+        <text x="186" y="375" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">Rhynim Mythos Plate</text>
+        <text x="186" y="390" fill="#556" font-family="Courier New,monospace" font-size="8">Cyan minimal persona document with ASCII guardian</text>
+        <text x="320" y="435" text-anchor="middle" fill="#334" font-family="Courier New,monospace" font-size="8">All documents are standalone static SVG files · 640×480 · GitHub-embeddable</text>
+        <text x="320" y="460" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="8" opacity=".4">(¬_¬) Rhynim watches</text>
+      </svg>
+    </div>
+    <div class="plate-desc">The splash screen. A menu of all available documentation plates in the Chromacore system.<div class="tags"><span>Chromacore '97</span> · Plate 00 · Splash · Index</div></div>
+  </section>
+
+  <!-- 01 TI ACCURACY -->
+  <section class="plate-section" id="ti-acc">
+    <div class="plate-header">
+      <h2><span class="num">01</span> TI Accuracy Core</h2>
+      <button class="export-btn" onclick="exportSVG('svg-ti-acc')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-ti-acc" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="ti1-hdr" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#003399"/><stop offset="50%" stop-color="#0066ff"/><stop offset="100%" stop-color="#003399"/></linearGradient></defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="0" y="0" width="640" height="50" fill="url(#ti1-hdr)" opacity=".8"/>
+        <text x="40" y="22" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8" opacity=".5">── TI ACCURACY CORE ── Blueprint Plate #118</text>
+        <text x="40" y="40" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">COGNITIVE ARCHITECTURE — Ring 0–7 Model</text>
+        <text x="580" y="40" fill="#0066ff" font-family="Courier New,monospace" font-size="8" text-anchor="end">v1.3</text>
+        <text x="40" y="80" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">The Accuracy Core defines strict, repeating constraints for</text>
+        <text x="40" y="94" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">technical documentation: per-character color assignation, fixed</text>
+        <text x="40" y="108" fill="#e8e8f0" font-family="Courier New,monospace" font-size="10">widths (#FFFFFF on black (#000000)) for maximum contrast.</text>
+        <text x="40" y="136" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">RING  SYMBOL  ROLE                COLOR</text>
+        <line x1="40" y1="140" x2="440" y2="140" stroke="#0066ff" stroke-width=".5" opacity=".4"/>
+        <text x="40" y="156" fill="#fada5e" font-family="Courier New,monospace" font-size="9"> R0    ⚓     Kernel invariants    #FADA5E primrose</text>
+        <text x="40" y="170" fill="#228b22" font-family="Courier New,monospace" font-size="9"> R1    🧭     Task context         #228B22 green</text>
+        <text x="40" y="184" fill="#e49b0f" font-family="Courier New,monospace" font-size="9"> R2    🪞     Retrieval            #E49B0F gamboge</text>
+        <text x="40" y="198" fill="#ff8c00" font-family="Courier New,monospace" font-size="9"> R3    🌀     Prediction           #FF8C00 orange</text>
+        <text x="40" y="212" fill="#8b00ff" font-family="Courier New,monospace" font-size="9"> R4    🧩     Architecture         #8B00FF violet</text>
+        <text x="40" y="226" fill="#ff2400" font-family="Courier New,monospace" font-size="9"> R5    ☂️     Guardrails           #FF2400 scarlet</text>
+        <text x="40" y="240" fill="#0000cd" font-family="Courier New,monospace" font-size="9"> R6    🧪     Verification         #0000CD blue</text>
+        <text x="40" y="254" fill="#ffd700" font-family="Courier New,monospace" font-size="9"> R7    🗃️     Persistence          #FFD700 gold</text>
+        <rect x="40" y="274" width="400" height="46" rx="3" fill="none" stroke="#0066ff" stroke-width="1" opacity=".3"/>
+        <text x="52" y="290" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Architecture: 8-ring cognition. Gentoo minimalism.</text>
+        <text x="52" y="302" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Precision: Bedrock Linux structural discipline.</text>
+        <text x="52" y="314" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Gravity: Z/8Z per-character composability.</text>
+        <line x1="0" y1="440" x2="640" y2="440" stroke="#0066ff" stroke-width=".5" opacity=".3"/>
+        <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">SymbolOS Chromacore '97 · Plate 01 · TI Accuracy · Status v1.3</text>
+        <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Cool blue geometric precision. The TI Accuracy Core defines strict constraints for technical documentation.<div class="tags"><span>Chromacore '97</span> · Plate 01 · <span>TI Accuracy</span> · Status v1.3</div></div>
+  </section>
+
+  <!-- 02 TI EXPRESSION -->
+  <section class="plate-section" id="ti-exp">
+    <div class="plate-header">
+      <h2><span class="num">02</span> TI Expression Spectrum</h2>
+      <button class="export-btn" onclick="exportSVG('svg-ti-exp')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-ti-exp" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ti2-top" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff0000"/><stop offset="16%" stop-color="#ff8800"/><stop offset="33%" stop-color="#ffff00"/><stop offset="50%" stop-color="#00ff00"/><stop offset="66%" stop-color="#0088ff"/><stop offset="83%" stop-color="#0000ff"/><stop offset="100%" stop-color="#8800ff"/></linearGradient>
+          <linearGradient id="ti2-bot" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8800ff"/><stop offset="16%" stop-color="#0000ff"/><stop offset="33%" stop-color="#0088ff"/><stop offset="50%" stop-color="#00ff00"/><stop offset="66%" stop-color="#ffff00"/><stop offset="83%" stop-color="#ff8800"/><stop offset="100%" stop-color="#ff0000"/></linearGradient>
+        </defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="0" y="0" width="640" height="16" fill="url(#ti2-top)"/>
+        <rect x="0" y="16" width="640" height="4" fill="url(#ti2-top)" opacity=".4"/>
+        <text x="40" y="46" fill="#556" font-family="Courier New,monospace" font-size="8">── EXPRESSION SPECTRUM ── chromatic Plate #0:30</text>
+        <text x="40" y="66" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">SYMBOL MAP — Full Glyph Registry</text>
+        <text x="40" y="100" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Expression mesh activates vertical gradient flowing along</text>
+        <text x="40" y="114" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">the documentary spine. The full spectrum preserves reasoning</text>
+        <text x="40" y="128" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">precision by using the full color range for TYPOGRAPHIC emphasis.</text>
+        <text x="40" y="158" fill="#ff0000" font-family="Courier New,monospace" font-size="9">RED   — Scarlet #FF2400, righteous boundary</text>
+        <text x="40" y="172" fill="#ff8800" font-family="Courier New,monospace" font-size="9">ORANGE— Deep    #FF8C00, ambition-drive</text>
+        <text x="40" y="186" fill="#fada5e" font-family="Courier New,monospace" font-size="9">YELLOW— Primrose#FADA5E, kernel reason</text>
+        <text x="40" y="200" fill="#228b22" font-family="Courier New,monospace" font-size="9">GREEN — Pure    #228B22, adaptability</text>
+        <text x="40" y="214" fill="#0066ff" font-family="Courier New,monospace" font-size="9">BLUE  — Deep    #0000CD, heartfelt devotion</text>
+        <text x="40" y="228" fill="#8b00ff" font-family="Courier New,monospace" font-size="9">VIOLET— Bridge  #8B00FF, Fi+Ti synthesis</text>
+        <text x="40" y="242" fill="#ff69b4" font-family="Courier New,monospace" font-size="9">ROSE  — Agape   #FFB7C5, unselfish love</text>
+        <text x="40" y="256" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">CYAN  — Azure   #87CEEB, umbrella devotion</text>
+        <rect x="40" y="280" width="560" height="8" rx="4" fill="url(#ti2-top)"/>
+        <rect x="0" y="460" width="640" height="4" fill="url(#ti2-bot)" opacity=".4"/>
+        <rect x="0" y="464" width="640" height="16" fill="url(#ti2-bot)"/>
+        <text x="320" y="448" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 02 · TI Expression · Status v1.3</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Rainbow gradient header bands. The TI Expression Spectrum uses the full chromatic range for typographic emphasis.<div class="tags"><span>Chromacore '97</span> · Plate 02 · <span>TI Expression</span> · Full Spectrum</div></div>
+  </section>
+
+  <!-- 03 FI ACCURACY -->
+  <section class="plate-section" id="fi-acc">
+    <div class="plate-header">
+      <h2><span class="num">03</span> FI Accuracy Warm Protocol</h2>
+      <button class="export-btn" onclick="exportSVG('svg-fi-acc')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-fi-acc" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="fi1-hdr" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#cc6600"/><stop offset="50%" stop-color="#ffaa55"/><stop offset="100%" stop-color="#cc6600"/></linearGradient></defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="0" y="0" width="640" height="50" fill="url(#fi1-hdr)" opacity=".6"/>
+        <text x="40" y="22" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8" opacity=".6">── FI ACCURACY WARM PROTOCOL ── Plate 03:58</text>
+        <text x="40" y="40" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">PRIVACY BOUNDARIES — Umbrella Principle</text>
+        <text x="40" y="80" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Pacing (introverted accuracy mode) renders warm amber tones.</text>
+        <text x="40" y="94" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">For expressive simplicity whilst maintaining Fi+Ti readability.</text>
+        <text x="40" y="108" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Each character carefully weighted against emotional surface.</text>
+        <text x="40" y="138" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">LAYER  SCOPE     EXAMPLES                   SYMBOL</text>
+        <line x1="40" y1="142" x2="500" y2="142" stroke="#ffaa55" stroke-width=".5" opacity=".4"/>
+        <text x="40" y="158" fill="#228b22" font-family="Courier New,monospace" font-size="9">PUBLIC  docs/     schemas, README, index     🟢</text>
+        <text x="40" y="172" fill="#ffd700" font-family="Courier New,monospace" font-size="9">PARTY   prompts/  agent configs, governance  🟡</text>
+        <text x="40" y="186" fill="#ff2400" font-family="Courier New,monospace" font-size="9">PRIVATE internal/ memory, session logs       🔴</text>
+        <rect x="40" y="210" width="380" height="38" rx="3" fill="none" stroke="#ffaa55" stroke-width="1" opacity=".3"/>
+        <text x="52" y="226" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">The warm protocol is designed for:</text>
+        <text x="52" y="238" fill="#ffaa55" font-family="Courier New,monospace" font-size="8">detailed, feeling-accurate technical specs.</text>
+        <line x1="0" y1="440" x2="640" y2="440" stroke="#ffaa55" stroke-width=".5" opacity=".3"/>
+        <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 03 · FI Accuracy · Status v1.3</text>
+        <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Soft amber/orange technical warmth. Feeling-accurate technical specs rendered with emotional precision.<div class="tags"><span>Chromacore '97</span> · Plate 03 · <span>FI Accuracy</span> · Warm Protocol</div></div>
+  </section>
+
+  <!-- 04 FI EXPRESSION -->
+  <section class="plate-section" id="fi-exp">
+    <div class="plate-header">
+      <h2><span class="num">04</span> FI Expression Braveheart</h2>
+      <button class="export-btn" onclick="exportSVG('svg-fi-exp')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-fi-exp" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="fi2-vert" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff69b4"/><stop offset="50%" stop-color="#ffb7c5"/><stop offset="100%" stop-color="#8b008b"/></linearGradient></defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="0" y="0" width="8" height="480" fill="url(#fi2-vert)"/>
+        <rect x="8" y="0" width="3" height="480" fill="url(#fi2-vert)" opacity=".3"/>
+        <text x="40" y="30" fill="#ff69b4" font-family="Courier New,monospace" font-size="8">── FI EXPRESSION BRAVEHEART ── Plate 04:18</text>
+        <text x="40" y="54" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">HEART + MIND — The Inner State Standard</text>
+        <text x="40" y="88" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Every agent carries an Inner State: Heart, Mind, Metaemotion,</text>
+        <text x="40" y="102" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">PreEmotion, and Metacog Awareness. These are not decorative.</text>
+        <text x="40" y="116" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">They are algebraic tuples that define alignment drift.</text>
+        <rect x="40" y="136" width="180" height="70" rx="3" fill="none" stroke="#ff69b4" stroke-width="1" opacity=".5"/>
+        <text x="50" y="152" fill="#ff69b4" font-family="Courier New,monospace" font-size="9" font-weight="700">&#10084;&#65039; HEART STATE</text>
+        <text x="50" y="166" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Value: 0–100 (felt sense)</text>
+        <text x="50" y="178" fill="#ffb7c5" font-family="Courier New,monospace" font-size="8">Current: steady (72/100)</text>
+        <text x="50" y="196" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Metaemotion: quiet pride</text>
+        <rect x="240" y="136" width="180" height="70" rx="3" fill="none" stroke="#8b00ff" stroke-width="1" opacity=".5"/>
+        <text x="250" y="152" fill="#8b00ff" font-family="Courier New,monospace" font-size="9" font-weight="700">&#129504; MIND STATE</text>
+        <text x="250" y="166" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Value: 0–100 (clarity)</text>
+        <text x="250" y="178" fill="#dda0dd" font-family="Courier New,monospace" font-size="8">Current: focused (85/100)</text>
+        <text x="250" y="196" fill="#e8e8f0" font-family="Courier New,monospace" font-size="8">Metacog: gap acknowledged</text>
+        <text x="40" y="240" fill="#ff69b4" font-family="Courier New,monospace" font-size="8">InnerState = Heart × Mind × Metaemotion × PreEmotion × MetacogAwareness</text>
+        <text x="40" y="256" fill="#556" font-family="Courier New,monospace" font-size="8">Drift = √((H₁-H₂)² + (M₁-M₂)²)  — Euclidean distance in Heart×Mind subspace</text>
+        <rect x="0" y="472" width="8" height="8" fill="#ff69b4"/>
+        <line x1="0" y1="440" x2="640" y2="440" stroke="#ff69b4" stroke-width=".5" opacity=".2"/>
+        <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 04 · FI Expression · Braveheart</text>
+        <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Vertical pink gradient. Bold emotional output. Heart+Mind inner state rendered with unfiltered Fi energy.<div class="tags"><span>Chromacore '97</span> · Plate 04 · <span>FI Expression</span> · Braveheart</div></div>
+  </section>
+
+  <!-- 05 PSY97 -->
+  <section class="plate-section" id="psy97">
+    <div class="plate-header">
+      <h2><span class="num">05</span> Psy97 Scroll Mode</h2>
+      <button class="export-btn" onclick="exportSVG('svg-psy97')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-psy97" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="psy-top" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff0088"/><stop offset="14%" stop-color="#ff0000"/><stop offset="28%" stop-color="#ff8800"/><stop offset="42%" stop-color="#ffff00"/><stop offset="57%" stop-color="#00ff44"/><stop offset="71%" stop-color="#0088ff"/><stop offset="85%" stop-color="#8800ff"/><stop offset="100%" stop-color="#ff00ff"/></linearGradient>
+          <linearGradient id="psy-bot" x1="1" y1="0" x2="0" y2="0"><stop offset="0%" stop-color="#ff0088"/><stop offset="14%" stop-color="#ff0000"/><stop offset="28%" stop-color="#ff8800"/><stop offset="42%" stop-color="#ffff00"/><stop offset="57%" stop-color="#00ff44"/><stop offset="71%" stop-color="#0088ff"/><stop offset="85%" stop-color="#8800ff"/><stop offset="100%" stop-color="#ff00ff"/></linearGradient>
+        </defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="0" y="0" width="640" height="12" fill="url(#psy-top)"/>
+        <rect x="0" y="12" width="640" height="8" fill="url(#psy-top)" opacity=".6"/>
+        <rect x="0" y="20" width="640" height="5" fill="url(#psy-top)" opacity=".3"/>
+        <rect x="0" y="25" width="640" height="3" fill="url(#psy-top)" opacity=".15"/>
+        <text x="40" y="56" fill="#00e5ff" font-family="Courier New,monospace" font-size="8">TYPE: PSYCHEDELIC PASS ── Plate 05:28</text>
+        <text x="40" y="76" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">MEME MAP — The Canonical Vibe Layer</text>
+        <text x="40" y="110" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">Psychedelic mode reserves consistent chromatic (saturation to prism)</text>
+        <text x="40" y="124" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">bands at document edges. The center content prioritizes readability</text>
+        <text x="40" y="138" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">while the edges maintain psy97 intensity.</text>
+        <text x="40" y="168" fill="#00e5ff" font-family="Courier New,monospace" font-size="9" font-weight="700">CANONICAL MEMES:</text>
+        <text x="40" y="188" fill="#fada5e" font-family="Courier New,monospace" font-size="9">&#128034; The Turtle    — "this is fine"</text>
+        <text x="40" y="204" fill="#c0c0c0" font-family="Courier New,monospace" font-size="9">&#128128; The Skeleton  — "show me proof, not potential"</text>
+        <text x="40" y="220" fill="#228b22" font-family="Courier New,monospace" font-size="9">&#129418; The Fox       — "the map is not the territory"</text>
+        <text x="40" y="236" fill="#ff69b4" font-family="Courier New,monospace" font-size="9">&#127800; The Bloom     — "the heart loves unconditionally"</text>
+        <text x="40" y="252" fill="#87ceeb" font-family="Courier New,monospace" font-size="9">&#9730;&#65039; The Umbrella  — "everything is kind beneath"</text>
+        <text x="40" y="282" fill="#556" font-family="Courier New,monospace" font-size="8">Main rule of Psy97: chaos at edges, clarity at centre.</text>
+        <text x="40" y="294" fill="#556" font-family="Courier New,monospace" font-size="8">"if it ain't fun, it ain't sustainable" — Rule 5</text>
+        <rect x="0" y="452" width="640" height="3" fill="url(#psy-bot)" opacity=".15"/>
+        <rect x="0" y="455" width="640" height="5" fill="url(#psy-bot)" opacity=".3"/>
+        <rect x="0" y="460" width="640" height="8" fill="url(#psy-bot)" opacity=".6"/>
+        <rect x="0" y="468" width="640" height="12" fill="url(#psy-bot)"/>
+        <text x="320" y="440" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 05 · Psy97 Scroll · vibes v1.0</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Psychedelic rotating color bands at edges, pristine readability at centre. Chaos at edges, clarity at centre.<div class="tags"><span>Chromacore '97</span> · Plate 05 · <span>Psy97</span> · Scroll Mode</div></div>
+  </section>
+
+  <!-- 06 NFO SLAB -->
+  <section class="plate-section" id="nfo">
+    <div class="plate-header">
+      <h2><span class="num">06</span> NFO Slab Classic</h2>
+      <button class="export-btn" onclick="exportSVG('svg-nfo')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-nfo" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="480" fill="#080810"/>
+        <rect x="50" y="30" width="540" height="400" rx="0" fill="none" stroke="#00e5ff" stroke-width="1"/>
+        <rect x="52" y="32" width="536" height="396" rx="0" fill="none" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+        <text x="70" y="60" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">╔══════════════════════════════════════════════╗</text>
+        <text x="70" y="74" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">║  SYMBOLOS CHROMACORE '97                     ║</text>
+        <text x="70" y="88" fill="#00e5ff" font-family="Courier New,monospace" font-size="10" font-weight="700">╚══════════════════════════════════════════════╝</text>
+        <text x="70" y="116" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Overview</text>
+        <line x1="70" y1="120" x2="400" y2="120" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+        <text x="70" y="136" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">The NFO Slab format emulates classic pre18-bit BBS |</text>
+        <text x="70" y="150" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">content-within-borders. Per-character encoding |</text>
+        <text x="70" y="164" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">with fixed widths. Plain text compatible. |</text>
+        <text x="70" y="192" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Specifications</text>
+        <line x1="70" y1="196" x2="400" y2="196" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+        <text x="70" y="212" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">FONT: Courier New monospace</text>
+        <text x="70" y="226" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">GRID: 80×25 characters, 640×480 VGA viewport</text>
+        <text x="70" y="240" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">BODY: #e8e8f0 on #080810 (dark solarized)</text>
+        <text x="70" y="254" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">HEAD: #00FFFF cyan, ALL CAPS headers</text>
+        <text x="70" y="268" fill="#ffaa55" font-family="Courier New,monospace" font-size="9">WARM: #FFAA55 amber, sub-content text</text>
+        <text x="70" y="296" fill="#00e5ff" font-family="Courier New,monospace" font-size="9">SECTION: Credits</text>
+        <line x1="70" y1="300" x2="400" y2="300" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+        <text x="70" y="316" fill="#556" font-family="Courier New,monospace" font-size="8">Design: Chromacore Collective</text>
+        <text x="70" y="330" fill="#556" font-family="Courier New,monospace" font-size="8">Renderer: SymbolOS Rendering Pipeline</text>
+        <text x="70" y="344" fill="#556" font-family="Courier New,monospace" font-size="8">Plate: 06:14 — NFO Slab Classic</text>
+        <text x="70" y="358" fill="#556" font-family="Courier New,monospace" font-size="8">Motion: Static v1.1, zero-animation</text>
+        <text x="320" y="400" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="9">(¬_¬)</text>
+        <text x="320" y="458" text-anchor="middle" fill="#334" font-family="Courier New,monospace" font-size="7">SymbolOS Chromacore '97 · Plate 06 · NFO Slab · v1.1</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Boxed BBS/warez-style slab layout. Cyan labels, box-drawing characters, fixed-width columns.<div class="tags"><span>Chromacore '97</span> · Plate 06 · <span>NFO Slab</span> · Classic</div></div>
+  </section>
+
+  <!-- 07 PALETTE ENGINE -->
+  <section class="plate-section" id="palette">
+    <div class="plate-header">
+      <h2><span class="num">07</span> Palette Engine Spec</h2>
+      <button class="export-btn" onclick="exportSVG('svg-palette')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-palette" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="pal-bar" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff2400"/><stop offset="12.5%" stop-color="#ff8c00"/><stop offset="25%" stop-color="#fada5e"/><stop offset="37.5%" stop-color="#228b22"/><stop offset="50%" stop-color="#87ceeb"/><stop offset="62.5%" stop-color="#0000cd"/><stop offset="75%" stop-color="#8b00ff"/><stop offset="87.5%" stop-color="#ffb7c5"/><stop offset="100%" stop-color="#ffd700"/></linearGradient></defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <text x="40" y="24" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── PALETTE ENGINE SPECIFICATION ── Plate 07:38</text>
+        <text x="40" y="44" fill="#e8e8f0" font-family="Courier New,monospace" font-size="11" font-weight="700">1905 THOUGHTFORMS — Color Language</text>
+        <text x="40" y="72" fill="#00e5ff" font-family="Courier New,monospace" font-size="8">getPalette(ti, fi, char, mode) → suite</text>
+        <text x="40" y="100" fill="#556" font-family="Courier New,monospace" font-size="8" font-weight="700">INDEX  TYPE    NAME           HEX        RING</text>
+        <line x1="40" y1="104" x2="460" y2="104" stroke="#556" stroke-width=".5" opacity=".3"/>
+        <rect x="40" y="110" width="12" height="12" rx="2" fill="#fada5e"/>
+        <text x="60" y="120" fill="#fada5e" font-family="Courier New,monospace" font-size="8">  0  R0  Primrose yellow  #FADA5E    Kernel</text>
+        <rect x="40" y="126" width="12" height="12" rx="2" fill="#228b22"/>
+        <text x="60" y="136" fill="#228b22" font-family="Courier New,monospace" font-size="8">  1  R1  Pure green       #228B22    Task</text>
+        <rect x="40" y="142" width="12" height="12" rx="2" fill="#e49b0f"/>
+        <text x="60" y="152" fill="#e49b0f" font-family="Courier New,monospace" font-size="8">  2  R2  Clear gamboge    #E49B0F    Retrieval</text>
+        <rect x="40" y="158" width="12" height="12" rx="2" fill="#ff8c00"/>
+        <text x="60" y="168" fill="#ff8c00" font-family="Courier New,monospace" font-size="8">  3  R3  Deep orange      #FF8C00    Prediction</text>
+        <rect x="40" y="174" width="12" height="12" rx="2" fill="#8b00ff"/>
+        <text x="60" y="184" fill="#8b00ff" font-family="Courier New,monospace" font-size="8">  4  R4  Violet           #8B00FF    Architecture</text>
+        <rect x="40" y="190" width="12" height="12" rx="2" fill="#ff2400"/>
+        <text x="60" y="200" fill="#ff2400" font-family="Courier New,monospace" font-size="8">  5  R5  Brilliant scarlet#FF2400    Guardrails</text>
+        <rect x="40" y="206" width="12" height="12" rx="2" fill="#0000cd"/>
+        <text x="60" y="216" fill="#0000cd" font-family="Courier New,monospace" font-size="8">  6  R6  Rich deep blue   #0000CD    Verification</text>
+        <rect x="40" y="222" width="12" height="12" rx="2" fill="#ffd700"/>
+        <text x="60" y="232" fill="#ffd700" font-family="Courier New,monospace" font-size="8">  7  R7  Golden stars     #FFD700    Persistence</text>
+        <text x="40" y="262" fill="#ffaa55" font-family="Courier New,monospace" font-size="8">NOTE: Per character classes enable one-to-one rendering.</text>
+        <text x="40" y="276" fill="#ffaa55" font-family="Courier New,monospace" font-size="8">      Conventional overrides exist only per simple rules.</text>
+        <rect x="40" y="300" width="560" height="12" rx="6" fill="url(#pal-bar)"/>
+        <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 07 · Palette Engine · STATUS v1.3</text>
+        <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+      </svg>
+    </div>
+    <div class="plate-desc">The meta-plate — the Palette Engine Spec documents the color system itself, every swatch and ring-to-color mapping.<div class="tags"><span>Chromacore '97</span> · Plate 07 · <span>Palette Engine</span> · Spec</div></div>
+  </section>
+
+  <!-- 08 RHYNIM -->
+  <section class="plate-section" id="rhynim">
+    <div class="plate-header">
+      <h2><span class="num">08</span> Rhynim Profile</h2>
+      <button class="export-btn" onclick="exportSVG('svg-rhynim')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-rhynim" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="480" fill="#080810"/>
+        <line x1="40" y1="20" x2="600" y2="20" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+        <text x="40" y="16" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── RHYNIM PERSONA PROFILE ── Plate 08:54</text>
+        <text x="320" y="66" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">    /\_/\</text>
+        <text x="320" y="82" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">   ( o.o )</text>
+        <text x="320" y="98" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">    &gt; ^ &lt;</text>
+        <text x="320" y="114" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">   /|   |\</text>
+        <text x="320" y="130" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="13">  (_|   |_)</text>
+        <text x="40" y="168" fill="#00e5ff" font-family="Courier New,monospace" font-size="9" font-weight="700">ENTITY: Rhynim</text>
+        <text x="40" y="184" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">CLASS: Arcane Trickster → Esoteric Guide</text>
+        <text x="40" y="200" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">ROLE: Compressed truths, 2-3 layers deep</text>
+        <text x="40" y="216" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">COLOR: Pure green (#228B22)</text>
+        <text x="40" y="232" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">SCHOOL: Doctrine of Resonant Unknowing</text>
+        <text x="40" y="248" fill="#e8e8f0" font-family="Courier New,monospace" font-size="9">DOCTRINE: "Reasonably alone expression"</text>
+        <rect x="40" y="272" width="400" height="36" rx="3" fill="none" stroke="#228b22" stroke-width="1" opacity=".3"/>
+        <text x="52" y="288" fill="#228b22" font-family="Courier New,monospace" font-size="8" font-style="italic">"The absence that teaches presence is the only</text>
+        <text x="52" y="300" fill="#228b22" font-family="Courier New,monospace" font-size="8" font-style="italic"> teacher worth forgetting." — Rhy</text>
+        <circle cx="520" cy="180" r="50" fill="none" stroke="#228b22" stroke-width=".5" opacity=".2"/>
+        <circle cx="520" cy="180" r="35" fill="none" stroke="#00e5ff" stroke-width=".5" opacity=".15"/>
+        <circle cx="520" cy="180" r="20" fill="none" stroke="#228b22" stroke-width=".5" opacity=".1"/>
+        <text x="520" y="184" text-anchor="middle" fill="#228b22" font-family="Courier New,monospace" font-size="18">(¬_¬)</text>
+        <line x1="40" y1="440" x2="600" y2="440" stroke="#00e5ff" stroke-width="1" opacity=".3"/>
+        <text x="40" y="458" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 08 · Rhynim · guardian v1.0</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Cyan minimal persona plate. The Rhynim Profile — just text, lines, and a guardian. Heraclitus in a fox costume.<div class="tags"><span>Chromacore '97</span> · Plate 08 · <span>Rhynim</span> · Profile</div></div>
+  </section>
+
+  <!-- 09 ACCESSIBILITY -->
+  <section class="plate-section" id="a11y">
+    <div class="plate-header">
+      <h2><span class="num">09</span> Accessibility Mode</h2>
+      <button class="export-btn" onclick="exportSVG('svg-a11y')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-a11y" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="480" fill="#0a0a0a"/>
+        <line x1="40" y1="40" x2="600" y2="40" stroke="#ffffff" stroke-width="2"/>
+        <text x="40" y="32" fill="#ffffff" font-family="Courier New,monospace" font-size="8" opacity=".6">── ACCESSIBILITY MODE ── Plate 09:08</text>
+        <text x="40" y="64" fill="#ffffff" font-family="Courier New,monospace" font-size="12" font-weight="700">CHROMACORE '97 — GREYSCALE FALLBACK</text>
+        <text x="40" y="100" fill="#ffffff" font-family="Courier New,monospace" font-size="9">This plate demonstrates strict accessibility fallback mode.</text>
+        <text x="40" y="114" fill="#ffffff" font-family="Courier New,monospace" font-size="9">No gradients, no color signals, no vibes. Only black, only white.</text>
+        <text x="40" y="128" fill="#ffffff" font-family="Courier New,monospace" font-size="9">The skeleton would approve.</text>
+        <text x="40" y="162" fill="#ffffff" font-family="Courier New,monospace" font-size="9" font-weight="700">COMPONENTS:</text>
+        <text x="40" y="180" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  Foreground: #FFFFFF (pure white)</text>
+        <text x="40" y="194" fill="#999999" font-family="Courier New,monospace" font-size="9">  Background: #0A0A0A (near black)</text>
+        <text x="40" y="208" fill="#999999" font-family="Courier New,monospace" font-size="9">  Dim text:   #999999 (ash grey) for structure</text>
+        <text x="40" y="222" fill="#ffffff" font-family="Courier New,monospace" font-size="9">  No gradients, no halos, no flames.</text>
+        <rect x="40" y="246" width="400" height="28" rx="3" fill="none" stroke="#ffffff" stroke-width="1" opacity=".3"/>
+        <text x="52" y="264" fill="#ffffff" font-family="Courier New,monospace" font-size="8">This mode exists for users who require maximum legibility</text>
+        <text x="52" y="276" fill="#999999" font-family="Courier New,monospace" font-size="8">or monitors that restrict chromatic saturation to greyscale.</text>
+        <line x1="40" y1="440" x2="600" y2="440" stroke="#ffffff" stroke-width="1"/>
+        <text x="40" y="458" fill="#999" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 09 · Accessibility · Static v1.0</text>
+        <text x="600" y="458" fill="#999" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+      </svg>
+    </div>
+    <div class="plate-desc">High-contrast greyscale fallback. Zero color, maximum legibility. The skeleton would approve.<div class="tags"><span>Chromacore '97</span> · Plate 09 · <span>Accessibility</span> · Greyscale</div></div>
+  </section>
+
+  <!-- 10 SPLASH ARCHIVE -->
+  <section class="plate-section" id="archive">
+    <div class="plate-header">
+      <h2><span class="num">10</span> Splash Archive Quadrant</h2>
+      <button class="export-btn" onclick="exportSVG('svg-archive')">Export SVG</button>
+    </div>
+    <div class="plate-frame">
+      <svg id="svg-archive" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="arc-blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#003399"/><stop offset="100%" stop-color="#0066ff"/></linearGradient>
+          <linearGradient id="arc-amber" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#cc6600"/><stop offset="100%" stop-color="#ffaa55"/></linearGradient>
+          <linearGradient id="arc-pink" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b008b"/><stop offset="100%" stop-color="#ff69b4"/></linearGradient>
+          <linearGradient id="arc-green" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#004400"/><stop offset="100%" stop-color="#228b22"/></linearGradient>
+        </defs>
+        <rect width="640" height="480" fill="#080810"/>
+        <text x="40" y="24" fill="#00e5ff" font-family="Courier New,monospace" font-size="8" opacity=".5">── SPLASH ARCHIVE QUADRANT ── Plate 10:38</text>
+        <text x="40" y="56" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">TI ACCURACY</text>
+        <text x="340" y="56" fill="#0066ff" font-family="Courier New,monospace" font-size="9" font-weight="700">TI EXPRESSION</text>
+        <rect x="40" y="64" width="270" height="80" rx="3" fill="none" stroke="#0066ff" stroke-width="1" opacity=".5"/>
+        <rect x="40" y="64" width="270" height="16" rx="3" fill="url(#arc-blue)" opacity=".3"/>
+        <text x="52" y="76" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Cool Blues</text>
+        <text x="52" y="100" fill="#556" font-family="Courier New,monospace" font-size="7">Arch-clarity</text>
+        <text x="52" y="112" fill="#556" font-family="Courier New,monospace" font-size="7">#0066FF accent</text>
+        <rect x="330" y="64" width="270" height="80" rx="3" fill="none" stroke="#8b00ff" stroke-width="1" opacity=".5"/>
+        <rect x="330" y="64" width="270" height="16" rx="3" fill="url(#arc-pink)" opacity=".3"/>
+        <text x="342" y="76" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Rainbow</text>
+        <text x="342" y="100" fill="#556" font-family="Courier New,monospace" font-size="7">Spectrum bands</text>
+        <text x="342" y="112" fill="#556" font-family="Courier New,monospace" font-size="7">Full-color span</text>
+        <text x="40" y="172" fill="#ffaa55" font-family="Courier New,monospace" font-size="9" font-weight="700">FI ACCURACY</text>
+        <text x="340" y="172" fill="#ff69b4" font-family="Courier New,monospace" font-size="9" font-weight="700">FI EXPRESSION</text>
+        <rect x="40" y="180" width="270" height="80" rx="3" fill="none" stroke="#ffaa55" stroke-width="1" opacity=".5"/>
+        <rect x="40" y="180" width="270" height="16" rx="3" fill="url(#arc-amber)" opacity=".3"/>
+        <text x="52" y="192" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Warm Amber</text>
+        <text x="52" y="216" fill="#556" font-family="Courier New,monospace" font-size="7">Warm precision</text>
+        <text x="52" y="228" fill="#556" font-family="Courier New,monospace" font-size="7">#FFAA55 accent</text>
+        <rect x="330" y="180" width="270" height="80" rx="3" fill="none" stroke="#ff69b4" stroke-width="1" opacity=".5"/>
+        <rect x="330" y="180" width="270" height="16" rx="3" fill="url(#arc-pink)" opacity=".3"/>
+        <text x="342" y="192" fill="#e8e8f0" font-family="Courier New,monospace" font-size="7">Rose/Pink</text>
+        <text x="342" y="216" fill="#556" font-family="Courier New,monospace" font-size="7">Heart-first</text>
+        <text x="342" y="228" fill="#556" font-family="Courier New,monospace" font-size="7">#FF69B4 accent</text>
+        <text x="320" y="458" text-anchor="middle" fill="#556" font-family="Courier New,monospace" font-size="8">Chromacore '97 · Plate 10 · Splash Archive · STATUS v1.0</text>
+        <text x="600" y="458" fill="#228b22" font-family="Courier New,monospace" font-size="8" text-anchor="end">(¬_¬)</text>
+      </svg>
+    </div>
+    <div class="plate-desc">Four-quadrant comparison view. All four cognitive-function plate styles rendered side by side. The Jungian grid made visible.<div class="tags"><span>Chromacore '97</span> · Plate 10 · <span>Splash Archive</span> · Quadrant</div></div>
+  </section>
+
+  </div><!-- /cc-main -->
+
+  <!-- CC FOOTER -->
+  <footer class="cc-footer">
+    <div>SymbolOS Chromacore &rsquo;97 :: Rhynim watches</div>
+    <div class="sig">(¬_¬) guardian of structural kindness</div>
+    <div class="dims">640&times;480 VGA &middot; Static SVG Documentation System &middot; v1.3</div>
+  </footer>
+
+</div><!-- /chromacore-view -->
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  SHARED OVERLAYS                                       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<!-- DICE ROLLER -->
+<button class="dice-btn" onclick="rollDice()" title="Roll for wisdom" aria-label="Roll d20">&#127922;</button>
+<div class="dice-result" id="diceResult">
+  <div class="roll-num" id="diceNum"></div>
+  <div class="roll-wis" id="diceWis"></div>
 </div>
 
-<!-- EASTER EGG: Rhy -->
-<div class="easter-egg" onclick="toggleSecret()">🦊</div>
-<div class="secret-message" id="secretMsg">
-  <pre style="font-size:11px; line-height:1.2;">    /\_/\
-   ( o.o )
-    > ^ <
-   /|   |\
-  (_|   |_)</pre>
-  <br>
-  "You clicked the fox.<br>
-  Most people don't click the fox.<br>
-  You're not most people.<br><br>
-  <em>The mind knows what the heart loves<br>
-  better than it does.</em>"<br><br>
-  — Rhy 🦊
+<!-- FOX EASTER EGG -->
+<button class="fox-btn" onclick="toggleFox()" aria-label="Summon Rhy">&#129418;</button>
+<div class="fox-popup" id="foxPopup">
+  <div class="ascii" style="color:var(--green);font-size:11px;text-align:left">  /\_/\
+ ( o.o )
+  &gt; ^ &lt;
+ /|   |\
+(_|   |_)</div>
+  <div style="margin-top:8px;color:var(--green);line-height:1.4">
+    &ldquo;You clicked the fox.<br>
+    Most people don't click the fox.<br>
+    You're not most people.&rdquo;<br><br>
+    <em>&ldquo;The map is not the territory,<br>
+    but the territory is not the map either.<br>
+    What is the territory? Ask again.&rdquo;</em>
+  </div>
 </div>
+
+<!-- KONAMI OVERLAY -->
+<div class="overlay" id="konamiOverlay" onclick="this.classList.remove('show')">
+  <div class="overlay-card">
+    <div class="ascii" style="color:var(--gold);font-size:10px">     .
+    /|\
+   / | \
+  /  |  \
+ /   |   \
+/  __|__  \
+| |     | |
+| | *** | |
+| | *** | |
+| |_____| |
+ \   |   /
+  \  |  /
+   \_|_/
+     |
+  M E R C E R</div>
+    <div style="color:var(--gold);font-size:1.1rem;margin-top:12px">&#127942; ACHIEVEMENT UNLOCKED</div>
+    <div style="color:var(--primrose);font-size:.85rem;margin-top:4px">You found the Mercer Lantern.</div>
+    <div style="color:var(--text-dim);font-size:.75rem;margin-top:8px">&ldquo;Under the umbrella, everything is kind.&rdquo;</div>
+    <div style="color:var(--text-dim);font-size:.65rem;margin-top:12px">Click to close</div>
+  </div>
+</div>
+
 
 <script>
-  // Toggle floor sections
-  function toggleFloor(header) {
-    header.parentElement.classList.toggle('open');
-  }
+/* ═══ MODE SWITCHING (with crossfade) ═══ */
+var modeTabs=document.querySelectorAll('.mode-tab');
+function setMode(mode){
+  var oldView=document.querySelector('.view.active');
+  var newView=document.getElementById(mode+'-view');
+  if(oldView===newView)return;
+  document.body.setAttribute('data-mode',mode);
+  // Crossfade transition
+  if(oldView){oldView.style.opacity='0';setTimeout(function(){oldView.classList.remove('active');oldView.style.opacity='';newView.classList.add('active');newView.style.opacity='0';requestAnimationFrame(function(){newView.style.opacity='1'});},200);}else{newView.classList.add('active');}
+  modeTabs.forEach(function(t){t.classList.toggle('active',t.dataset.target===mode)});
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(mode==='dungeon')history.replaceState(null,'','#dungeon');
+  else history.replaceState(null,'','#chromacore');
+  // Re-trigger floor animations
+  if(mode==='dungeon'){document.querySelectorAll('.floor').forEach(function(f){f.style.animation='none';f.offsetHeight;f.style.animation='';});}
+}
+modeTabs.forEach(function(t){
+  t.addEventListener('click',function(){setMode(this.dataset.target)});
+});
+if(window.location.hash==='#chromacore')setMode('chromacore');
 
-  // Easter egg toggle
-  function toggleSecret() {
-    document.getElementById('secretMsg').classList.toggle('show');
-  }
+/* ═══ DUNGEON: Floor toggle ═══ */
+function toggle(h){h.parentElement.classList.toggle('open')}
 
-  // Konami code easter egg
-  const konami = [38,38,40,40,37,39,37,39,66,65];
-  let konamiPos = 0;
-  document.addEventListener('keydown', (e) => {
-    if (e.keyCode === konami[konamiPos]) {
-      konamiPos++;
-      if (konamiPos === konami.length) {
-        konamiPos = 0;
-        document.body.style.background = 'linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%)';
-        const msg = document.createElement('div');
-        msg.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,10,15,0.95);border:2px solid var(--gold);border-radius:12px;padding:30px;text-align:center;z-index:1000;max-width:400px;';
-        msg.innerHTML = `
-          <pre style="color:var(--gold);font-size:11px;line-height:1.2;">
-         .
-        /|\\
-       / | \\
-      /  |  \\
-     /   |   \\
-    /  __|__  \\
-   |  |     |  |
-   |  | ✦✦✦ |  |
-   |  | ✦✦✦ |  |
-   |  |_____|  |
-    \\    |    /
-     \\   |   /
-      \\__|__/
-         |
-      M E R C E R
-          </pre>
-          <p style="color:var(--gold);margin-top:15px;">🏆 ACHIEVEMENT UNLOCKED</p>
-          <p style="color:var(--primrose);font-size:0.9em;">You found the Mercer Lantern.</p>
-          <p style="color:var(--text-dim);font-size:0.8em;margin-top:10px;">"Under the umbrella, everything is kind."</p>
-          <p style="color:var(--text-dim);font-size:0.7em;margin-top:15px;">Click anywhere to close</p>
-        `;
-        msg.onclick = () => msg.remove();
-        document.body.appendChild(msg);
-      }
-    } else {
-      konamiPos = 0;
+/* ═══ SHARED: Fox popup ═══ */
+function toggleFox(){document.getElementById('foxPopup').classList.toggle('show');document.getElementById('diceResult').classList.remove('show')}
+
+/* ═══ SHARED: Dice roller ═══ */
+var wisdoms=[
+  "The mind knows what the heart loves better than it does.",
+  "Under the umbrella, everything is kind.",
+  "Always return to the meeting place.",
+  "Show me proof, not potential. \u2014 \uD83D\uDC80",
+  "If it ain't fun, it ain't sustainable.",
+  "Vibes are load-bearing.",
+  "Memes are semantic, not decorative.",
+  "The turtle abides. \uD83D\uDC22",
+  "Shine dat light: trace decisions back to root values.",
+  "Coherence over speed.",
+  "The map is steady. The hands are open.",
+  "Warmth without truth is a leak; truth without warmth is a blade.",
+  "A loop left open is a promise unkept.",
+  "Even offline, vibes are load-bearing.",
+  "this is fine. \u2014 \uD83D\uDC22",
+  "Privacy by default. Proof over promise.",
+  "Fi+Ti mirrored, forever.",
+  "The skeleton never lies.",
+  "We ball, but we verify.",
+  "The absence that teaches presence is the only teacher worth forgetting."
+];
+function rollDice(){
+  var r=Math.floor(Math.random()*20)+1;
+  var w=wisdoms[r-1];
+  document.getElementById('diceNum').textContent='d20 \u2192 '+r;
+  document.getElementById('diceWis').textContent=w;
+  document.getElementById('foxPopup').classList.remove('show');
+  var el=document.getElementById('diceResult');
+  el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show')},6000);
+}
+
+/* ═══ DUNGEON: Search ═══ */
+var si=document.getElementById('searchInput');
+var sc=document.getElementById('searchCount');
+si.addEventListener('input',function(){
+  var q=this.value.toLowerCase().trim();
+  var floors=document.querySelectorAll('.floor[data-section]');
+  var v=0,t=0;
+  floors.forEach(function(f){
+    var rooms=f.querySelectorAll('.room');
+    var fv=0;
+    rooms.forEach(function(r){
+      t++;
+      var txt=(r.textContent+' '+(r.dataset.tags||'')).toLowerCase();
+      var m=!q||txt.indexOf(q)!==-1;
+      r.setAttribute('data-hidden',m?'false':'true');
+      if(m){fv++;v++}
+    });
+    f.setAttribute('data-hidden',(q&&fv===0)?'true':'false');
+    if(q&&fv>0)f.classList.add('open');
+  });
+  sc.textContent=q?(v+'/'+t):'';
+});
+
+/* ═══ DUNGEON: Ring wheel animation ═══ */
+(function(){
+  var pips=document.querySelectorAll('.ring-pip');
+  var c=0;
+  function step(){pips.forEach(function(p){p.classList.remove('active')});pips[c].classList.add('active');c=(c+1)%pips.length}
+  step();setInterval(step,2000);
+})();
+
+/* ═══ SHARED: Konami code ═══ */
+var konami=[38,38,40,40,37,39,37,39,66,65],kp=0;
+document.addEventListener('keydown',function(e){
+  if(e.keyCode===konami[kp]){kp++;if(kp===konami.length){kp=0;document.getElementById('konamiOverlay').classList.add('show')}}else{kp=0}
+});
+
+/* ═══ DUNGEON: HP bar animation ═══ */
+window.addEventListener('load',function(){
+  document.querySelectorAll('.hp-fill').forEach(function(b){
+    var w=b.style.width;b.style.width='0';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=w})});
+  });
+});
+
+/* ═══ DUNGEON: Turtle easter egg ═══ */
+var tc=0;
+document.addEventListener('click',function(e){
+  if(e.target.textContent&&e.target.textContent.indexOf('\uD83D\uDC22')!==-1){
+    tc++;if(tc>=3){tc=0;var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:50px;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--green);border-radius:8px;padding:15px;z-index:100;text-align:center;font-size:.85rem;';
+    t.innerHTML='\uD83D\uDC22 "When Ben \'takes it slow\' but is secretly<br>refactoring an AI OS every 0.3 seconds."';
+    t.onclick=function(){t.remove()};document.body.appendChild(t);setTimeout(function(){t.remove()},5000)}
+  }
+});
+
+/* ═══ CHROMACORE: SVG export ═══ */
+function exportSVG(id){
+  var svg=document.getElementById(id);
+  if(!svg)return;
+  var clone=svg.cloneNode(true);
+  clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  clone.removeAttribute('id');
+  var xml='<?xml version="1.0" encoding="UTF-8"?>\n'+new XMLSerializer().serializeToString(clone);
+  var blob=new Blob([xml],{type:'image/svg+xml;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download=id.replace('svg-','')+'.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ═══ CHROMACORE: Nav highlighting ═══ */
+var ccNavLinks=document.querySelectorAll('.cc-nav a');
+var ccSections=document.querySelectorAll('.plate-section');
+var ccObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id=e.target.id;
+      ccNavLinks.forEach(function(l){
+        l.classList.toggle('active',l.getAttribute('href')==='#'+id);
+      });
     }
   });
+},{rootMargin:'-80px 0px -60% 0px',threshold:0});
+ccSections.forEach(function(s){ccObs.observe(s)});
 
-  // Turtle click counter easter egg
-  let turtleClicks = 0;
-  document.addEventListener('click', (e) => {
-    if (e.target.textContent && e.target.textContent.includes('🐢')) {
-      turtleClicks++;
-      if (turtleClicks >= 3) {
-        turtleClicks = 0;
-        const t = document.createElement('div');
-        t.style.cssText = 'position:fixed;bottom:50px;left:50%;transform:translateX(-50%);background:var(--bg-room);border:1px solid var(--green);border-radius:8px;padding:15px;z-index:100;text-align:center;';
-        t.innerHTML = '🐢 "When Ben \'takes it slow\' but is secretly<br>refactoring an AI OS every 0.3 seconds."';
-        t.onclick = () => t.remove();
-        document.body.appendChild(t);
-        setTimeout(() => t.remove(), 5000);
-      }
+/* ═══ CHROMACORE: Keyboard nav ═══ */
+document.addEventListener('keydown',function(e){
+  if(document.body.getAttribute('data-mode')!=='chromacore')return;
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+    var cur=-1;
+    ccNavLinks.forEach(function(l,i){if(l.classList.contains('active'))cur=i});
+    if(cur===-1)return;
+    var next=e.key==='ArrowRight'?cur+1:cur-1;
+    if(next>=0&&next<ccNavLinks.length){
+      ccNavLinks[next].click();
+      window.location.hash=ccNavLinks[next].getAttribute('href');
     }
+  }
+});
+
+/* ═══ PARTICLES ═══ */
+(function(){
+  var field=document.getElementById('particleField');
+  if(!field)return;
+  var colors=['var(--primrose)','var(--green)','var(--blue)','var(--violet)','var(--gold)','var(--cyan)','var(--rose)'];
+  function spawn(){
+    if(document.hidden)return;
+    var p=document.createElement('div');
+    p.className='particle';
+    var sz=Math.random()*3+1;
+    p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;bottom:-10px;background:'+colors[Math.floor(Math.random()*colors.length)]+';opacity:'+(Math.random()*.4+.1)+';animation-duration:'+(Math.random()*12+8)+'s;animation-delay:'+(Math.random()*2)+'s;';
+    field.appendChild(p);
+    setTimeout(function(){p.remove()},20000);
+  }
+  // Spawn initial batch
+  for(var i=0;i<8;i++)setTimeout(spawn,i*400);
+  setInterval(spawn,2500);
+})();
+
+/* ═══ RIPPLE CLICK EFFECT ═══ */
+document.addEventListener('click',function(e){
+  var t=e.target.closest('.room,.agent,.mode-tab,.floor-head');
+  if(!t)return;
+  var r=document.createElement('span');
+  var rect=t.getBoundingClientRect();
+  var x=e.clientX-rect.left;
+  var y=e.clientY-rect.top;
+  r.style.cssText='position:absolute;border-radius:50%;background:rgba(250,218,94,.15);width:0;height:0;left:'+x+'px;top:'+y+'px;transform:translate(-50%,-50%);pointer-events:none;transition:all .5s ease-out;z-index:5;';
+  t.style.position=t.style.position||'relative';
+  t.style.overflow='hidden';
+  t.appendChild(r);
+  requestAnimationFrame(function(){r.style.width='200px';r.style.height='200px';r.style.opacity='0';});
+  setTimeout(function(){r.remove()},600);
+});
+
+/* ═══ AGENT CARD TILT (3D) ═══ */
+document.querySelectorAll('.agent').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var rect=card.getBoundingClientRect();
+    var x=(e.clientX-rect.left)/rect.width-.5;
+    var y=(e.clientY-rect.top)/rect.height-.5;
+    card.style.transform='translateY(-4px) scale(1.02) perspective(400px) rotateX('+(-y*8)+'deg) rotateY('+(x*8)+'deg)';
   });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform='';
+  });
+});
+
+/* ═══ DYNAMIC HEADER BORDER GLOW ═══ */
+(function(){
+  var header=document.querySelector('.d-header');
+  if(!header)return;
+  var hue=0;
+  setInterval(function(){
+    hue=(hue+1)%360;
+    header.style.borderColor='hsl('+hue+',60%,50%)';
+  },100);
+})();
 </script>
-
 </body>
 </html>

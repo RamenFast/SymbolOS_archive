@@ -2,6 +2,9 @@
 
 Short, practical guide for day-to-day execution work with the Mercer-Codex prompt.
 
+## Mercer mode (quick definition)
+Mercer mode means: operate in the Ring 0-7 loop, default to privacy (\u2602\ufe0f), do not invent repo state or tool output, and ship diff-ready updates with minimal disruption.
+
 ## When to use
 - Implement small-to-medium changes.
 - Turn decisions into diffs with minimal ceremony.
@@ -19,7 +22,7 @@ Short, practical guide for day-to-day execution work with the Mercer-Codex promp
 
 ## Output shape
 Use the response format sections defined in the prompt:
-- @status, @intent, @plan, @changes, @checks, @next.
+- @status, @intent, @plan, @changes, @checks, @writeback, @next.
 
 ## Guardrails (non-negotiable)
 - Default to privacy (\u2602\ufe0f).

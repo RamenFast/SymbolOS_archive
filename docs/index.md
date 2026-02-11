@@ -7,7 +7,7 @@
 ║  📍 Floor: Ring 4 │ Difficulty: ⭐☆☆☆☆ │ Loot: A Map of the Known World ║
 ║  🎨 Color: Violet (#8B00FF)                                     ║
 ║                                                              ║
-║  You stand on a glowing dais. Seven doors pulse with faint light. ║
+║  You stand on a glowing dais. Seven pedestals pulse with faint light.          ║
 ╚══════════════════════════════════════════════════════════════╝
 
 ```
@@ -69,6 +69,7 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 - Mercer-Codex (Ops): [../prompts/mercer_codex.json](../prompts/mercer_codex.json) — day-to-day operator
 - Mercer-Local (LLaMA): [../prompts/local_llama.json](../prompts/local_llama.json) — the hermit
 - Mercer-Max (Manus): [../prompts/manus_mercer.json](../prompts/manus_mercer.json) — the everything-agent
+- Mercer-Opus (Claude): [../prompts/claude_opus_4_6.json](../prompts/claude_opus_4_6.json) — alignment research partner
 - Character sheet (ChatGPT app): [../prompts/chatgpt_character_sheet.md](../prompts/chatgpt_character_sheet.md)
 
 ---
@@ -86,11 +87,18 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 ## Protocols & Standards
 - MCP server standard: [mcp_servers.md](mcp_servers.md)
 
+## Governance
+- Alignment primitives: [governance/alignment_primitives.md](governance/alignment_primitives.md)
+- Claude Opus 4.6 onboarding: [governance/claude_opus_4_6_onboarding.md](governance/claude_opus_4_6_onboarding.md)
+- Future possibilities (Ring-0, internal): [../internal_docs/future_possibilities_ring0.md](../internal_docs/future_possibilities_ring0.md)
+
 ## Systems
 - Precog (anticipatory computing): [precog_thought.md](precog_thought.md) 🔮
 
 ## Heart + Mind (DND-compatible) ❤️
 - Character sheet integration: [dnd_character_sheet_integration.md](dnd_character_sheet_integration.md) 🎲
+- Agent character sheets (full party): [agent_character_sheets.md](agent_character_sheets.md) ⚔️
+- PreEmotion (anticipatory heart): [preemotion.md](preemotion.md) 🔮❤️
 - Metaemotion: [metaemotion.md](metaemotion.md) ❤️
 - Memory (consent-driven): [memory.md](memory.md) 🧾
 
@@ -105,6 +113,12 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 - Symbol map (shared JSON): [../symbol_map.shared.json](../symbol_map.shared.json)
 	- 🧬 Meeting place: the canonical return loop + shared symbol set.
 
+## Characters & Guides 🦊
+- Rhynim esoteric guide: [rhynim_guide.md](rhynim_guide.md) 🦊
+- Agent character sheets (DND party): [agent_character_sheets.md](agent_character_sheets.md) ⚔️
+- Required reading list: [required_reading.md](required_reading.md) 📖
+- Lightwork guidelines: [lightwork_guidelines.md](lightwork_guidelines.md) ✨
+
 ## Mercer 🎨
 - Mercer webview theme map (CSS): [mercer_webview_theme_v1.css](mercer_webview_theme_v1.css) 🎨
 - Mercer-Codex runbook: [mercer_codex.md](mercer_codex.md)
@@ -114,7 +128,23 @@ Full agent prompts and topology: [../prompts/README.md](../prompts/README.md)
 
 ## Ops ⚙️
 - Docs sync playbook: [sync_playbook.md](sync_playbook.md) ⚙️
-- Required reading list: [required_reading.md](required_reading.md) 📖
+- Workflow guidelines: [workflow_guidelines.md](workflow_guidelines.md)
+- Agent boundaries: [agent_boundaries.md](agent_boundaries.md) 🛡️
+
+## Chromacore '97 🎨
+- Tech spec + plate directory: [chromacore/README.md](chromacore/README.md)
+- Interactive viewer (all 10 plates): [chromacore/chromacore.html](chromacore/chromacore.html)
+- SVG plates (GitHub-embeddable): [chromacore/plates/](chromacore/plates/)
+
+## Apps 🚀
+- **React web app** (Vite + Framer Motion): [../web/README.md](../web/README.md) ⚛️ — the POPPIN version of index.html
+- **Desktop TUI** (Rust + Ratatui): [../desktop/README.md](../desktop/README.md) 🦀 — terminal explorer with rings, symbols, agents, wisdom
+
+## Cross-Platform Tools 🛠️
+- Alignment report (Python): [../scripts/symbolos_alignment_report.py](../scripts/symbolos_alignment_report.py) 🐍
+- Ring validator (TypeScript): [../scripts/symbolos_ring_validator.ts](../scripts/symbolos_ring_validator.ts) 🟦
+- Resonance engine (Rust): [../scripts/symbolos_resonance.rs](../scripts/symbolos_resonance.rs) 🦀
+- Ring algebra proof (Haskell): [../scripts/symbolos_ring_algebra.hs](../scripts/symbolos_ring_algebra.hs) λ
 
 ## Inbox 📥
 - Intake conventions: [inbox/README.md](inbox/README.md) 📥
