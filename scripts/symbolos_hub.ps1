@@ -308,6 +308,134 @@ function Invoke-ProcessHealthCheck {
   } catch { }
 }
 
+# ─── Mercer-Local Context Snapshot (Anti-Drift) ─────────────────────────────
+
+function Update-MercerLocalContext {
+  # Reads symbol_map.shared.json + quest threads and generates a compact
+  # context file at local_ai/cache/mercer_local_context.md.
+  # This file becomes the system prompt for Mercer-Local interactions,
+  # ensuring its world-model stays current as the project evolves.
+
+  $symbolMapPath = Join-Path $repoRoot 'symbol_map.shared.json'
+  $contextOutPath = Join-Path $repoRoot 'local_ai\cache\mercer_local_context.md'
+  $questDir = Join-Path $repoRoot 'memory\quest_threads'
+  $promptPath = Join-Path $repoRoot 'prompts\local_llama.json'
+
+  if (-not (Test-Path $symbolMapPath)) {
+    Write-HubLog -Level "WARN" -Component "CONTEXT" -Message "symbol_map.shared.json not found - skipping context gen"
+    return
+  }
+
+  try {
+    # Use .NET for proper UTF-8 handling (PS 5.1 mangles multi-byte chars)
+    $jsonText = [System.IO.File]::ReadAllText($symbolMapPath, [System.Text.Encoding]::UTF8)
+    $map = $jsonText | ConvertFrom-Json
+
+    # Build compact symbol list (name + meaning, no emoji chars to avoid PS 5.1 UTF-8 issues)
+    $symbolLines = @()
+    foreach ($s in $map.symbols) {
+      if ($s.name) {
+        $symbolLines += "- $($s.name): $($s.meaning)"
+      }
+    }
+
+    # Build compact docs index (path + title, grouped by kind)
+    $docsByKind = @{}
+    foreach ($d in $map.indexes.docs) {
+      $kind = $d.kind
+      if (-not $docsByKind.ContainsKey($kind)) { $docsByKind[$kind] = @() }
+      $docsByKind[$kind] += "$($d.path) ($($d.title))"
+    }
+    $docsLines = @()
+    foreach ($kind in ($docsByKind.Keys | Sort-Object)) {
+      $docsLines += "### $kind"
+      foreach ($item in $docsByKind[$kind]) {
+        # Strip non-ASCII to avoid PS 5.1 encoding issues
+        $item = $item -replace '[^\x20-\x7E]', ''
+        $docsLines += "- $item"
+      }
+    }
+
+    # Active quest threads
+    $questLines = @()
+    if (Test-Path $questDir) {
+      $questFiles = Get-ChildItem -Path $questDir -Filter 'QT-*.md' -File -ErrorAction SilentlyContinue
+      foreach ($qf in $questFiles) {
+        $firstLines = Get-Content $qf.FullName -TotalCount 10 -ErrorAction SilentlyContinue
+        $title = ($firstLines | Where-Object { $_ -match '^# ' } | Select-Object -First 1) -replace '^# ', ''
+        $status = ($firstLines | Where-Object { $_ -match 'Status:' } | Select-Object -First 1) -replace '.*Status:\s*', ''
+        # Strip emoji from status to avoid PS 5.1 UTF-8 issues in JSON
+        $status = $status -replace '[^\x20-\x7E]', '' -replace '\s+', ' '
+        if ($title) {
+          $title = $title -replace '[^\x20-\x7E]', '' -replace '\s+', ' '
+          $questLines += "- $($qf.BaseName): $($title.Trim()) [$($status.Trim())]"
+        }
+      }
+    }
+
+    # Load ring assignments from prompt file
+    $ringBlock = ""
+    if (Test-Path $promptPath) {
+      $promptJson = [System.IO.File]::ReadAllText($promptPath, [System.Text.Encoding]::UTF8)
+      $prompt = $promptJson | ConvertFrom-Json
+      if ($prompt.ring_model.your_rings) {
+        $ringBlock = "Your rings: $($prompt.ring_model.your_rings -join ', '). Escalate: $($prompt.ring_model.escalate_to_cloud -join ', ')."
+      }
+    }
+
+    # Compose the context snapshot
+    $ts = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    $context = @"
+# Mercer-Local Context Snapshot
+Generated: $ts by symbolos_hub.ps1 (auto-regenerated each hub cycle)
+
+## Identity
+You are Mercer-Local, running Qwen3-8B Q5_K_M on RX 6750 XT (Vulkan, ~41 tok/s).
+Part of the SymbolOS multi-agent party. Offline-first (no persistent internet).
+$ringBlock
+
+## Party
+- MercerGPT (ChatGPT) - architect, R0/R1/R6/R7
+- Mercer-Opus (Claude/VS Code) - deep analysis, R6/R7/R11
+- Manus-Max (Manus) - full-stack executor
+- You (Mercer-Local) - fast local workhorse, R2/R4/R5/R8/R9/R10
+- Rhy (fox NPC) - esoteric guide
+
+## Communication
+- MCP: server.mjs bridges VS Code agents to your API
+- Agent loop: mercer_local_agent.ps1 polls handoffs/ for your tasks
+- Tavern: memory/tavern_board.md (shared message board)
+- Handoffs: memory/handoffs/HO-*.json (structured task transfer)
+- Hub: symbolos_hub.ps1 manages your lifecycle + generates this file
+
+## Core Symbols
+$($symbolLines -join "`n")
+
+## Active Quests
+$( if ($questLines.Count -gt 0) { $questLines -join "`n" } else { "(none)" } )
+
+## Docs Index
+$($docsLines -join "`n")
+
+## Rules
+- Never fabricate repo state. Operate on provided context only.
+- Coherence over speed. No hallucinated files or fake commits.
+- Emoji is semantic, not decorative. Memes are structural.
+- Output blocks: @analysis, @options, @recommendation, @risks
+"@
+
+    $outDir = Split-Path $contextOutPath
+    if (-not (Test-Path $outDir)) { New-Item -ItemType Directory -Path $outDir -Force | Out-Null }
+    # Write with .NET for clean UTF-8 (with BOM for PS 5.1 compat)
+    $utf8Bom = [System.Text.UTF8Encoding]::new($true)
+    [System.IO.File]::WriteAllText($contextOutPath, $context, $utf8Bom)
+
+    Write-HubLog -Level "OK" -Component "CONTEXT" -Message "Regenerated mercer_local_context.md ($($symbolLines.Count) symbols, $($questLines.Count) quests)"
+  } catch {
+    Write-HubLog -Level "ERROR" -Component "CONTEXT" -Message "Context generation failed: $_"
+  }
+}
+
 # ─── Ring Heartbeat ──────────────────────────────────────────────────────────
 
 function Invoke-RingHeartbeat {
@@ -355,6 +483,9 @@ Write-Host ""
 Save-HubState
 Write-HubLog -Level "OK" -Component "HUB" -Message "Orchestrator started"
 
+# Generate initial context snapshot
+Update-MercerLocalContext
+
 # Timing trackers
 $lastSync = [datetime]::MinValue
 $lastLlamaCheck = [datetime]::MinValue
@@ -372,6 +503,8 @@ do {
   # ── GitHub sync (every SyncIntervalMinutes) ──
   if (($now - $lastSync).TotalMinutes -ge $SyncIntervalMinutes) {
     Invoke-GitHubSync
+    # Regenerate context after sync in case symbol_map changed
+    Update-MercerLocalContext
     $lastSync = $now
   }
 

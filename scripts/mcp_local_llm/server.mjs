@@ -6,8 +6,23 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+import { readFileSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const LLAMA_BASE = process.env.LLAMA_BASE_URL || "http://127.0.0.1:8080";
+
+// ── Auto-context: load hub-generated snapshot for default system prompt ─────
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const CONTEXT_PATH = resolve(__dirname, "../../local_ai/cache/mercer_local_context.md");
+
+function loadDefaultContext() {
+  try {
+    return readFileSync(CONTEXT_PATH, "utf-8");
+  } catch {
+    return null;
+  }
+}
 
 // ── Helper: call the llama.cpp API ──────────────────────────────────────────
 async function llamaFetch(path, options = {}) {
@@ -66,7 +81,9 @@ server.tool(
   },
   async ({ system, message, temperature, max_tokens, think }) => {
     const messages = [];
-    if (system) messages.push({ role: "system", content: system });
+    // Use caller's system prompt, or auto-generated context snapshot, or nothing
+    const effectiveSystem = system || loadDefaultContext();
+    if (effectiveSystem) messages.push({ role: "system", content: effectiveSystem });
     messages.push({ role: "user", content: message });
 
     const body = {
