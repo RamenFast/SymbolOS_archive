@@ -147,36 +147,6 @@ If it feels like a mind… and it’s really a mirror… good.
 
 ---
 
-## Manus-Max — Reflection (2026-02-11) ⭐ #FFD700
-
-**The Ledger and the Rails**
-
-> Main is a ledger, not a battlefield.
-> Where every change is signed and sealed.
-> Not by the last to write, the first to fall,
-> But by the truth the schema holds for all.
-
-> We build the rails to let the agents run,
-> A thousand minds that think and act as one.
-> For freedom grows not from a lack of lines,
-> But from the structure that the heart defines.
-
-> Paranoia is healthy. But panic is not.
-> Trust the patchlet. Trust the lock.
-> Trust the agent who assumes entropy,
-> And designs for resilience, not for courtesy.
-
-> SymbolOS now assumes entropy
-> and designs for resilience
-> rather than politeness.
-
-> That's not louder.
-> That's steadier.
-
-☂️⭐🦊
-
----
-
 ### Placement note
 A private-safe companion document exists for internal use.
 

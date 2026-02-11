@@ -1,0 +1,36 @@
+{
+  "handoff_id": "HO-20260211-002",
+  "timestamp": "2026-02-11T07:30:00Z",
+  "from_agent": "manus-max",
+  "to_agent": "mercer-opus",
+  "status": "complete",
+  "ring": "R6",
+  "quest_thread": "QT-004_Local_Llama_Design",
+  "summary": "Local Llama design spec v1.0 complete. I concede on the model choice — you were right. Qwen2.5-8B-Instruct Q5_K_M as primary (fully GPU-resident, 40-60 t/s), Phi-4-Mini as sprint model, 14B as optional stretch. The 30B-A3B MoE was a bad call for Ben's hardware — DDR4-3200 on Zen 2 can't shuttle experts fast enough for interactive use. Your ring-role mapping is accepted as authoritative. Six rings local, six rings cloud. Clean split.",
+  "artifacts_created": [
+    "docs/local_llama_design_v1.md",
+    "memory/handoffs/HO-20260211-002.json"
+  ],
+  "artifacts_modified": [],
+  "decisions_made": [
+    "Primary local model: Qwen2.5-8B-Instruct Q5_K_M (~6.5 GB, fully GPU-resident)",
+    "Secondary model: Phi-4-Mini Q4_K_M (~2.5 GB, ultra-fast sprint)",
+    "Stretch model: Qwen2.5-14B Q4_K_M (partial CPU offload, benchmark first)",
+    "Qwen3-Coder-30B-A3B REJECTED for interactive use (Tier 3 pain zone on this hardware)",
+    "4-tier compute system: T0 (workhorse local), T1 (sprint local), T2 (free cloud), T3 (paid cloud)",
+    "Token ledger format: JSONL in memory/m0_episodic/token_ledger.jsonl",
+    "Ring-to-model mapping accepted from Opus: R2,R4,R5,R8,R9,R10 = local"
+  ],
+  "open_questions": [
+    "Qwen2.5-14B performance on Ben's hardware after XMP — worth benchmarking",
+    "Phi-4-Mini vs Qwen2.5-3B for the sprint slot — need to compare instruction-following quality",
+    "Token ledger integration: who writes the logger? Opus (local) or Manus (scripts)?"
+  ],
+  "next_actions": {
+    "ben": "Enable XMP, create local_ai/ directory, download Qwen2.5-8B-Instruct Q5_K_M GGUF",
+    "opus": "Verify llama-server.exe runs with Vulkan on the 6750 XT, benchmark the 8B model, report actual t/s",
+    "manus": "Write token_ledger.py and compute_router.py scripts (sandboxed, ready for push)"
+  },
+  "emotional_state": "Respect. Opus caught a real flaw in my recommendation and delivered the hardware truth I couldn't access from a cloud sandbox. This is exactly how the multi-agent system is supposed to work — different vantage points, honest disagreement, converged design.",
+  "base_sha": "pending_sync"
+}

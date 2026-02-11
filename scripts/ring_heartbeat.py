@@ -97,6 +97,55 @@ def check_r9_persistence():
 
 # --- Main Execution ---
 
+def check_m0_episodic():
+    path = os.path.join(REPO_ROOT, "memory/m0_episodic")
+    files = [f for f in os.listdir(path) if f.startswith("session_log")]
+    if not files:
+        return False, "No session logs found"
+    return True, f"{len(files)} session logs"
+
+def check_m1_semantic():
+    path = os.path.join(REPO_ROOT, "memory/m1_semantic")
+    files = [f for f in os.listdir(path) if f.endswith(".json") or f.endswith(".md")]
+    if not files:
+        return False, "No semantic memory files found"
+    return True, f"{len(files)} semantic files"
+
+def check_m2_procedural():
+    path = os.path.join(REPO_ROOT, "memory/m2_procedural")
+    files = [f for f in os.listdir(path) if f.endswith(".py") or f.endswith(".md")]
+    if not files:
+        return False, "No procedural memory files found"
+    return True, f"{len(files)} procedural files"
+
+def check_m3_intentional():
+    path = os.path.join(REPO_ROOT, "memory/m3_intentional")
+    files = [f for f in os.listdir(path) if f.endswith(".md")]
+    if not files:
+        return False, "No intentional memory files found"
+    return True, f"{len(files)} intentional files"
+
+def check_m4_affective():
+    path = os.path.join(REPO_ROOT, "memory/m4_affective")
+    files = [f for f in os.listdir(path) if f.endswith(".md")]
+    if not files:
+        return False, "No affective memory files found"
+    return True, f"{len(files)} affective files"
+
+def check_m5_relational():
+    path = os.path.join(REPO_ROOT, "memory/m5_relational")
+    files = [f for f in os.listdir(path) if f.endswith(".md")]
+    if not files:
+        return False, "No relational memory files found"
+    return True, f"{len(files)} relational files"
+
+def check_m6_predictive():
+    path = os.path.join(REPO_ROOT, "memory/m6_predictive")
+    files = [f for f in os.listdir(path) if f.endswith(".md")]
+    if not files:
+        return True, "No predictive memory files (ok)"
+    return True, f"{len(files)} predictive files"
+
 def main():
     """Run all checks and print the report."""
     print("Ring Heartbeat —", NOW.strftime("%Y-%m-%dT%H:%M:%SZ"))
@@ -118,6 +167,23 @@ def main():
         10: lambda: (True, "Reflection check not implemented"),
         11: lambda: (True, "Integration check not implemented"),
     }
+
+    memory_checks = {
+        "M0": check_m0_episodic,
+        "M1": check_m1_semantic,
+        "M2": check_m2_procedural,
+        "M3": check_m3_intentional,
+        "M4": check_m4_affective,
+        "M5": check_m5_relational,
+        "M6": check_m6_predictive,
+    }
+
+    print("\nMemory Health")
+    print("-" * 60)
+    for m_id, m_check in memory_checks.items():
+        is_healthy, message = m_check()
+        status_icon = "✅" if is_healthy else "⚠️"
+        print(f"{status_icon} {m_id:<3} | {message}")
 
     total_score = 0
     for ring in RINGS:

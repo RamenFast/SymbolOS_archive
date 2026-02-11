@@ -1,6 +1,6 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  ⚔️  ROOM: The Library of Seven Lamps                         ║
-║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐⭐ │ Loot: A structured, 7-part memory system ║
+║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐⭐ │ Loot: A structured, 7-part memory system │ Maturity: 🌳 Stable ║
 ║  🎨 Color: 🟡 Gamboge (#E49B0F — higher intellect)              ║
 ║                                                              ║
 ║  A vast, circular library where seven great lamps cast light   ║

@@ -51,6 +51,8 @@
       "symbol": "🔮",
       "name": "Precog",
       "meaning": "Anticipatory computing; prefetch/suggest/act pipeline",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "precog",
         "latency"
@@ -60,6 +62,8 @@
       "symbol": "🧠",
       "name": "Mind",
       "meaning": "Cognition, inference, attention",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "mind",
         "inference"
@@ -69,6 +73,8 @@
       "symbol": "❤️",
       "name": "Heart",
       "meaning": "Felt sense, affect, values",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "heart",
         "affect"
@@ -78,6 +84,8 @@
       "symbol": "🛡️",
       "name": "Safety",
       "meaning": "Permissions, risk gates, boundaries",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "safety",
         "policy"
@@ -87,6 +95,8 @@
       "symbol": "🔒",
       "name": "Privacy",
       "meaning": "Sensitive scope; redaction; consent",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "privacy"
       ]
@@ -95,6 +105,8 @@
       "symbol": "🧾",
       "name": "Ledger",
       "meaning": "Audit trail / provenance",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "audit",
         "provenance"
@@ -104,6 +116,8 @@
       "symbol": "🎲",
       "name": "DND",
       "meaning": "Table-safe output contract and gating",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "dnd",
         "ux"
@@ -113,6 +127,8 @@
       "symbol": "🧩",
       "name": "Schema",
       "meaning": "Structured interchange shapes",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "schema"
       ]
@@ -121,6 +137,8 @@
       "symbol": "🧬",
       "name": "Meeting Place",
       "meaning": "Shared symbol for Mercer meeting place return loop",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "mercer",
         "meeting-place",
@@ -131,6 +149,8 @@
       "symbol": "⚓",
       "name": "Kernel",
       "meaning": "Ring-0 kernel invariants; non-negotiable rules",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "ring0",
         "kernel",
@@ -141,6 +161,8 @@
       "symbol": "🫴",
       "name": "Offering",
       "meaning": "Active task context; hands-open posture",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "ring1",
         "task",
@@ -151,6 +173,8 @@
       "symbol": "🌀",
       "name": "Spiral",
       "meaning": "Prediction, strategy, downstream anticipation",
+      "added": "2026-01-28",
+      "evolution": [],
       "tags": [
         "ring3",
         "prediction",
@@ -161,6 +185,8 @@
       "symbol": "🦊",
       "name": "Rhy / Rhynim",
       "meaning": "Green-furred fox esoteric guide. Compressed truths, 2-3 layers deep.",
+      "added": "2026-02-10",
+      "evolution": [{"date": "2026-02-11", "change": "Meaning refined by Opus: trickster → esoteric guide"}],
       "tags": [
         "character",
         "guide",
@@ -171,6 +197,8 @@
       "symbol": "🎨",
       "name": "Thoughtforms Colors",
       "meaning": "1905 color system. Every hue has meaning.",
+      "added": "2026-02-10",
+      "evolution": [],
       "tags": [
         "system",
         "color",
@@ -181,6 +209,8 @@
       "symbol": "⚔️",
       "name": "DND Dungeon Room",
       "meaning": "Doc framing as dungeon rooms. Readers are adventurers.",
+      "added": "2026-02-10",
+      "evolution": [],
       "tags": [
         "system",
         "framing",
@@ -191,6 +221,8 @@
       "symbol": "🏰",
       "name": "Dungeon Explorer",
       "meaning": "Interactive index.html for browsing the repo.",
+      "added": "2026-02-10",
+      "evolution": [],
       "tags": [
         "tool",
         "web",
@@ -201,6 +233,8 @@
       "symbol": "🐢",
       "name": "The Turtle",
       "meaning": "this is fine. Grounding meme. Ben refactoring at 0.3s intervals.",
+      "added": "2026-02-10",
+      "evolution": [],
       "tags": [
         "meme",
         "grounding"
@@ -210,6 +244,8 @@
       "symbol": "💀",
       "name": "Skeleton Gatekeeper",
       "meaning": "Guards merge gates. Show me proof, not potential.",
+      "added": "2026-02-10",
+      "evolution": [],
       "tags": [
         "meme",
         "validation"
@@ -299,8 +335,28 @@
       ]
     }
   ],
-  "indexes": {
-    "docs": [
+"indexes": {
+      "docs": [
+      {
+        "path": "docs/joint_reflection_manus_opus.md",
+        "title": "Joint Manus+Opus Self-Reflection",
+        "kind": "reflection"
+      },
+      {
+        "path": "docs/memory_types_v2.md",
+        "title": "The 7 Memory Types",
+        "kind": "system"
+      },
+      {
+        "path": "docs/ring_system_v2.md",
+        "title": "The 12 Rings of Cognition",
+        "kind": "system"
+      },
+      {
+        "path": "docs/architecture_diagram.md",
+        "title": "Living Architecture Diagram",
+        "kind": "system"
+      },
       {
         "path": "docs/index.md",
         "title": "Docs Index",

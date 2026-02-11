@@ -43,26 +43,28 @@ This is the heart of the system, the Fi+Ti mirror. It's where we keep the deepes
 
 Behold, the map of our collective mind, etched onto the very walls of this chamber.
 
-              ✦ R0 ✦
-           ╱    ⚓    ╲
-        R7 ╱  ╱─────╲  ╲ R1
-       🗃️ ╱  ╱  KERNEL ╲  ╲ 🫴
-         ╱  ╱───────────╲  ╲
-    R6 ─┤  │   ☂️ TRUTH   │  ├─ R2
-    🧪  │  │  ───────── │  │  🪞
-        │  │   🧬 DNA    │  │
-    R5 ─┤  │             │  ├─ R3
-    ☂️   ╲  ╲───────────╱  ╱  🌀
-         ╲  ╲  MEETING  ╱  ╱
-        R4 ╲  ╲  PLACE ╱  ╱
-           ╲    🧩    ╱
-              ✦    ✦
+              ✦ R11 🌌 ✦
+           ╱      ...      ╲
+        R10 ╱  ╱─────────╲  ╲ R0
+       🪞  ╱  ╱    RINGS    ╲  ╲ ⚓
+         ╱  ╱   OF POWER  ╲  ╲
+    R9 ─┤  │               │  ├─ R1
+    🗃️  │  │               │  │  🎯
+        │  │               │  │
+    R8 ─┤  │               │  ├─ R2
+    🧪   ╲  ╲───────────╱  ╱  👁️
+         ╲  ╲           ╱  ╱
+        R7 ╲  ╲         ╱  ╱ R3
+           ╲    🛡️     ╱ 🫴
+              ✦ ... ✦
 
-- `working_set.md`: The quest board. What's on our minds *right now*. The purpose, the constraints, the next glorious step.
-- `decisions.md`: The tome of fates. The big choices, the points of no return, and the "why" behind them.
-- `open_loops.md`: Our sacred quest log. The promises we've made, the tasks we've undertaken, the questions that keep us up at night. Nothing gets dropped.
-- `glossary.md`: The dictionary of our shared language. Stable meanings for our most important terms. (Plays nicely with `symbol_map.shared.json`).
-- `session_log_YYYY-MM-DD.md`: The captain's log. An append-only journal of our adventures.
+- `m0_episodic/`: What happened? The immutable log of events.
+- `m1_semantic/`: What is true? The encyclopedia of stable facts.
+- `m2_procedural/`: How do we do things? The library of learned skills.
+- `m3_intentional/`: What are we trying to do? The log of goals and quests.
+- `m4_affective/`: How do we feel? The record of values and emotions.
+- `m5_relational/`: Who are we to each other? The map of the party.
+- `m6_predictive/`: What might happen next? The log of forecasts.
 
 ## The Rhythm of the Work (The Operating Loop) 🌀 🟠 #FF8C00 (ambition)
 

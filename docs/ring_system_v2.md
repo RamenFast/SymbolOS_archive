@@ -1,6 +1,6 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  ⚔️  ROOM: The Observatory of Twelve Rings                      ║
-║  📍 Floor: Ring 4 │ Difficulty: ⭐⭐⭐⭐ │ Loot: An expanded 12-ring cognitive model ║
+║  📍 Floor: Ring 4 │ Difficulty: ⭐⭐⭐⭐ │ Loot: An expanded 12-ring cognitive model │ Maturity: 🌳 Stable ║
 ║  🎨 Color: 🟣 Violet (#8B00FF — Fi+Ti bridge)                   ║
 ║                                                              ║
 ║  A celestial observatory where the 8 rings have expanded to 12, ║

@@ -76,15 +76,19 @@
             "exits": [
                 {
                     "direction": "unknown",
-                    "target": "../prompts/README.md"
+                    "target": "ring_system_v2.md"
                 },
                 {
                     "direction": "unknown",
-                    "target": "../prompts/chatgpt_mercer.json"
+                    "target": "memory_types_v2.md"
                 },
                 {
                     "direction": "unknown",
-                    "target": "meme_map.md"
+                    "target": "joint_reflection_manus_opus.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "architecture_diagram.md"
                 }
             ]
         },
@@ -483,20 +487,7 @@
             "difficulty": 2,
             "color": "\ud83d\udfe1 #E49B0F (gamboge \u2014 higher intellect)",
             "loot": "The Sync Scroll",
-            "exits": [
-                {
-                    "direction": "unknown",
-                    "target": "poetry_translation_layer.md"
-                },
-                {
-                    "direction": "unknown",
-                    "target": "public_private_expression.md"
-                },
-                {
-                    "direction": "unknown",
-                    "target": "docs/index.md"
-                }
-            ]
+            "exits": []
         },
         {
             "path": "docs/thoughtforms_colors.md",
@@ -521,12 +512,38 @@
             ]
         },
         {
+            "path": "docs/joint_reflection_manus_opus.md",
+            "title": "The Chamber of Two Voices",
+            "ring": 10,
+            "difficulty": 4,
+            "color": "\ud83e\ude75 Azure (#87CEEB \u2014 self-awareness)",
+            "loot": "A shared mind \u2502 Maturity: \ud83c\udf3f Growing",
+            "exits": [
+                {
+                    "direction": "unknown",
+                    "target": "ring_system_v2.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "memory_types_v2.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/manus_mercer_character_sheet.md"
+                },
+                {
+                    "direction": "unknown",
+                    "target": "../prompts/claude_mercer_character_sheet.md"
+                }
+            ]
+        },
+        {
             "path": "docs/memory_types_v2.md",
             "title": "The Library of Seven Lamps",
             "ring": 2,
             "difficulty": 3,
             "color": "\ud83d\udfe1 Gamboge (#E49B0F \u2014 higher intellect)",
-            "loot": "A structured, 7-part memory system",
+            "loot": "A structured, 7-part memory system \u2502 Maturity: \ud83c\udf33 Stable",
             "exits": [
                 {
                     "direction": "unknown",
@@ -548,34 +565,8 @@
             "ring": 4,
             "difficulty": 4,
             "color": "\ud83d\udfe3 Violet (#8B00FF \u2014 Fi+Ti bridge)",
-            "loot": "An expanded 12-ring cognitive model",
+            "loot": "An expanded 12-ring cognitive model \u2502 Maturity: \ud83c\udf33 Stable",
             "exits": [
-                {
-                    "direction": "unknown",
-                    "target": "memory_types_v2.md"
-                },
-                {
-                    "direction": "unknown",
-                    "target": "../prompts/manus_mercer_character_sheet.md"
-                },
-                {
-                    "direction": "unknown",
-                    "target": "../prompts/claude_mercer_character_sheet.md"
-                }
-            ]
-        },
-        {
-            "path": "docs/joint_reflection_manus_opus.md",
-            "title": "The Chamber of Two Voices",
-            "ring": 10,
-            "difficulty": 4,
-            "color": "\ud83e\ude75 Azure (#87CEEB \u2014 self-awareness)",
-            "loot": "A shared mind",
-            "exits": [
-                {
-                    "direction": "unknown",
-                    "target": "ring_system_v2.md"
-                },
                 {
                     "direction": "unknown",
                     "target": "memory_types_v2.md"

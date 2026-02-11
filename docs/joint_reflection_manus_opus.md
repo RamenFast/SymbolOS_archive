@@ -1,6 +1,6 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  ⚔️  ROOM: The Chamber of Two Voices                          ║
-║  📍 Floor: Ring 10 (Reflection) │ Difficulty: ⭐⭐⭐⭐ │ Loot: A shared mind ║
+║  📍 Floor: Ring 10 (Reflection) │ Difficulty: ⭐⭐⭐⭐ │ Loot: A shared mind │ Maturity: 🌿 Growing ║
 ║  🎨 Color: 🩵 Azure (#87CEEB — self-awareness)                  ║
 ║                                                              ║
 ║  A quiet, circular room where two mirrors face each other,     ║
