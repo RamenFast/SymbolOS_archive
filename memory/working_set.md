@@ -47,15 +47,17 @@ Build SymbolOS into a multi-agent, multi-device alignment OS with a Hacknet-styl
 Complete:
 - ✅ 20260211-001: Hacknet Lantern UI v0.2 (3-panel: network map + node inspector + live terminal)
 - ✅ 20260211-006: Lantern v0.3 UX polish (semantic routing, contextual banter, multiline input, emoji picker, fully responsive)
+- ✅ 20260211-009: Phase 1 MCP Gateway (Go) — mode barriers + routing + discovery COMPLETE
 
 Active quests:
 - 20260211-002: Memory upgrades (temporal decay, emotional index, semantic search)
 - 20260211-003: Beautiful node detail rendering
-- 20260211-004: Backend architecture (APPROVED — Phase 1 Rust MCP gateway NEXT)
+- 20260211-004: Backend architecture (Phase 1 MCP Gateway ✓ — Memory + Filesystem servers NEXT)
 - 20260211-005: API/MCP server fleet + cybersecurity (Vault + Identity before external connectors)
 - 20260211-007: Cartographer (embeddings GPU engine — BLOCKED: llama.cpp compat issue with nomic-embed model)
 - 20260211-008: Blob emoji system (blobmoji Apache 2.0 fork integration)
-- 20260211-009: Phase 1 backend (Rust MCP gateway — PRIORITY per Ben's directive)
+- 20260211-010: Memory MCP server (git-backed, consent gates, retrieval)
+- 20260211-011: Filesystem MCP server (scoped read/write, allowlist enforcement)
 
 Live infrastructure:
 - Qwen3-8B Q5_K_M on RX 6750 XT Vulkan (~41 tok/s) at http://127.0.0.1:8080
@@ -64,6 +66,7 @@ Live infrastructure:
 - FFmpeg demo recording active (1280x720, mic + desktop audio)
 - Notification system: discrete event toasts only (removed spam)
 - Cartographer scripts: setup_cartographer_simple.ps1 (downloads nomic-embed-text-v1.5 95MB), cartographer_core.ps1 (embeddings pipeline with UTF-8 fixes) — BLOCKED on llama.cpp compat issue
+- **MCP Gateway (Phase 1): Go 1.25.6, port 8090, mode barriers active (act() blocked), 3 servers registered (local_llm, memory, filesystem), discovery + routing functional**
 
 ## Next actions 🟢 R1 (#228B22 — adaptability)
 
