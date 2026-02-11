@@ -671,6 +671,16 @@
         "path": ".vscode/mcp.json",
         "title": "VS Code MCP Server Config",
         "kind": "config"
+      },
+      {
+        "path": "scripts/symbolos_hub.ps1",
+        "title": "Hub Orchestrator Daemon (PowerShell)",
+        "kind": "tool"
+      },
+      {
+        "path": "memory/quest_threads/QT-005_Hub_Architecture.md",
+        "title": "QT-005: Hub Architecture",
+        "kind": "memory"
       }
     ],
     "schemas": [
@@ -1282,6 +1292,18 @@
       "path": ".vscode/mcp.json",
       "tags": ["vscode", "mcp", "config", "local-llm"],
       "summary": "Registers the symbolos-local-llm MCP server with VS Code Copilot for agent access to the local LLM."
+    },
+    {
+      "title": "Hub Orchestrator Daemon",
+      "path": "scripts/symbolos_hub.ps1",
+      "tags": ["hub", "orchestrator", "daemon", "powershell", "offline-first", "QT-005"],
+      "summary": "Local orchestrator daemon (QT-005): llama-server lifecycle, GitHub sync (offline-first), process health, ring heartbeat. Opus as hub."
+    },
+    {
+      "title": "QT-005: Hub Architecture",
+      "path": "memory/quest_threads/QT-005_Hub_Architecture.md",
+      "tags": ["quest", "hub", "architecture", "QT-005"],
+      "summary": "Quest thread tracking the Hub Architecture initiative. Phase 1: desktop-only, offline-first orchestrator daemon."
     }
   ]
 }

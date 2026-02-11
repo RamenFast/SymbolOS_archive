@@ -90,25 +90,20 @@ Write-Host "  url:   http://${BindIP}:${Port}"
 # -c            : context length
 # Qwen3 defaults to thinking mode, which puts all output in reasoning_content
 # and leaves content empty. The web UI only shows content, so it looks blank.
-# --reasoning-format none  → keeps thoughts in content (visible in web UI)
+# --no-webui             → disables web UI; API-only (MCP + scripts access via /v1/*)
+# --reasoning-format none  → keeps thoughts in content (not split to reasoning_content)
 # --chat-template-kwargs   → tells the Jinja template to disable thinking by default
-# --webui-config-file      → sets default system prompt (Mercer-Local identity)
 # Per-request overrides still work (e.g. MCP server can send enable_thinking: true)
-$webuiConfig = Join-Path $repoRoot 'local_ai\webui_config.json'
-$webuiArg = @()
-if (Test-Path $webuiConfig) {
-  $webuiArg = @('--webui-config-file', $webuiConfig)
-}
-
 $cliParams = @(
   '--host', $BindIP,
   '--port', "$Port",
   '-m', $ModelPath,
   '-c', "$Context",
   '-ngl', "$GpuLayers",
+  '--no-webui',
   '--reasoning-format', 'none',
-  '--chat-template-kwargs', '{"enable_thinking":false}'
-) + $webuiArg + $threadArg
+  '--chat-template-kwargs', '{\"enable_thinking\":false}'
+) + $threadArg
 
 & $serverExe @cliParams
 

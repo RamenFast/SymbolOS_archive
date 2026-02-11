@@ -146,6 +146,21 @@
         "${workspaceFolder}\\scripts\\mercer_status.ps1"
       ],
       "problemMatcher": []
+    },
+    {
+      "label": "SymbolOS: hub orchestrator",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\symbolos_hub.ps1"
+      ],
+      "problemMatcher": [],
+      "group": "build",
+      "isBackground": true
     }
   ]
 }

@@ -14,6 +14,7 @@ param(
   [bool]$StartAlignmentScan = $true,
   [bool]$StartStatusUi = $true,
   [bool]$StartLlama = $true,
+  [bool]$StartHub = $true,
   [bool]$SyncClock = $true
 )
 
@@ -93,6 +94,13 @@ Sync-ClockIfNeeded
 if ($StartAlignmentScan) { Start-AlignmentScan -repoRoot $root }
 if ($StartStatusUi) { Start-StatusUiOnce -repoRoot $root }
 if ($StartLlama) { Start-Llama -repoRoot $root }
+if ($StartHub) {
+  $hubScript = Join-Path $root 'scripts\symbolos_hub.ps1'
+  if (Test-Path -LiteralPath $hubScript) {
+    Write-Host 'Starting hub orchestrator...' -ForegroundColor Cyan
+    & $hubScript
+  }
+}
 
 #
 #    ___
