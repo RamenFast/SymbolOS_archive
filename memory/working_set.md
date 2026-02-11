@@ -44,31 +44,47 @@ Build SymbolOS into a multi-agent, multi-device alignment OS with a Hacknet-styl
 
 **Phase 1: The Lantern (Hacknet-style client) + MCP Gateway + Public Release Prep**
 
+Complete:
+- ✅ 20260211-001: Hacknet Lantern UI v0.2 (3-panel: network map + node inspector + live terminal)
+- ✅ 20260211-006: Lantern v0.3 UX polish (semantic routing, contextual banter, multiline input, emoji picker, fully responsive)
+
 Active quests:
-- 20260211-001: Hacknet Lantern UI (3-panel: network map + node detail + terminal)
 - 20260211-002: Memory upgrades (temporal decay, emotional index, semantic search)
 - 20260211-003: Beautiful node detail rendering
-- 20260211-004: Backend architecture (APPROVED — building Rust MCP gateway)
-- 20260211-005: API/MCP server fleet + cybersecurity (APPROVED — building)
+- 20260211-004: Backend architecture (APPROVED — Phase 1 Rust MCP gateway next)
+- 20260211-005: API/MCP server fleet + cybersecurity (APPROVED — vault + identity first)
+- 20260211-007: Cartographer (embeddings GPU engine — HIGHEST PRIORITY per Manus)
+- 20260211-008: Blob emoji system (blobmoji Apache 2.0 fork integration)
 
 Live infrastructure:
 - Qwen3-8B Q5_K_M on RX 6750 XT Vulkan (~41 tok/s) at http://127.0.0.1:8080
-- Lantern UI: live LLM inference in terminal, system vitals polling, device awareness
+- Lantern v0.3: semantic agent routing, contextual banter (analyzes recent 6 messages + LLM health), multiline textarea (Shift+Enter), emoji picker (20 symbols), fully responsive (480px–1600px+), silent device scanning
 - 7 agents in party: Mercer-Opus, CoreGPT-Chasity, Executor, Mercer-Local, Manus-Max, Mercer-GPT, Rhy
 - FFmpeg demo recording active (1280x720, mic + desktop audio)
-- Notification system: toast stack, device scan (Zenphone 9)
+- Notification system: discrete event toasts only (removed spam)
 
 ## Next actions 🟢 R1 (#228B22 — adaptability)
 
+**COMPLETED (v0.3):**
 - [x] Build public/private umbrella separation (limited dev release)
 - [x] Implement agent banter system across tavern board
 - [x] Build Hacknet Lantern web prototype (React/Vite, 3-panel layout)
 - [x] Wire Local LLM live inference into Lantern terminal
 - [x] Add notification + device awareness system
 - [x] Add system vitals bar (real-time LLM health polling)
-- [ ] Build Rust MCP gateway (single entrypoint, mode barrier)
-- [ ] Update schemas: memory_record, precog_card
+- [x] Semantic agent routing (keyword-based, no more random)
+- [x] Contextual banter (responds to recent conversation + system state)
+- [x] Multiline textarea input (Shift+Enter) + emoji picker (20 symbols)
+- [x] Fully responsive Lantern UI (8 breakpoints, 480px–1600px+)
+- [x] Clean tavern board (restructured, references Issue #5)
+
+**UP NEXT (Phase 1 Backend):**
+- [ ] Cartographer GPU engine (embeddings via llama.cpp `--embedding` flag) — HIGHEST PRIORITY
+- [ ] Rust MCP gateway (single entrypoint, security barrier, dynamic server discovery)
+- [ ] Blob emoji system (blobmoji Apache 2.0 integration, manifest parser, React component)
+- [ ] Vault + Identity MCP servers (Phase 1 security before external connectors)
 - [ ] Wire Tauri v2 shell around web UI + gateway
+- [ ] Update schemas: memory_record, precog_card
 - [ ] Build handoff schema for structured agent-to-agent payloads
 
 ## Alignment / drift ⭐ R7 (#FFD700 — spiritual aspiration)
