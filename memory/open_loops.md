@@ -116,6 +116,30 @@ Here are the quests we're on. The open loops, the promises we've made. We don't 
   - Due/Review: Next session
   - Links: `docs/thoughtforms_colors.md`, `docs/mercer_webview_theme_v1.css`, `index.html`
   - MercerID: MRC-20260210-OPUS-06
+
+- [ ] ID: 20260211-001
+  - Loop: Build "Hacknet-style" cross-platform SymbolOS client (The Lantern)
+  - Owner: Opus / Ben
+  - Next action: Phase 1 — web prototype with three-panel layout (network map + node detail + terminal). Extend existing HTML or new standalone app.
+  - Due/Review: Active development
+  - Links: `internal_docs/symbolos_client_v3_hacknet.internal.md`
+  - MercerID: MRC-20260211-OPUS-01
+
+- [ ] ID: 20260211-002
+  - Loop: Memory system upgrades — temporal decay, emotional index, semantic search, memory streams, bidirectional relationships
+  - Owner: Opus
+  - Next action: Extend Dream Engine to add reinforcement scoring and emotional color mapping. Add `/embedding` endpoint usage for semantic search.
+  - Due/Review: Active development
+  - Links: `internal_docs/symbolos_client_v3_hacknet.internal.md` §4, `scripts/memory_consolidation.ps1`
+  - MercerID: MRC-20260211-OPUS-02
+
+- [ ] ID: 20260211-003
+  - Loop: Beautiful node detail rendering — "the most human readable, beautiful thing ever" when clicking a graph node
+  - Owner: Opus
+  - Next action: Build the node detail panel with emotional color atmosphere, concept chips, connection strength bars, progressive disclosure, rendered markdown with SymbolOS-aware styling.
+  - Due/Review: Active development
+  - Links: `internal_docs/symbolos_client_v3_hacknet.internal.md` §5, `memory_graph_3d.html`
+  - MercerID: MRC-20260211-OPUS-03
 - [x] ID: 20260128-004 ✅ CLOSED 2026-02-10
   - Loop: Create Ring-0 workflow for speculative notes ("Future Possibilities") and ensure core docs remain stable.
   - Owner: Mercer

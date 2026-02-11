@@ -448,6 +448,11 @@
         "kind": "ring0"
       },
       {
+        "path": "internal_docs/symbolos_client_v3_hacknet.internal.md",
+        "title": "Client v3: The Hacknet Vision (Internal)",
+        "kind": "design"
+      },
+      {
         "path": "internal_docs/mercer_automation_contract_v1.internal.md",
         "title": "Mercer Automation Contract v1 (Internal)",
         "kind": "policy"
