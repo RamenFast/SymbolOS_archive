@@ -500,6 +500,77 @@ a:hover { text-decoration: underline; }
   pointer-events: none; z-index: 999;
 }
 
+/* ═══ NOTIFICATION TOASTS ═══ */
+.lt-notif-stack {
+  position: fixed; top: 44px; right: 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  z-index: 500; max-width: 340px; pointer-events: none;
+}
+.lt-notif {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; border-radius: 6px;
+  background: rgba(8,12,8,.95); border: 1px solid rgba(34,139,34,.25);
+  backdrop-filter: blur(8px); cursor: pointer; pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,.6), 0 0 12px rgba(34,139,34,.08);
+}
+.lt-notif:hover { border-color: rgba(34,139,34,.5); }
+.lt-notif-emoji { font-size: 1.3rem; flex-shrink: 0; filter: drop-shadow(0 0 4px currentColor); }
+.lt-notif-content { flex: 1; min-width: 0; }
+.lt-notif-title { font-size: .72rem; font-weight: 700; letter-spacing: .05em; }
+.lt-notif-body { font-size: .65rem; color: #778; margin-top: 2px; line-height: 1.4; }
+.lt-notif-x { color: #334; font-size: .65rem; flex-shrink: 0; margin-top: 1px; }
+.lt-notif-x:hover { color: #778; }
+.lt-notif-device_connect { border-left: 3px solid var(--green); }
+.lt-notif-device_disconnect { border-left: 3px solid var(--scarlet); }
+.lt-notif-system { border-left: 3px solid var(--primrose); }
+.lt-notif-alert { border-left: 3px solid var(--amber); }
+
+/* ═══ NOTIFICATION BADGE ═══ */
+.lt-notif-badge {
+  position: relative; font-size: .75rem; cursor: default;
+  padding: 2px 6px; user-select: none;
+}
+.lt-badge-num {
+  position: absolute; top: -4px; right: -2px;
+  background: var(--green); color: #050510; font-size: .5rem;
+  font-weight: 700; min-width: 14px; height: 14px;
+  border-radius: 7px; display: flex; align-items: center;
+  justify-content: center; padding: 0 3px;
+  box-shadow: 0 0 6px rgba(34,139,34,.5);
+  animation: lt-badge-pulse 2s ease-in-out infinite;
+}
+@keyframes lt-badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ═══ DEVICE PANEL (in topbar) ═══ */
+.lt-devices {
+  display: flex; align-items: center; gap: 8px; margin-left: auto;
+}
+.lt-dev-hdr {
+  font-size: .5rem; color: #334; letter-spacing: .15em;
+  text-transform: uppercase; margin-right: 2px;
+}
+.lt-dev {
+  display: flex; align-items: center; gap: 5px;
+  padding: 2px 8px; border-radius: 3px;
+  border: 1px solid rgba(34,139,34,.12);
+  background: rgba(34,139,34,.03);
+  font-size: .6rem; transition: all .3s;
+}
+.lt-dev-emoji { font-size: .8rem; }
+.lt-dev-info { display: flex; flex-direction: column; gap: 0; }
+.lt-dev-name { color: #99a; font-weight: 600; font-size: .58rem; }
+.lt-dev-status { font-size: .48rem; letter-spacing: .1em; }
+.lt-ds-scanning { color: var(--cyan); animation: lt-blink 1.5s step-end infinite; }
+.lt-ds-connected { color: var(--green); text-shadow: 0 0 4px rgba(34,139,34,.6); }
+.lt-ds-disconnected { color: #445; }
+.lt-ds-pairing { color: var(--amber); animation: lt-blink 1s step-end infinite; }
+.lt-dev-ip { color: #334; font-size: .5rem; font-variant-numeric: tabular-nums; }
+.lt-dev-connected { border-color: rgba(34,139,34,.3); background: rgba(34,139,34,.06); }
+.lt-dev-scanning { border-color: rgba(0,229,255,.15); }
+
 /* Lantern responsive */
 @media (max-width: 768px) {
   .lt-grid {

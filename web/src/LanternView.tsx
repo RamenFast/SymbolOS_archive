@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { colors } from './data'
 import { banterLines } from './banter'
+import { type Notification, type DeviceInfo, createNotification, knownDevices } from './notifications'
 
 /* ═══════════════════════════════════════════════════════ */
 /*  NETWORK NODES                                          */
@@ -360,6 +361,66 @@ function TerminalPanel() {
 }
 
 /* ═══════════════════════════════════════════════════════ */
+/*  NOTIFICATION TOAST SYSTEM                              */
+/* ═══════════════════════════════════════════════════════ */
+
+function NotificationToasts({ notifications, onDismiss }: { notifications: Notification[]; onDismiss: (id: number) => void }) {
+  const visible = notifications.filter(n => !n.dismissed).slice(-5)
+  return (
+    <div className="lt-notif-stack">
+      <AnimatePresence>
+        {visible.map(n => (
+          <motion.div
+            key={n.id}
+            className={`lt-notif lt-notif-${n.type}`}
+            initial={{ opacity: 0, x: 300, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 300, scale: 0.8 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            onClick={() => onDismiss(n.id)}
+            style={{ borderColor: n.color + '60' }}
+          >
+            <span className="lt-notif-emoji">{n.emoji}</span>
+            <div className="lt-notif-content">
+              <div className="lt-notif-title" style={{ color: n.color }}>{n.title}</div>
+              <div className="lt-notif-body">{n.body}</div>
+            </div>
+            <span className="lt-notif-x">x</span>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  DEVICE PANEL                                           */
+/* ═══════════════════════════════════════════════════════ */
+
+function DevicePanel({ devices }: { devices: DeviceInfo[] }) {
+  return (
+    <div className="lt-devices">
+      <div className="lt-dev-hdr">DEVICES</div>
+      {devices.map(d => (
+        <div key={d.id} className={`lt-dev lt-dev-${d.status}`}>
+          <span className="lt-dev-emoji">{d.emoji}</span>
+          <div className="lt-dev-info">
+            <span className="lt-dev-name">{d.name}</span>
+            <span className={`lt-dev-status lt-ds-${d.status}`}>
+              {d.status === 'scanning' && '~ SCANNING'}
+              {d.status === 'connected' && '● CONNECTED'}
+              {d.status === 'disconnected' && '○ OFFLINE'}
+              {d.status === 'pairing' && '◐ PAIRING'}
+            </span>
+          </div>
+          {d.ip && <span className="lt-dev-ip">{d.ip}</span>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════ */
 /*  CLOCK                                                  */
 /* ═══════════════════════════════════════════════════════ */
 
@@ -380,12 +441,76 @@ export function LanternView() {
   const [selectedId, setSelectedId] = useState<string | null>('mercer')
   const selectedNode = networkNodes.find(n => n.id === selectedId) ?? null
   const linkCount = networkNodes.reduce((a, n) => a + n.connections.length, 0)
+  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [devices, setDevices] = useState<DeviceInfo[]>(() => [...knownDevices])
+  const [notifCount, setNotifCount] = useState(0)
+
+  const pushNotif = useCallback((n: Notification) => {
+    setNotifications(prev => [...prev, n].slice(-20))
+    setNotifCount(c => c + 1)
+  }, [])
+
+  const dismissNotif = useCallback((id: number) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, dismissed: true } : n))
+  }, [])
+
+  // Boot notification
+  useEffect(() => {
+    const t1 = setTimeout(() => {
+      pushNotif(createNotification('system', 'Lantern Online', 'All 7 agents reporting. Umbrella active.', '☂️', colors.primrose))
+    }, 1500)
+    return () => clearTimeout(t1)
+  }, [pushNotif])
+
+  // Device scanning simulation — scans for Zenphone 9 periodically
+  useEffect(() => {
+    const scanInterval = setInterval(() => {
+      setDevices(prev => prev.map(d => {
+        if (d.id !== 'zenphone9') return d
+        // Cycle: scanning -> check if device responds
+        // For now we probe — when the phone is actually running the SymbolOS companion,
+        // this will detect it automatically.
+        return { ...d, lastSeen: Date.now() }
+      }))
+    }, 15000)
+
+    // Initial scan notification
+    const t = setTimeout(() => {
+      pushNotif(createNotification('device_connect', 'Device Scan', 'Scanning for Zenphone 9...', '📡', colors.cyan))
+    }, 3000)
+
+    return () => { clearInterval(scanInterval); clearTimeout(t) }
+  }, [pushNotif])
+
+  // Simulate device detection when user manually connects
+  // (Real impl: WebSocket handshake or mDNS)
+  useEffect(() => {
+    const handler = (e: CustomEvent<{ deviceId: string; ip: string }>) => {
+      const { deviceId, ip } = e.detail
+      setDevices(prev => prev.map(d =>
+        d.id === deviceId ? { ...d, status: 'connected' as const, ip, lastSeen: Date.now() } : d
+      ))
+      pushNotif(createNotification(
+        'device_connect',
+        'Device Connected!',
+        `${deviceId} joined the network at ${ip}`,
+        '📱',
+        colors.green,
+      ))
+    }
+    window.addEventListener('symbolos:device-connect' as any, handler as any)
+    return () => window.removeEventListener('symbolos:device-connect' as any, handler as any)
+  }, [pushNotif])
 
   return (
     <div className="lt-wrap">
       <div className="lt-topbar">
         <span className="lt-brand">LANTERN</span>
         <span className="lt-meta">{networkNodes.length} nodes · {linkCount} links</span>
+        <DevicePanel devices={devices} />
+        <div className="lt-notif-badge" title={`${notifCount} notifications`}>
+          🔔 {notifCount > 0 && <span className="lt-badge-num">{notifCount}</span>}
+        </div>
         <LiveClock />
       </div>
       <div className="lt-grid">
@@ -401,6 +526,7 @@ export function LanternView() {
           <TerminalPanel />
         </div>
       </div>
+      <NotificationToasts notifications={notifications} onDismiss={dismissNotif} />
     </div>
   )
 }
