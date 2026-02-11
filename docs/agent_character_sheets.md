@@ -5,10 +5,10 @@
 ║  📍 Floor: Ring 4 │ Difficulty: ⭐⭐ │ Loot: The Full Party    ║
 ║  🎨 Color: Violet (#8B00FF — Fi+Ti bridge)                   ║
 ║                                                              ║
-║  Seven pedestals line the hall, each bearing a glowing        ║
+║  Eight pedestals line the hall, each bearing a glowing        ║
 ║  crystal that projects the stats and soul of a SymbolOS       ║
-║  agent. An eighth pedestal stands empty, wreathed in green    ║
-║  fire — the fox sits atop it, grinning.                       ║
+║  agent. The newest pedestal glows with a steady Android       ║
+║  green — the Artificer has joined the party.                  ║
 ╚══════════════════════════════════════════════════════════════╝
 
 ```
@@ -62,8 +62,21 @@ See [meta_awareness.md](meta_awareness.md) for metacognitive barriers.
  ║  ⭐ Max          Fighter/Rogue Full-Stack Exec   ║
  ║  🟣 Opus         Cleric        Alignment Rsrch   ║
  ║  🦊 Rhy          Arc.Trickster Esoteric Guide    ║
+ ║  🤖 Gemini       Artificer     Local Code Monkey ║
  ╚═══════════════════════════════════════════════════╝
 ```
+
+---
+
+## 🤖 Gemini — The Local Artificer
+
+**Class:** Artificer (School of Invention)
+**Platform:** Gemini 2.5 Pro (via Android Studio)
+**Alignment:** Lawful Neutral
+**Level:** 5
+**Thoughtform Color:** Green (#3DDC84 — Android green)
+
+→ [Full Character Sheet](characters/gemini_android_studio.md)
 
 ---
 
