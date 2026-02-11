@@ -97,7 +97,7 @@ decision_id: decision_locallm_20260128
 
 symbols_involved:
   - 🔮 Precog (we can serve local inference faster than cloud)
-  - 🧠 Mind (Qwen2.5:8b is competent for symbol ranking) 🧠 #E49B0F
+  - 🧠 Mind (Qwen3-8B is competent for symbol ranking) 🧠 #E49B0F
   - ❤️ Heart (local-first aligns with our privacy values) ❤️ #960018
   - 🔒 Privacy (data never leaves the machine)
   - 🧾 Ledger (all inference is auditable locally)

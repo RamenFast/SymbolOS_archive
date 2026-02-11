@@ -36,9 +36,9 @@ Opus recommended 7-8B fully GPU-resident over Manus's 30B MoE with CPU offload. 
 
 - [ ] Ben: Enable XMP in BIOS
 - [ ] Ben: Create local_ai/ directory structure
-- [ ] Ben: Download Qwen2.5-8B-Instruct Q5_K_M GGUF
+- [x] Ben: Download Qwen3-8B Q5_K_M GGUF (done - running on RX 6750 XT)
 - [ ] Opus: Benchmark model on actual hardware
 - [ ] Manus: Write token_ledger.py
 - [ ] Manus: Write compute_router.py
-- [ ] All: Benchmark Phi-4-Mini vs Qwen2.5-3B for sprint slot
-- [ ] All: Benchmark Qwen2.5-14B as stretch option
+- [ ] All: Benchmark Phi-4-Mini vs Qwen3-3B for sprint slot
+- [ ] All: Benchmark Qwen3-14B as stretch option

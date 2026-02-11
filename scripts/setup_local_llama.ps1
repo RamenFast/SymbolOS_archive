@@ -10,7 +10,7 @@
 #       /|   |\
 #      (_|   |_)  — Rhy 🦊
 #
-# Downloads llama.cpp (Vulkan) + Qwen2.5-8B-Instruct Q5_K_M GGUF.
+# Downloads llama.cpp (Vulkan) + Qwen3-8B Q5_K_M GGUF.
 # Designed to run unattended overnight on Ben's RX 6750 XT machine.
 # See: docs/local_llama_design_v1.md for the full design rationale.
 #

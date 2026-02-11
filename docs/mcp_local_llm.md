@@ -39,7 +39,7 @@ This room grants you access to the following spells:
 
 The mind is still settling into its new home. Beware these quirks:
 
-1.  **Quantization Tuning**: The mind's vessel (Qwen2.5:8b Q4_K_M) may need adjustments for memory (Q2 2026).
+1.  **Quantization Tuning**: The mind's vessel (Qwen3-8B Q5_K_M) may need adjustments for memory (Q2 2026).
 2.  **Context Management**: The mind's memory is fleeting; no automated windowing for long conversations (Q2 2026).
 3.  **Token Counting**: The mind sometimes miscounts its thoughts by one; a validation suite is needed (Q2 2026).
 
@@ -71,11 +71,11 @@ Acceleration: Vulkan (llama.cpp)
 Endpoint: http://127.0.0.1:8080
 Server: llama.cpp HTTP API (OpenAI-compatible)
 
-Model: Qwen2.5:8b-instruct-q4_k_m (default)
+Model: Qwen3-8B-Q5_K_M (default)
   - Parameters: 8 billion
-  - Quantization: Q4_K_M (4-bit, ~5.2 GB VRAM)
-  - Context window: 4096 tokens
-  - Performance: ~40-60 tokens/sec on RX 6750 XT
+  - Quantization: Q5_K_M (5-bit, ~5.45 GB VRAM)
+  - Context window: 4096 tokens (32K native)
+  - Performance: ~41 tokens/sec on RX 6750 XT Vulkan
 
 Alternative models available:
   - Mistral 7B (smaller, faster, a mischievous imp)
@@ -105,7 +105,7 @@ If the incantation fails with "No server binary found", it means the `llama-serv
 ```
 Agent: The Coordinator needs to decide on the scope of our next quest.
 → Server: inference_chat(
-    model: "qwen2.5:8b",
+    model: "qwen3-8b",
     messages: [
       {role: "system", content: "You are a scope decision agent... a wise and cautious advisor."},
       {role: "user", content: "Should we add async/await support to our spellbook?"}
@@ -173,7 +173,7 @@ Testing suite (Q2 2026):
 
 ## Async Timeline ⭐ #FFD700 (spiritual aspiration)
 
-- **Now (Jan 2026)**: Beta inference, embedding, and status on Qwen2.5:8b Q4_K_M.
+- **Now (Feb 2026)**: Beta inference, embedding, and status on Qwen3-8B Q5_K_M (~41 tok/s Vulkan).
 - **Q2 2026**: The mind will learn to manage its own context window and summarize its thoughts.
 - **Q2 2026**: The mind will undergo quantization tuning and performance benchmarks.
 - **Q2 2026**: The mind's token counting accuracy will be validated.

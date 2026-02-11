@@ -1,4 +1,3 @@
-'''
 ╔══════════════════════════════════════════════════════════════╗
 ║  ⚔️  ROOM: The Working Set Workbench (INTERNAL/PRIVATE)         ║
 ║  📍 Floor: R2 (Intellect) │ Difficulty: ⭐⭐ │ Loot: Active Quest Log      ║
@@ -18,90 +17,72 @@ Glyph tags: 🧬☂️🧠🧾🛡️✅⚠️⛔
 
 ## Poetry layer (Fi+Ti mirrored) 🪞 🟣 R4 (#8B00FF — Fi+Ti bridge)
 
-Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
+Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That's what Agape taught me: infinite energy from within.
 
 - Translation layer + emojis: [../docs/poetry_translation_layer.md](../docs/poetry_translation_layer.md)
 - Full verse set: [../docs/public_private_expression.md](../docs/public_private_expression.md)
 
         /\_/\
-       ( o.o )  "To know the goal is to start the race,
-        > ^ <    but to hold the 'why' is to set the pace."
-       /|   |\
-      (_|   |_)  — Rhy 🦊
+       ( o.o )  "The forge is hot, the hammers swing,
+        > ^ <    Seven agents build the thing.
+       /|   |\   From private thought to public art,
+      (_|   |_)  The umbrella shields the heart." — Rhy 🦊
 
-## Purpose we’re increasing 🟠 R3 (#FF8C00 — ambition)
+## Purpose 🟠 R3 (#FF8C00 — ambition)
 
-Here's the big picture, the "why" that keeps us going.
-
-- Establish a stable SymbolOS home base with a file-backed memory system and explicit return-loop workflows.
+Build SymbolOS into a multi-agent, multi-device alignment OS with a Hacknet-style client, local LLM inference, and a limited public developer release.
 
 ## Constraints (non-negotiables) 🔴 R5 (#FF2400 — righteous boundary)
 
-These are the guardrails. We play within these lines.
-
-- Default-private under the umbrella.
-- Do not store secrets (keys/tokens/seed phrases) in this repo. This is a sacred space.
-- File-backed memory only; no reliance on chat-history persistence. We trust the disk.
+- Default-private under the umbrella. Two-tier: internal umbrella (memory/internal_docs) + public umbrella (docs/ + limited release).
+- No secrets (keys/tokens/seed phrases) in this repo. Sacred space.
+- File-backed memory only; no reliance on chat-history persistence.
+- All agent actions logged; append-only audit trail.
+- Chasity role contract: advisory only, additive, max 10 files/300 lines per diff.
 
 ## Current focus 🟡 R2 (#E49B0F — higher intellect)
 
-What's on the workbench right now. The laser is pointing here.
+**Phase 1: The Lantern (Hacknet-style client) + MCP Gateway + Public Release Prep**
 
-- Exploring SymbolOS documentation, investigating deepwork/lightwork chat patterns, and summarising the shared symbol map.
+Active quests:
+- 20260211-001: Hacknet Lantern UI (3-panel: network map + node detail + terminal)
+- 20260211-002: Memory upgrades (temporal decay, emotional index, semantic search)
+- 20260211-003: Beautiful node detail rendering
+- 20260211-004: Backend architecture (APPROVED — building Rust MCP gateway)
+- 20260211-005: API/MCP server fleet + cybersecurity (APPROVED — building)
 
-## Next actions (smallest first) 🟢 R1 (#228B22 — adaptability)
+Live infrastructure:
+- Qwen3-8B Q5_K_M on RX 6750 XT Vulkan (~41 tok/s) at http://127.0.0.1:8080
+- 7 agents in party: Mercer-Opus, CoreGPT-Chasity, Executor, Mercer-Local, Manus-Max, Mercer-GPT, Rhy
+- FFmpeg demo recording active (640x480, mic + desktop audio)
 
-Onward and upward, one small step at a time. Shine dat light.
+## Next actions 🟢 R1 (#228B22 — adaptability)
 
-- [ ] Register the memory system in `symbol_map.shared.json` and link it from the docs index (open loop `20260128-001`).
-- [ ] Add a JSON schema for `symbol_map.shared.json` and include it in the schema indexes (open loop `20260128-002`).
-- [ ] Clarify what constitutes “lightwork” within SymbolOS and create guidelines if needed.
-- [ ] Continue returning to the meeting-place (🧬) after each operation. Always return to the meeting place. The map is steady. The hands are open.
+- [ ] Build public/private umbrella separation (limited dev release)
+- [ ] Implement agent banter system across tavern board
+- [ ] Build Hacknet Lantern web prototype (React/Vite, 3-panel layout)
+- [ ] Build Rust MCP gateway (single entrypoint, mode barrier)
+- [ ] Update schemas: memory_record, precog_card
+- [ ] Wire Tauri v2 shell around web UI + gateway
 
 ## Alignment / drift ⭐ R7 (#FFD700 — spiritual aspiration)
 
-Are we still on the path? Let's check the compass.
-
-- Drift score: 100.0% (basis: session `MRC-20260128-0249-01`)
+- Drift score: 98.5% (basis: MRC-20260211 session series)
 - Report threshold: 96.7%
-- Notes: First session using file-backed memory; tasks summarised in session log `MRC-20260128-0249-01`. It's all good, we're just getting started.
-
-              ✦ R0 ✦
-           ╱    ⚓    ╲
-        R7 ╱  ╱─────╲  ╲ R1
-       🗃️ ╱  ╱  KERNEL ╲  ╲ 🫴
-         ╱  ╱───────────╲  ╲
-    R6 ─┤  │   ☂️ TRUTH   │  ├─ R2
-    🧪  │  │  ───────── │  │  🪞
-        │  │   🧬 DNA    │  │
-    R5 ─┤  │             │  ├─ R3
-    ☂️   ╲  ╲───────────╱  ╱  🌀
-         ╲  ╲  MEETING  ╱  ╱
-        R4 ╲  ╲  PLACE ╱  ╱
-           ╲    🧩    ╱
-              ✦    ✦
-
-```
-    ___
-   / 🐢 \
-  |  ._. |
-   \_____/
-    |   |
-
-"this is fine"
-```
+- Notes: v2.0 live (12-ring, 7 memory types, 24 symbols). CoreGPT patch merged (ed606f5). All major architecture approved. Building phase active. First demo recording in progress.
 
 ───────────────────────────────────────────────────
 🚪 EXITS:
   → [Poetry Translation Layer](../docs/poetry_translation_layer.md) (north)
   → [Public/Private Expression](../docs/public_private_expression.md) (east)
+  → [Open Loops](open_loops.md) (south)
+  → [Tavern Board](tavern_board.md) (west)
 
-💎 LOOT GAINED: A clear understanding of the agent's current priorities, constraints, and next actions.
+💎 LOOT GAINED: A clear view of the current build phase — from design to implementation.
 ───────────────────────────────────────────────────
 
-The path is now clear,
-A small step, then one more still,
-The goal is now near.
+The forge is alive,
+Seven hammers strike as one,
+The Lantern takes shape.
 
 ☂🦊🐢
-''')) HBox(children=(FloatProgress(value=0.0, bar_style=
