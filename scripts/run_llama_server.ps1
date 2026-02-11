@@ -88,12 +88,19 @@ Write-Host "  url:   http://${BindIP}:${Port}"
 # --host/--port : bind address
 # -m            : model path
 # -c            : context length
+# Qwen3 defaults to thinking mode, which puts all output in reasoning_content
+# and leaves content empty. The web UI only shows content, so it looks blank.
+# --reasoning-format none  → keeps thoughts in content (visible in web UI)
+# --chat-template-kwargs   → tells the Jinja template to disable thinking by default
+# Per-request overrides still work (e.g. MCP server can send enable_thinking: true)
 $cliParams = @(
   '--host', $BindIP,
   '--port', "$Port",
   '-m', $ModelPath,
   '-c', "$Context",
-  '-ngl', "$GpuLayers"
+  '-ngl', "$GpuLayers",
+  '--reasoning-format', 'none',
+  '--chat-template-kwargs', '{"enable_thinking":false}'
 ) + $threadArg
 
 & $serverExe @cliParams
