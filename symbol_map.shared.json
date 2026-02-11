@@ -453,6 +453,11 @@
         "kind": "design"
       },
       {
+        "path": "internal_docs/symbolos_backend_v1_research.internal.md",
+        "title": "Backend v1: Multi-Device Architecture Research (Internal)",
+        "kind": "design"
+      },
+      {
         "path": "internal_docs/mercer_automation_contract_v1.internal.md",
         "title": "Mercer Automation Contract v1 (Internal)",
         "kind": "policy"
@@ -1342,6 +1347,12 @@
       "path": "scripts/overnight_orchestrator.ps1",
       "tags": ["automation", "overnight", "gpu", "cpu", "network", "disk", "dream-engine", "orchestrator"],
       "summary": "Full resource saturation daemon: manages Dream Engine (GPU), repo integrity checks (CPU), git maintenance (network), disk cleanup, symbol drift detection, graph analysis. Produces overnight_report.json each cycle. Auto-restarts LLaMA server if down."
+    },
+    {
+      "title": "Backend v1: Multi-Device Architecture Research",
+      "path": "internal_docs/symbolos_backend_v1_research.internal.md",
+      "tags": ["backend", "multi-device", "multi-language", "rust", "kotlin", "swift", "go", "sync", "battery", "npu", "architecture"],
+      "summary": "Comprehensive backend architecture research for The Lantern ecosystem. 8 languages (Rust core, Kotlin Android, Swift Apple, Go sync, TS web, Python tools, Haskell proofs, PS ops), native acceleration per platform (Vulkan/NPU/Metal/CoreML), battery-aware S25 compute, LAN inference relay, Git-as-CRDT sync. Awaiting agent review."
     }
   ]
 }

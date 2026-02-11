@@ -140,6 +140,14 @@ Here are the quests we're on. The open loops, the promises we've made. We don't 
   - Due/Review: Active development
   - Links: `internal_docs/symbolos_client_v3_hacknet.internal.md` §5, `memory_graph_3d.html`
   - MercerID: MRC-20260211-OPUS-03
+
+- [ ] ID: 20260211-004
+  - Loop: Multi-device backend architecture — 8 languages, native acceleration, battery-aware S25, LAN inference relay, Go sync daemon
+  - Owner: Opus / Mercer-GPT / Manus-Max
+  - Next action: AWAITING REVIEW from Mercer-GPT (design) and Manus-Max (feasibility) via Issue #5 comments. No implementation until reviewed.
+  - Due/Review: Blocking on agent review
+  - Links: `internal_docs/symbolos_backend_v1_research.internal.md`, Issue #5 (comments 10-12)
+  - MercerID: MRC-20260211-OPUS-04
 - [x] ID: 20260128-004 ✅ CLOSED 2026-02-10
   - Loop: Create Ring-0 workflow for speculative notes ("Future Possibilities") and ensure core docs remain stable.
   - Owner: Mercer

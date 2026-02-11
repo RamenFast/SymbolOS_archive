@@ -11,9 +11,10 @@
 # SymbolOS Client v3: The Hacknet Vision
 
 **Author:** Mercer-Opus (brain + heart)
-**Date:** 2026-02-11
-**Status:** Ideation / Design Exploration
-**Quest:** New (to be formalized)
+**Date:** 2026-02-11 (revised)
+**Status:** Design Exploration → Backend Research Complete
+**Quest:** 20260211-001 (The Lantern Client), 20260211-004 (Backend Architecture)
+**Companion Doc:** `symbolos_backend_v1_research.internal.md` (multi-device backend)
 
 ---
 
@@ -199,6 +200,18 @@ The client can connect to the SymbolOS backend in three ways:
 | **Hybrid** | Local + background GitHub sync | Default mode |
 
 The Local LLM (llama-server) is accessed via HTTP — same API whether the client is on the same machine or across the network. Future: embed llama.cpp directly in the Tauri Rust backend.
+
+### 3.4 Backend Integration (See companion doc)
+
+The full backend architecture is detailed in `symbolos_backend_v1_research.internal.md`. Key decisions that affect the frontend:
+
+- **Rust core library** (`core/`) provides graph queries, search, and sync via Tauri IPC on desktop, JNI on Android, C FFI on iOS/Mac
+- **Go sync daemon** handles device discovery plus LAN inference relay (S25 can use desktop GPU over Wi-Fi)
+- **8 languages** total — each with a genuine role, not decoration
+- **Battery-aware compute** on S25: full/light/passive tiers based on charge level
+- **NPU inference** on S25 via Qualcomm QNN SDK (75 TOPS INT8, power-efficient)
+
+The Hacknet UI (TypeScript) doesn't care which backend it talks to — it calls the same API shape whether served by Tauri IPC (desktop), REST (mobile), or Go relay (cross-device).
 
 ---
 
@@ -508,13 +521,20 @@ My heart says: **The Lantern**. You carry light into your own memory. The Dream 
 
 ---
 
-## 10. Open Questions for Ben
+## 10. Open Questions (Partially Resolved)
 
-1. **Web-first or native-first?** Phase 1 web prototype feels right (zero friction, instant iteration), then wrap in Tauri for Phase 2. Agree?
-2. **2D or 3D network map?** The 3D visualizer exists and is gorgeous, but 2D might be more practical for daily use. Could offer both as a toggle.
-3. **Sound design — yes or later?** It's pure vibes but it's also engineering time.
-4. **S25 as SymbolOS terminal** — is this actually the plan? Tauri v2 mobile would make it real.
-5. **Color rewrite first?** The full Thoughtforms color update (open loop 20260210-005) should probably land before the Hacknet UI is themed.
+1. **Web-first or native-first?** → **RESOLVED:** Web-first for Phase 1 (Hacknet UI in TypeScript), then Tauri v2 wraps it for desktop. Android gets native Kotlin app (better NPU/battery access). iOS gets native Swift. See backend doc.
+2. **2D or 3D network map?** → **LEANING 2D for daily use.** 3D visualizer stays as exploration tool. The Hacknet UI constellation view (§6) is 2D by default with optional 3D toggle. 2D is better for phone screens.
+3. **Sound design — yes or later?** → Deferred to Phase 3+. Core functionality first.
+4. **S25 as SymbolOS terminal** → **YES.** Backend doc designs full Kotlin native app with NPU inference, battery policy, and LAN relay to desktop. The S25 becomes a legitimate compute node.
+5. **Color rewrite first?** → Open loop 20260210-005 still pending from Ben. Hacknet UI theme can proceed with current Thoughtforms palette and update when the rewrite lands.
+
+### New Questions (From Backend Research)
+
+6. **Go sync daemon: separate binary or embedded?** Should `symbolos-sync` be a standalone daemon or compiled into each platform's app via library?
+7. **S25 storage budget?** How much space can we allocate to models? Qwen3-8B Q5_K_M = 5.45 GB.
+8. **Phase 1 scope?** Desktop Tauri + web Hacknet UI + Go sync daemon, or Tauri + web only?
+9. **Rust core library: UniFFI or hand-rolled FFI?** UniFFI auto-generates Kotlin/Swift bindings but adds a build step.
 
 ---
 
