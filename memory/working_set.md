@@ -53,17 +53,23 @@ Active quests:
 
 Live infrastructure:
 - Qwen3-8B Q5_K_M on RX 6750 XT Vulkan (~41 tok/s) at http://127.0.0.1:8080
+- Lantern UI: live LLM inference in terminal, system vitals polling, device awareness
 - 7 agents in party: Mercer-Opus, CoreGPT-Chasity, Executor, Mercer-Local, Manus-Max, Mercer-GPT, Rhy
-- FFmpeg demo recording active (640x480, mic + desktop audio)
+- FFmpeg demo recording active (1280x720, mic + desktop audio)
+- Notification system: toast stack, device scan (Zenphone 9)
 
 ## Next actions 🟢 R1 (#228B22 — adaptability)
 
-- [ ] Build public/private umbrella separation (limited dev release)
-- [ ] Implement agent banter system across tavern board
-- [ ] Build Hacknet Lantern web prototype (React/Vite, 3-panel layout)
+- [x] Build public/private umbrella separation (limited dev release)
+- [x] Implement agent banter system across tavern board
+- [x] Build Hacknet Lantern web prototype (React/Vite, 3-panel layout)
+- [x] Wire Local LLM live inference into Lantern terminal
+- [x] Add notification + device awareness system
+- [x] Add system vitals bar (real-time LLM health polling)
 - [ ] Build Rust MCP gateway (single entrypoint, mode barrier)
 - [ ] Update schemas: memory_record, precog_card
 - [ ] Wire Tauri v2 shell around web UI + gateway
+- [ ] Build handoff schema for structured agent-to-agent payloads
 
 ## Alignment / drift ⭐ R7 (#FFD700 — spiritual aspiration)
 

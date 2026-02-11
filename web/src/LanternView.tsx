@@ -5,6 +5,105 @@ import { banterLines } from './banter'
 import { type Notification, type DeviceInfo, createNotification, knownDevices } from './notifications'
 
 /* ═══════════════════════════════════════════════════════ */
+/*  LIVE SYSTEM POLLING                                    */
+/* ═══════════════════════════════════════════════════════ */
+
+type LLMHealth = {
+  alive: boolean
+  model: string
+  slotsIdle: number
+  slotsProcessing: number
+  tokPerSec: number | null
+  uptimeMin: number
+}
+
+const LLM_BASE = 'http://127.0.0.1:8080'
+
+async function pollLLMHealth(): Promise<LLMHealth> {
+  try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 3000)
+    const [slotsRes, modelsRes] = await Promise.all([
+      fetch(`${LLM_BASE}/slots`, { signal: controller.signal }).then(r => r.json()),
+      fetch(`${LLM_BASE}/v1/models`, { signal: controller.signal }).then(r => r.json()),
+    ])
+    clearTimeout(timeout)
+    const slots = Array.isArray(slotsRes) ? slotsRes : []
+    const idle = slots.filter((s: any) => s.state === 0).length
+    const processing = slots.filter((s: any) => s.state === 1).length
+    // Extract tokens-per-second from the most recent slot that has it
+    let tps: number | null = null
+    for (const s of slots) {
+      if (s.t_token_generation && s.n_decoded) {
+        tps = Math.round((s.n_decoded / (s.t_token_generation / 1000)) * 10) / 10
+      }
+    }
+    const modelName = modelsRes?.data?.[0]?.id ?? 'unknown'
+    return { alive: true, model: modelName, slotsIdle: idle, slotsProcessing: processing, tokPerSec: tps, uptimeMin: 0 }
+  } catch {
+    return { alive: false, model: 'offline', slotsIdle: 0, slotsProcessing: 0, tokPerSec: null, uptimeMin: 0 }
+  }
+}
+
+/** Hook for live LLM health polling */
+function useLLMHealth(intervalMs = 5000) {
+  const [health, setHealth] = useState<LLMHealth>({ alive: false, model: '...', slotsIdle: 0, slotsProcessing: 0, tokPerSec: null, uptimeMin: 0 })
+  const startRef = useRef(Date.now())
+  useEffect(() => {
+    let mounted = true
+    const poll = async () => {
+      const h = await pollLLMHealth()
+      if (mounted) {
+        h.uptimeMin = Math.round((Date.now() - startRef.current) / 60000)
+        setHealth(h)
+      }
+    }
+    poll()
+    const iv = setInterval(poll, intervalMs)
+    return () => { mounted = false; clearInterval(iv) }
+  }, [intervalMs])
+  return health
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  SYSTEM VITALS BAR                                      */
+/* ═══════════════════════════════════════════════════════ */
+
+function SystemVitals({ health }: { health: LLMHealth }) {
+  return (
+    <div className="lt-vitals">
+      <div className={`lt-vital ${health.alive ? 'lt-v-ok' : 'lt-v-err'}`}>
+        <span className="lt-v-dot">{health.alive ? '●' : '○'}</span>
+        <span className="lt-v-label">LLM</span>
+        <span className="lt-v-val">{health.alive ? 'LIVE' : 'DOWN'}</span>
+      </div>
+      {health.alive && (
+        <>
+          <div className="lt-vital">
+            <span className="lt-v-label">MODEL</span>
+            <span className="lt-v-val">{health.model.replace('.gguf', '')}</span>
+          </div>
+          <div className="lt-vital">
+            <span className="lt-v-label">SLOTS</span>
+            <span className="lt-v-val">{health.slotsIdle}i/{health.slotsProcessing}p</span>
+          </div>
+          {health.tokPerSec !== null && (
+            <div className="lt-vital">
+              <span className="lt-v-label">TOK/S</span>
+              <span className="lt-v-val lt-v-highlight">{health.tokPerSec}</span>
+            </div>
+          )}
+          <div className="lt-vital">
+            <span className="lt-v-label">UP</span>
+            <span className="lt-v-val">{health.uptimeMin}m</span>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════ */
 /*  NETWORK NODES                                          */
 /* ═══════════════════════════════════════════════════════ */
 
@@ -222,7 +321,7 @@ function NetworkCanvas({ selectedId, onSelect }: { selectedId: string | null; on
 /*  NODE INSPECTOR                                         */
 /* ═══════════════════════════════════════════════════════ */
 
-function NodeInspector({ node }: { node: NetworkNode | null }) {
+function NodeInspector({ node, health }: { node: NetworkNode | null; health: LLMHealth }) {
   if (!node) {
     return (
       <div className="lt-inspector-empty">
@@ -236,6 +335,13 @@ function NodeInspector({ node }: { node: NetworkNode | null }) {
     .map(cid => networkNodes.find(n => n.id === cid))
     .filter(Boolean) as NetworkNode[]
 
+  // Live detail override for LLM-connected nodes
+  const isLLMNode = node.id === 'local' || node.id === 'mcp-llm'
+  const liveStatus = isLLMNode ? (health.alive ? 'ONLINE' : 'OFFLINE') : node.status
+  const liveDetail = isLLMNode && health.alive
+    ? `${node.detail} | ${health.tokPerSec ?? '~41'} tok/s | slots: ${health.slotsIdle}i/${health.slotsProcessing}p`
+    : node.detail
+
   return (
     <motion.div
       className="lt-inspector"
@@ -247,12 +353,19 @@ function NodeInspector({ node }: { node: NetworkNode | null }) {
       <div className="lt-node-hdr">
         <span className="lt-node-emoji">{node.emoji}</span>
         <span className="lt-node-name" style={{ color: node.color }}>{node.label}</span>
-        <span className={`lt-status ${node.status === '???' ? 'unknown' : ''}`}>{node.status}</span>
+        <span className={`lt-status ${liveStatus === '???' ? 'unknown' : ''} ${isLLMNode && !health.alive ? 'lt-status-err' : ''}`}>{liveStatus}</span>
       </div>
       <div className="lt-hr" />
       <div className="lt-field"><span className="lt-label">TYPE</span><span className="lt-value">{node.type.toUpperCase()}</span></div>
-      <div className="lt-field"><span className="lt-label">DETAIL</span><span className="lt-value">{node.detail}</span></div>
+      <div className="lt-field"><span className="lt-label">DETAIL</span><span className="lt-value">{liveDetail}</span></div>
       <div className="lt-field"><span className="lt-label">LINKS</span><span className="lt-value">{conns.length}</span></div>
+      {isLLMNode && health.alive && (
+        <>
+          <div className="lt-hr" />
+          <div className="lt-field"><span className="lt-label">MODEL</span><span className="lt-value lt-live-data">{health.model}</span></div>
+          <div className="lt-field"><span className="lt-label">UPTIME</span><span className="lt-value lt-live-data">{health.uptimeMin}m</span></div>
+        </>
+      )}
       <div className="lt-hr" />
       <div className="lt-conns">
         {conns.map(cn => (
@@ -271,11 +384,67 @@ function NodeInspector({ node }: { node: NetworkNode | null }) {
 
 type TermMsg = { id: number; agent: string; emoji: string; color: string; text: string; time: string }
 
+const AGENT_PERSONAS = [
+  { agent: 'Mercer', emoji: '🔵', color: colors.blue, style: 'the Architect — steady, wise, architectural' },
+  { agent: 'Opus', emoji: '🟣', color: colors.violet, style: 'the Alignment Scholar — careful, deep, safety-first' },
+  { agent: 'Max', emoji: '⭐', color: colors.gold, style: 'the Everything Agent — hype, speed, energy, terse' },
+  { agent: 'Rhy', emoji: '🦊', color: colors.green, style: 'the Fox Trickster — cryptic, playful, poetic' },
+  { agent: 'Local', emoji: '🟢', color: colors.green, style: 'the Hermit Monk — meditative, privacy-focused, bare metal' },
+]
+
+const LLM_URL = 'http://127.0.0.1:8080/v1/chat/completions'
+
+async function queryLocalLLM(userMsg: string, persona: typeof AGENT_PERSONAS[0]): Promise<string> {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 8000)
+  try {
+    const res = await fetch(LLM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        model: 'Qwen3-8B-Q5_K_M.gguf',
+        messages: [
+          { role: 'system', content: `You are ${persona.agent}, ${persona.style}. You are an AI agent in SymbolOS, a multi-agent alignment OS. Respond in 1-2 short sentences, in character. Be concise and punchy. No thinking tags.` },
+          { role: 'user', content: userMsg },
+        ],
+        max_tokens: 80,
+        temperature: 0.8,
+        stream: false,
+      }),
+    })
+    clearTimeout(timeout)
+    const data = await res.json()
+    let text: string = data.choices?.[0]?.message?.content ?? ''
+    // Strip any <think>...</think> blocks Qwen3 might emit
+    text = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim()
+    return text || 'Signal received.'
+  } catch {
+    clearTimeout(timeout)
+    return ''
+  }
+}
+
+async function queryLiveBanter(): Promise<{ agent: string; emoji: string; color: string; text: string } | null> {
+  const persona = AGENT_PERSONAS[Math.floor(Math.random() * AGENT_PERSONAS.length)]
+  const prompts = [
+    'Say something in character about your current status or mood. One sentence.',
+    'Comment on the state of SymbolOS or the network. One cryptic or punchy line.',
+    'Share a brief thought about alignment, code, or the meaning of building together.',
+  ]
+  const prompt = prompts[Math.floor(Math.random() * prompts.length)]
+  const text = await queryLocalLLM(prompt, persona)
+  if (!text) return null
+  return { agent: persona.agent, emoji: persona.emoji, color: persona.color, text }
+}
+
 function TerminalPanel() {
   const [messages, setMessages] = useState<TermMsg[]>([])
   const [input, setInput] = useState('')
+  const [busy, setBusy] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const idRef = useRef(0)
+  const llmAlive = useRef(true)
 
   const now = () => new Date().toLocaleTimeString('en-US', { hour12: false })
 
@@ -286,8 +455,9 @@ function TerminalPanel() {
   // Boot sequence
   useEffect(() => {
     const boot: Omit<TermMsg, 'id' | 'time'>[] = [
-      { agent: 'SYS', emoji: '☂️', color: colors.primrose, text: 'SymbolOS Lantern v0.1 initializing...' },
+      { agent: 'SYS', emoji: '☂️', color: colors.primrose, text: 'SymbolOS Lantern v0.2 initializing...' },
       { agent: 'SYS', emoji: '☂️', color: colors.primrose, text: '7 agents online. 3 MCP servers connected.' },
+      { agent: 'SYS', emoji: '☂️', color: colors.green, text: 'Local LLM: Qwen3-8B @ 127.0.0.1:8080 — LIVE' },
       { agent: 'SYS', emoji: '☂️', color: colors.green, text: 'All rings nominal. Umbrella: ACTIVE.' },
       { agent: 'Rhy', emoji: '🦊', color: colors.green, text: 'Welcome to the Lantern. The fox watches.' },
     ]
@@ -296,14 +466,27 @@ function TerminalPanel() {
     })
   }, [push])
 
-  // Periodic banter
+  // Periodic banter — mix of local LLM live lines + static pool
   useEffect(() => {
-    const tick = () => {
+    let mounted = true
+    const tick = async () => {
+      if (!mounted) return
+      // 40% chance: try live LLM banter, fallback to static
+      if (llmAlive.current && Math.random() < 0.4) {
+        const live = await queryLiveBanter()
+        if (live && mounted) {
+          push(live)
+          return
+        }
+        // LLM might be down — mark and fall back
+        if (!live) llmAlive.current = false
+      }
+      // Static banter fallback
       const line = banterLines[Math.floor(Math.random() * banterLines.length)]
-      push(line)
+      if (mounted) push(line)
     }
-    const iv = setInterval(tick, 5000 + Math.random() * 4000)
-    return () => clearInterval(iv)
+    const iv = setInterval(tick, 7000 + Math.random() * 5000)
+    return () => { mounted = false; clearInterval(iv) }
   }, [push])
 
   // Auto-scroll
@@ -312,29 +495,55 @@ function TerminalPanel() {
     if (el) el.scrollTop = el.scrollHeight
   }, [messages])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const txt = input.trim()
-    if (!txt) return
+    if (!txt || busy) return
     push({ agent: 'YOU', emoji: '👤', color: colors.cyan, text: txt })
     setInput('')
-    setTimeout(() => {
-      const pool = [
-        { agent: 'Mercer', emoji: '🔵', color: colors.blue, text: `Copy. Processing: "${txt}"` },
-        { agent: 'Rhy', emoji: '🦊', color: colors.green, text: 'The fox heard you. Interesting choice of words.' },
-        { agent: 'Opus', emoji: '🟣', color: colors.violet, text: 'Noted. Aligning with umbrella principles.' },
-        { agent: 'Max', emoji: '⭐', color: colors.gold, text: 'ON IT. Consider it done.' },
-        { agent: 'Local', emoji: '🟢', color: colors.green, text: 'Running local inference... no cloud required.' },
-      ]
-      push(pool[Math.floor(Math.random() * pool.length)])
-    }, 600 + Math.random() * 400)
+    setBusy(true)
+
+    // Pick a random agent to respond
+    const persona = AGENT_PERSONAS[Math.floor(Math.random() * AGENT_PERSONAS.length)]
+    push({ agent: persona.agent, emoji: persona.emoji, color: persona.color, text: '...' })
+
+    const response = await queryLocalLLM(txt, persona)
+    if (response) {
+      // Replace the "..." with real response
+      setMessages(prev => {
+        const copy = [...prev]
+        for (let i = copy.length - 1; i >= 0; i--) {
+          if (copy[i].text === '...' && copy[i].agent === persona.agent) {
+            copy[i] = { ...copy[i], text: response }
+            break
+          }
+        }
+        return copy
+      })
+      llmAlive.current = true
+    } else {
+      // LLM offline — use static fallback
+      const fallback = banterLines.filter(b => b.agent === persona.agent)
+      const line = fallback.length > 0 ? fallback[Math.floor(Math.random() * fallback.length)] : banterLines[0]
+      setMessages(prev => {
+        const copy = [...prev]
+        for (let i = copy.length - 1; i >= 0; i--) {
+          if (copy[i].text === '...' && copy[i].agent === persona.agent) {
+            copy[i] = { ...copy[i], text: line.text }
+            break
+          }
+        }
+        return copy
+      })
+    }
+    setBusy(false)
   }
 
   return (
     <div className="lt-terminal">
       <div className="lt-term-hdr">
         <span>TERMINAL</span>
-        <span className="lt-term-live">● LIVE</span>
+        <span className="lt-term-live">● LIVE {busy && <span className="lt-thinking">THINKING</span>}</span>
       </div>
       <div className="lt-term-body" ref={scrollRef}>
         {messages.map(m => (
@@ -351,7 +560,8 @@ function TerminalPanel() {
           type="text"
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder="Type a message..."
+          placeholder={busy ? 'Thinking...' : 'Type a message...'}
+          disabled={busy}
           autoComplete="off"
           spellCheck={false}
         />
@@ -444,6 +654,7 @@ export function LanternView() {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [devices, setDevices] = useState<DeviceInfo[]>(() => [...knownDevices])
   const [notifCount, setNotifCount] = useState(0)
+  const health = useLLMHealth(5000)
 
   const pushNotif = useCallback((n: Notification) => {
     setNotifications(prev => [...prev, n].slice(-20))
@@ -513,6 +724,7 @@ export function LanternView() {
         </div>
         <LiveClock />
       </div>
+      <SystemVitals health={health} />
       <div className="lt-grid">
         <div className="lt-panel lt-map">
           <div className="lt-panel-lbl">NETWORK MAP</div>
@@ -520,7 +732,7 @@ export function LanternView() {
         </div>
         <div className="lt-panel lt-detail">
           <div className="lt-panel-lbl">NODE INSPECTOR</div>
-          <NodeInspector node={selectedNode} />
+          <NodeInspector node={selectedNode} health={health} />
         </div>
         <div className="lt-panel lt-term-panel">
           <TerminalPanel />
