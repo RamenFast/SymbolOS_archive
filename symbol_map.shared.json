@@ -688,6 +688,11 @@
         "kind": "tool"
       },
       {
+        "path": "scripts/overnight_orchestrator.ps1",
+        "title": "Overnight Orchestrator (Full Saturation)",
+        "kind": "tool"
+      },
+      {
         "path": "memory_graph_3d.html",
         "title": "3D Memory Graph Visualizer",
         "kind": "tool"
@@ -1326,6 +1331,12 @@
       "path": "memory_graph_3d.html",
       "tags": ["3d", "webgl", "three-js", "memory-graph", "dream-engine", "visualization", "gpu"],
       "summary": "Interactive Three.js force-directed 3D visualization of the Dream Engine semantic graph. Renders 65+ nodes by tier/kind with concept-based edges. Uses the GPU 3D rendering pipeline alongside LLM compute."
+    },
+    {
+      "title": "Overnight Orchestrator (Full Saturation)",
+      "path": "scripts/overnight_orchestrator.ps1",
+      "tags": ["automation", "overnight", "gpu", "cpu", "network", "disk", "dream-engine", "orchestrator"],
+      "summary": "Full resource saturation daemon: manages Dream Engine (GPU), repo integrity checks (CPU), git maintenance (network), disk cleanup, symbol drift detection, graph analysis. Produces overnight_report.json each cycle. Auto-restarts LLaMA server if down."
     }
   ]
 }

@@ -178,6 +178,21 @@
       "isBackground": true
     },
     {
+      "label": "SymbolOS: overnight orchestrator (full saturation)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\overnight_orchestrator.ps1"
+      ],
+      "problemMatcher": [],
+      "group": "build",
+      "isBackground": true
+    },
+    {
       "label": "SymbolOS: 3D memory graph (serve + open)",
       "type": "shell",
       "command": "powershell",
