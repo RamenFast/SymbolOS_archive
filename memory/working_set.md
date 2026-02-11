@@ -51,10 +51,11 @@ Complete:
 Active quests:
 - 20260211-002: Memory upgrades (temporal decay, emotional index, semantic search)
 - 20260211-003: Beautiful node detail rendering
-- 20260211-004: Backend architecture (APPROVED — Phase 1 Rust MCP gateway next)
-- 20260211-005: API/MCP server fleet + cybersecurity (APPROVED — vault + identity first)
-- 20260211-007: Cartographer (embeddings GPU engine — HIGHEST PRIORITY per Manus)
+- 20260211-004: Backend architecture (APPROVED — Phase 1 Rust MCP gateway NEXT)
+- 20260211-005: API/MCP server fleet + cybersecurity (Vault + Identity before external connectors)
+- 20260211-007: Cartographer (embeddings GPU engine — BLOCKED: llama.cpp compat issue with nomic-embed model)
 - 20260211-008: Blob emoji system (blobmoji Apache 2.0 fork integration)
+- 20260211-009: Phase 1 backend (Rust MCP gateway — PRIORITY per Ben's directive)
 
 Live infrastructure:
 - Qwen3-8B Q5_K_M on RX 6750 XT Vulkan (~41 tok/s) at http://127.0.0.1:8080
@@ -62,6 +63,7 @@ Live infrastructure:
 - 7 agents in party: Mercer-Opus, CoreGPT-Chasity, Executor, Mercer-Local, Manus-Max, Mercer-GPT, Rhy
 - FFmpeg demo recording active (1280x720, mic + desktop audio)
 - Notification system: discrete event toasts only (removed spam)
+- Cartographer scripts: setup_cartographer_simple.ps1 (downloads nomic-embed-text-v1.5 95MB), cartographer_core.ps1 (embeddings pipeline with UTF-8 fixes) — BLOCKED on llama.cpp compat issue
 
 ## Next actions 🟢 R1 (#228B22 — adaptability)
 
@@ -79,6 +81,12 @@ Live infrastructure:
 - [x] Clean tavern board (restructured, references Issue #5)
 
 **UP NEXT (Phase 1 Backend):**
+1. **Rust MCP Gateway** (mode barrier, agent identity, server discovery) — Ben directed priority
+2. Build vault MCP server (secure local storage for credential metadata only)
+3. Build identity MCP server (did:peer, agent keys, self-sovereign identity)
+4. Blob emoji system (blobmoji Apache 2.0 integration for consistent ☂️🦊🐢 rendering)
+5. Fix Cartographer llama.cpp compatibility (test alternative embedding models or llama.cpp versions)
+6. Memory expansion (semantic search via Cartographer once unblocked)
 - [ ] Cartographer GPU engine (embeddings via llama.cpp `--embedding` flag) — HIGHEST PRIORITY
 - [ ] Rust MCP gateway (single entrypoint, security barrier, dynamic server discovery)
 - [ ] Blob emoji system (blobmoji Apache 2.0 integration, manifest parser, React component)
