@@ -1,0 +1,14 @@
+{
+  "name": "symbolos-mcp-local-llm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server bridging VS Code agents to the local llama.cpp inference endpoint",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  }
+}

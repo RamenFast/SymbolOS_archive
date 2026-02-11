@@ -46,18 +46,20 @@ Manus-Max concurs. The revised recommendation follows.
 
 ## The Final Model Design
 
-### Primary Model: Qwen2.5-8B-Instruct @ Q5_K_M
+### Primary Model: Qwen3-8B @ Q5_K_M
+
+> **Update (2026-02-11):** Upgraded from Qwen2.5-8B-Instruct to **Qwen3-8B**. The Qwen2.5 GGUF repos were removed from HuggingFace; Qwen3 is the successor. Qwen3 has a "thinking mode" (output in `reasoning_content` field) — disable with `chat_template_kwargs: { enable_thinking: false }` for direct answers. Benchmarked at **~41 tok/s** on RX 6750 XT Vulkan. File: `Qwen3-8B-Q5_K_M.gguf` (~5.45 GB).
 
 This is the daily driver. Fully GPU-resident, no CPU offload needed, fast and reliable.
 
 | Property | Value |
 |----------|-------|
-| **Model** | Qwen2.5-8B-Instruct |
+| **Model** | Qwen3-8B |
 | **Quantization** | Q5_K_M |
-| **VRAM** | ~6.5 GB (fits entirely in 10.5 GiB budget) |
-| **Speed** | ~40-60 tok/s on RX 6750 XT via Vulkan |
+| **VRAM** | ~5.5 GB (fits entirely in 10.5 GiB budget) |
+| **Speed** | ~41 tok/s on RX 6750 XT via Vulkan |
 | **Context** | 4096 default, 8192 achievable |
-| **Strengths** | Instruction following, JSON output, markdown, summaries |
+| **Strengths** | Instruction following, JSON output, markdown, summaries, thinking mode |
 | **Tier** | T0 + T1 (free, local) |
 
 This model handles the vast majority of SymbolOS agent work: session log generation, memory updates, doc alignment checks, structured output, ring heartbeat analysis, tavern board posts, and simple code edits. At 40-60 t/s, it feels interactive and responsive.
@@ -105,7 +107,7 @@ Incorporating Opus's hardware reality and role mapping:
 
 | Tier | Name | Where | Model | Speed | Cost | Ring Coverage |
 |------|------|-------|-------|-------|------|-------------|
-| **T0** | Workhorse | Local GPU | Qwen2.5-8B Q5_K_M | 40-60 t/s | $0.00 | R2, R4, R5, R8, R9, R10 |
+| **T0** | Workhorse | Local GPU | Qwen3-8B Q5_K_M | ~41 t/s | $0.00 | R2, R4, R5, R8, R9, R10 |
 | **T1** | Sprint | Local GPU | Phi-4-Mini Q4_K_M | 80-120 t/s | $0.00 | Quick checks, classification |
 | **T2** | Standard | Free cloud tiers | Gemini Flash, Groq | varies | ~free | Multi-step reasoning |
 | **T3** | Premium | Paid cloud | GPT-4o, Claude, Manus | varies | $0.01-0.10 | Architecture, novel design |
@@ -142,7 +144,7 @@ Every inference — local or cloud — gets logged to `memory/m0_episodic/token_
   "ts": "2026-02-11T06:00:00Z",
   "agent": "mercer-local",
   "tier": "T0",
-  "model": "qwen2.5-8b-q5_k_m",
+  "model": "qwen3-8b-q5_k_m",
   "tokens_in": 340,
   "tokens_out": 1200,
   "cost_usd": 0.00,
@@ -170,9 +172,9 @@ Get the latest Windows release from [llama.cpp releases](https://github.com/gger
 
 **Step 3: Download the primary model**
 ```
-Qwen2.5-8B-Instruct-Q5_K_M.gguf (~6.5 GB)
+Qwen3-8B-Q5_K_M.gguf (~5.45 GB)
 ```
-From HuggingFace. Place in `local_ai/models/`.
+From HuggingFace (`Qwen/Qwen3-8B-GGUF`). Place in `local_ai/models/`.
 
 **Step 4: Enable XMP in BIOS**
 Reboot → BIOS → Enable XMP/DOCP profile → DDR4-3200. This gives ~50% more bandwidth for any future CPU offload work.

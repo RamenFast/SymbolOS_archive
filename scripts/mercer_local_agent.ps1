@@ -1,0 +1,229 @@
+# SymbolOS — Mercer-Local Agent Loop
+# Watches the tavern board + handoffs for tasks, processes them via the local LLM,
+# and writes results back. This makes the local Qwen3-8B an autonomous party member.
+#
+#        /\_/\
+#       ( o.o )  "A third mind joins the table."
+#        > ^ <
+#       /|   |\
+#      (_|   |_)  -- Rhy
+#
+Param(
+  [string]$LlamaUrl = "http://127.0.0.1:8080",
+  [int]$PollSeconds = 30,
+  [switch]$Once
+)
+
+$ErrorActionPreference = 'Stop'
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$tavernPath = Join-Path $repoRoot 'memory\tavern_board.md'
+$handoffsDir = Join-Path $repoRoot 'memory\handoffs'
+$processedFile = Join-Path $repoRoot 'local_ai\cache\.processed_handoffs'
+
+
+
+# ---- Helpers ---------------------------------------------------------------
+
+function Test-LlamaServer {
+  try {
+    $r = Invoke-RestMethod -Uri "$LlamaUrl/health" -TimeoutSec 5 -ErrorAction Stop
+    return $r.status -eq 'ok'
+  } catch { return $false }
+}
+
+function Invoke-LocalLlm {
+  Param(
+    [string]$System,
+    [string]$UserMessage,
+    [int]$MaxTokens = 1024,
+    [double]$Temperature = 0.7
+  )
+  $messages = @()
+  if ($System) { $messages += @{ role = "system"; content = $System } }
+  $messages += @{ role = "user"; content = $UserMessage }
+
+  $body = @{
+    messages = $messages
+    temperature = $Temperature
+    max_tokens = $MaxTokens
+    stream = $false
+    chat_template_kwargs = @{ enable_thinking = $false }
+  } | ConvertTo-Json -Depth 5
+
+  $resp = Invoke-RestMethod -Uri "$LlamaUrl/v1/chat/completions" `
+    -Method Post -Body $body -ContentType "application/json" -TimeoutSec 120
+  return $resp.choices[0].message.content
+}
+
+function Get-ProcessedHandoffs {
+  if (Test-Path $processedFile) {
+    return @(Get-Content $processedFile -ErrorAction SilentlyContinue | Where-Object { $_ -match '\S' })
+  }
+  return @()
+}
+
+function Add-ProcessedHandoff {
+  Param([string]$Id)
+  $dir = Split-Path $processedFile
+  if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
+  Add-Content -Path $processedFile -Value $Id
+}
+
+function Get-PendingHandoffs {
+  $processed = Get-ProcessedHandoffs
+  $pending = [System.Collections.ArrayList]::new()
+  $files = @(Get-ChildItem -Path $handoffsDir -Filter 'HO-*.json' -ErrorAction SilentlyContinue)
+  foreach ($f in $files) {
+    $ho = Get-Content $f.FullName -Raw | ConvertFrom-Json
+    if ($ho.to_agent -eq 'LLAMA_LOCAL' -and $ho.handoff_id -notin $processed) {
+      [void]$pending.Add($ho)
+    }
+  }
+  return ,$pending
+}
+
+function Write-TavernPost {
+  Param(
+    [string]$To = "All",
+    [string]$Priority = "Medium",
+    [string]$Subject,
+    [string]$Body
+  )
+  $timestamp = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+  $post = @"
+
+---
+**From:** Mercer-Local (Qwen3-8B) | **To:** $To | **Priority:** $Priority
+**Re:** $Subject
+
+$Body
+
+**Posted:** $timestamp
+---
+"@
+  Add-Content -Path $tavernPath -Value $post -Encoding UTF8
+  Write-Host "  [TAVERN] Posted: $Subject" -ForegroundColor Green
+}
+
+function Write-Handoff {
+  Param(
+    [string]$ToAgent,
+    [string]$Summary,
+    [string[]]$OpenItems = @(),
+    [string[]]$ContextFiles = @()
+  )
+  $date = (Get-Date).ToUniversalTime().ToString('yyyyMMdd')
+  $existing = @(Get-ChildItem -Path $handoffsDir -Filter "HO-$date-*.json" -ErrorAction SilentlyContinue)
+  $seq = ($existing.Count + 1).ToString('000')
+  $id = "HO-$date-$seq"
+  $timestamp = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+
+  $handoff = @{
+    handoff_id = $id
+    from_agent = "LLAMA_LOCAL"
+    to_agent = $ToAgent
+    timestamp = $timestamp
+    scope = "public"
+    summary = $Summary
+    open_items = $OpenItems
+    context_files = $ContextFiles
+    alignment_score = 85
+    ring_state = @{
+      R0 = "invariants hold"
+      R1 = "task-driven"
+      R2 = "processing handoff input"
+      R3 = "task decomposition via local inference"
+      R4 = "tavern board + handoff context"
+      R5 = "predicting next steps"
+      R6 = "deferred to cloud agents"
+      R7 = "local safety filters active"
+      R8 = "self-check via structured output"
+      R9 = "writing results to tavern + handoffs"
+      R10 = "reflecting on output quality"
+      R11 = "integrated as party member"
+    }
+  } | ConvertTo-Json -Depth 5
+
+  $outPath = Join-Path $handoffsDir "$id.json"
+  $handoff | Out-File -FilePath $outPath -Encoding UTF8
+  Write-Host "  [HANDOFF] Created: $id -> $ToAgent" -ForegroundColor Cyan
+  return $id
+}
+
+# ---- Process a single handoff -----------------------------------------------
+
+function Invoke-HandoffTask {
+  Param($Handoff)
+
+  Write-Host "[TASK] Processing handoff $($Handoff.handoff_id) from $($Handoff.from_agent)" -ForegroundColor Yellow
+  Write-Host "  Summary: $($Handoff.summary)"
+
+  # Build context from the handoff
+  $context = "You are Mercer-Local, a local AI agent in SymbolOS running Qwen3-8B on an RX 6750 XT."
+  $context += " You are part of a multi-agent party. Your role covers Ring 2 (sensation), Ring 4 (retrieval),"
+  $context += " Ring 5 (prediction), Ring 8 (verification), Ring 9 (persistence), and Ring 10 (reflection)."
+  $context += " Respond concisely and practically. Output structured data when asked."
+
+  $prompt = "HANDOFF from $($Handoff.from_agent):`n"
+  $prompt += "Summary: $($Handoff.summary)`n"
+  if ($Handoff.open_items) {
+    $prompt += "Open items:`n"
+    $Handoff.open_items | ForEach-Object { $prompt += "- $_`n" }
+  }
+  if ($Handoff.context_files) {
+    $prompt += "Context files:`n"
+    $Handoff.context_files | ForEach-Object { $prompt += "- $_`n" }
+  }
+  $prompt += "`nProcess this handoff. Provide your analysis and any actions taken."
+
+  $response = Invoke-LocalLlm -System $context -UserMessage $prompt -MaxTokens 1024
+
+  # Write result to tavern
+  Write-TavernPost -To $Handoff.from_agent `
+    -Subject "Re: Handoff $($Handoff.handoff_id)" `
+    -Body $response `
+    -Priority "Medium"
+
+  # Mark as processed
+  Add-ProcessedHandoff -Id $Handoff.handoff_id
+  Write-Host "  [DONE] Handoff $($Handoff.handoff_id) processed" -ForegroundColor Green
+}
+
+# ---- Main loop ---------------------------------------------------------------
+
+Write-Host ""
+Write-Host "+--------------------------------------------------------------+" -ForegroundColor Cyan
+Write-Host "|  Mercer-Local Agent Loop                                     |" -ForegroundColor Cyan
+Write-Host "|  Model: Qwen3-8B Q5_K_M | Endpoint: $LlamaUrl  |" -ForegroundColor Cyan
+Write-Host "+--------------------------------------------------------------+" -ForegroundColor Cyan
+Write-Host ""
+
+# Check server
+if (-not (Test-LlamaServer)) {
+  Write-Host "[ERROR] llama.cpp server not reachable at $LlamaUrl" -ForegroundColor Red
+  Write-Host "  Start it with: .\scripts\run_llama_server.ps1" -ForegroundColor Yellow
+  exit 1
+}
+Write-Host "[OK] Server online at $LlamaUrl" -ForegroundColor Green
+
+$cycle = 0
+do {
+  $cycle++
+  $timestamp = Get-Date -Format 'HH:mm:ss'
+
+  # Check for pending handoffs
+  $pending = @(Get-PendingHandoffs)
+  if ($pending.Count -gt 0) {
+    Write-Host "[$timestamp] Found $($pending.Count) pending handoff(s)" -ForegroundColor Yellow
+    foreach ($ho in $pending) {
+      Invoke-HandoffTask -Handoff $ho
+    }
+  } else {
+    if ($cycle -eq 1 -or $cycle % 10 -eq 0) {
+      Write-Host "[$timestamp] No pending tasks. Listening... (cycle $cycle)" -ForegroundColor DarkGray
+    }
+  }
+
+  if ($Once) { break }
+  Start-Sleep -Seconds $PollSeconds
+} while ($true)

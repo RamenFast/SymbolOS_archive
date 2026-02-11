@@ -656,6 +656,21 @@
         "path": "scripts/setup_local_llama.ps1",
         "title": "Local Llama Setup Script (PowerShell)",
         "kind": "tool"
+      },
+      {
+        "path": "scripts/mcp_local_llm/server.mjs",
+        "title": "MCP Local LLM Server (Node.js)",
+        "kind": "tool"
+      },
+      {
+        "path": "scripts/mercer_local_agent.ps1",
+        "title": "Mercer-Local Agent Loop (PowerShell)",
+        "kind": "tool"
+      },
+      {
+        "path": ".vscode/mcp.json",
+        "title": "VS Code MCP Server Config",
+        "kind": "config"
       }
     ],
     "schemas": [
@@ -1241,14 +1256,32 @@
     {
       "title": "Local Llama Design v1",
       "path": "docs/local_llama_design_v1.md",
-      "tags": ["compute", "llama", "local", "vulkan", "qwen", "R6"],
-      "summary": "Co-authored Manus+Opus design spec: Qwen2.5-8B Q5_K_M primary, Phi-4-Mini sprint, 4-tier compute, ring-to-model mapping."
+      "tags": ["compute", "llama", "local", "vulkan", "qwen3", "R6"],
+      "summary": "Co-authored Manus+Opus design spec: Qwen3-8B Q5_K_M primary (upgraded from Qwen2.5), 4-tier compute, ring-to-model mapping, MCP bridge."
     },
     {
       "title": "Local Llama Setup Script",
       "path": "scripts/setup_local_llama.ps1",
       "tags": ["tool", "powershell", "setup", "llama", "download"],
-      "summary": "Downloads llama.cpp Vulkan build + Qwen2.5-8B GGUF model. Resume-capable, multi-source fallback."
+      "summary": "Downloads llama.cpp Vulkan build + Qwen3-8B GGUF model. Resume-capable, multi-source fallback."
+    },
+    {
+      "title": "MCP Local LLM Server",
+      "path": "scripts/mcp_local_llm/server.mjs",
+      "tags": ["mcp", "local-llm", "bridge", "tools", "node"],
+      "summary": "MCP stdio server bridging VS Code agents to local llama.cpp. Tools: chat (think/no-think toggle), status, tokenize."
+    },
+    {
+      "title": "Agent Loop (Mercer-Local)",
+      "path": "scripts/mercer_local_agent.ps1",
+      "tags": ["agent", "loop", "local-llm", "handoffs", "tavern"],
+      "summary": "Autonomous agent loop: polls handoffs for LLAMA_LOCAL tasks, processes via Qwen3-8B, posts results to tavern board."
+    },
+    {
+      "title": "VS Code MCP Server Config",
+      "path": ".vscode/mcp.json",
+      "tags": ["vscode", "mcp", "config", "local-llm"],
+      "summary": "Registers the symbolos-local-llm MCP server with VS Code Copilot for agent access to the local LLM."
     }
   ]
 }

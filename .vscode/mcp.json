@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "symbolos-local-llm": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["scripts/mcp_local_llm/server.mjs"],
+      "env": {
+        "LLAMA_BASE_URL": "http://127.0.0.1:8080"
+      }
+    }
+  }
+}
