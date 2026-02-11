@@ -14,7 +14,7 @@ Param(
   [string]$ModelPath = "",
   [string]$BindIP = "127.0.0.1",
   [int]$Port = 8080,
-  [int]$Context = 4096,
+  [int]$Context = 32768,
   [int]$GpuLayers = 999,
   [int]$Threads = 0
 )
@@ -93,6 +93,8 @@ Write-Host "  url:   http://${BindIP}:${Port}"
 # --no-webui             → disables web UI; API-only (MCP + scripts access via /v1/*)
 # --reasoning-format none  → keeps thoughts in content (not split to reasoning_content)
 # --chat-template-kwargs   → tells the Jinja template to disable thinking by default
+# -fa                    -> flash attention (lower VRAM for KV cache, enables larger ctx)
+# --parallel 4           -> concurrent request slots (fills GPU between token bursts)
 # Per-request overrides still work (e.g. MCP server can send enable_thinking: true)
 $cliParams = @(
   '--host', $BindIP,
@@ -100,6 +102,8 @@ $cliParams = @(
   '-m', $ModelPath,
   '-c', "$Context",
   '-ngl', "$GpuLayers",
+  '-fa', 'on',
+  '--parallel', '4',
   '--no-webui',
   '--reasoning-format', 'none',
   '--chat-template-kwargs', '{\"enable_thinking\":false}'
