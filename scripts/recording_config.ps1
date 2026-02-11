@@ -146,15 +146,15 @@ function Set-RecordingMode {
     Write-Host "`nFFmpeg Recording Options:" -ForegroundColor Cyan
     $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
     $outputFile = "recording_$timestamp.mp4"
-    
+
     Write-Host "`nOPTION 1: Primary Monitor Only (1920x1080) - RECOMMENDED" -ForegroundColor Green
     Write-Host "ffmpeg -f gdigrab -framerate 30 -offset_x 0 -offset_y 0 -video_size 1920x1080 -i desktop -c:v libx264 -preset fast -crf 23 -pix_fmt yuv420p $outputFile" -ForegroundColor Yellow
     Write-Host "  Output: Clean 1920x1080 video (3-5 GB/hour)"
-    
+
     Write-Host "`nOPTION 2: Both Monitors (3640x1920) - Large File" -ForegroundColor Yellow
     Write-Host "ffmpeg -f gdigrab -framerate 30 -i desktop -c:v libx264 -preset fast -crf 23 -pix_fmt yuv420p $outputFile" -ForegroundColor Yellow
     Write-Host "  Output: Ultra-wide 3640x1920 video (15-20 GB/hour)"
-    
+
     Write-Host "`nOPTION 3: With Webcam Overlay (Picture-in-Picture)" -ForegroundColor Cyan
     Write-Host "# List webcam devices first:"
     Write-Host "ffmpeg -list_devices true -f dshow -i dummy" -ForegroundColor Gray
