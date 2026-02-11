@@ -681,6 +681,16 @@
         "path": "memory/quest_threads/QT-005_Hub_Architecture.md",
         "title": "QT-005: Hub Architecture",
         "kind": "memory"
+      },
+      {
+        "path": "scripts/memory_consolidation.ps1",
+        "title": "Dream Engine (Memory Consolidation Daemon)",
+        "kind": "tool"
+      },
+      {
+        "path": "memory_graph_3d.html",
+        "title": "3D Memory Graph Visualizer",
+        "kind": "tool"
       }
     ],
     "schemas": [
@@ -1304,6 +1314,18 @@
       "path": "memory/quest_threads/QT-005_Hub_Architecture.md",
       "tags": ["quest", "hub", "architecture", "QT-005"],
       "summary": "Quest thread tracking the Hub Architecture initiative. Phase 1: desktop-only, offline-first orchestrator daemon."
+    },
+    {
+      "title": "Dream Engine (Memory Consolidation Daemon)",
+      "path": "scripts/memory_consolidation.ps1",
+      "tags": ["memory", "consolidation", "gpu", "dream-engine", "parallel", "semantic-graph"],
+      "summary": "Background daemon that saturates GPU parallel slots by continuously processing memory/docs files through the LLM. Extracts concepts, connections, and summaries into a semantic dream graph (memory_graph.json). Like biological sleep consolidation."
+    },
+    {
+      "title": "3D Memory Graph Visualizer",
+      "path": "memory_graph_3d.html",
+      "tags": ["3d", "webgl", "three-js", "memory-graph", "dream-engine", "visualization", "gpu"],
+      "summary": "Interactive Three.js force-directed 3D visualization of the Dream Engine semantic graph. Renders 65+ nodes by tier/kind with concept-based edges. Uses the GPU 3D rendering pipeline alongside LLM compute."
     }
   ]
 }

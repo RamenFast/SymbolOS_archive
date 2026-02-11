@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&#9730;&#65039; SymbolOS Dream Engine - 3D Memory Graph</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #080810; overflow: hidden; font-family: 'Cascadia Code','Fira Code','Courier New',monospace; color: #d8d8e0; }
+  canvas { display: block; }
+
+  /* HUD overlay */
+  #hud { position: fixed; top: 0; left: 0; right: 0; pointer-events: none; z-index: 10; padding: 12px 16px; display: flex; justify-content: space-between; align-items: flex-start; }
+  #hud-left { pointer-events: auto; }
+  #hud-right { text-align: right; pointer-events: auto; }
+  .hud-title { font-size: 14px; color: #FADA5E; font-weight: 700; letter-spacing: 2px; text-shadow: 0 0 12px rgba(250,218,94,.3); }
+  .hud-sub { font-size: 10px; color: #556; margin-top: 2px; letter-spacing: 1px; }
+  .hud-stats { font-size: 10px; color: #556; line-height: 1.6; }
+  .hud-stats .val { color: #00e5ff; }
+
+  /* Legend */
+  #legend { position: fixed; bottom: 12px; left: 12px; z-index: 10; font-size: 9px; line-height: 1.8; pointer-events: auto; background: rgba(8,8,16,.85); border: 1px solid #1a1a2a; border-radius: 4px; padding: 8px 12px; }
+  #legend h3 { font-size: 10px; color: #00e5ff; margin-bottom: 4px; font-weight: 400; letter-spacing: 1px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; }
+  .legend-item:hover { opacity: 1; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { color: #888; }
+  .legend-count { color: #556; margin-left: auto; padding-left: 12px; }
+
+  /* Node info panel */
+  #info { position: fixed; top: 50%; right: 16px; transform: translateY(-50%); z-index: 10; width: 280px; background: rgba(8,8,16,.92); border: 1px solid #1a1a2a; border-radius: 6px; padding: 16px; display: none; pointer-events: auto; max-height: 80vh; overflow-y: auto; }
+  #info.show { display: block; }
+  #info-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #556; font-size: 14px; cursor: pointer; font-family: inherit; }
+  #info-close:hover { color: #d8d8e0; }
+  #info-title { font-size: 12px; font-weight: 700; color: #FADA5E; margin-bottom: 4px; word-break: break-word; }
+  #info-tier { font-size: 9px; color: #556; margin-bottom: 8px; }
+  #info-summary { font-size: 10px; color: #aaa; line-height: 1.5; margin-bottom: 10px; }
+  .info-section { font-size: 9px; color: #00e5ff; margin-top: 8px; margin-bottom: 2px; letter-spacing: 1px; }
+  .info-list { font-size: 9px; color: #888; line-height: 1.6; padding-left: 10px; }
+  .info-list li { list-style: none; position: relative; }
+  .info-list li::before { content: ''; position: absolute; left: -8px; top: 6px; width: 3px; height: 3px; border-radius: 50%; background: #334; }
+  .info-symbols { font-size: 12px; margin-top: 6px; letter-spacing: 2px; }
+
+  /* Controls hint */
+  #controls-hint { position: fixed; bottom: 12px; right: 12px; z-index: 10; font-size: 9px; color: #334; text-align: right; line-height: 1.6; pointer-events: none; }
+
+  /* Loading */
+  #loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #080810; z-index: 100; flex-direction: column; gap: 12px; }
+  #loading .spinner { width: 30px; height: 30px; border: 2px solid #1a1a2a; border-top-color: #FADA5E; border-radius: 50%; animation: spin 1s linear infinite; }
+  #loading .text { font-size: 11px; color: #556; letter-spacing: 2px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Scrollbar for info panel */
+  #info::-webkit-scrollbar { width: 4px; }
+  #info::-webkit-scrollbar-track { background: transparent; }
+  #info::-webkit-scrollbar-thumb { background: #1a1a2a; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <div class="text">LOADING DREAM ENGINE GRAPH</div>
+</div>
+
+<div id="hud">
+  <div id="hud-left">
+    <div class="hud-title">&#9730;&#65039; DREAM ENGINE</div>
+    <div class="hud-sub">3D MEMORY GRAPH</div>
+  </div>
+  <div id="hud-right">
+    <div class="hud-stats" id="stats"></div>
+  </div>
+</div>
+
+<div id="legend"></div>
+
+<div id="info">
+  <button id="info-close" onclick="closeInfo()">&times;</button>
+  <div id="info-title"></div>
+  <div id="info-tier"></div>
+  <div id="info-summary"></div>
+  <div id="info-details"></div>
+</div>
+
+<div id="controls-hint">
+  DRAG to orbit &middot; SCROLL to zoom<br>
+  CLICK node for details &middot; ESC to close
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ---- Color palette by tier (SymbolOS ring colors) ----
+const TIER_COLORS = {
+  m0_episodic:    0xFADA5E,  // Primrose - R0
+  m1_semantic:    0x228B22,  // Green - R1
+  m2_procedural:  0xE49B0F,  // Gamboge - R2
+  m3_intentional: 0xFF8C00,  // Orange - R3
+  m4_affective:   0xFFB7C5,  // Rose
+  m5_relational:  0x8B00FF,  // Violet - R4
+  m6_predictive:  0x0000CD,  // Blue - R6
+  core:           0xFFD700,  // Gold - R7
+  docs:           0x00E5FF,  // Cyan
+  sessions:       0x87CEEB,  // Azure
+  quests:         0xFF2400,  // Scarlet
+};
+const DEFAULT_COLOR = 0x556677;
+
+const TIER_LABELS = {
+  m0_episodic: 'M0 Episodic', m1_semantic: 'M1 Semantic', m2_procedural: 'M2 Procedural',
+  m3_intentional: 'M3 Intentional', m4_affective: 'M4 Affective', m5_relational: 'M5 Relational',
+  m6_predictive: 'M6 Predictive', core: 'Core', docs: 'Docs', sessions: 'Sessions', quests: 'Quests'
+};
+
+// ---- Load graph data ----
+let graphData;
+try {
+  const resp = await fetch('local_ai/cache/memory_graph.json');
+  graphData = await resp.json();
+} catch(e) {
+  document.getElementById('loading').innerHTML =
+    '<div class="text" style="color:#ff2400">Failed to load memory_graph.json<br><span style="color:#556">Run the Dream Engine first, or serve from the repo root.</span></div>';
+  throw e;
+}
+
+const nodes = graphData.nodes;
+const globalConcepts = graphData.global_concepts || [];
+
+// ---- Build edges: nodes sharing concepts ----
+// Build concept -> nodeIndex map
+const conceptToNodes = new Map();
+nodes.forEach((n, i) => {
+  (n.concepts || []).forEach(c => {
+    if (!conceptToNodes.has(c)) conceptToNodes.set(c, []);
+    conceptToNodes.get(c).push(i);
+  });
+});
+
+// Build edge list (unique pairs, weight = shared concept count)
+const edgeMap = new Map();
+for (const [, indices] of conceptToNodes) {
+  for (let a = 0; a < indices.length; a++) {
+    for (let b = a + 1; b < indices.length; b++) {
+      const key = indices[a] < indices[b] ? `${indices[a]}-${indices[b]}` : `${indices[b]}-${indices[a]}`;
+      edgeMap.set(key, (edgeMap.get(key) || 0) + 1);
+    }
+  }
+}
+const edges = [];
+for (const [key, weight] of edgeMap) {
+  const [a, b] = key.split('-').map(Number);
+  edges.push({ a, b, weight });
+}
+
+// ---- Stats ----
+const tierCounts = {};
+nodes.forEach(n => { tierCounts[n.tier] = (tierCounts[n.tier] || 0) + 1; });
+document.getElementById('stats').innerHTML =
+  `NODES <span class="val">${nodes.length}</span> &middot; ` +
+  `EDGES <span class="val">${edges.length}</span> &middot; ` +
+  `CONCEPTS <span class="val">${globalConcepts.length}</span> &middot; ` +
+  `CYCLES <span class="val">${graphData.cycle_count || 0}</span>`;
+
+// ---- Legend ----
+const legendEl = document.getElementById('legend');
+let legendHtml = '<h3>TIERS</h3>';
+for (const [tier, label] of Object.entries(TIER_LABELS)) {
+  const count = tierCounts[tier] || 0;
+  if (count === 0) continue;
+  const hex = '#' + (TIER_COLORS[tier] || DEFAULT_COLOR).toString(16).padStart(6, '0');
+  legendHtml += `<div class="legend-item" data-tier="${tier}"><span class="legend-dot" style="background:${hex}"></span><span class="legend-label">${label}</span><span class="legend-count">${count}</span></div>`;
+}
+legendEl.innerHTML = legendHtml;
+
+// ---- Three.js setup ----
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x080810, 0.003);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+camera.position.set(0, 40, 120);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x080810);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.minDistance = 10;
+controls.maxDistance = 500;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.3;
+
+// ---- Lighting ----
+scene.add(new THREE.AmbientLight(0x222233, 0.6));
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(50, 80, 60);
+scene.add(dirLight);
+const pointLight = new THREE.PointLight(0xFADA5E, 0.4, 200);
+pointLight.position.set(0, 30, 0);
+scene.add(pointLight);
+
+// ---- Create node meshes ----
+const nodeMeshes = [];
+const nodePositions = []; // vec3 arrays for physics
+const nodeVelocities = [];
+
+const sphereGeo = new THREE.SphereGeometry(1, 16, 12);
+
+nodes.forEach((n, i) => {
+  const color = TIER_COLORS[n.tier] || DEFAULT_COLOR;
+  const conceptCount = (n.concepts || []).length;
+  const radius = 0.8 + conceptCount * 0.3;
+
+  const mat = new THREE.MeshStandardMaterial({
+    color,
+    emissive: color,
+    emissiveIntensity: 0.15,
+    roughness: 0.6,
+    metalness: 0.3,
+  });
+
+  const mesh = new THREE.Mesh(sphereGeo, mat);
+  mesh.scale.setScalar(radius);
+  mesh.userData = { index: i, node: n, baseRadius: radius, color };
+
+  // Random initial positions in a sphere
+  const phi = Math.random() * Math.PI * 2;
+  const theta = Math.acos(2 * Math.random() - 1);
+  const r = 30 + Math.random() * 40;
+  mesh.position.set(
+    r * Math.sin(theta) * Math.cos(phi),
+    r * Math.sin(theta) * Math.sin(phi),
+    r * Math.cos(theta)
+  );
+
+  scene.add(mesh);
+  nodeMeshes.push(mesh);
+  nodePositions.push(mesh.position.clone());
+  nodeVelocities.push(new THREE.Vector3());
+});
+
+// ---- Create edge lines ----
+const edgeGeometry = new THREE.BufferGeometry();
+const edgePositions = new Float32Array(edges.length * 6);
+const edgeColors = new Float32Array(edges.length * 6);
+edgeGeometry.setAttribute('position', new THREE.BufferAttribute(edgePositions, 3));
+edgeGeometry.setAttribute('color', new THREE.BufferAttribute(edgeColors, 3));
+
+const edgeMaterial = new THREE.LineBasicMaterial({
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.25,
+  depthWrite: false,
+});
+const edgeLines = new THREE.LineSegments(edgeGeometry, edgeMaterial);
+scene.add(edgeLines);
+
+function updateEdgeGeometry() {
+  const pos = edgeGeometry.attributes.position.array;
+  const col = edgeGeometry.attributes.color.array;
+  for (let i = 0; i < edges.length; i++) {
+    const e = edges[i];
+    const pa = nodeMeshes[e.a].position;
+    const pb = nodeMeshes[e.b].position;
+    const base = i * 6;
+    pos[base] = pa.x; pos[base + 1] = pa.y; pos[base + 2] = pa.z;
+    pos[base + 3] = pb.x; pos[base + 4] = pb.y; pos[base + 5] = pb.z;
+
+    // Blend colors of connected nodes
+    const ca = new THREE.Color(nodeMeshes[e.a].userData.color);
+    const cb = new THREE.Color(nodeMeshes[e.b].userData.color);
+    col[base] = ca.r; col[base + 1] = ca.g; col[base + 2] = ca.b;
+    col[base + 3] = cb.r; col[base + 4] = cb.g; col[base + 5] = cb.b;
+  }
+  edgeGeometry.attributes.position.needsUpdate = true;
+  edgeGeometry.attributes.color.needsUpdate = true;
+}
+
+// ---- Force-directed layout (velocity verlet) ----
+const REPULSION = 800;
+const ATTRACTION = 0.005;
+const GRAVITY = 0.02;
+const DAMPING = 0.92;
+const MAX_VELOCITY = 2;
+let layoutCooling = 1.0;
+
+function layoutStep() {
+  const n = nodeMeshes.length;
+  const forces = nodeMeshes.map(() => new THREE.Vector3());
+
+  // Repulsion (all pairs via Barnes-Hut approximation simplified: direct for <200 nodes)
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      const diff = new THREE.Vector3().subVectors(nodeMeshes[i].position, nodeMeshes[j].position);
+      const distSq = diff.lengthSq() + 1;
+      const force = REPULSION / distSq;
+      diff.normalize().multiplyScalar(force * layoutCooling);
+      forces[i].add(diff);
+      forces[j].sub(diff);
+    }
+  }
+
+  // Attraction (edges)
+  for (const e of edges) {
+    const diff = new THREE.Vector3().subVectors(nodeMeshes[e.b].position, nodeMeshes[e.a].position);
+    const dist = diff.length();
+    const idealDist = 15;
+    const force = ATTRACTION * (dist - idealDist) * e.weight * layoutCooling;
+    diff.normalize().multiplyScalar(force);
+    forces[e.a].add(diff);
+    forces[e.b].sub(diff);
+  }
+
+  // Gravity toward center
+  for (let i = 0; i < n; i++) {
+    const toCenter = nodeMeshes[i].position.clone().negate().multiplyScalar(GRAVITY * layoutCooling);
+    forces[i].add(toCenter);
+  }
+
+  // Apply forces
+  for (let i = 0; i < n; i++) {
+    nodeVelocities[i].add(forces[i]);
+    nodeVelocities[i].multiplyScalar(DAMPING);
+    // Clamp velocity
+    if (nodeVelocities[i].length() > MAX_VELOCITY * layoutCooling) {
+      nodeVelocities[i].normalize().multiplyScalar(MAX_VELOCITY * layoutCooling);
+    }
+    nodeMeshes[i].position.add(nodeVelocities[i]);
+  }
+
+  // Cool down slowly
+  layoutCooling = Math.max(layoutCooling * 0.998, 0.05);
+}
+
+// ---- Raycaster for interaction ----
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredMesh = null;
+let selectedMesh = null;
+
+renderer.domElement.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+
+renderer.domElement.addEventListener('click', () => {
+  if (hoveredMesh) {
+    selectNode(hoveredMesh);
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeInfo();
+});
+
+function selectNode(mesh) {
+  // Deselect previous
+  if (selectedMesh && selectedMesh !== mesh) {
+    selectedMesh.material.emissiveIntensity = 0.15;
+    selectedMesh.scale.setScalar(selectedMesh.userData.baseRadius);
+  }
+  selectedMesh = mesh;
+  mesh.material.emissiveIntensity = 0.5;
+  mesh.scale.setScalar(mesh.userData.baseRadius * 1.3);
+
+  const n = mesh.userData.node;
+  document.getElementById('info-title').textContent = n.source;
+  document.getElementById('info-tier').textContent =
+    `${(TIER_LABELS[n.tier] || n.tier).toUpperCase()} | ${n.kind} | ${n.emotional_valence || 'neutral'}`;
+
+  document.getElementById('info-summary').textContent = n.summary || '(no summary)';
+
+  let details = '';
+  if (n.concepts && n.concepts.length) {
+    details += `<div class="info-section">CONCEPTS</div><ul class="info-list">${n.concepts.map(c => `<li>${esc(c)}</li>`).join('')}</ul>`;
+  }
+  if (n.connections && n.connections.length) {
+    details += `<div class="info-section">CONNECTIONS</div><ul class="info-list">${n.connections.map(c => `<li>${esc(c.to_concept)} <span style="color:#556">(${c.relation}, ${c.strength})</span></li>`).join('')}</ul>`;
+  }
+  if (n.open_threads && n.open_threads.length) {
+    details += `<div class="info-section">OPEN THREADS</div><ul class="info-list">${n.open_threads.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
+  }
+  if (n.symbols_referenced && n.symbols_referenced.length) {
+    details += `<div class="info-section">SYMBOLS</div><div class="info-symbols">${n.symbols_referenced.map(s => esc(s)).join(' ')}</div>`;
+  }
+  document.getElementById('info-details').innerHTML = details;
+  document.getElementById('info').classList.add('show');
+
+  // Highlight connected edges
+  highlightConnections(mesh.userData.index);
+}
+
+function highlightConnections(idx) {
+  // Reset edge opacity
+  edgeMaterial.opacity = 0.08;
+  // We'll handle per-edge highlighting via vertex colors in updateEdgeGeometry
+}
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+window.closeInfo = function() {
+  document.getElementById('info').classList.remove('show');
+  if (selectedMesh) {
+    selectedMesh.material.emissiveIntensity = 0.15;
+    selectedMesh.scale.setScalar(selectedMesh.userData.baseRadius);
+    selectedMesh = null;
+  }
+  edgeMaterial.opacity = 0.25;
+};
+
+// ---- Background stars ----
+const starGeo = new THREE.BufferGeometry();
+const starCount = 1500;
+const starPositionsArr = new Float32Array(starCount * 3);
+for (let i = 0; i < starCount * 3; i++) {
+  starPositionsArr[i] = (Math.random() - 0.5) * 800;
+}
+starGeo.setAttribute('position', new THREE.BufferAttribute(starPositionsArr, 3));
+const starMat = new THREE.PointsMaterial({ color: 0x334455, size: 0.5, sizeAttenuation: true });
+scene.add(new THREE.Points(starGeo, starMat));
+
+// ---- Central glow (SymbolOS core) ----
+const glowGeo = new THREE.SphereGeometry(2, 32, 24);
+const glowMat = new THREE.MeshBasicMaterial({ color: 0xFADA5E, transparent: true, opacity: 0.08 });
+const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+scene.add(glowMesh);
+
+// ---- Animation loop ----
+const clock = new THREE.Clock();
+let frame = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  frame++;
+  const dt = clock.getDelta();
+
+  // Run layout physics (more steps early, fewer later)
+  const layoutSteps = layoutCooling > 0.2 ? 3 : 1;
+  for (let s = 0; s < layoutSteps; s++) layoutStep();
+
+  // Update edges
+  updateEdgeGeometry();
+
+  // Hover detection (every 3 frames for performance)
+  if (frame % 3 === 0) {
+    raycaster.setFromCamera(mouse, camera);
+    const hits = raycaster.intersectObjects(nodeMeshes);
+    if (hoveredMesh && hoveredMesh !== selectedMesh) {
+      hoveredMesh.material.emissiveIntensity = 0.15;
+      hoveredMesh.scale.setScalar(hoveredMesh.userData.baseRadius);
+    }
+    if (hits.length > 0) {
+      hoveredMesh = hits[0].object;
+      if (hoveredMesh !== selectedMesh) {
+        hoveredMesh.material.emissiveIntensity = 0.35;
+        hoveredMesh.scale.setScalar(hoveredMesh.userData.baseRadius * 1.15);
+      }
+      renderer.domElement.style.cursor = 'pointer';
+    } else {
+      hoveredMesh = null;
+      renderer.domElement.style.cursor = 'default';
+    }
+  }
+
+  // Gentle node breathing
+  const t = clock.elapsedTime;
+  nodeMeshes.forEach((m, i) => {
+    const breath = 1 + Math.sin(t * 0.8 + i * 0.5) * 0.03;
+    if (m !== selectedMesh && m !== hoveredMesh) {
+      m.scale.setScalar(m.userData.baseRadius * breath);
+    }
+  });
+
+  // Central glow pulse
+  glowMesh.scale.setScalar(2 + Math.sin(t * 0.5) * 0.3);
+  glowMat.opacity = 0.05 + Math.sin(t * 0.3) * 0.02;
+
+  // Point light orbit
+  pointLight.position.set(Math.cos(t * 0.2) * 40, 20 + Math.sin(t * 0.15) * 10, Math.sin(t * 0.2) * 40);
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// ---- Resize handler ----
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---- Remove loading screen ----
+document.getElementById('loading').style.display = 'none';
+
+animate();
+</script>
+</body>
+</html>

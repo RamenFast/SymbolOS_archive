@@ -161,6 +161,36 @@
       "problemMatcher": [],
       "group": "build",
       "isBackground": true
+    },
+    {
+      "label": "SymbolOS: dream engine (memory consolidation)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\memory_consolidation.ps1"
+      ],
+      "problemMatcher": [],
+      "group": "build",
+      "isBackground": true
+    },
+    {
+      "label": "SymbolOS: 3D memory graph (serve + open)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Start-Process 'http://127.0.0.1:8888/memory_graph_3d.html'; Set-Location '${workspaceFolder}'; py -m http.server 8888 --bind 127.0.0.1"
+      ],
+      "problemMatcher": [],
+      "group": "build",
+      "isBackground": true
     }
   ]
 }

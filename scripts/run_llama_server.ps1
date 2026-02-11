@@ -16,10 +16,23 @@ Param(
   [int]$Port = 8080,
   [int]$Context = 32768,
   [int]$GpuLayers = 999,
-  [int]$Threads = 0
+  [int]$Threads = 0,
+  [switch]$AllowRemoteBind
 )
 
 $ErrorActionPreference = 'Stop'
+
+# Validate BindIP — the LLM server has no authentication, so binding to
+# non-loopback interfaces exposes it to the entire network.
+if ($BindIP -ne '127.0.0.1' -and $BindIP -ne 'localhost' -and $BindIP -ne '::1') {
+  if (-not $AllowRemoteBind) {
+    Write-Host "[WARN] BindIP '$BindIP' is non-loopback. The llama.cpp server has NO authentication." -ForegroundColor Red
+    Write-Host "       Anyone on your network could query the model or abuse GPU resources." -ForegroundColor Red
+    Write-Host "       Pass -AllowRemoteBind to override this check." -ForegroundColor Red
+    exit 1
+  }
+  Write-Host "[WARN] Binding to $BindIP (non-loopback) — server is network-accessible!" -ForegroundColor Yellow
+}
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $binDir = Join-Path $repoRoot 'local_ai\bin'

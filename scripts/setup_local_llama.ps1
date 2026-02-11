@@ -26,8 +26,19 @@ Param(
   [switch]$SkipVerify,
   [ValidateSet('qwen8b', 'phi4')]
   [string]$Model = 'qwen8b',
-  [string]$HfToken = ''
+  [string]$HfToken = '',
+  [string]$HfTokenFile = ''
 )
+
+# ── Credential handling ───────────────────────────────────────
+# Prefer env var or file over CLI arg to avoid leaking tokens in
+# process lists, shell history, and event logs.
+#   Priority: -HfTokenFile > $env:HF_TOKEN > -HfToken
+if ($HfTokenFile -and (Test-Path -LiteralPath $HfTokenFile)) {
+  $HfToken = (Get-Content -LiteralPath $HfTokenFile -TotalCount 1 -ErrorAction Stop).Trim()
+} elseif (-not $HfToken -and $env:HF_TOKEN) {
+  $HfToken = $env:HF_TOKEN
+}
 
 $ErrorActionPreference = 'Stop'
 
@@ -161,6 +172,11 @@ if (-not $SkipBinary) {
     try {
       $releaseInfo = Invoke-RestMethod -Uri 'https://api.github.com/repos/ggml-org/llama.cpp/releases/latest' -TimeoutSec 30
       $tag = $releaseInfo.tag_name
+      # Sanitize: tag should be alphanumeric + dots/dashes only (e.g. "b7993")
+      if ($tag -notmatch '^[a-zA-Z0-9._-]+$') {
+        Write-Warn "Unexpected tag format '$tag', falling back to known release"
+        $tag = 'b7993'
+      }
       Write-Ok "Latest release: $tag"
     } catch {
       Write-Warn "GitHub API failed, using known latest: b7993"
