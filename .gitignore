@@ -3,6 +3,10 @@
 /local_ai/models/
 /local_ai/cache/
 
+# Build outputs
+/dist/
+/web/dist/
+
 # Common tooling
 *.log
 *.tmp

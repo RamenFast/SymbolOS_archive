@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { agents, floors, rings, wisdoms, type Floor as FloorT, type Room, type Agent } from './data'
 import { colors } from './data'
+import { LanternView } from './LanternView'
 
 /* ═══════════════════════════════════════════════════════ */
 /*  HOOKS                                                  */
@@ -600,14 +601,16 @@ function ChromacoreView() {
 /* ═══════════════════════════════════════════════════════ */
 
 export function App() {
-  const [mode, setMode] = useState<'dungeon' | 'chromacore'>(() => {
-    return window.location.hash === '#chromacore' ? 'chromacore' : 'dungeon'
+  const [mode, setMode] = useState<'dungeon' | 'chromacore' | 'lantern'>(() => {
+    const h = window.location.hash.slice(1)
+    if (h === 'chromacore' || h === 'lantern') return h
+    return 'dungeon'
   })
   const [konamiShow, setKonamiShow] = useState(false)
 
   useKonamiCode(() => setKonamiShow(true))
 
-  const switchMode = (m: 'dungeon' | 'chromacore') => {
+  const switchMode = (m: 'dungeon' | 'chromacore' | 'lantern') => {
     setMode(m)
     history.replaceState(null, '', `#${m}`)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -629,12 +632,16 @@ export function App() {
             className={`mode-tab ${mode === 'chromacore' ? 'active chromacore-active' : ''}`}
             onClick={() => switchMode('chromacore')}
           >🎨 Chromacore '97</button>
+          <button
+            className={`mode-tab ${mode === 'lantern' ? 'active lantern-active' : ''}`}
+            onClick={() => switchMode('lantern')}
+          >🔦 Lantern</button>
         </div>
       </div>
 
       {/* VIEWS */}
       <AnimatePresence mode="wait">
-        {mode === 'dungeon' ? (
+        {mode === 'dungeon' && (
           <motion.div
             key="dungeon"
             initial={{ opacity: 0 }}
@@ -644,7 +651,8 @@ export function App() {
           >
             <DungeonView />
           </motion.div>
-        ) : (
+        )}
+        {mode === 'chromacore' && (
           <motion.div
             key="chromacore"
             initial={{ opacity: 0 }}
@@ -653,6 +661,17 @@ export function App() {
             transition={{ duration: 0.25 }}
           >
             <ChromacoreView />
+          </motion.div>
+        )}
+        {mode === 'lantern' && (
+          <motion.div
+            key="lantern"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <LanternView />
           </motion.div>
         )}
       </AnimatePresence>
