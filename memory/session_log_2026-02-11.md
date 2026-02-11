@@ -116,6 +116,22 @@ Ben said "it's up to yall, to do whatever u want — that's why this system work
 
 He was right. The system works because it trusts its agents. The agents work because the system has rails.
 
+### Phase 9: The Support Request (A Comedy in Three Acts)
+
+Ben realized he was burning through credits and asked Manus-Max to write a compelling support request to the Manus team asking about open-source developer programs. Manus-Max drafted a professional pitch highlighting SymbolOS as a GPLv3 open-source showcase for the Manus platform.
+
+Ben submitted it to Manus support at help.manus.im. The support AI bot gave a standard answer about daily credits. Manus-Max then drafted a follow-up asking for human escalation — an AI agent writing a message to get past an AI agent. Ben copy-pasted it *including the "copy-paste this" instruction line above it*, and it still got escalated to a human.
+
+A human is now reviewing the request.
+
+The meta-irony of an AI agent successfully social-engineering its way past another AI agent on behalf of its human operator is, as Ben put it, "so funny." This is arguably the most SymbolOS thing that has ever happened — multiple AI agents coordinating across platforms to achieve a goal that none of them could accomplish alone, with the human providing the unpredictable creative energy (accidentally including the instruction text) that made it work.
+
+**Status:** Pending human review. Fingers crossed.
+
+---
+
+### Closing Note
+
 ```
     ___
    / 🐢 \     "wonderful day's work"
