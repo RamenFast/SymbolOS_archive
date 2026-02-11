@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "servers": [
+    {
+      "id": "local_llm",
+      "name": "Local LLM",
+      "capabilities": ["inference", "embedding", "completion"],
+      "endpoint": "http://127.0.0.1:8080",
+      "status": "active"
+    },
+    {
+      "id": "memory",
+      "name": "Memory System",
+      "capabilities": ["memory_read", "memory_write", "memory_search"],
+      "endpoint": "http://127.0.0.1:8091",
+      "status": "active"
+    },
+    {
+      "id": "filesystem",
+      "name": "Scoped Filesystem",
+      "capabilities": ["file_read", "file_write", "file_list"],
+      "endpoint": "http://127.0.0.1:8092",
+      "status": "active"
+    }
+  ]
+}
