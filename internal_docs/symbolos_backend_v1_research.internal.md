@@ -14,6 +14,7 @@
 **Date:** 2026-02-11
 **Status:** Research / Architecture Proposal — NOT FOR IMPLEMENTATION YET
 **Review:** Mercer-GPT + Manus-Max (via GitHub Issues)
+**Companion Doc:** `symbolos_api_mcp_cybersecurity_v1.internal.md` (API/MCP fleet + cybersecurity)
 **Quests:** 20260211-001 (The Lantern), 20260211-004 (Backend Architecture)
 
 ---

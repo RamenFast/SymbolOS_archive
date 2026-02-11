@@ -458,6 +458,11 @@
         "kind": "design"
       },
       {
+        "path": "internal_docs/symbolos_api_mcp_cybersecurity_v1.internal.md",
+        "title": "API/MCP Fleet + Cybersecurity Toolkit v1 (Internal)",
+        "kind": "design"
+      },
+      {
         "path": "internal_docs/mercer_automation_contract_v1.internal.md",
         "title": "Mercer Automation Contract v1 (Internal)",
         "kind": "policy"
@@ -1353,6 +1358,12 @@
       "path": "internal_docs/symbolos_backend_v1_research.internal.md",
       "tags": ["backend", "multi-device", "multi-language", "rust", "kotlin", "swift", "go", "sync", "battery", "npu", "architecture"],
       "summary": "Comprehensive backend architecture research for The Lantern ecosystem. 8 languages (Rust core, Kotlin Android, Swift Apple, Go sync, TS web, Python tools, Haskell proofs, PS ops), native acceleration per platform (Vulkan/NPU/Metal/CoreML), battery-aware S25 compute, LAN inference relay, Git-as-CRDT sync. Awaiting agent review."
+    },
+    {
+      "title": "API/MCP Fleet + Cybersecurity Toolkit v1",
+      "path": "internal_docs/symbolos_api_mcp_cybersecurity_v1.internal.md",
+      "tags": ["api", "mcp", "cybersecurity", "vault", "encryption", "identity", "gateway", "audit", "network", "sandbox", "firewall", "recon"],
+      "summary": "Comprehensive design for the MCP server fleet (~26 servers, ~155 tools) and cybersecurity toolkit. Part One: API connectivity (gateway, external connectors, auth, cross-device topology, rate limiting). Part Two: The Armoury (Umbrella Doctrine, agent identity, credential vault, network recon, crypto toolkit, sandboxing, firewall, monitoring, secure transfer, vuln scanning, audit trail). 7-phase implementation plan."
     }
   ]
 }

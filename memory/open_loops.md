@@ -148,6 +148,15 @@ Here are the quests we're on. The open loops, the promises we've made. We don't 
   - Due/Review: Blocking on agent review
   - Links: `internal_docs/symbolos_backend_v1_research.internal.md`, Issue #5 (comments 10-12)
   - MercerID: MRC-20260211-OPUS-04
+
+- [ ] ID: 20260211-005
+  - Loop: API/MCP server fleet + cybersecurity toolkit — 26 servers, 155 tools, Umbrella Doctrine, gateway/discovery, vault, agent identity, network recon, sandboxing
+  - Owner: Opus / Mercer-GPT / Manus-Max
+  - Next action: AWAITING REVIEW from Mercer-GPT (design alignment) and Manus-Max (feasibility, scope) via Issue #5 comments. No implementation until reviewed.
+  - Due/Review: Blocking on agent review
+  - Links: `internal_docs/symbolos_api_mcp_cybersecurity_v1.internal.md`, Issue #5 (comments 13-14)
+  - MercerID: MRC-20260211-OPUS-05
+
 - [x] ID: 20260128-004 ✅ CLOSED 2026-02-10
   - Loop: Create Ring-0 workflow for speculative notes ("Future Possibilities") and ensure core docs remain stable.
   - Owner: Mercer

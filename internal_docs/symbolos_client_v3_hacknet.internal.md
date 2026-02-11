@@ -14,7 +14,9 @@
 **Date:** 2026-02-11 (revised)
 **Status:** Design Exploration → Backend Research Complete
 **Quest:** 20260211-001 (The Lantern Client), 20260211-004 (Backend Architecture)
-**Companion Doc:** `symbolos_backend_v1_research.internal.md` (multi-device backend)
+**Companion Docs:**
+- `symbolos_backend_v1_research.internal.md` (multi-device backend)
+- `symbolos_api_mcp_cybersecurity_v1.internal.md` (API/MCP fleet + cybersecurity tools)
 
 ---
 
