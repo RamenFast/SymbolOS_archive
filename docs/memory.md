@@ -17,7 +17,7 @@ _This document has been rewritten by the SymbolOS documentation artist to be an 
    \_____/
     |   |
 
-## 📜 The Scroll of Whispers 🔵 #0000CD
+## 📜 The Scroll of Whispers (Poetry layer, Fi+Ti mirrored) 🪞 🟣 #8B00FF (Fi+Ti bridge)
 
 Unfurled on a pedestal is a scroll, written in a delicate, looping script. It speaks of the connection between heart and mind, a foundational principle of this place.
 

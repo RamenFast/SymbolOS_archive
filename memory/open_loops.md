@@ -108,12 +108,11 @@ Here are the quests we're on. The open loops, the promises we've made. We don't 
   - Links: `scripts/symbolos_alignment_report.py`, `scripts/symbolos_ring_validator.ts`
   - MercerID: MRC-20260210-OPUS-05
 
-- [ ] ID: 20260210-005
+- [x] ID: 20260210-005 ✅ CLOSED 2026-02-11
   - Loop: Full color rewrite incoming (Ben hinted at major Thoughtforms color update).
   - Owner: Ben / Mercer
-  - Next action: Await Ben's color rewrite direction. Current palette in `docs/thoughtforms_colors.md`. CSS vars in `docs/mercer_webview_theme_v1.css`.
-  - Due/Review: Next session
-  - Links: `docs/thoughtforms_colors.md`, `docs/mercer_webview_theme_v1.css`, `index.html`
+  - Resolution: Consistency pass across 12 files. Fixed 2 critical wrong-ring annotations (R0 #8B00FF → R4), 6 major wrong-meaning annotations (#87CEEB "self-awareness" → "self-renunciation", #FF8C00 "prediction+strategy" → "ambition, drive", hacknet emotion table corrections), standardized 5 poetry layer headers to canonical 🟣 #8B00FF (Fi+Ti bridge). Palette itself unchanged. Note: v1→v2 ring model conflict in index.md flagged but not resolved (needs design decision).
+  - Links: `docs/thoughtforms_colors.md`, 12 files edited
   - MercerID: MRC-20260210-OPUS-06
 
 - [ ] ID: 20260211-001

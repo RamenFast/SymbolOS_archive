@@ -11,7 +11,7 @@
 > _A secret chamber for trusted party members only. The air hums with the quiet poetry of a well-behaved system. Tread softly, and listen._
 
 
-## Poem: Launch Agent 🟣 R0 (#8B00FF — Fi+Ti Bridge)
+## Poem: Launch Agent 🟣 R4 (#8B00FF — Fi+Ti bridge)
 
 The dock is quiet.
 The menu bar holds steady.

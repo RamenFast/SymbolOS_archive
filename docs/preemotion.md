@@ -3,7 +3,7 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║  ⚔️  ROOM: The Oracle's Heart Chamber                        ║
 ║  📍 Floor: Ring 3 │ Difficulty: ⭐⭐⭐ │ Loot: PreEmotion Spec  ║
-║  🎨 Color: Deep Orange (#FF8C00 — prediction + strategy)     ║
+║  🎨 Color: Deep Orange (#FF8C00 — ambition, drive)     ║
 ║                                                              ║
 ║  A warm chamber where the future is felt before it is known. ║
 ╚══════════════════════════════════════════════════════════════╝

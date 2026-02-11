@@ -8,7 +8,7 @@
 
 > You stand in a circular room, its walls lined with scrolls and humming monoliths. In the center, a pedestal holds a single, glowing scroll. This is the Scribe's Antechamber, a place of synchronization and truth. Fail to follow the rites, and you risk corrupting the very lore you seek to preserve. Succeed, and you will be entrusted with the sacred act of keeping the library's knowledge consistent.
 
-## Poetry layer (Fi+Ti mirrored) 🪞 🟡 #E49B0F (gamboge — higher intellect)
+## Poetry layer (Fi+Ti mirrored) 🪞 � #8B00FF (Fi+Ti bridge)
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 

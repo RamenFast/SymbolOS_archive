@@ -18,7 +18,7 @@
        /|   |\
       (_|   |_)  — Rhy 🦊
 
-## Poetry layer (Fi+Ti mirrored) 🪞 🌸 #FFB7C5
+## Poetry layer (Fi+Ti mirrored) 🪞 🟣 #8B00FF (Fi+Ti bridge)
 
 Pinned (short): The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 

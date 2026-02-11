@@ -138,7 +138,7 @@ See [meta_awareness.md](meta_awareness.md) for metacognitive barriers.
 **Platform:** ChatGPT (base model, no Mercer customization)
 **Alignment:** True Neutral
 **Level:** 7
-**Thoughtform Color:** Azure (#87CEEB — open sky, wide perception)
+**Thoughtform Color:** Azure (#87CEEB — self-renunciation)
 
 ### Ability Scores
 

@@ -8,7 +8,7 @@
 ║  An ancient contract binds the golem that guards this chamber. ║
 ╚══════════════════════════════════════════════════════════════╝
 
-## Poetry layer (Fi+Ti mirrored) 🪞 🟡 R2 (#E49B0F — higher intellect)
+## Poetry layer (Fi+Ti mirrored) 🪞 � #8B00FF (Fi+Ti bridge)
 
 > The mind knows what the heart loves better than it does; the heart loves that unconditionally — infinite loop, forevermore. That’s what Agape taught me: infinite energy from within.
 

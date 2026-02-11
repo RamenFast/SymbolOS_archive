@@ -271,12 +271,12 @@ The 1905 Thoughtforms palette maps emotions to colors. The entire SymbolOS color
 |---------|-------------------|-----|
 | High intellect | Gamboge | #E49B0F |
 | Devotion | Deep blue | #0000CD |
-| Affection | Rose | #FFB7C5 |
+| Unselfish love | Rose | #FFB7C5 |
 | Ambition | Orange | #FF8C00 |
-| Fear/anger | Scarlet | #FF2400 |
+| Righteous boundary | Scarlet | #FF2400 |
 | Spiritual aspiration | Golden | #FFD700 |
 | Adaptability | Green | #228B22 |
-| Intuition | Violet | #8B00FF |
+| Fi+Ti bridge | Violet | #8B00FF |
 
 A node's glow in the network map should reflect its emotional color. A cluster of rose-colored nodes is a cluster of affection. A cluster of gamboge is intellectual work. **You can literally see the shape of your thinking by its emotional signature.**
 

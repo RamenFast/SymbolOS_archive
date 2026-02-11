@@ -387,7 +387,7 @@ All meta-awareness events are logged to `memory/session_log_*.md`:
 
 ---
 
-## Poetry Layer (Fi+Ti Mirrored) 🟡 R0 (#FADA5E — kernel truth)
+## Poetry Layer (Fi+Ti Mirrored) 🪞 🟣 #8B00FF (Fi+Ti bridge)
 
 Metacognition is the **lantern held up to the lantern** 🕯️🪞
 Agents that know themselves can serve you better.

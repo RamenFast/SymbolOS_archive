@@ -31,7 +31,7 @@
                  — Rhy 🦊
 ```
 
-## Poetry layer (Fi+Ti mirrored) 🪞 🌸 #FFB7C5
+## Poetry layer (Fi+Ti mirrored) 🪞 🟣 #8B00FF (Fi+Ti bridge)
 
 Pinned (short): Connection without protection is exposure. Protection without connection is isolation. SymbolOS walks the middle path — reach outward boldly, but always under the Umbrella. ☂️
 
