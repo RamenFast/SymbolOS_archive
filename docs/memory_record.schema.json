@@ -2,24 +2,75 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://symbolos.local/schemas/memory_record.schema.json",
   "title": "MemoryRecord",
+  "description": "A single memory record in SymbolOS v2. Supports 7 memory types (M0-M6), ring associations, emotional valence, embedding vectors, bidirectional relationships, and temporal decay.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "type", "title", "summary", "scope", "provenance"],
+  "required": ["id", "type", "memoryType", "title", "summary", "scope", "provenance"],
   "properties": {
-    "id": { "type": "string", "minLength": 1 },
-    "type": { "type": "string", "enum": ["fact", "preference", "plan", "story"] },
-    "title": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "id": { "type": "string", "description": "Unique record ID. Format: MR-YYYYMMDD-NNN", "minLength": 1 },
+    "type": { "type": "string", "enum": ["fact", "preference", "plan", "story", "event", "skill", "goal", "feeling", "relationship", "prediction"] },
+    "memoryType": { "type": "string", "description": "Which of the 7 memory lamps this record belongs to", "enum": ["M0_episodic", "M1_semantic", "M2_procedural", "M3_intentional", "M4_affective", "M5_relational", "M6_predictive"] },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
     "summary": { "type": "string", "minLength": 1, "maxLength": 400 },
     "details": { "type": ["string", "null"], "maxLength": 4000 },
     "tags": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
     "scope": { "type": "string", "enum": ["private", "party", "dm", "public"], "default": "private" },
+    "ring": { "type": "string", "description": "Primary ring association (R0-R11)", "pattern": "^R(0|1|2|3|4|5|6|7|8|9|10|11)$" },
+    "thoughtformColor": { "type": "string", "description": "Thoughtforms color hex", "pattern": "^#[0-9A-Fa-f]{6}$" },
+    "emotional": {
+      "type": "object",
+      "description": "Emotional metadata (M4 affective layer)",
+      "additionalProperties": false,
+      "properties": {
+        "valence": { "type": "string", "enum": ["positive", "negative", "neutral", "mixed"] },
+        "intensity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "label": { "type": "string", "maxLength": 40 }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Bidirectional links to other memory records",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["targetId", "relation"],
+        "properties": {
+          "targetId": { "type": "string" },
+          "relation": { "type": "string", "enum": ["causes", "caused_by", "supports", "contradicts", "extends", "supersedes", "related_to"] },
+          "strength": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      },
+      "maxItems": 20
+    },
+    "embedding": {
+      "type": "object",
+      "description": "Semantic embedding vector (from Cartographer engine)",
+      "additionalProperties": false,
+      "properties": {
+        "model": { "type": "string" },
+        "dimensions": { "type": "integer" },
+        "vector": { "type": "array", "items": { "type": "number" } },
+        "generatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "temporalDecay": {
+      "type": "object",
+      "description": "Temporal decay metadata for memory consolidation",
+      "additionalProperties": false,
+      "properties": {
+        "lastAccessed": { "type": "string", "format": "date-time" },
+        "accessCount": { "type": "integer", "minimum": 0 },
+        "reinforcementScore": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
     "ttlSeconds": { "type": ["integer", "null"], "minimum": 60 },
     "provenance": {
       "type": "object",
       "additionalProperties": false,
       "required": ["source", "createdAt"],
       "properties": {
-        "source": { "type": "string", "enum": ["user_manual", "assistant", "system"] },
+        "source": { "type": "string", "enum": ["user_manual", "assistant", "system", "agent_handoff", "consolidation"] },
+        "agent": { "type": "string", "description": "Which agent created this record" },
         "createdAt": { "type": "string", "format": "date-time" },
         "updatedAt": { "type": "string", "format": "date-time" },
         "evidence": { "type": "array", "items": { "type": "string" }, "maxItems": 20 }

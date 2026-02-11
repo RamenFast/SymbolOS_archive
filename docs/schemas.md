@@ -69,6 +69,11 @@ _(Psst... we use the 1905 Thoughtforms color system for annotations!)_
 ## PreEmotion 🔮❤️ (the heart's prediction layer)
 - PreEmotion event: [preemotion_event.schema.json](preemotion_event.schema.json)
 
+## Agent Handoff 🫴 #E49B0F (task delegation)
+- Agent handoff payload: [agent_handoff_payload.schema.json](agent_handoff_payload.schema.json)
+- Example payload: [agent_handoff_payload.example.json](agent_handoff_payload.example.json)
+- Handoff protocol (base): [../memory/handoffs/handoff.schema.json](../memory/handoffs/handoff.schema.json)
+
 ## Shared maps 🔴 #FF2400 (righteous boundary)
 - Shared symbol map: [symbol_map.shared.schema.json](symbol_map.shared.schema.json)
 

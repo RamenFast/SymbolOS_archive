@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symbolos.local/schemas/agent_handoff_payload.schema.json",
+  "title": "AgentHandoffPayload",
+  "description": "Structured payload for agent-to-agent task delegation, continuation, and context transfer within SymbolOS. Extends the handoff protocol (handoff.schema.json) with typed payloads for specific task categories.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "payload_id",
+    "handoff_id",
+    "type",
+    "from_agent",
+    "to_agent",
+    "timestamp",
+    "scope",
+    "task"
+  ],
+  "properties": {
+    "payload_id": {
+      "type": "string",
+      "description": "Unique payload ID. Format: PL-YYYYMMDD-NNN",
+      "pattern": "^PL-\\d{8}-\\d{3}$"
+    },
+    "handoff_id": {
+      "type": "string",
+      "description": "Reference to the parent handoff document (HO-YYYYMMDD-NNN)",
+      "pattern": "^HO-\\d{8}-\\d{3}$"
+    },
+    "type": {
+      "type": "string",
+      "description": "The category of task being handed off",
+      "enum": [
+        "code_task",
+        "doc_task",
+        "review_task",
+        "research_task",
+        "build_task",
+        "alignment_task",
+        "memory_task",
+        "schema_task"
+      ]
+    },
+    "from_agent": {
+      "type": "string",
+      "description": "The agent sending the payload",
+      "enum": ["MANUS_MERCER", "CHATGPT_MERCER", "CODEX_EXECUTOR", "LLAMA_LOCAL", "USER_BEN", "ALL"]
+    },
+    "to_agent": {
+      "type": "string",
+      "description": "The agent receiving the payload",
+      "enum": ["MANUS_MERCER", "CHATGPT_MERCER", "CODEX_EXECUTOR", "LLAMA_LOCAL", "USER_BEN", "ALL"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of payload creation"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Privacy scope of the payload",
+      "enum": ["private", "public", "sensitive"]
+    },
+    "priority": {
+      "type": "string",
+      "description": "Execution priority for the receiving agent",
+      "enum": ["critical", "high", "normal", "low", "background"],
+      "default": "normal"
+    },
+    "task": {
+      "type": "object",
+      "description": "The structured task definition",
+      "additionalProperties": false,
+      "required": ["title", "description", "acceptance_criteria"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Short task title",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed task description with full context",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "description": "Conditions that must be met for the task to be considered complete",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "maxLength": 200
+          }
+        },
+        "input_files": {
+          "type": "array",
+          "description": "Files the receiving agent should read before starting",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20
+        },
+        "output_files": {
+          "type": "array",
+          "description": "Expected output file paths",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20
+        },
+        "ring": {
+          "type": "string",
+          "description": "Primary ring this task operates in",
+          "pattern": "^R(0|1|2|3|4|5|6|7|8|9|10|11)$"
+        },
+        "compute_tier": {
+          "type": "string",
+          "description": "Recommended compute tier for execution",
+          "enum": ["T0", "T1", "T2", "T3"]
+        },
+        "estimated_tokens": {
+          "type": "integer",
+          "description": "Estimated token budget for the task",
+          "minimum": 0
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "Payload IDs that must complete before this task can start",
+          "items": {
+            "type": "string",
+            "pattern": "^PL-\\d{8}-\\d{3}$"
+          },
+          "maxItems": 10
+        },
+        "quest_thread": {
+          "type": "string",
+          "description": "Reference to the quest thread this task belongs to",
+          "pattern": "^QT-\\d{3}"
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "description": "Additional context for the receiving agent",
+      "additionalProperties": false,
+      "properties": {
+        "working_set_snapshot": {
+          "type": "string",
+          "description": "Key items from working_set.md relevant to this task",
+          "maxLength": 2000
+        },
+        "recent_decisions": {
+          "type": "array",
+          "description": "Recent decisions that affect this task",
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "maxItems": 10
+        },
+        "blockers": {
+          "type": "array",
+          "description": "Known blockers or risks",
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "maxItems": 5
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-form notes from the sending agent",
+          "maxLength": 2000
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "description": "Filled in by the receiving agent upon completion",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["pending", "in_progress", "complete", "failed", "blocked"],
+          "default": "pending"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "Files created or modified during execution",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of what was done",
+          "maxLength": 2000
+        },
+        "tokens_used": {
+          "type": "integer",
+          "description": "Actual tokens consumed",
+          "minimum": 0
+        },
+        "follow_up_payloads": {
+          "type": "array",
+          "description": "New payload IDs spawned from this task",
+          "items": {
+            "type": "string",
+            "pattern": "^PL-\\d{8}-\\d{3}$"
+          },
+          "maxItems": 10
+        }
+      }
+    }
+  }
+}

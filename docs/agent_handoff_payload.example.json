@@ -1,0 +1,49 @@
+{
+  "payload_id": "PL-20260211-001",
+  "handoff_id": "HO-20260211-004",
+  "type": "code_task",
+  "from_agent": "MANUS_MERCER",
+  "to_agent": "LLAMA_LOCAL",
+  "timestamp": "2026-02-11T22:00:00Z",
+  "scope": "public",
+  "priority": "high",
+  "task": {
+    "title": "Generate session log summary for 2026-02-11",
+    "description": "Read the session log at memory/session_log_2026-02-11.md, extract all completed items, and produce a structured summary with: (1) items completed, (2) items still open, (3) alignment score delta. Output as markdown appended to the session log under a new ## Daily Summary section.",
+    "acceptance_criteria": [
+      "Summary section appended to session_log_2026-02-11.md",
+      "All completed items listed with commit hashes",
+      "Open items cross-referenced with open_loops.md",
+      "Alignment score calculated and reported"
+    ],
+    "input_files": [
+      "memory/session_log_2026-02-11.md",
+      "memory/open_loops.md",
+      "memory/working_set.md"
+    ],
+    "output_files": [
+      "memory/session_log_2026-02-11.md"
+    ],
+    "ring": "R9",
+    "compute_tier": "T0",
+    "estimated_tokens": 2000,
+    "dependencies": [],
+    "quest_thread": "QT-004"
+  },
+  "context": {
+    "working_set_snapshot": "Lantern v0.3 complete. Phase 1 backend starting. Cartographer GPU engine is highest priority.",
+    "recent_decisions": [
+      "Qwen3-8B is the primary local model (41 tok/s)",
+      "Phase 1 scope: Tauri shell + 3 panels + MCP gateway + 2-3 servers"
+    ],
+    "blockers": [],
+    "notes": "This is a good first task for Mercer-Local to prove the loop works end-to-end."
+  },
+  "result": {
+    "status": "pending",
+    "artifacts": [],
+    "summary": "",
+    "tokens_used": 0,
+    "follow_up_payloads": []
+  }
+}
