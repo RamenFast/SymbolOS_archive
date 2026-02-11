@@ -40,13 +40,11 @@ $cacheDir  = Join-Path $repoRoot 'local_ai\cache'
 # ── Model definitions ─────────────────────────────────────────
 $models = @{
   'qwen8b' = @{
-    Name         = 'Qwen2.5-8B-Instruct Q5_K_M'
-    FileName     = 'qwen2.5-8b-instruct-q5_k_m.gguf'
-    MinSizeBytes = 5000000000   # ~5 GB minimum (actual ~5.5-6.5 GB)
+    Name         = 'Qwen3-8B Q5_K_M'
+    FileName     = 'Qwen3-8B-Q5_K_M.gguf'
+    MinSizeBytes = 5000000000   # ~5 GB minimum (actual ~5.45 GB)
     Sources      = @(
-      'https://huggingface.co/Qwen/Qwen2.5-8B-Instruct-GGUF/resolve/main/qwen2.5-8b-instruct-q5_k_m.gguf',
-      'https://huggingface.co/bartowski/Qwen2.5-8B-Instruct-GGUF/resolve/main/Qwen2.5-8B-Instruct-Q5_K_M.gguf',
-      'https://huggingface.co/lmstudio-community/Qwen2.5-8B-Instruct-GGUF/resolve/main/Qwen2.5-8B-Instruct-Q5_K_M.gguf'
+      'https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q5_K_M.gguf'
     )
   }
   'phi4' = @{

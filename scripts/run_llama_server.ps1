@@ -82,7 +82,7 @@ if ($Threads -gt 0) {
 Write-Host "Starting llama server" -ForegroundColor Cyan
 Write-Host "  exe:   $serverExe"
 Write-Host "  model: $ModelPath"
-Write-Host "  url:   http://${BindIP}:${Port}" 
+Write-Host "  url:   http://${BindIP}:${Port}"
 
 # Common llama.cpp flags (may vary by build/version)
 # --host/--port : bind address
@@ -93,7 +93,7 @@ $cliParams = @(
   '--port', "$Port",
   '-m', $ModelPath,
   '-c', "$Context",
-  '--ngl', "$GpuLayers"
+  '-ngl', "$GpuLayers"
 ) + $threadArg
 
 & $serverExe @cliParams
