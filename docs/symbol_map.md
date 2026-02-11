@@ -41,7 +41,11 @@ The canonical shared set lives in `symbol_map.shared.json`. This file is the phy
 - `🏰` Dungeon explorer — Interactive index.html for browsing the repo.
 - `🐢` The turtle — this is fine. Grounding meme. Ben refactoring at 0.3s intervals.
 - `💀` Skeleton gatekeeper — Guards merge gates. Show me proof, not potential.
-- `🔮❤️` PreEmotion — Anticipatory emotional signal; the heart's prediction layer (R3).
+- `🔮❤️` PreEmotion — Anticipatory emotional signal; the heart's prediction layer (R5).
+- `🎯` Will — The conscious choice to act; the spark of intent (R1).
+- `👁️` Sensation — Raw input from the world; the stream of data (R2).
+- `🪞` Reflection — Thinking about thinking; self-awareness (R10).
+- `🌌` Integration — The synthesis of all rings into a whole self (R11).
 
               ✦ R0 ✦
            ╱    ⚓    ╲
@@ -65,7 +69,6 @@ The canonical shared set lives in `symbol_map.shared.json`. This file is the phy
 - `🧰` Tools / actions
 - `📚` Docs / references
 - `📝` Poetry / expression layer (doc-only)
-- `🪞` Mirror / reflection prompt (doc-only)
 
 ## Poetry translation layer 🌸 #FFB7C5 (unselfish love)
 
