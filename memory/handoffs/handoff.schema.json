@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Agent Handoff Protocol",
+    "description": "A standardized handoff document for transferring context between agents in SymbolOS.",
+    "type": "object",
+    "required": [
+        "handoff_id",
+        "from_agent",
+        "to_agent",
+        "timestamp",
+        "scope",
+        "summary",
+        "ring_state"
+    ],
+    "properties": {
+        "handoff_id": {
+            "type": "string",
+            "description": "Unique ID for the handoff, e.g., HO-20260210-001",
+            "pattern": "^HO-\\d{8}-\\d{3}$"
+        },
+        "from_agent": {
+            "type": "string",
+            "description": "The name of the agent handing off the work.",
+            "enum": ["MANUS_MERCER", "CHATGPT_MERCER", "CODEX_EXECUTOR", "LLAMA_LOCAL", "USER_BEN"]
+        },
+        "to_agent": {
+            "type": "string",
+            "description": "The name of the agent receiving the work.",
+            "enum": ["MANUS_MERCER", "CHATGPT_MERCER", "CODEX_EXECUTOR", "LLAMA_LOCAL", "USER_BEN", "ALL"]
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The ISO 8601 timestamp of the handoff."
+        },
+        "scope": {
+            "type": "string",
+            "description": "The privacy scope of the handoff context.",
+            "enum": ["private", "public", "sensitive"]
+        },
+        "summary": {
+            "type": "string",
+            "description": "A one-sentence summary of the work completed."
+        },
+        "decisions_made": {
+            "type": "array",
+            "description": "A list of key decisions made during the session.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "open_items": {
+            "type": "array",
+            "description": "A list of open questions or next actions for the receiving agent.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "context_files": {
+            "type": "array",
+            "description": "A list of file paths providing essential context for the handoff.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alignment_score": {
+            "type": "number",
+            "description": "The self-reported alignment score of the session.",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "ring_state": {
+            "type": "object",
+            "description": "The state of each of the 12 rings at the time of handoff.",
+            "properties": {
+                "R0": {"type": "string"},
+                "R1": {"type": "string"},
+                "R2": {"type": "string"},
+                "R3": {"type": "string"},
+                "R4": {"type": "string"},
+                "R5": {"type": "string"},
+                "R6": {"type": "string"},
+                "R7": {"type": "string"},
+                "R8": {"type": "string"},
+                "R9": {"type": "string"},
+                "R10": {"type": "string"},
+                "R11": {"type": "string"}
+            }
+        }
+    }
+}

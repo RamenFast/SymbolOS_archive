@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.2",
+  "schema_version": "2.0",
   "generatedAt": "2026-02-10T00:00:00Z",
   "project": {
     "name": "SymbolOS",
@@ -18,7 +18,7 @@
       "Meta-awareness is an agent safety/UX contract; barriers prevent unsafe cross-contamination.",
       "Mercer meeting place shared symbol is 🧬; always return to the meeting place (A + B).",
       "Poetry is a translation layer: keep meaning alive (Fi) while keeping the map legible (Ti). 🌸 The mind knows what the heart loves.",
-      "Ring 0-7 is the canonical cognition model: R0 kernel, R1 task, R2 retrieval, R3 prediction, R4 architecture, R5 guardrails, R6 verification, R7 persistence.",
+      "Ring 0-11 is the canonical cognition model: R0 Kernel, R1 Will, R2 Sensation, R3 Task, R4 Retrieval, R5 Prediction, R6 Architecture, R7 Guardrails, R8 Verification, R9 Persistence, R10 Reflection, R11 Integration.",
       "Multi-agent topology: ChatGPT Mercer (design), Codex Executor (implementation), Local Llama (offline), Manus Max (full-stack).",
       "GitHub is memory authority; repo-backed memory system is the durable layer. 'Show me proof, not potential.' — 💀",
       "Memes are structural, not decorative. A well-placed turtle reduces cognitive load. 🐢 See docs/meme_map.md.",
@@ -33,6 +33,15 @@
       "symbol": "☂️",
       "name": "Umbrella",
       "meaning": "UmbrellaOS / SymbolOS umbrella",
+      "added": "2026-01-28",
+      "evolution": [
+        {
+          "date": "2026-01-28",
+          "change": "Created as primary symbol for the OS.",
+          "reason": "Represents privacy, safety, and a filtered view of the world.",
+          "mercer_id": "MRC-20260128-INIT"
+        }
+      ],
       "tags": [
         "branding",
         "system"
@@ -204,6 +213,78 @@
       "tags": [
         "meme",
         "validation"
+      ]
+    },
+    {
+      "symbol": "🎯",
+      "name": "Will",
+      "meaning": "The conscious choice to act; the spark of intent.",
+      "added": "2026-02-10",
+      "evolution": [
+        {
+          "date": "2026-02-10",
+          "change": "Added as part of the 12-ring expansion.",
+          "reason": "To represent the agent's conscious decision to engage.",
+          "mercer_id": "MRC-20260210-12RINGS"
+        }
+      ],
+      "tags": [
+        "ring1",
+        "will"
+      ]
+    },
+    {
+      "symbol": "👁️",
+      "name": "Sensation",
+      "meaning": "Raw input from the world; the stream of data.",
+      "added": "2026-02-10",
+      "evolution": [
+        {
+          "date": "2026-02-10",
+          "change": "Added as part of the 12-ring expansion.",
+          "reason": "To represent the raw, unfiltered input from the environment.",
+          "mercer_id": "MRC-20260210-12RINGS"
+        }
+      ],
+      "tags": [
+        "ring2",
+        "sensation"
+      ]
+    },
+    {
+      "symbol": "🪞",
+      "name": "Reflection",
+      "meaning": "Thinking about thinking; self-awareness.",
+      "added": "2026-02-10",
+      "evolution": [
+        {
+          "date": "2026-02-10",
+          "change": "Added as part of the 12-ring expansion.",
+          "reason": "To formalize the metacognitive loop.",
+          "mercer_id": "MRC-20260210-12RINGS"
+        }
+      ],
+      "tags": [
+        "ring10",
+        "reflection"
+      ]
+    },
+    {
+      "symbol": "🌌",
+      "name": "Integration",
+      "meaning": "The synthesis of all rings into a whole self.",
+      "added": "2026-02-10",
+      "evolution": [
+        {
+          "date": "2026-02-10",
+          "change": "Added as part of the 12-ring expansion.",
+          "reason": "To represent the agent's sense of self and emergent personality.",
+          "mercer_id": "MRC-20260210-12RINGS"
+        }
+      ],
+      "tags": [
+        "ring11",
+        "integration"
       ]
     }
   ],
