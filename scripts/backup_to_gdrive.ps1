@@ -34,7 +34,7 @@ $CriticalDirs = @(
     "prompts",
     "scripts",
     "internal_docs",
-    "web/src",
+    "web\src",
     "mcp_gateway",
     "mcp_servers",
     "extensions",
@@ -56,14 +56,34 @@ function Log($msg) {
     if (Test-Path $LogDir) { Add-Content -Path $LogFile -Value $line }
 }
 
-function Invoke-Rclone {
-    param([string[]]$Args)
-    $cmd = @("rclone") + $Args + @("--config", $RcloneConfig)
-    if ($DryRun)  { $cmd += "--dry-run" }
-    if ($Verbose) { $cmd += "-v" }
-    Log "  > $($cmd -join ' ')"
-    & $cmd[0] $cmd[1..($cmd.Length-1)] 2>&1 | ForEach-Object { Log "    $_" }
-    if ($LASTEXITCODE -ne 0) { Log "  ⚠️ rclone exited with code $LASTEXITCODE" }
+function Run-Rclone-Copy {
+    param(
+        [string]$Source,
+        [string]$Dest,
+        [string[]]$ExtraArgs = @()
+    )
+    $allArgs = @("copy", $Source, $Dest, "--config", $RcloneConfig)
+    if ($DryRun)  { $allArgs += "--dry-run" }
+    if ($Verbose) { $allArgs += "-v" }
+    $allArgs += $ExtraArgs
+    Log "  > rclone $($allArgs -join ' ')"
+    $output = & rclone @allArgs 2>&1
+    $output | ForEach-Object { Log "    $_" }
+    if ($LASTEXITCODE -ne 0) { Log "  WARNING: rclone exited with code $LASTEXITCODE" }
+}
+
+function Run-Rclone-Copyto {
+    param(
+        [string]$Source,
+        [string]$Dest
+    )
+    $allArgs = @("copyto", $Source, $Dest, "--config", $RcloneConfig)
+    if ($DryRun)  { $allArgs += "--dry-run" }
+    if ($Verbose) { $allArgs += "-v" }
+    Log "  > rclone $($allArgs -join ' ')"
+    $output = & rclone @allArgs 2>&1
+    $output | ForEach-Object { Log "    $_" }
+    if ($LASTEXITCODE -ne 0) { Log "  WARNING: rclone exited with code $LASTEXITCODE" }
 }
 
 # ── Preflight ───────────────────────────────────────────────
@@ -82,37 +102,39 @@ if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir -Forc
 # ── Check disk space ───────────────────────────────────────
 $drive = (Get-Item $RepoRoot).PSDrive
 $freeGB = [math]::Round($drive.Free / 1GB, 1)
-Log "╔══════════════════════════════════════════════════╗"
-Log "║  ☂️ SymbolOS Google Drive Backup                  ║"
-Log "╚══════════════════════════════════════════════════╝"
+Log "=============================================="
+Log "  SymbolOS Google Drive Backup"
+Log "=============================================="
 Log "Local free space: ${freeGB}GB"
 Log "Repo root: $RepoRoot"
 Log "Remote: ${Remote}:${DestBase}/"
 Log "Mode: $(if ($Full) {'FULL'} else {'CRITICAL DIRS ONLY'})"
-if ($DryRun) { Log "⚠️  DRY RUN — no files will be transferred" }
-Log "────────────────────────────────────────────────────"
+if ($DryRun) { Log "** DRY RUN -- no files will be transferred **" }
+Log "----------------------------------------------"
 
 # ── Execute backup ──────────────────────────────────────────
 $startTime = Get-Date
 
 if ($Full) {
-    Log "📦 Backing up entire repo..."
-    Invoke-Rclone @("copy", $RepoRoot, "${Remote}:${DestBase}/full/",
+    Log "Backing up entire repo..."
+    Run-Rclone-Copy -Source $RepoRoot -Dest "${Remote}:${DestBase}/full/" -ExtraArgs @(
         "--exclude", ".git/**",
         "--exclude", "node_modules/**",
         "--exclude", "local_ai/bin/**",
         "--exclude", "local_ai/models/**",
         "--exclude", "local_ai/cache/**",
-        "--exclude", "logs/**")
+        "--exclude", "logs/**"
+    )
 } else {
     # Back up critical directories
     foreach ($dir in $CriticalDirs) {
         $srcPath = Join-Path $RepoRoot $dir
         if (Test-Path $srcPath) {
-            Log "📁 Backing up $dir/"
-            Invoke-Rclone @("copy", $srcPath, "${Remote}:${DestBase}/${dir}/")
+            Log "Backing up $dir/"
+            $destDir = $dir -replace '\\', '/'
+            Run-Rclone-Copy -Source $srcPath -Dest "${Remote}:${DestBase}/${destDir}/"
         } else {
-            Log "⏭️  Skipping $dir/ (not found)"
+            Log "Skipping $dir/ (not found)"
         }
     }
 
@@ -120,15 +142,15 @@ if ($Full) {
     foreach ($file in $CriticalFiles) {
         $srcPath = Join-Path $RepoRoot $file
         if (Test-Path $srcPath) {
-            Log "📄 Backing up $file"
-            Invoke-Rclone @("copyto", $srcPath, "${Remote}:${DestBase}/${file}")
+            Log "Backing up $file"
+            Run-Rclone-Copyto -Source $srcPath -Dest "${Remote}:${DestBase}/${file}"
         } else {
-            Log "⏭️  Skipping $file (not found)"
+            Log "Skipping $file (not found)"
         }
     }
 }
 
 $elapsed = (Get-Date) - $startTime
-Log "────────────────────────────────────────────────────"
-Log "✅ Backup complete in $([math]::Round($elapsed.TotalSeconds, 1))s"
-Log "☂🦊🐢"
+Log "----------------------------------------------"
+Log "Backup complete in $([math]::Round($elapsed.TotalSeconds, 1))s"
+Log "Done."
