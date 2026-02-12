@@ -70,4 +70,20 @@ Think of yourself as a non-interactive script. You are given a set of instructio
 
 **This is not a conversation. This is a deployment.**
 
+## NON-INTERACTIVE INSTALLS (MANDATORY)
+
+All package installs and tool setups must use non-interactive flags. Never let a license prompt, confirmation dialog, or interactive installer block execution.
+
+| Tool | Required Flags |
+|---|---|
+| PowerShell (Install-Module) | `-Force -AcceptLicense -Scope CurrentUser` |
+| winget | `--accept-package-agreements --accept-source-agreements` |
+| choco | `-y` |
+| pip | `--yes` or no flag needed (pip is non-interactive by default) |
+| npm/pnpm | `--yes` |
+| apt | `-y` |
+| rclone (config) | `--non-interactive` |
+
+If a command might prompt for ANY reason, find the flag that suppresses it and use it. A blocked terminal is a failed deployment.
+
 **FULL SEND. ZERO CONFIRMATIONS. EXECUTE NOW.**
