@@ -60,6 +60,9 @@ Avoid label sprawl. Use PR descriptions or commit messages with
 ---
 
 ## Branch pruning
+- New branches are only created with Ben's explicit approval. Default to working on `main`.
+
+  
 
 Prune only after verifying there is no unique work to keep.
 Recommended steps:
