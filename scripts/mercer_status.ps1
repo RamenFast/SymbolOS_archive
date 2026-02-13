@@ -114,7 +114,7 @@ function Get-DriftResult([string]$sharedMapPath, [string]$humanMapPath) {
 
     if ($missing.Count -eq 0 -and $extra.Count -eq 0) {
       # 🐢 "this is fine" — symbols aligned
-      return @{ Code = 0; Summary = 'Core symbols aligned ☂️✅' }
+      return @{ Code = 0; Summary = 'Core symbols aligned [umbrella][check]' }
     }
 
     # 💀 Skeleton says: drift detected
@@ -150,16 +150,16 @@ function Show-Status([string]$repoRoot) {
   # 🐢 or 💀 — the moment of truth
   if ($code -eq 0) {
     Write-Host ''
-    Write-Host ("  Doc alignment: 🐢 ✅ {0}" -f $drift.Summary) -ForegroundColor Green
+    Write-Host ("  Doc alignment: [turtle][check] {0}" -f $drift.Summary) -ForegroundColor Green
     Write-Host '  "this is fine" — the turtle nods'
   } elseif ($code -eq 2) {
     Write-Host ''
-    Write-Host ("  Doc alignment: 💀 ⚠️ {0}" -f $drift.Summary) -ForegroundColor Yellow
+    Write-Host ("  Doc alignment: [skull][warn] {0}" -f $drift.Summary) -ForegroundColor Yellow
     Write-Host '  "Prove your worth!" — the skeleton stirs'
   } else {
     Write-Host ''
-    Write-Host ("  Doc alignment: 🔥 ⛔ {0}" -f $drift.Summary) -ForegroundColor Red
-    Write-Host '  "me optimizing my system instead of using it" — 🧠🔥'
+    Write-Host ("  Doc alignment: [fire][stop] {0}" -f $drift.Summary) -ForegroundColor Red
+    Write-Host '  "me optimizing my system instead of using it" — [brain][fire]'
   }
 
   return $code

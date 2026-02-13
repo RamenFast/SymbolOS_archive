@@ -35,30 +35,65 @@ class MemoryMCPHandler(BaseHTTPRequestHandler):
         """Custom logging with [MEMORY] prefix"""
         print(f"[MEMORY] {format % args}")
 
-    def _send_json(self, data: dict, status=200):
-        """Helper to send JSON response"""
+    def _send_json(self, data: dict, status=200, banner=None, exits=None, loot=None, haiku=None, color="#FADA5E"):
+        """Send JSON response with Chroma 97/Thoughtforms style formatting"""
+        style = {
+            "banner": banner or {
+                "room": "The Chamber of Echoes",
+                "floor": "Ring 1 (The Foundations)",
+                "difficulty": "⭐⭐",
+                "loot": "Durable, auditable memory",
+                "color": color,
+                "desc": "A quiet chamber where every choice is etched into the stone walls, forever remembered."
+            },
+            "exits": exits or ["/tools", "/execute", "/health"],
+            "loot": loot or ["Memory read/search/list/write (consent-gated)", "Git-backed, provenance-auditable"],
+            "haiku": haiku or "Echoes in the stone,\nChoices kept, consent required,\nMemory abides.",
+            "footer": "☂🦊🐢"
+        }
+        payload = {
+            "success": data.get("success", True),
+            "data": data.get("data"),
+            "error": data.get("error"),
+            "blocked": data.get("blocked"),
+            "reason": data.get("reason"),
+            "style": style
+        }
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
-        self.wfile.write(json.dumps(data).encode())
+        self.wfile.write(json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8"))
 
     def _send_error(self, message: str, status=400):
-        """Helper to send error response"""
-        self._send_json({"success": False, "error": message}, status)
+        """Helper to send error response with style"""
+        self._send_json({"success": False, "error": message}, status,
+            banner={
+                "room": "The Chamber of Echoes",
+                "floor": "Ring 1 (The Foundations)",
+                "difficulty": "⭐⭐",
+                "loot": "Durable, auditable memory",
+                "color": "#FF2400",
+                "desc": "A warning echoes: \"%s\"" % message
+            },
+            loot=["Error: %s" % message],
+            haiku="Warning in the stone,\nBoundaries hold memory,\nConsent is the key.",
+            color="#FF2400"
+        )
 
     def do_GET(self):
         """Handle GET requests"""
         if self.path == "/health":
             self._send_json({
-                "status": "ok",
-                "server": "Memory MCP v1",
-                "memory_dir": str(MEMORY_DIR),
-                "files_count": len(list(MEMORY_DIR.glob("*.md")))
+                "success": True,
+                "data": {
+                    "status": "ok",
+                    "server": "Memory MCP v1",
+                    "memory_dir": str(MEMORY_DIR),
+                    "files_count": len(list(MEMORY_DIR.glob("*.md")))
+                }
             })
-
         elif self.path == "/tools":
-            # MCP standard: list available tools
             tools = [
                 {
                     "name": "memory_read",
@@ -95,8 +130,7 @@ class MemoryMCPHandler(BaseHTTPRequestHandler):
                     "risk": "read"
                 }
             ]
-            self._send_json({"success": True, "tools": tools})
-
+            self._send_json({"success": True, "data": {"tools": tools}})
         else:
             self._send_error("Not found", 404)
 
@@ -158,6 +192,13 @@ class MemoryMCPHandler(BaseHTTPRequestHandler):
                     "size": len(content),
                     "lines": content.count("\n") + 1
                 }
+            }, banner={
+                "room": "The Chamber of Echoes",
+                "floor": "Ring 1 (The Foundations)",
+                "difficulty": "⭐⭐",
+                "loot": "Memory file read",
+                "color": "#FADA5E",
+                "desc": f"Read file: {filename}"
             })
         except Exception as e:
             self._send_error(f"Read failed: {str(e)}", 500)
@@ -203,6 +244,13 @@ class MemoryMCPHandler(BaseHTTPRequestHandler):
                 "results": results,
                 "total_files": len(results)
             }
+        }, banner={
+            "room": "The Chamber of Echoes",
+            "floor": "Ring 1 (The Foundations)",
+            "difficulty": "⭐⭐",
+            "loot": "Memory search",
+            "color": "#FADA5E",
+            "desc": f"Search query: {query}"
         })
 
     def _handle_memory_list(self, params: dict):
@@ -224,6 +272,13 @@ class MemoryMCPHandler(BaseHTTPRequestHandler):
                 "files": files,
                 "count": len(files)
             }
+        }, banner={
+            "room": "The Chamber of Echoes",
+            "floor": "Ring 1 (The Foundations)",
+            "difficulty": "⭐⭐",
+            "loot": "Memory file list",
+            "color": "#FADA5E",
+            "desc": "List all memory files"
         })
 
     def _handle_memory_write(self, params: dict):
@@ -237,11 +292,17 @@ class MemoryMCPHandler(BaseHTTPRequestHandler):
             return
 
         # Phase 1: Always return consent gate message
-        # (Gateway should block act() mode, but we reinforce here)
         self._send_json({
             "success": False,
             "blocked": True,
             "reason": "memory_write requires act() mode with explicit user confirmation (Phase 1: not implemented)"
+        }, banner={
+            "room": "The Chamber of Echoes",
+            "floor": "Ring 1 (The Foundations)",
+            "difficulty": "⭐⭐",
+            "loot": "Consent required for write",
+            "color": "#FF8C00",
+            "desc": "Write blocked: explicit user confirmation required"
         })
 
 def run_server():

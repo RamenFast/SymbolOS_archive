@@ -1,0 +1,59 @@
+{
+  "name": "filesystem_server",
+  "title": "Filesystem MCP Server",
+  "description": "Scoped file operations for SymbolOS. Provides read/list/write/delete (with explicit consent) for files in allowed directories. All operations are schema-validated and provenance-auditable.",
+  "kind": "mcp-server",
+  "transport": "http",
+  "address": "http://127.0.0.1:8092",
+  "tools": [
+    {
+      "name": "file_read",
+      "description": "Read file contents from allowed directories",
+      "inputSchema": {
+        "$ref": "file_read.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "file_read_result.schema.json"
+      },
+      "riskLevel": "read"
+    },
+    {
+      "name": "file_list",
+      "description": "List directory contents",
+      "inputSchema": {
+        "$ref": "file_list.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "file_list_result.schema.json"
+      },
+      "riskLevel": "read"
+    },
+    {
+      "name": "file_write",
+      "description": "Write to file (requires act() mode consent)",
+      "inputSchema": {
+        "$ref": "file_write.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "file_write_result.schema.json"
+      },
+      "riskLevel": "write",
+      "requiresConfirmation": true
+    },
+    {
+      "name": "file_delete",
+      "description": "Delete file (requires act() mode consent)",
+      "inputSchema": {
+        "$ref": "file_delete.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "file_delete_result.schema.json"
+      },
+      "riskLevel": "write",
+      "requiresConfirmation": true
+    }
+  ],
+  "riskBoundary": "read/write (no sensitive)",
+  "style": "Chroma 97, Thoughtforms, ASCII banners",
+  "ascii_banner": "╔══════════════════════════════════════════════════════════════╗\n║  ⚔️  ROOM: The Chamber of Structured Files                  ║\n║  📍 Floor: R2 (Higher Intellect) │ Difficulty: ⭐⭐ │ Loot: Safe file I/O ║\n║  🎨 Color: Gamboge (#E49B0F)                                 ║\n╚══════════════════════════════════════════════════════════════╝"
+}

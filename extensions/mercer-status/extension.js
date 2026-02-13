@@ -3,6 +3,120 @@
 // ║  🎨 Color: 🟡 #E49B0F (higher intellect)
 // ╚══════════════════════════════════════════════════════════════╝
 //
+// ─── MCP Sync/Commit Output Formatting (Chroma 97, ASCII) ────────────────
+// All output/logs must use ASCII banners and Chroma 97/Thoughtforms style.
+function formatMCPBanner({ room, floor, difficulty, loot, color, maturity }) {
+  // Returns a string banner for logs/commits
+  const lines = [
+    '╔══════════════════════════════════════════════════════════════╗',
+    `║  ⚔️  ROOM: ${room.padEnd(48)}║`,
+    `║  📍 Floor: ${floor} │ Difficulty: ${difficulty} │ Loot: ${loot.padEnd(18)}║`,
+    `║  🎨 Color: ${color}${maturity ? ` │ Maturity: ${maturity}` : ''}${' '.repeat(Math.max(0, 54 - color.length - (maturity ? maturity.length + 13 : 0)))}║`,
+    '╚══════════════════════════════════════════════════════════════╝'
+  ];
+  return lines.join('\n');
+}
+
+function formatMCPFooter() {
+  return '\n☂🦊🐢';
+}
+
+function formatMCPCommitMessage({ banner, summary, details }) {
+  // Compose a full commit message with banner, summary, details, and footer
+  return [
+    banner,
+    '',
+    summary,
+    details ? `- ${details}` : '',
+    formatMCPFooter()
+  ].filter(Boolean).join('\n');
+}
+
+// ─── MCP Sync/Commit Command Implementations ─────────────────────
+const MCP_MEMORY_URL = 'http://127.0.0.1:8091';
+const MCP_FS_URL = 'http://127.0.0.1:8092';
+const MCP_GIT_URL = 'http://127.0.0.1:8093'; // Planned
+
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+async function mcpSyncCommand() {
+  // List memory files and show in output
+  try {
+    const res = await fetch(`${MCP_MEMORY_URL}/tools`);
+    const data = await res.json();
+    const files = (data.data && data.data.tools) ? data.data.tools.map(t => t.name).join(', ') : 'N/A';
+    const banner = formatMCPBanner({
+      room: "MCP Sync Chamber",
+      floor: "R9 (Persistence)",
+      difficulty: "⭐⭐",
+      loot: "Memory, docs, audit",
+      color: "Gold (#FFD700)",
+      maturity: undefined
+    });
+    const summary = '- MCP Sync: Available tools: ' + files;
+    vscode.window.showInformationMessage([banner, '', summary, formatMCPFooter()].join('\n'));
+  } catch (err) {
+    vscode.window.showErrorMessage('MCP Sync error: ' + err.message);
+  }
+}
+
+async function mcpCommitCommand() {
+  // Phase 1: Consent-gated commit (stub for MCP Git server)
+  const banner = formatMCPBanner({
+    room: "The Git Sync Chamber (MCP-First)",
+    floor: "R9 (Persistence)",
+    difficulty: "⭐⭐⭐",
+    loot: "Provenance, audit",
+    color: "Gold (#FFD700)",
+    maturity: undefined
+  });
+  const summary = '- MCP Commit: All changes auditable and style-compliant';
+  const details = 'Consent required. (Planned: POST to MCP Git server for commit/push)';
+  const msg = formatMCPCommitMessage({ banner, summary, details });
+  vscode.window.showInformationMessage(msg);
+}
+
+// ─── MCP Sync/Commit UI Panel ──────────────────────────────
+function showMcpPanel(context) {
+  const panel = vscode.window.createWebviewPanel(
+    'mcpSyncPanel',
+    'MCP Sync/Commit State',
+    vscode.ViewColumn.One,
+    { enableScripts: true }
+  );
+  panel.webview.html = getMcpPanelHtml();
+}
+
+function getMcpPanelHtml() {
+  // Simple HTML panel with Chroma 97/ASCII style
+  return `
+    <html><body style="font-family:monospace;background:#181818;color:#FFD700;">
+    <pre>
+╔══════════════════════════════════════════════════════════════╗
+║  🗃️  MCP Sync/Commit State Panel                            ║
+║  📍 Floor: R9 │ Difficulty: ⭐⭐⭐ │ Loot: Provenance, audit   ║
+║  🎨 Color: Gold (#FFD700)                                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+<b>Sync/Commit Status:</b>
+- Last sync: (not implemented)
+- Pending changes: (not implemented)
+- Audit log: (not implemented)
+
+<button onclick="vscode.postMessage({ command: 'mcpSync' })">Sync via MCP</button>
+<button onclick="vscode.postMessage({ command: 'mcpCommit' })">Commit via MCP</button>
+
+☂🦊🐢
+    </pre>
+    <script>
+      const vscode = acquireVsCodeApi();
+      window.addEventListener('message', event => {
+        // handle messages from extension
+      });
+    </script>
+    </body></html>
+  `;
+}
 //        /\_/\
 //       ( o.o )  "Extensions extend, but foxes transcend."
 //        > ^ <
@@ -192,8 +306,42 @@ async function onStartup(repoRoot) {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+
   const workspaceFolders = vscode.workspace.workspaceFolders || [];
   const repoRoot = workspaceFolders.length ? workspaceFolders[0].uri.fsPath : null;
+
+  // Register MCP Sync/Commit commands
+  context.subscriptions.push(
+    vscode.commands.registerCommand('mercerStatus.mcpSync', mcpSyncCommand)
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand('mercerStatus.mcpCommit', mcpCommitCommand)
+  );
+  // Register MCP Sync/Commit UI panel
+  context.subscriptions.push(
+    vscode.commands.registerCommand('mercerStatus.showMcpPanel', () => showMcpPanel(context))
+  );
+  // ─── Cartographer (vector memory) API stub ───────────────
+  // Planned: Integrate with Cartographer semantic search API (PowerShell/HTTP)
+  // Planned endpoint: http://127.0.0.1:8081/search
+  // API contract (planned):
+  //   POST /search { query: string, top_k?: number }
+  //   → { results: [ { path, preview, similarity } ] }
+  // Usage: concept-based memory/document retrieval
+
+  async function cartographerSemanticSearch(query, topK = 5) {
+    // Stub: planned HTTP API integration
+    // Example:
+    // const res = await fetch('http://127.0.0.1:8081/search', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ query, top_k: topK })
+    // });
+    // const data = await res.json();
+    // return data.results;
+    vscode.window.showInformationMessage(`Cartographer semantic search (stub): '${query}' (API not yet implemented)`);
+    return [];
+  }
 
   // Command: Show Status UI
   context.subscriptions.push(

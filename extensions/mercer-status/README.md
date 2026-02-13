@@ -1,3 +1,29 @@
+# VSCode 4.1 MCP Sync/Commit Integration
+
+## MCP-First Git Workflow
+
+Mercer agents should use the MCP servers for all file changes, state sync, and commit operations. The VSCode extension should:
+
+- Trigger MCP sync/commit tasks (via command palette or status UI)
+- Format all commit messages and logs with ASCII banners and Chroma 97/Thoughtforms style
+- Only push to GitHub after MCP commit is complete and auditable
+
+### Example Commit Message
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🗃️  MCP Commit: Tavern Board Update                        ║
+║  📍 Floor: R9 │ Difficulty: ⭐⭐⭐ │ Loot: Provenance, audit   ║
+║  🎨 Color: Gold (#FFD700)                                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+- Updated Tavern board via MCP
+- All changes auditable and style-compliant
+- ☂🦊🐢
+```
+
+## Usage
+- Use the "Mercer: Sync via MCP" and "Mercer: Commit via MCP" commands to coordinate all changes.
+- If GitHub is unavailable, continue working via MCP and push when available.
 ╔══════════════════════════════════════════════════════════════╗
 ║  ⚔️  ROOM: The Sentinel's Outpost                               ║
 ║  📍 Floor: Ring 2 │ Difficulty: ⭐⭐   │ Loot: Drift Early Warning System ║

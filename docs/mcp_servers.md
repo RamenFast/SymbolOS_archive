@@ -13,7 +13,25 @@
 
 > "Under the umbrella, everything is kind. The rain is just context we haven't parsed yet." ☂️ #87CEEB
 
+
 This document defines how Model Context Protocol (MCP) servers are designed, operated, and integrated inside SymbolOS. Here, you will learn the sacred rites of server creation, the incantations of capability boundaries, and the secret checklist of the ancients.
+
+---
+
+## Registry Entries (Phase 1 Examples)
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║  🗃️  MCP Server Registry Entries (Chroma 97, ASCII style)   ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+- [registry_entry.memory_server.json](registry_entry.memory_server.json)
+- [registry_entry.filesystem_server.json](registry_entry.filesystem_server.json)
+
+All registry entries must include an ASCII banner, Chroma 97 color tokens, and a clear description of risk boundaries and style.
+
+---
 
 ---
 
@@ -49,13 +67,45 @@ Before you can forge a tool, you must understand the blueprint of the universe. 
        /|   |\   Use them wisely, and you'll ask for more."
       (_|   |_)  — Rhy 🦊
 
+
 MCP servers expose capabilities to AI clients via three building blocks:
 
 - **Tools**: Callable actions with validated inputs/outputs 🟢 #228B22
 - **Resources**: Read-only context sources, addressable via URIs ✨ #FADA5E
 - **Prompts**: Reusable instruction templates (optional, but recommended) 🧠 #E49B0F
 
+
 MCP is transport-agnostic. SymbolOS may run MCP servers over different transports (e.g., stdio for local adapters, or network transports for service deployments). Requirements below are written to be transport-independent.
+
+---
+
+## Output Formatting Requirements (Chroma 97, ASCII, Semantic)
+
+All MCP server responses **must**:
+
+- Include an ASCII banner at the top of the response (see registry examples)
+- Use Chroma 97/1905 Thoughtforms color tokens for all color fields
+- Structure output with clear sections: banner, exits, loot, haiku/poem, footer
+- Use semantic tokens for all color/role fields (never hard-code hex in docs/UI)
+- Be auditable, provenance-friendly, and style-compliant
+
+Example:
+
+```
+{
+   "success": true,
+   "data": { ... },
+   "style": {
+      "banner": { ... },
+      "exits": [ ... ],
+      "loot": [ ... ],
+      "haiku": "...",
+      "footer": "☂🦊🐢"
+   }
+}
+```
+
+---
 
 Internal-only notes: [internal_docs/mcp_servers_internal.md](../internal_docs/mcp_servers_internal.md)
 

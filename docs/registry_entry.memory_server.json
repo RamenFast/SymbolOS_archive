@@ -1,0 +1,58 @@
+{
+  "name": "memory_server",
+  "title": "Memory MCP Server",
+  "description": "Git-backed, consent-gated memory server for SymbolOS. Provides read/search/list/write (with explicit consent) for memory files. All operations are provenance-auditable.",
+  "kind": "mcp-server",
+  "transport": "http",
+  "address": "http://127.0.0.1:8091",
+  "tools": [
+    {
+      "name": "memory_read",
+      "description": "Read a memory file (working_set, glossary, decisions, session_logs)",
+      "inputSchema": {
+        "$ref": "memory_read.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "memory_read_result.schema.json"
+      },
+      "riskLevel": "read"
+    },
+    {
+      "name": "memory_search",
+      "description": "Search memory files by keyword",
+      "inputSchema": {
+        "$ref": "memory_search.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "memory_search_result.schema.json"
+      },
+      "riskLevel": "read"
+    },
+    {
+      "name": "memory_list",
+      "description": "List all memory files",
+      "inputSchema": {
+        "$ref": "memory_list.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "memory_list_result.schema.json"
+      },
+      "riskLevel": "read"
+    },
+    {
+      "name": "memory_write",
+      "description": "Write to memory file (requires act() mode consent)",
+      "inputSchema": {
+        "$ref": "memory_write.schema.json"
+      },
+      "outputSchema": {
+        "$ref": "memory_write_result.schema.json"
+      },
+      "riskLevel": "write",
+      "requiresConfirmation": true
+    }
+  ],
+  "riskBoundary": "read/write (no sensitive)",
+  "style": "Chroma 97, Thoughtforms, ASCII banners",
+  "ascii_banner": "╔══════════════════════════════════════════════════════════════╗\n║  ⚔️  ROOM: The Chamber of Echoes                            ║\n║  📍 Floor: Ring 1 │ Difficulty: ⭐⭐ │ Loot: Durable, auditable memory ║\n║  🎨 Color: 🟡 Primrose Yellow (#FADA5E)                       ║\n╚══════════════════════════════════════════════════════════════╝"
+}

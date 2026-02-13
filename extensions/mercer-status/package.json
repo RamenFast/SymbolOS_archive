@@ -25,6 +25,18 @@
       {
         "command": "mercerStatus.checkDrift",
         "title": "Mercer: Check Drift (Core Symbols)"
+      },
+      {
+        "command": "mercerStatus.mcpSync",
+        "title": "Mercer: Sync via MCP"
+      },
+      {
+        "command": "mercerStatus.mcpCommit",
+        "title": "Mercer: Commit via MCP"
+      },
+      {
+        "command": "mercerStatus.showMcpPanel",
+        "title": "Mercer: Show MCP Sync/Commit Panel"
       }
     ],
     "configuration": {

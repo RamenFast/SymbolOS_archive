@@ -18,7 +18,21 @@ The canonical shared set lives in `symbol_map.shared.json`. This file is the phy
        /|   |\
       (_|   |_)  — Rhy 🦊
 
+
 (Answer: A symbol map!)
+
+---
+
+## Output Conventions (ASCII, Chroma 97, Semantic)
+
+All SymbolOS output—docs, APIs, registry entries—must:
+- Use ASCII banners and clear structural sections
+- Apply Chroma 97/1905 Thoughtforms color tokens for all color fields
+- Use semantic tokens for all color/role fields (never hard-code hex in docs/UI)
+- Include banner, exits, loot, haiku/poem, and footer sections
+- Be style-compliant and provenance-friendly
+
+See `registry_entry.memory_server.json` and `style_guidelines.md` for examples.
 
 ## Core symbols 🟣 #8B00FF (Fi+Ti bridge)
 

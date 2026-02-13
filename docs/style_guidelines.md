@@ -9,13 +9,37 @@ This document defines the canonical style rules for all SymbolOS documents, incl
 - Use semantic tokens such as `--mercer-fg`, `--mercer-bg`, `--mercer-link`, `--mercer-error`, etc., instead of raw colours. See the CSS file for full list.
 - The Chroma 97 palette is the default syntax highlighting scheme. When embedding code or logs, specify a style that maps to these tokens.
 
-## Document Structure
-- Every Markdown file must include a banner at the top with `floor`, `ring`, `difficulty`, `loot`, `colour`, and a short description, formatted as per the sync playbook.
+
+## Document & API Output Structure
+- Every Markdown file **and every MCP server/API response** must include a banner at the top with `floor`, `ring`, `difficulty`, `loot`, `colour`, and a short description, formatted as per the sync playbook and Chroma 97 style.
 - After the banner, include:
-  - **Exits:** a list of related docs or next steps.
-  - **Loot:** key take‑aways or deliverables.
-  - **Haiku** or **Poem**: capture the essence of the page in a symbolic way.
-  - A footer with `☂🧺🐢` to indicate private‑by‑default umbrella context.
+  - **Exits:** a list of related docs, endpoints, or next steps.
+  - **Loot:** key take‑aways, deliverables, or capabilities.
+  - **Haiku** or **Poem**: capture the essence of the page or response in a symbolic way.
+  - A footer with `☂🦊🐢` to indicate umbrella context and style compliance.
+
+## ASCII Banners & Registry Entries
+- All registry entries and API responses must use ASCII banners (see `registry_entry.memory_server.json` for example).
+- ASCII structure is required for all top-level sections in docs and API output.
+
+## Chroma 97 & Semantic Output
+- All output (docs, APIs, registry) must use Chroma 97/1905 Thoughtforms color tokens and semantic roles.
+- Never hard‑code hex codes in docs, Markdown, or API output; always use semantic tokens or reference the palette.
+
+## Example API Response
+```
+{
+  "success": true,
+  "data": { ... },
+  "style": {
+    "banner": { ... },
+    "exits": [ ... ],
+    "loot": [ ... ],
+    "haiku": "...",
+    "footer": "☂🦊🐢"
+  }
+}
+```
 
 ## Maturity tags
 - Use tree icons to indicate maturity:
