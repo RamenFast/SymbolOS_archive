@@ -58,7 +58,14 @@ cd web && npm install && npm run dev
 
 If SymbolOS resonates with you:
 - **Star the repo** — it helps visibility
-- **CashApp**: $BenMillward — keeps the lights on and the GPU hot
+- **CashApp**: $cashingthetags
+
+
+($BenMillward), idk where this came from??? -Ben
+
+
+
+— keeps the lights on and the GPU hot
 - **Share it** — with developers who care about human-AI alignment
 
 ---
