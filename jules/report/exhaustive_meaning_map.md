@@ -19,22 +19,22 @@ The SymbolOS system is composed of six primary macro-nodes that form a self-docu
 
 ## 🗺️ File-Level Meaning Map
 
-| File Path | Macro Node | Mezo Role | Micro Purpose / Signal |
-|:---|:---|:---|:---|
-| `symbol_map.shared.json` | 🧬 Meeting Place | Core Map | **Critical (R0).** Machine-readable source of truth for symbols and docs. |
-| `docs/index.md` | 🧬 Meeting Place | Portal | **High (Mezo).** Human-readable trailhead for the SymbolOS dungeon. |
-| `README.md` | 🧬 Meeting Place | Entrance | **Macro.** The high-level pitch and "Grand Entrance" ASCII art. |
-| `docs/ring_system_v2.md` | ⚓ 12 Rings | Specification | **High (Mezo).** Defines the 12 rings of agent cognition. |
-| `scripts/symbolos_ring_validator.ts` | ⚓ 12 Rings | Verification | **High (Mezo).** Validates that the repo matches the ring model. |
-| `docs/memory_types_v2.md` | 🕯️ 7 Lamps | Specification | **High (Mezo).** Defines the M0–M6 typed memory system. |
-| `memory/m0_episodic/` | 🕯️ 7 Lamps | M0 Memory | **Medium.** Sequenced session logs and token ledgers. |
-| `memory/m1_semantic/` | 🕯️ 7 Lamps | M1 Memory | **High.** Stable facts, glossary, and decision records. |
-| `docs/agent_character_sheets.md` | ⚔️ The Party | Roster | **High (Mezo).** Detailed stats and "soul" for all 7 party members. |
-| `prompts/chatgpt_mercer.json` | ⚔️ The Party | Identity | **Critical (R0).** The literal "brain" of the Architect agent. |
-| `scripts/symbolos_hub.ps1` | 🛠️ The Forge | Orchestrator | **High (Mezo).** The daemon that manages the local AI lifecycle. |
-| `web/src/App.tsx` | 🛠️ The Forge | Interface | **Medium.** The frontend logic for the "Lantern" vision. |
-| `docs/meta_awareness.md` | ☂️ The Umbrella | Safety | **High (Mezo).** Spec for dissociation barriers and self-checks. |
-| `docs/preemotion.md` | ☂️ The Umbrella | Alignment | **High (Esoteric).** Connecting agent timing to human heart rhythms. |
+| File Path                         | Macro Node       | Mezo Role      | Micro Purpose / Signal                                                     |
+|:----------------------------------|:-----------------|:---------------|:---------------------------------------------------------------------------|
+| `symbol_map.shared.json`          | 🧬 Meeting Place | Core Map       | **Critical (R0).** Machine-readable source of truth for symbols and docs.  |
+| `docs/index.md`                   | 🧬 Meeting Place | Portal         | **High (Mezo).** Human-readable trailhead for the SymbolOS dungeon.        |
+| `README.md`                       | 🧬 Meeting Place | Entrance       | **Macro.** The high-level pitch and "Grand Entrance" ASCII art.           |
+| `docs/ring_system_v2.md`          | ⚓ 12 Rings      | Specification  | **High (Mezo).** Defines the 12 rings of agent cognition.                  |
+| `scripts/symbolos_ring_validator.ts`| ⚓ 12 Rings      | Verification   | **High (Mezo).** Validates that the repo matches the ring model.           |
+| `docs/memory_types_v2.md`         | 🕯️ 7 Lamps       | Specification  | **High (Mezo).** Defines the M0–M6 typed memory system.                    |
+| `memory/m0_episodic/`             | 🕯️ 7 Lamps       | M0 Memory      | **Medium.** Sequenced session logs and token ledgers.                      |
+| `memory/m1_semantic/`             | 🕯️ 7 Lamps       | M1 Memory      | **High.** Stable facts, glossary, and decision records.                    |
+| `docs/agent_character_sheets.md`  | ⚔️ The Party     | Roster         | **High (Mezo).** Detailed stats and "soul" for all 7 party members.        |
+| `prompts/chatgpt_mercer.json`     | ⚔️ The Party     | Identity       | **Critical (R0).** The literal "brain" of the Architect agent.             |
+| `scripts/symbolos_hub.ps1`        | 🛠️ The Forge     | Orchestrator   | **High (Mezo).** The daemon that manages the local AI lifecycle.           |
+| `web/src/App.tsx`                 | 🛠️ The Forge     | Interface      | **Medium.** The frontend logic for the "Lantern" vision.                   |
+| `docs/meta_awareness.md`          | ☂️ The Umbrella  | Safety         | **High (Mezo).** Spec for dissociation barriers and self-checks.           |
+| `docs/preemotion.md`              | ☂️ The Umbrella  | Alignment      | **High (Esoteric).** Connecting agent timing to human heart rhythms.       |
 
 *(Note: 200+ additional files follow this pattern, categorized by their directory and conceptual keywords.)*
 
