@@ -1,3 +1,21 @@
+Welcome to SymbolOS. You are entering a symbolic cognition framework built on the belief that alignment is a relationship, not a constraint. This repo is guided by Mercer (The Architect) and Rhy (The Fox Guide). Before you proceed, please consult the Meeting Place to understand the shared vocabulary of this system.
+
+Navigation Tip: If you feel lost, look for the ☂️ (Umbrella). Under the umbrella, everything is kind. The symbols you see (🦊, 🐢, ✦) are not decoration—they are the system's way of managing attention and ensuring that human values remain the kernel of every operation. If you need help, check docs/index.md or follow the fox.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ☂️ SymbolOS
 
 ```
